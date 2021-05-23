@@ -82,7 +82,7 @@ function AllCompanies() {
               title="Are you sure to delete?"
               okText="Yes"
               cancelText="No"
-              onConfirm={async () => { 
+              onConfirm={async () => {
                 // === delete company from database ===
                 delete_company({ variables: { id: `${id}` } })
                   .then(async (res) => {
@@ -119,7 +119,7 @@ function AllCompanies() {
       <div>
         <Table
           columns={columns}
-          pagination={{ pageSize: 6 }}
+          pagination={{ pageSize: 7 }}
           dataSource={data.get_companies}
         />
       </div>

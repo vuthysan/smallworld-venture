@@ -16,6 +16,7 @@ import AddCompany from "./components/Pages/companies/addCompany";
 import EditCompany from "./components/Pages/companies/editCompany";
 import AllDepartments from "./components/Pages/departments/allDepartment";
 import AddDepartment from "./components/Pages/departments/addDepartment";
+import EditDepartment from "./components/Pages/departments/editDepartment";
 import AllOpportunities from "./components/Pages/opportunities/opportunities";
 import AddOpportunity from "./components/Pages/opportunities/addOpportunity";
 
@@ -62,6 +63,11 @@ function App() {
                       path="/admin/add-department"
                       exact
                       component={AddDepartment}
+                    />
+                    <Route
+                      path="/admin/edit-department/:id"
+                      exact
+                      component={EditDepartment}
                     />
                     <Route
                       path="/admin/opportunities"

@@ -162,6 +162,9 @@ textarea {
 .delete-btn:hover {
   cursor: pointer;
 }
+.ant-upload-list-item-card-actions-btn {
+  opacity: 1 !important;
+}
 /* === Login Page === */
 .login-page {
   width: 100vw;

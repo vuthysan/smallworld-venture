@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_DEPARTMENTS } from "../../../graphql/query";
 import { DELETE_DEPARTMENT } from "../../../graphql/mutation";
+import axios from "axios";
 import moment from "moment";
 import { Table, Spin, Tag, Popconfirm, Divider, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
@@ -14,11 +15,12 @@ function AllDepartments() {
   const columns = [
     {
       title: "Icon",
-      width: 150,
+      width: 200,
       dataIndex: "icon",
       render: (data, s) => {
         return (
           <img
+            height="30"
             width="70"
             src={`http://localhost:5000/public/upload/${data}`}
             alt="icon of each department"
@@ -42,10 +44,11 @@ function AllDepartments() {
       dataIndex: "action",
       key: "action",
       render: (_, data) => {
-        const { id } = data;
+        const { id, icon } = data;
+
         return (
           <div>
-            <Link to={`/admin/edit-company/${id}`}>
+            <Link to={`/admin/edit-department/${id}`}>
               <Tag className="edit-btn">
                 <BsPencil
                   color="#1388d1"
@@ -61,7 +64,6 @@ function AllDepartments() {
               okText="Yes"
               cancelText="No"
               onConfirm={async () => {
-
                 // === delete department from database ===
                 delete_department({ variables: { id: `${id}` } })
                   .then(async (res) => {
@@ -72,6 +74,10 @@ function AllDepartments() {
                     console.log(error);
                     return null;
                   });
+                // === delete image from public/upload folder in server ===
+                await axios.delete(
+                  "http://localhost:5000/image/delete/" + icon
+                );
               }}
             >
               <Tag className="delete-btn">
@@ -98,7 +104,11 @@ function AllDepartments() {
   return (
     <div>
       <h1>All Departments</h1>
-      <Table columns={columns} dataSource={data.get_departments} />
+      <Table
+        pagination={{ pageSize: 7 }}
+        columns={columns}
+        dataSource={data.get_departments}
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_DEPARTMENTS } from "../../../graphql/query";
 import { ADD_DEPARTMENT } from "../../../graphql/mutation";
+import axios from "axios";
 import { Form, Input, Button, Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 function AddDepartment() {
@@ -20,15 +21,17 @@ function AddDepartment() {
 
   // ====== file management =======
   function beforeUpload(file) {
-    const isPng = file.type === "image/png";
-    if (!isPng) {
-      message.error("You can only upload PNG file!");
+    const isPngOrSvg =
+      file.type === "image/png" || file.type === "image/svg+xml";
+    if (!isPngOrSvg) {
+      message.error("You can only upload PNG/SVG file!");
+      return Upload.LIST_IGNORE;
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
       message.error("Image must smaller than 2MB!");
     }
-    return isPng && isLt2M;
+    return isPngOrSvg && isLt2M;
   }
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -43,6 +46,19 @@ function AddDepartment() {
       });
       // console.log(info.file);
     }
+  };
+  // === remove image from server's public folder ===
+  const onRemove = async (data) => {
+    // console.log(data.response)
+    await axios
+      .delete("http://localhost:5000/image/delete/" + data.response)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    setState({
+      imageUrl: null,
+      loading: false,
+    });
   };
   const onFinish = (values) => {
     // console.log(values);
@@ -95,6 +111,7 @@ function AddDepartment() {
             maxCount={1}
             beforeUpload={beforeUpload}
             onChange={handleChange}
+            onRemove={onRemove}
           >
             <div className="upload-frame">
               {state.imageUrl ? (
@@ -104,10 +121,10 @@ function AddDepartment() {
                   alt="uploaed logo"
                 />
               ) : (
-                <>
+                <div>
                   {loading ? <LoadingOutlined /> : <PlusOutlined />}
                   <div style={{ marginTop: 8 }}>Upload</div>
-                </>
+                </div>
               )}
             </div>
           </Upload>

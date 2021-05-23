@@ -20,6 +20,7 @@ function AddCompany() {
     const isPng = file.type === "image/png";
     if (!isPng) {
       message.error("You can only upload PNG file!");
+      return Upload.LIST_IGNORE;
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
