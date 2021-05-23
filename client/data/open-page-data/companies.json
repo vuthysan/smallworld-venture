@@ -1,0 +1,33 @@
+[
+  {
+    "logo": "/images/open-opportunities/koompi.png",
+    "name": "Koompi",
+    "des": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum.",
+    "ourTeam": "Koompi ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum."
+  },
+  {
+    "logo": "/images/open-opportunities/grood.png",
+    "name": "Grood",
+    "des": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum.",
+    "ourTeam": "Grood ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum."
+  },
+  {
+    "logo": "/images/open-opportunities/sw-green.png",
+    "name": "Smallworld",
+    "des": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum.",
+    "ourTeam": "Smallworld ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum."
+  },
+
+  {
+    "logo": "/images/open-opportunities/selendra.png",
+    "name": "Selendra",
+    "des": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum.",
+    "ourTeam": "Selendra ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum."
+  },
+  {
+    "logo": "/images/open-opportunities/va.png",
+    "name": "Vitaminair",
+    "des": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum.",
+    "ourTeam": "Vitaminair ipsum dolor sit amet consectetur adipisicing elit. Ipsa rem earum eveniet, animi facilis quas. Veritatis asperiores dolore perspiciatis necessitatibus iste ratione quaerat, deleniti cumque quod numquam, sunt ipsa ipsum."
+  }
+]

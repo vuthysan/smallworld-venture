@@ -1,0 +1,22 @@
+{
+  "name": "smallworld-venture",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 4404"
+  },
+  "dependencies": {
+    "@loadable/component": "^5.14.1",
+    "antd": "^4.14.0",
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "html-react-parser": "^1.2.4",
+    "next": "10.0.9",
+    "next-seo": "^4.23.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-icons": "^4.2.0"
+  }
+}

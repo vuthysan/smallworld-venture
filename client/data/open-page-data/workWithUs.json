@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Meaningful Work",
+    "img": "/images/open-opportunities/work.svg",
+    "des": "Our goal is to have fun, experiment, create, to do exceptional work, build the best products, give proper attention to detail, treat people right, tell the truth.",
+    "imgOrder": 1,
+    "desOrder": 2
+  },
+  {
+    "id": 2,
+    "title": "Good People",
+    "img": "/images/open-opportunities/work.svg",
+    "des": "Our goal is to have fun, experiment, create, to do exceptional work, build the best products, give proper attention to detail, treat people right, tell the truth.",
+    "imgOrder": 2,
+    "desOrder": 1
+  },
+  {
+    "id": 3,
+    "title": "Something",
+    "img": "/images/open-opportunities/work.svg",
+    "des": "Our goal is to have fun, experiment, create, to do exceptional work, build the best products, give proper attention to detail, treat people right, tell the truth.",
+    "imgOrder": 1,
+    "desOrder": 2
+  }
+]

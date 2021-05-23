@@ -1,0 +1,17 @@
+[
+  {
+    "id": "web-developer",
+    "name": "Web developer",
+    "icon": "/images/open-opportunities/developer.svg"
+  },
+  {
+    "id": "acount",
+    "name": "Acount",
+    "icon": "/images/open-opportunities/developer.svg"
+  },
+  {
+    "id": "mobile-developer",
+    "name": "Mobile App Developer",
+    "icon": "/images/open-opportunities/developer.svg"
+  }
+]

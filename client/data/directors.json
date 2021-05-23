@@ -1,0 +1,29 @@
+[
+    {
+        "id": "1",
+        "photo": "/images/about/rithy-thul.webp",
+        "fullName": "Mr. Rithy THUL",
+        "position": "Co-Founder & CEO of SmallWorld Venture"
+    },
+    {
+        "id": "2",
+        "photo": "/images/about/mr-lin-willson.jpg",
+        "fullName": "Mr. Willson LIN",
+        "position": "Founder & CEO of DOERS Education Group"
+    },{
+        "id": "3",
+        "photo": "/images/about/Ratana.jpg",
+        "fullName": "Ms. Ratana Phurik-Callebaut",
+        "position": "Independent Director"
+    },{
+        "id": "4",
+        "photo": "/images/about/mr-sila-chy.jpeg",
+        "fullName": "Mr. Sila CHY",
+        "position": "CEO of Sabay Digital Corp"
+    },{
+        "id": "5",
+        "photo": "/images/about/mr-sen-kang.jpeg",
+        "fullName": "Mr. Sen KANG",
+        "position": "Managing Director of Fuxin Steel Building"
+    }
+]
