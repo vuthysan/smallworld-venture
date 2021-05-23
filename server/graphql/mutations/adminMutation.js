@@ -24,8 +24,8 @@ const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
 const User = require("../../models/userModel");
 
-const Mutation = new GraphQLObjectType({
-  name: "Mutation",
+const AdminMutation = new GraphQLObjectType({
+  name: "AdminMutation",
   fields: {
     // ====== register user ======
     register: {
@@ -213,7 +213,7 @@ const Mutation = new GraphQLObjectType({
       },
     },
     // ======= add new opportunity ======
-    opportunity: {
+    add_opportunity: {
       type: OpportunityType,
       args: {
         position: { type: GraphQLNonNull(GraphQLString) },
@@ -291,4 +291,4 @@ const Mutation = new GraphQLObjectType({
   },
 });
 
-module.exports = Mutation;
+module.exports = AdminMutation;

@@ -9,7 +9,7 @@ import { Table, Spin, Tag, Divider, Popconfirm, message } from "antd";
 
 import { BsTrash, BsPencil } from "react-icons/bs";
 
-function AllCompanies() {
+function Companies() {
   const { loading, data, refetch } = useQuery(GET_COMPANIES);
   const [delete_company] = useMutation(DELETE_COMPANY);
   if (loading) {
@@ -115,7 +115,7 @@ function AllCompanies() {
 
   return (
     <div>
-      <h1>All Companies</h1>
+      <h1>Companies</h1>
       <div>
         <Table
           columns={columns}
@@ -127,4 +127,4 @@ function AllCompanies() {
   );
 }
 
-export default AllCompanies;
+export default Companies;

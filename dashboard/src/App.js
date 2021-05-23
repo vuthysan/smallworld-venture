@@ -11,14 +11,15 @@ import TopNavbar from "./components/Layout/TopNavbar";
 import Footer from "./components/Layout/Footer";
 
 // === pages ====
-import AllCompanies from "./components/Pages/companies/allCompany";
+import Companies from "./components/Pages/companies/companies";
 import AddCompany from "./components/Pages/companies/addCompany";
 import EditCompany from "./components/Pages/companies/editCompany";
-import AllDepartments from "./components/Pages/departments/allDepartment";
+import Departments from "./components/Pages/departments/departments";
 import AddDepartment from "./components/Pages/departments/addDepartment";
 import EditDepartment from "./components/Pages/departments/editDepartment";
-import AllOpportunities from "./components/Pages/opportunities/opportunities";
+import Opportunities from "./components/Pages/opportunities/opportunities";
 import AddOpportunity from "./components/Pages/opportunities/addOpportunity";
+import EditOpportunity from "./components/Pages/opportunities/editOpportunity";
 
 // === routers ===
 // import PrivateRoute from "./routers/PrivateRoute";
@@ -42,7 +43,7 @@ function App() {
                     <Route
                       path="/admin/companies"
                       exact
-                      component={AllCompanies}
+                      component={Companies}
                     />
                     <Route
                       path="/admin/add-company"
@@ -57,7 +58,7 @@ function App() {
                     <Route
                       path="/admin/departments"
                       exact
-                      component={AllDepartments}
+                      component={Departments}
                     />
                     <Route
                       path="/admin/add-department"
@@ -72,12 +73,17 @@ function App() {
                     <Route
                       path="/admin/opportunities"
                       exact
-                      component={AllOpportunities}
+                      component={Opportunities}
                     />
                     <Route
                       path="/admin/add-opportunity"
                       exact
                       component={AddOpportunity}
+                    />
+                    <Route
+                      path="/admin/edit-opportunity/:id"
+                      exact
+                      component={EditOpportunity}
                     />
                   </Switch>
                 </Content>

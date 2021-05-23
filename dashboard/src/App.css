@@ -114,6 +114,10 @@ label {
   border: 1px solid #1388d1;
   font-size: 16px;
 }
+.ant-select-selector {
+  border-radius: 6px !important;
+  border-color: #1388d1 !important;
+}
 textarea {
   height: 250px !important;
 }
@@ -124,6 +128,7 @@ textarea {
   border-radius: 12px !important;
 }
 .upload-frame {
+  border-radius: 6px;
   width: 104px;
   height: 104px;
   background-color: #fafafa;
@@ -164,6 +169,17 @@ textarea {
 }
 .ant-upload-list-item-card-actions-btn {
   opacity: 1 !important;
+}
+.ant-form-item-control-input-content {
+  width: 1200px;
+}
+
+/* === Status design === */
+.status {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #dadada;
 }
 /* === Login Page === */
 .login-page {

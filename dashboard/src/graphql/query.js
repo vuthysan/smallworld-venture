@@ -43,4 +43,29 @@ const GET_DEPARTMENT = gql`
   }
 `;
 
-export { GET_COMPANIES, GET_COMPANY, GET_DEPARTMENTS, GET_DEPARTMENT };
+// ===== opportuity part =====
+const GET_OPPORTUNITIES = gql`
+  query {
+    get_opportunities {
+      id
+      position
+      status
+      responsibilities
+      conditions
+      requirements
+      companyName
+      department {
+        name
+        id
+      }
+    }
+  }
+`;
+
+export {
+  GET_COMPANIES,
+  GET_COMPANY,
+  GET_DEPARTMENTS,
+  GET_DEPARTMENT,
+  GET_OPPORTUNITIES,
+};

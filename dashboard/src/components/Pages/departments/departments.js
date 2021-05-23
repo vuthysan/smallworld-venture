@@ -8,7 +8,7 @@ import moment from "moment";
 import { Table, Spin, Tag, Popconfirm, Divider, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
 
-function AllDepartments() {
+function Departments() {
   const { loading, data, refetch } = useQuery(GET_DEPARTMENTS);
   const [delete_department] = useMutation(DELETE_DEPARTMENT);
   // ==== table management ====
@@ -103,7 +103,7 @@ function AllDepartments() {
 
   return (
     <div>
-      <h1>All Departments</h1>
+      <h1> Departments</h1>
       <Table
         pagination={{ pageSize: 7 }}
         columns={columns}
@@ -113,4 +113,4 @@ function AllDepartments() {
   );
 }
 
-export default AllDepartments;
+export default Departments;

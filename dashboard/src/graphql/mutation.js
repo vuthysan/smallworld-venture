@@ -61,6 +61,16 @@ const EDIT_DEPARTMENT = gql`
   }
 `;
 
+// ==== Opportunity part ====
+
+const DELETE_OPPORTUNITY = gql`
+  mutation ($id: ID!) {
+    delete_opportunity(id: $id) {
+      message
+    }
+  }
+`;
+
 export {
   LOGIN,
   ADD_COMPANY,
@@ -69,4 +79,5 @@ export {
   ADD_DEPARTMENT,
   DELETE_DEPARTMENT,
   EDIT_DEPARTMENT,
+  DELETE_OPPORTUNITY,
 };

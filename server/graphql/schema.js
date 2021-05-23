@@ -1,7 +1,10 @@
 const graphql = require("graphql");
 const { GraphQLSchema } = graphql;
 // const RootQuery = require("./queries/queries");
-const RootQuery = require("./queries/rootQuery");
-const Mutation = require("./mutations/adminMutation");
+const AdminQuery = require("./queries/adminQuery");
+const AdminMutation = require("./mutations/adminMutation");
 
-module.exports = new GraphQLSchema({ query: RootQuery, mutation: Mutation });
+module.exports = new GraphQLSchema({
+  query: AdminQuery,
+  mutation: AdminMutation,
+});

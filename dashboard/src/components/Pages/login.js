@@ -3,7 +3,7 @@
 // import Cookie from "js-cookie";
 // import jwt from "jsonwebtoken";
 // import { LOGIN } from "../../graphql/mutation";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button } from "antd";
 
 // === antd form layout ===
 

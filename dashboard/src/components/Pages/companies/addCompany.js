@@ -48,7 +48,8 @@ function AddCompany() {
     // console.log(values);
     const { name, description } = values;
     let newCom = {
-      name: name,
+      // === trim to avoid space ===
+      name: name.trim(),
       description: description,
       logo: state.imageUrl,
     };
@@ -119,7 +120,7 @@ function AddCompany() {
             >
               <Input.TextArea />
             </Form.Item>
-            <Form.Item wrapperCol={24}>
+            <Form.Item>
               <Button
                 id="submit-btn"
                 type="primary"

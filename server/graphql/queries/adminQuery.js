@@ -17,9 +17,9 @@ const Company = require("../../models/companyModel");
 const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
 
-// === RootQuery ===
-const RootQuery = new GraphQLObjectType({
-  name: "RootQuery",
+// === AdminQuery ===
+const AdminQuery = new GraphQLObjectType({
+  name: "AdminQuery",
   fields: {
     // ====== get all companies
     get_companies: {
@@ -81,4 +81,4 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-module.exports = RootQuery;
+module.exports = AdminQuery;
