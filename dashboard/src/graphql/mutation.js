@@ -53,6 +53,14 @@ const DELETE_DEPARTMENT = gql`
   }
 `;
 
+const EDIT_DEPARTMENT = gql`
+  mutation ($id: ID!, $name: String!, $icon: String!) {
+    edit_department(id: $id, name: $name, icon: $icon) {
+      message
+    }
+  }
+`;
+
 export {
   LOGIN,
   ADD_COMPANY,
@@ -60,4 +68,5 @@ export {
   EDIT_COMPANY,
   ADD_DEPARTMENT,
   DELETE_DEPARTMENT,
+  EDIT_DEPARTMENT,
 };

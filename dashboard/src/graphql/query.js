@@ -33,5 +33,14 @@ const GET_DEPARTMENTS = gql`
     }
   }
 `;
+const GET_DEPARTMENT = gql`
+  query ($id: ID!) {
+    get_department(id: $id) {
+      id
+      name
+      icon
+    }
+  }
+`;
 
-export { GET_COMPANIES, GET_COMPANY, GET_DEPARTMENTS };
+export { GET_COMPANIES, GET_COMPANY, GET_DEPARTMENTS, GET_DEPARTMENT };

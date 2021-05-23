@@ -84,7 +84,6 @@ function AddCompany() {
       // console.log(data.response);
       await axios
         .delete("http://localhost:5000/image/delete/" + data.response)
-        .then((res) => console.log(res))
         .catch((err) => console.log(err));
 
       setState({

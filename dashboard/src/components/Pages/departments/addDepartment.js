@@ -52,7 +52,6 @@ function AddDepartment() {
     // console.log(data.response)
     await axios
       .delete("http://localhost:5000/image/delete/" + data.response)
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
     setState({
@@ -116,6 +115,7 @@ function AddDepartment() {
             <div className="upload-frame">
               {state.imageUrl ? (
                 <img
+                  height="45"
                   width="80"
                   src={`http://localhost:5000/public/upload/${state.imageUrl}`}
                   alt="uploaed logo"
