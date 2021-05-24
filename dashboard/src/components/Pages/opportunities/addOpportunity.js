@@ -1,16 +1,61 @@
-import React from "react";
-import { Form, Input, Radio, Select, Button, Row, Col } from "antd";
+import React, { useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import {
+  GET_DEPARTMENTS,
+  GET_COMPANIES,
+  GET_OPPORTUNITIES,
+} from "../../../graphql/query";
+import { ADD_OPPORTUNITY } from "../../../graphql/mutation";
+import {
+  Form,
+  Input,
+  Radio,
+  Select,
+  Button,
+  Row,
+  Col,
+  Spin,
+  message,
+} from "antd";
 
 // === comps ===
-import Responsibility from "../../Layout/Responsibility";
-import Requirement from "../../Layout/Requirements";
-import Condition from "../../Layout/Condition";
+import FormList from "../../Layout/FormList";
+// === FormList = Repsonsibilities,Requirements,Conditions's Input ===
+
 const { Option } = Select;
 function AddOpportunity() {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+
+  //  === query ===
+  const { refetch } = useQuery(GET_OPPORTUNITIES);
+  const { loading: loadingDep, data: depData } = useQuery(GET_DEPARTMENTS);
+  const { loading: loadingCom, data: comData } = useQuery(GET_COMPANIES);
+
+  // === mutatatoin ===
+  const [add_opportunity] = useMutation(ADD_OPPORTUNITY);
+
   const onFinish = (values) => {
     console.log(values);
+    add_opportunity({
+      variables: values,
+    })
+      .then(async (res) => {
+        setLoading(true);
+        await refetch();
+        setLoading(false);
+        await message.success(res.data.add_opportunity.message);
+      })
+      .catch((err) => console.log(err));
   };
+  if (loadingDep || loadingCom) {
+    return (
+      <center style={{ marginTop: "100px" }}>
+        <Spin size="large" />
+      </center>
+    );
+  }
+
   return (
     <div>
       <h1>Add Opportunity</h1>
@@ -51,8 +96,14 @@ function AddOpportunity() {
               rules={[{ required: true, message: "Please select a company!" }]}
             >
               <Select placeholder="Select a company">
-                <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option>
+                {comData.get_companies.map((com) => {
+                  const { name, id } = com;
+                  return (
+                    <Option key={id} value={name}>
+                      {name.toUpperCase()}
+                    </Option>
+                  );
+                })}
               </Select>
             </Form.Item>
           </Col>
@@ -65,19 +116,27 @@ function AddOpportunity() {
                 { required: true, message: "Please select a department!" },
               ]}
             >
-              <Select placeholder="Select a company">
-                <Option value="china">China</Option>
-                <Option value="usa">U.S.A</Option>
+              <Select placeholder="Select a department">
+                {depData.get_departments.map((dep) => {
+                  const { id, name } = dep;
+                  return (
+                    <Option key={id} value={id}>
+                      {name.toUpperCase()}
+                    </Option>
+                  );
+                })}
               </Select>
             </Form.Item>
           </Col>
         </Row>
         {/* === input responsibilities === */}
-        <Responsibility />
+        <FormList name="Responsibilities" message="Responsibility" />
+
         {/* === input requirement === */}
-        <Requirement />
+        <FormList name="Requirements" message="Requirement" />
+
         {/* === input conditions === */}
-        <Condition />
+        <FormList name="Conditions" message="Condition" />
         <Form.Item>
           <Button
             id="submit-btn"
@@ -85,6 +144,7 @@ function AddOpportunity() {
             size="large"
             htmlType="submit"
             style={{ width: "175px" }}
+            loading={loading ? true : false}
           >
             Add Opportunity
           </Button>

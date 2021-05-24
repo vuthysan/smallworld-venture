@@ -1,17 +1,17 @@
 import { Form, Space, Input, Button } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-function Responsibility() {
+function FormList({ name, message }) {
   return (
     <>
       <div className="ant-col ant-form-item-label">
-        <label className="ant-form-item-required">Responsibilities</label>
+        <label className="ant-form-item-required">{name}</label>
       </div>
       <Form.List
-        name="responsibilities"
+        name={name.toLowerCase()}
         rules={[
           {
             required: true,
-            message: "Please input opportunity's responsibility!",
+            message: `Please input opportunity's ${message.toLowerCase()}!`,
           },
         ]}
       >
@@ -28,7 +28,10 @@ function Responsibility() {
                   name={[name]}
                   fieldKey={[fieldKey]}
                   rules={[
-                    { required: true, message: "Missing repsonsibility!" },
+                    {
+                      required: true,
+                      message: `Missing ${message.toLowerCase()}!`,
+                    },
                   ]}
                 >
                   <Input />
@@ -45,7 +48,7 @@ function Responsibility() {
                 icon={<PlusOutlined />}
                 style={{ borderColor: "#1388d1" }}
               >
-                Add Responsibility
+                Add {message}
               </Button>
             </Form.Item>
           </>
@@ -55,4 +58,4 @@ function Responsibility() {
   );
 }
 
-export default Responsibility;
+export default FormList;

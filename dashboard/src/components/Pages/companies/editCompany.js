@@ -4,7 +4,6 @@ import axios from "axios";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_COMPANY } from "../../../graphql/query";
 import { EDIT_COMPANY } from "../../../graphql/mutation";
-
 import { Form, Input, Button, Row, Col, Upload, message, Spin } from "antd";
 
 function EditCompany({ history }) {

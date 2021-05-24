@@ -63,6 +63,56 @@ const EDIT_DEPARTMENT = gql`
 
 // ==== Opportunity part ====
 
+const ADD_OPPORTUNITY = gql`
+  mutation (
+    $position: String!
+    $status: Boolean!
+    $companyName: String!
+    $departmentId: ID!
+    $requirements: [String]!
+    $responsibilities: [String]!
+    $conditions: [String]!
+  ) {
+    add_opportunity(
+      position: $position
+      status: $status
+      companyName: $companyName
+      departmentId: $departmentId
+      requirements: $requirements
+      conditions: $conditions
+      responsibilities: $responsibilities
+    ) {
+      message
+    }
+  }
+`;
+
+const EDIT_OPPORTUNITY = gql`
+  mutation (
+    $id: ID!
+    $position: String!
+    $status: Boolean!
+    $companyName: String!
+    $departmentId: ID!
+    $requirements: [String]!
+    $responsibilities: [String]!
+    $conditions: [String]!
+  ) {
+    edit_opportunity(
+      id: $id
+      position: $position
+      status: $status
+      companyName: $companyName
+      departmentId: $departmentId
+      requirements: $requirements
+      conditions: $conditions
+      responsibilities: $responsibilities
+    ) {
+      message
+    }
+  }
+`;
+
 const DELETE_OPPORTUNITY = gql`
   mutation ($id: ID!) {
     delete_opportunity(id: $id) {
@@ -79,5 +129,7 @@ export {
   ADD_DEPARTMENT,
   DELETE_DEPARTMENT,
   EDIT_DEPARTMENT,
+  ADD_OPPORTUNITY,
+  EDIT_OPPORTUNITY,
   DELETE_OPPORTUNITY,
 };

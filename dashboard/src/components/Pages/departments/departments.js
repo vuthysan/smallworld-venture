@@ -23,7 +23,7 @@ function Departments() {
             height="30"
             width="70"
             src={`http://localhost:5000/public/upload/${data}`}
-            alt="icon of each department"
+            alt="icon"
           />
         );
       },
@@ -105,7 +105,7 @@ function Departments() {
     <div>
       <h1> Departments</h1>
       <Table
-        pagination={{ pageSize: 7 }}
+        pagination={{ pageSize: 10 }}
         columns={columns}
         dataSource={data.get_departments}
       />

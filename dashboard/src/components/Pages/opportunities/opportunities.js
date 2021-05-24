@@ -28,7 +28,7 @@ function Opportunities() {
     {
       title: "Responsibilities",
       dataIndex: "responsibilities",
-      render: (data) => data[0].substring(0, 10) + "...",
+      render: (data) => data[0].substring(0, 13) + "...",
     },
     {
       title: "Requirements",
@@ -113,7 +113,7 @@ function Opportunities() {
       <Table
         columns={columns}
         dataSource={data.get_opportunities}
-        pagination={{ pageSize: 7 }}
+        pagination={{ pageSize: 10 }}
       />
     </div>
   );

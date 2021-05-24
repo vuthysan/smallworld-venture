@@ -61,6 +61,20 @@ const GET_OPPORTUNITIES = gql`
     }
   }
 `;
+const GET_OPPORTUNITY = gql`
+  query ($id: ID!) {
+    get_opportunity(id: $id) {
+      id
+      position
+      status
+      responsibilities
+      conditions
+      requirements
+      companyName
+      departmentId
+    }
+  }
+`;
 
 export {
   GET_COMPANIES,
@@ -68,4 +82,5 @@ export {
   GET_DEPARTMENTS,
   GET_DEPARTMENT,
   GET_OPPORTUNITIES,
+  GET_OPPORTUNITY,
 };

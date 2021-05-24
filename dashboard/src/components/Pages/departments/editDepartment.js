@@ -83,8 +83,8 @@ function EditDepartment({ history }) {
     edit_department({
       variables: editedDep,
     }).then(async (res) => {
-      await message.success(res.data.edit_department.message);
       await departmentRefetch();
+      await message.success(res.data.edit_department.message);
       await history.push("/admin/departments");
     });
   };

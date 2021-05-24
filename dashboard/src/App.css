@@ -18,6 +18,9 @@ label {
   font-weight: 600;
   font-size: 16px !important;
 }
+.dash-loading {
+  margin: 0 100px;
+}
 .ant-layout {
   background-color: #a9d4eb52;
 }
@@ -27,6 +30,7 @@ label {
   color: white;
   font-size: 16px;
   font-weight: 600;
+
   background-color: #136da5 !important;
 }
 .ant-menu-inline {

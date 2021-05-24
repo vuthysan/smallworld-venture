@@ -12,13 +12,7 @@ import { BsTrash, BsPencil } from "react-icons/bs";
 function Companies() {
   const { loading, data, refetch } = useQuery(GET_COMPANIES);
   const [delete_company] = useMutation(DELETE_COMPANY);
-  if (loading) {
-    return (
-      <center style={{ marginTop: "100px" }}>
-        <Spin size="large" />
-      </center>
-    );
-  }
+
   // console.log(data);
 
   // === table data management ===
@@ -35,7 +29,7 @@ function Companies() {
             height="33"
             width="100"
             src={`http://localhost:5000/public/upload/${data}`}
-            alt="logo of each company"
+            alt="logo"
           />
         );
       },
@@ -112,14 +106,20 @@ function Companies() {
       },
     },
   ];
-
+  if (loading) {
+    return (
+      <center style={{ marginTop: "100px" }}>
+        <Spin size="large" />
+      </center>
+    );
+  }
   return (
     <div>
       <h1>Companies</h1>
       <div>
         <Table
           columns={columns}
-          pagination={{ pageSize: 7 }}
+          pagination={{ pageSize: 10 }}
           dataSource={data.get_companies}
         />
       </div>
