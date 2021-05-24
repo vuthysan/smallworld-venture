@@ -21,6 +21,10 @@ label {
 .dash-loading {
   margin: 0 100px;
 }
+.left-nav a,
+.left-nav li {
+  font-size: 18px !important;
+}
 .ant-layout {
   background-color: #a9d4eb52;
 }
@@ -30,7 +34,6 @@ label {
   color: white;
   font-size: 16px;
   font-weight: 600;
-
   background-color: #136da5 !important;
 }
 .ant-menu-inline {
@@ -38,7 +41,7 @@ label {
 }
 .ant-menu-item,
 .ant-menu-submenu {
-  margin: 10px 0 !important;
+  margin: 22px 0 !important;
 }
 .ant-menu-submenu-selected {
   color: white;
@@ -47,8 +50,17 @@ label {
   background-color: rgba(39, 39, 39, 0.521) !important;
   color: white;
 }
+.ant-menu-item,
+.ant-menu-item-selected {
+  height: 50px !important;
+  padding-top: 7px !important;
+}
+
 .ant-menu-submenu-arrow {
   color: white;
+}
+.anticon {
+  font-size: 23px !important;
 }
 /* === content === */
 .content {

@@ -9,13 +9,14 @@ import {
   ClusterOutlined,
   FileSearchOutlined,
 } from "@ant-design/icons";
+import { GiReactor } from "react-icons/gi";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 function LeftNav() {
   const pathname = window.location.pathname;
   return (
     <React.Fragment>
-      <Sider width={290}>
+      <Sider width={290} className="left-nav">
         <div className="logo">
           <Link to="/">
             <center>
