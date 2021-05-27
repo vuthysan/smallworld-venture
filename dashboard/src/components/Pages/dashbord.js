@@ -4,24 +4,27 @@ import {
   GET_OPPORTUNITIES,
   GET_DEPARTMENTS,
   GET_COMPANIES,
+  GET_MESSAGES,
 } from "../../graphql/query";
 import { Row, Col, Spin } from "antd";
 // === icon ===
 import { FaNetworkWired } from "react-icons/fa";
 import { GiBullseye } from "react-icons/gi";
 import { BsBuilding } from "react-icons/bs";
+import { GoMail } from "react-icons/go";
 
 function Dashbord() {
   const { loading: loadingDep, data: depData } = useQuery(GET_DEPARTMENTS);
   const { loading: loadingCom, data: comData } = useQuery(GET_COMPANIES);
   const { loading: loadingOpp, data: OppData } = useQuery(GET_OPPORTUNITIES);
-  console.log(depData);
-  console.log(comData);
-  console.log(OppData);
+  const { loading: loadingMsg, data: MsgData } = useQuery(GET_MESSAGES);
+  // console.log(depData);
+  // console.log(comData);
+  // console.log(OppData);
   return (
     <React.Fragment>
       <h1>Overview</h1>
-      <Row gutter={40} align="middle">
+      <Row gutter={[40, 20]} align="middle">
         <Col>
           {loadingCom ? (
             <Spin className="dash-loading" size="large" />
@@ -69,6 +72,23 @@ function Dashbord() {
               <Col>
                 <h1>{OppData.get_opportunities.length}</h1>
                 <p>Total Opportunities</p>
+              </Col>
+            </Row>
+          )}
+        </Col>
+        <Col>
+          {loadingMsg ? (
+            <Spin className="dash-loading" size="large" />
+          ) : (
+            <Row className="card card3" align="middle" gutter={20}>
+              <Col>
+                <div className="card-icon card-icon3">
+                  <GoMail className="icon" />
+                </div>
+              </Col>
+              <Col>
+                <h1>{MsgData.get_messages.length}</h1>
+                <p>Total Messages</p>
               </Col>
             </Row>
           )}

@@ -20,6 +20,7 @@ import EditDepartment from "./components/Pages/departments/editDepartment";
 import Opportunities from "./components/Pages/opportunities/opportunities";
 import AddOpportunity from "./components/Pages/opportunities/addOpportunity";
 import EditOpportunity from "./components/Pages/opportunities/editOpportunity";
+import Messages from "./components/Pages/messages";
 
 // === routers ===
 // import PrivateRoute from "./routers/PrivateRoute";
@@ -85,6 +86,7 @@ function App() {
                       exact
                       component={EditOpportunity}
                     />
+                    <Route path="/admin/messages" exact component={Messages} />
                   </Switch>
                 </Content>
                 <Footer />

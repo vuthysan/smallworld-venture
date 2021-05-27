@@ -8,10 +8,12 @@
     "start": "next start -p 4404"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.19",
     "@loadable/component": "^5.14.1",
     "antd": "^4.14.0",
     "axios": "^0.21.1",
     "express": "^4.17.1",
+    "graphql": "^15.5.0",
     "html-react-parser": "^1.2.4",
     "next": "10.0.9",
     "next-seo": "^4.23.0",

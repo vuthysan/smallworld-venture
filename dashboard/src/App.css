@@ -25,6 +25,9 @@ label {
 .left-nav li {
   font-size: 18px !important;
 }
+.left-nav .anticon {
+  font-size: 23px !important;
+}
 .ant-layout {
   background-color: #a9d4eb52;
 }
@@ -50,18 +53,11 @@ label {
   background-color: rgba(39, 39, 39, 0.521) !important;
   color: white;
 }
-.ant-menu-item,
-.ant-menu-item-selected {
-  height: 50px !important;
-  padding-top: 7px !important;
-}
 
 .ant-menu-submenu-arrow {
   color: white;
 }
-.anticon {
-  font-size: 23px !important;
-}
+
 /* === content === */
 .content {
   background-color: white;
@@ -189,13 +185,19 @@ textarea {
 .ant-form-item-control-input-content {
   width: 1200px;
 }
-
+.action-btn {
+  border: none;
+  color: white;
+  padding: 0px 0 !important;
+  width: 70px;
+  height: 20px;
+}
 /* === Status design === */
 .status {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #dadada;
+  border: 1px soslid #dadada;
 }
 /* === Login Page === */
 .login-page {

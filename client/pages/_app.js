@@ -1,11 +1,17 @@
 import Head from "next/head";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Layout from "../comps/Layout";
 import "antd/dist/antd.css";
 import "../styles/globals.css";
 
+const client = new ApolloClient({
+  uri: "http://localhost:5000/graphql",
+  cache: new InMemoryCache(),
+});
+
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <ApolloProvider client={client}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
@@ -17,7 +23,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </ApolloProvider>
   );
 }
 

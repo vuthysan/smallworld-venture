@@ -11,11 +11,13 @@ const {
 const CompanyType = require("../type/companyType");
 const DepartmentType = require("../type/departmentType");
 const OpportunityType = require("../type/opportunityType");
+const MessageType = require("../type/messageType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
 const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
+const Message = require("../../models/messageModel");
 
 // === AdminQuery ===
 const AdminQuery = new GraphQLObjectType({
@@ -76,6 +78,15 @@ const AdminQuery = new GraphQLObjectType({
       },
       resolve: async (parent, args) => {
         return Opportunity.findById(args.id);
+      },
+    },
+    // ======= get message from users =======
+    get_messages: {
+      type: new GraphQLList(MessageType),
+      description: "List of message from users",
+      resolve: async () => {
+        let message = await Message.find();
+        return message;
       },
     },
   },

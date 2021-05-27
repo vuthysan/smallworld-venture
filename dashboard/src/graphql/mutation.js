@@ -121,6 +121,14 @@ const DELETE_OPPORTUNITY = gql`
   }
 `;
 
+// ======= Message part =======
+const DELETE_MESSAGE = gql`
+  mutation ($id: ID!) {
+    delete_message(id: $id) {
+      respond
+    }
+  }
+`;
 export {
   LOGIN,
   ADD_COMPANY,
@@ -132,4 +140,5 @@ export {
   ADD_OPPORTUNITY,
   EDIT_OPPORTUNITY,
   DELETE_OPPORTUNITY,
+  DELETE_MESSAGE,
 };

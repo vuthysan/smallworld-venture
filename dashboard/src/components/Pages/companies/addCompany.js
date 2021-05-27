@@ -120,17 +120,6 @@ function AddCompany() {
             >
               <Input.TextArea />
             </Form.Item>
-            <Form.Item>
-              <Button
-                id="submit-btn"
-                type="primary"
-                size="large"
-                htmlType="submit"
-                loading={loading ? true : false}
-              >
-                Add Company
-              </Button>
-            </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item
@@ -159,6 +148,17 @@ function AddCompany() {
             </Form.Item>
           </Col>
         </Row>
+        <Form.Item>
+          <Button
+            id="submit-btn"
+            type="primary"
+            size="large"
+            htmlType="submit"
+            loading={loading ? true : false}
+          >
+            Add Company
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );

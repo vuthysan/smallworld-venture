@@ -8,8 +8,9 @@ import {
   BankOutlined,
   ClusterOutlined,
   FileSearchOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
-import { GiReactor } from "react-icons/gi";
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 function LeftNav() {
@@ -91,6 +92,10 @@ function LeftNav() {
               Add Opportunity
             </Menu.Item>
           </SubMenu>
+          <Menu.Item key="/admin/messages" icon={<MailOutlined />}>
+            <Link to="/admin/messages" />
+            Messages
+          </Menu.Item>
         </Menu>
       </Sider>
     </React.Fragment>

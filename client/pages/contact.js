@@ -1,30 +1,40 @@
-import { Row, Col, Form, Input, Button, notification } from "antd";
-import axios from "axios";
+import { Row, Col, Form, Input, Button, notification, message } from "antd";
+// import axios from "axios";
+import { useMutation } from "@apollo/client";
+import { POST_MESSAGE } from "../graphql/mutation";
 import { useState } from "react";
 import { FaTelegramPlane, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import MetaTags from "../comps/MetaTags";
 
 function Contact() {
+  const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const layout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-  };
-  const onFinish = async (values) => {
-    await axios
-      .post("http://localhost:4405/api/form", { ...values })
-      .then(() => {
-        setIsLoading(true);
-        notification["success"]({
-          message: "Success",
-          description: "Thank you for reaching out. Please check your email.",
-        });
-        setIsLoading(false);
-      });
-  };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const [post_message] = useMutation(POST_MESSAGE);
+  // const onFinish = async (values) => {
+  //   await axios
+  //     .post("http://localhost:4405/api/form", { ...values })
+  //     .then(() => {
+  //       setIsLoading(true);
+  //       notification["success"]({
+  //         message: "Success",
+  //         description: "Thank you for reaching out. Please check your email.",
+  //       });
+  //       setIsLoading(false);
+  //     });
+  // };
+
+  const onFinish = (values) => {
+    // console.log(values);
+    post_message({
+      variables: values,
+    }).then(async (res) => {
+      setIsLoading(true);
+
+      await message.success(res.data.post_message.respond);
+      form.resetFields();
+      setIsLoading(false);
+    });
   };
   return (
     <>
@@ -40,11 +50,7 @@ function Contact() {
           <Row gutter={50}>
             <Col xs={24} sm={24} md={12}>
               <h2>Inquiries Request</h2>
-              <Form
-                {...layout}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-              >
+              <Form form={form} layout="vertical" onFinish={onFinish}>
                 <Form.Item
                   name="fullname"
                   label="Full Name"
@@ -52,7 +58,7 @@ function Contact() {
                     { required: true, message: "Please input your fullname!" },
                   ]}
                 >
-                  <Input disabled={true} />
+                  <Input />
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -65,7 +71,7 @@ function Contact() {
                     { type: "email", message: "The email is not valid!" },
                   ]}
                 >
-                  <Input disabled={true} />
+                  <Input />
                 </Form.Item>
                 <Form.Item
                   name="message"
@@ -81,16 +87,15 @@ function Contact() {
                     },
                   ]}
                 >
-                  <Input.TextArea disabled={true} />
+                  <Input.TextArea />
                 </Form.Item>
                 <Form.Item>
                   <br />
                   <Button
                     className="sw-default-btn"
                     htmlType="submit"
-                    style={{ padding: "20px 60px" }}
+                    size="large"
                     loading={isLoading ? true : false}
-                    disabled={true}
                   >
                     Submit
                   </Button>

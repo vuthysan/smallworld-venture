@@ -76,6 +76,31 @@ const GET_OPPORTUNITY = gql`
   }
 `;
 
+// ====== message part ======
+
+const GET_MESSAGES = gql`
+  query {
+    get_messages {
+      id
+      fullname
+      email
+      message
+      createdAt
+    }
+  }
+`;
+
+const GET_MESSAGE = gql`
+  query ($id: ID!) {
+    get_message(id: $id) {
+      fullname
+      id
+      email
+      message
+    }
+  }
+`;
+
 export {
   GET_COMPANIES,
   GET_COMPANY,
@@ -83,4 +108,6 @@ export {
   GET_DEPARTMENT,
   GET_OPPORTUNITIES,
   GET_OPPORTUNITY,
+  GET_MESSAGES,
+  GET_MESSAGE,
 };

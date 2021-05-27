@@ -5,9 +5,7 @@ const { Footer } = Layout;
 function footer() {
   return (
     <Footer>
-      <center className="footer">
-        Smallworldventure @2021 created by KOOMPI
-      </center>
+      <center className="footer">Smallworldventure @2021</center>
     </Footer>
   );
 }

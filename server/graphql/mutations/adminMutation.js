@@ -17,12 +17,14 @@ const CompanyType = require("../type/companyType");
 const DepartmentType = require("../type/departmentType");
 const OpportunityType = require("../type/opportunityType");
 const UserType = require("../type/userType");
+const MessageType = require("../type/messageType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
 const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
 const User = require("../../models/userModel");
+const Message = require("../../models/messageModel");
 
 const AdminMutation = new GraphQLObjectType({
   name: "AdminMutation",
@@ -286,6 +288,16 @@ const AdminMutation = new GraphQLObjectType({
           console.log(err);
           throw err;
         }
+      },
+    },
+    delete_message: {
+      type: MessageType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (parent, args) => {
+        await Message.findByIdAndDelete(args.id);
+        return { respond: "Message deleted!" };
       },
     },
   },

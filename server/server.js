@@ -3,7 +3,8 @@ const path = require("path");
 const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
 const cors = require("cors");
-const schema = require("./graphql/schema");
+const adminSchema = require("./graphql/schema/adminSchema");
+const schema = require("./graphql/schema/schema");
 // === invoke express ===
 const app = express();
 
@@ -11,8 +12,17 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/public/", express.static(path.join(__dirname, "public")));
+// === for admin dashboard ===
 app.use(
   "/admin",
+  graphqlHTTP({
+    schema: adminSchema,
+    graphiql: true,
+  })
+);
+
+app.use(
+  "/graphql",
   graphqlHTTP({
     schema,
     graphiql: true,
