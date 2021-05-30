@@ -7,8 +7,8 @@ router.delete("/image/delete/:image", (req, res) => {
   // console.log(image);
 
   // === delete uploaded image ===
-  if (fs.existsSync(`./public/upload/${image}`)) {
-    fs.unlinkSync(`./public/upload/${image}`);
+  if (fs.existsSync(`./public/upload/images/${image}`)) {
+    fs.unlinkSync(`./public/upload/images/${image}`);
     res.json({ message: "Success" });
   } else {
     res.json({ message: "File not found" });

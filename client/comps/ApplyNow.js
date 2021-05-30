@@ -1,109 +1,125 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
+import axios from "axios";
+import { POST_APPLICATION } from "../graphql/mutation";
+import { useMutation } from "@apollo/client";
 import { Modal, Button, Form, Input, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-// === form lay out ===
-const layout = {
-  labelCol: {
-    span: 24,
-  },
-  wrapperCol: {
-    span: 24,
-  },
-};
-
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not a valid email!",
-    number: "${label} is not a valid number!",
-  },
-};
-
-// === file management props ===
-const props = {
-  name: "cv",
-  beforeUpload: (file) => {
-    if (file.type !== "application/pdf") {
-      message.error(`${file.name} is not a pdf file`);
-    }
-    return file.type === "application/pdf" ? true : Upload.LIST_IGNORE;
-  },
-
-  onChange({ file }) {
-    if (file.status !== "uploading") {
-      console.log(file);
-    }
-  },
-  maxCount: 1,
-};
 function ApplyNow() {
+  const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [fileName, setFileName] = useState("");
+  const [file, setFile] = useState("");
 
-  const showModal = () => {
-    setIsModalVisible(true);
+  const [post_application] = useMutation(POST_APPLICATION);
+  // === file management props ===
+
+  const props = {
+    name: "pdf",
+    // action: "http://localhost:5000/upload/pdf",
+    beforeUpload: (file) => {
+      if (file.type !== "application/pdf") {
+        message.error(`You can upload PDF file Only`);
+      }
+      return file.type === "application/pdf" ? true : Upload.LIST_IGNORE;
+    },
+    maxCount: 1,
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  const onFinish = async (values) => {
+    const { name, email, phone, additional } = values;
+    // == post pdf file to public/uplaod/pdf folder in server ==
+    const formdata = new FormData();
+    formdata.append("pdf", file);
 
-  const onFinish = (values) => {
-    console.log(values);
+    await axios
+      .post("http://localhost:5000/upload/pdf", formdata)
+      .then(async (res) => {
+        let newApp = {
+          name: name,
+          email: email,
+          phone: phone,
+          additional: additional ? additional : "",
+          cv: res.data,
+        };
+        // console.log(newApp);
+        post_application({
+          variables: newApp,
+        }).then(
+          async (res) =>
+            await message.success(res.data.post_application.message)
+        );
+      });
 
     setIsModalVisible(false);
   };
   return (
     <React.Fragment>
-      <button className="sw-default-btn apply-now-btn" onClick={showModal}>
+      <button
+        className="sw-default-btn apply-now-btn"
+        onClick={() => {
+          setIsModalVisible(true);
+        }}
+      >
         Apply Now
       </button>
       <Modal
         visible={isModalVisible}
-        closable={false}
-        onCancel={handleCancel}
+        onCancel={() => {
+          setIsModalVisible(false);
+        }}
         footer={null}
       >
-        <Form
-          {...layout}
-          labelAlign="left"
-          name="nest-messages"
-          onFinish={onFinish}
-          validateMessages={validateMessages}
-        >
+        <Form form={form} onFinish={onFinish} layout="vertical">
           <Form.Item
-            name={["user", "name"]}
+            name="name"
             label="Name"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "Please input your fullname!" }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "email"]}
+            name="email"
             label="Email"
-            rules={[{ type: "email", required: true }]}
+            rules={[
+              {
+                type: "email",
+                required: true,
+                message: "Email is not valid!",
+              },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "phone"]}
+            name="phone"
             label="Phone"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+                message: "Please input your phone number!",
+              },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "message"]}
-            initialValue=""
+            name="additional"
             label="Additional Information (Optional)"
           >
             <Input.TextArea id="aditional-info" />
           </Form.Item>
           {/*  === file management ===  */}
           <Form.Item
-            name={["user", "cv"]}
-            rules={[{ required: true }]}
+            name="cv"
+            onChange={(e) => setFile(e.target.files[0])}
+            rules={[
+              {
+                required: true,
+                message: "Please upload your CV/Resume in PDF!",
+              },
+            ]}
+            valuePropName="pdf"
             label="Resume/CV"
           >
             <Upload {...props}>
@@ -112,7 +128,7 @@ function ApplyNow() {
               </Button>
             </Upload>
           </Form.Item>
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 0 }}>
+          <Form.Item>
             <Button id="apply" htmlType="submit">
               APPLY
             </Button>

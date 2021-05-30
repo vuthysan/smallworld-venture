@@ -1,14 +1,14 @@
 import { Row, Col } from "antd";
-import Link from "next/link";
 import MetaTags from "../../comps/MetaTags";
-// import { useRouter } from "next/router";
+
+// === comps ===
+import Departments from "../../comps/Departments";
+import Companies from "../../comps/Companies";
 
 //=== json data ====
 import values from "../../data/open-page-data/values.json";
-import departmentList from "../../data/open-page-data/departmentList.json";
 import workWithUs from "../../data/open-page-data/workWithUs.json";
 import recruiting from "../../data/open-page-data/recruiting.json";
-import companies from "../../data/open-page-data/companies.json";
 
 function index() {
   return (
@@ -60,6 +60,8 @@ function index() {
             </Row>
           </div>
         </div>
+
+        {/* === values ===  */}
         <div className="about-smallworld container">
           <h2>
             <span>&lt; </span>
@@ -73,6 +75,8 @@ function index() {
               </Col>
             ))}
           </Row>
+
+          {/* === goal and vision === */}
           <Row align="middle" justify="space-between">
             <Col md={13}>
               <h2>
@@ -110,40 +114,11 @@ function index() {
               </div>
             </Col>
           </Row>
+
           {/* ==== choose department ==== */}
-          {/* id is for view openning button */}
-          <h2 id="openning">
-            <span>&lt; </span>
-            CHOOSE YOUR DEPARTMENT
-            <span> /&gt;</span>
-          </h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet autem
-            vitae, excepturi eum recusandae ut expedita blanditiis, quaerat
-            architecto non molestias assumenda enim voluptatibus corrupti,
-            numquam consequuntur dolorum deleniti at!
-          </p>
+          <Departments />
 
-          <Row align="middle" gutter={[20, 20]}>
-            {departmentList.map((list) => {
-              const { id, name, icon } = list;
-              return (
-                <Col key={list.id} xs={24} sm={24} md={12} xl={8}>
-                  <a href={`open-opportunities/department/${id}`}>
-                    <Row align="middle" className="departments">
-                      <Col xs={3} sm={2} md={3}>
-                        <img src={icon} alt={`${name} icon`} />
-                      </Col>
-                      <Col>
-                        <h3>{name.toUpperCase()}</h3>
-                      </Col>
-                    </Row>
-                  </a>
-                </Col>
-              );
-            })}
-          </Row>
-
+          {/* === work with us === */}
           <h2 className="center">
             <span>&lt; </span>
             WORK WITH US
@@ -169,6 +144,7 @@ function index() {
               </Col>
             ))}
           </Row>
+
           {/* === recruiting === */}
           <h2 className="center">
             <span>&lt; </span>
@@ -187,28 +163,9 @@ function index() {
               </Col>
             ))}
           </Row>
+
           {/* === choose company === */}
-          <h2 className="center">
-            <span>&lt; </span>
-            CHOOSE YOUR COMPANY
-            <span> /&gt;</span>
-          </h2>
-          <Row
-            className="company"
-            justify="center"
-            align="middle"
-            gutter={[0, 20]}
-          >
-            {companies.map((com, i) => (
-              <Col key={i} xs={10} sm={7} md={6} lg={4}>
-                <Link href={`/open-opportunities/${com.name.toLowerCase()}`}>
-                  <div className="brand">
-                    <img src={com.logo} alt={`${com.name} logo`} />
-                  </div>
-                </Link>
-              </Col>
-            ))}
-          </Row>
+          <Companies />
         </div>
       </div>
     </>

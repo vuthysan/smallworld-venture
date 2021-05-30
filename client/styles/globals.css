@@ -39,6 +39,9 @@ h2 span {
   color: #cfcfcf;
   font-weight: 900 !important;
 }
+#loading {
+  margin: 100px 0;
+}
 /* navbar */
 .nav {
   background-color: rgb(1, 94, 152);

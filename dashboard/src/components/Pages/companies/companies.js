@@ -28,7 +28,7 @@ function Companies() {
             // height="auto"
             height="33"
             width="100"
-            src={`http://localhost:5000/public/upload/${data}`}
+            src={`http://localhost:5000/public/upload/images/${data}`}
             alt="logo"
           />
         );

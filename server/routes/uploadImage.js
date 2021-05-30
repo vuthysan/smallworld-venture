@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require("uuid");
 // === upload file mangement ===
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/upload");
+    cb(null, "public/upload/images");
   },
   filename: (req, file, cb) => {
     // console.log(file);
@@ -21,7 +21,7 @@ const upload = multer({ storage: storage });
 router.post("/upload/image", upload.single("image"), (req, res) => {
   //   console.log(req.file);
   if (!req.file) {
-    res.send("There is not image to upload");
+    res.send("There is no image to upload");
   }
   //   console.log(req.file);
   res.send(req.file.filename);

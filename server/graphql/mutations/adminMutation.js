@@ -18,6 +18,7 @@ const DepartmentType = require("../type/departmentType");
 const OpportunityType = require("../type/opportunityType");
 const UserType = require("../type/userType");
 const MessageType = require("../type/messageType");
+const ApplicationType = require("../type/applicationType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
@@ -25,6 +26,7 @@ const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
 const User = require("../../models/userModel");
 const Message = require("../../models/messageModel");
+const Application = require("../../models/applicationModel");
 
 const AdminMutation = new GraphQLObjectType({
   name: "AdminMutation",
@@ -290,6 +292,7 @@ const AdminMutation = new GraphQLObjectType({
         }
       },
     },
+    // === delete message from user ===
     delete_message: {
       type: MessageType,
       args: {
@@ -298,6 +301,17 @@ const AdminMutation = new GraphQLObjectType({
       resolve: async (parent, args) => {
         await Message.findByIdAndDelete(args.id);
         return { respond: "Message deleted!" };
+      },
+    },
+    // === delete user's application ===
+    delete_application: {
+      type: ApplicationType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (parent, args) => {
+        await Application.findByIdAndDelete(args.id);
+        return { message: "Application deleted!" };
       },
     },
   },

@@ -22,7 +22,7 @@ function Departments() {
           <img
             height="30"
             width="70"
-            src={`http://localhost:5000/public/upload/${data}`}
+            src={`http://localhost:5000/public/upload/images/${data}`}
             alt="icon"
           />
         );

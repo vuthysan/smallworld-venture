@@ -141,16 +141,6 @@ function EditCompany({ history }) {
             >
               <Input.TextArea />
             </Form.Item>
-            <Form.Item wrapperCol={24}>
-              <Button
-                id="submit-btn"
-                type="primary"
-                size="large"
-                htmlType="submit"
-              >
-                Submit
-              </Button>
-            </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item
@@ -171,7 +161,7 @@ function EditCompany({ history }) {
                     // === response for onRemove when user remove image ===
                     response: companyData.get_company.logo,
                     url:
-                      "http://localhost:5000/public/upload/" +
+                      "http://localhost:5000/public/upload/images" +
                       companyData.get_company.logo,
                   },
                 ]}
@@ -181,14 +171,14 @@ function EditCompany({ history }) {
                   {state.imageUrl ? (
                     <img
                       width="300"
-                      src={`http://localhost:5000/public/upload/${state.imageUrl}`}
+                      src={`http://localhost:5000/public/upload/images/${state.imageUrl}`}
                       alt="uploaed logo"
                     />
                   ) : // === original image before deleted or change ===
                   defaultImg ? (
                     <img
                       width="300"
-                      src={`http://localhost:5000/public/upload/${companyData.get_company.logo}`}
+                      src={`http://localhost:5000/public/upload/images/${companyData.get_company.logo}`}
                       alt=""
                     />
                   ) : (
@@ -200,6 +190,11 @@ function EditCompany({ history }) {
             </Form.Item>
           </Col>
         </Row>
+        <Form.Item wrapperCol={24}>
+          <Button id="submit-btn" type="primary" size="large" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );

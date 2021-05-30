@@ -5,6 +5,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const adminSchema = require("./graphql/schema/adminSchema");
 const schema = require("./graphql/schema/schema");
+
 // === invoke express ===
 const app = express();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/public/", express.static(path.join(__dirname, "public")));
+
 // === for admin dashboard ===
 app.use(
   "/admin",
@@ -30,7 +32,8 @@ app.use(
 );
 
 // === upload file route ===
-app.use(require("./routes/uploadFile"));
+app.use(require("./routes/uploadImage"));
+app.use(require("./routes/uploadPdf"));
 
 // === delete file route ===
 app.use(require("./routes/deleteFile"));

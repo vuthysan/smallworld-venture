@@ -137,7 +137,7 @@ function AddCompany() {
                   {state.imageUrl ? (
                     <img
                       width="300"
-                      src={`http://localhost:5000/public/upload/${state.imageUrl}`}
+                      src={`http://localhost:5000/public/upload/images/${state.imageUrl}`}
                       alt="uploaed logo"
                     />
                   ) : (

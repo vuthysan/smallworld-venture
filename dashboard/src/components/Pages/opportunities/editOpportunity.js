@@ -150,14 +150,8 @@ function EditOpportunity({ history }) {
         {/* === input conditions === */}
         <FormList name="Conditions" message="Condition" />
         <Form.Item>
-          <Button
-            id="submit-btn"
-            type="primary"
-            size="large"
-            htmlType="submit"
-            style={{ width: "175px" }}
-          >
-            Add Opportunity
+          <Button id="submit-btn" type="primary" size="large" htmlType="submit">
+            Submit
           </Button>
         </Form.Item>
       </Form>

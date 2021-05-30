@@ -150,14 +150,14 @@ function EditDepartment({ history }) {
                 <img
                   width="80"
                   height="45"
-                  src={`http://localhost:5000/public/upload/${state.imageUrl}`}
+                  src={`http://localhost:5000/public/upload/images/${state.imageUrl}`}
                   alt="uploaed logo"
                 />
               ) : defaultImg ? (
                 <img
                   height="45"
                   width="80"
-                  src={`http://localhost:5000/public/upload/${departmentData.get_department.icon}`}
+                  src={`http://localhost:5000/public/upload/images/${departmentData.get_department.icon}`}
                   alt="department's icon"
                 />
               ) : (
@@ -170,14 +170,8 @@ function EditDepartment({ history }) {
           </Upload>
         </Form.Item>
         <Form.Item>
-          <Button
-            id="submit-btn"
-            type="primary"
-            size="large"
-            htmlType="submit"
-            style={{ width: "170px" }}
-          >
-            Add Department
+          <Button id="submit-btn" type="primary" size="large" htmlType="submit">
+            Submit
           </Button>
         </Form.Item>
       </Form>

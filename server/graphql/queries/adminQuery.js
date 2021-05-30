@@ -8,16 +8,18 @@ const {
 } = graphql;
 
 // ==== Graphql Type Section ====
+const OpportunityType = require("../type/opportunityType");
 const CompanyType = require("../type/companyType");
 const DepartmentType = require("../type/departmentType");
-const OpportunityType = require("../type/opportunityType");
 const MessageType = require("../type/messageType");
+const ApplicationType = require("../type/applicationType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
 const Department = require("../../models/departmentModel");
 const Opportunity = require("../../models/opportunityModel");
 const Message = require("../../models/messageModel");
+const Application = require("../../models/applicationModel");
 
 // === AdminQuery ===
 const AdminQuery = new GraphQLObjectType({
@@ -28,7 +30,7 @@ const AdminQuery = new GraphQLObjectType({
       type: new GraphQLList(CompanyType),
       description: "List of companies",
       resolve: async () => {
-        const com = await Company.find();
+        const com = await Company.find().sort({ createdAt: -1 });
         return com;
       },
     },
@@ -47,7 +49,7 @@ const AdminQuery = new GraphQLObjectType({
       type: new GraphQLList(DepartmentType),
       description: "List of departments",
       resolve: async () => {
-        const dep = await Department.find();
+        const dep = await Department.find().sort({ createdAt: -1 });
         return dep;
       },
     },
@@ -66,7 +68,7 @@ const AdminQuery = new GraphQLObjectType({
       type: new GraphQLList(OpportunityType),
       description: "List of opportunities",
       resolve: async () => {
-        const op = await Opportunity.find();
+        const op = await Opportunity.find().sort({ createdAt: -1 });
         return op;
       },
     },
@@ -85,8 +87,17 @@ const AdminQuery = new GraphQLObjectType({
       type: new GraphQLList(MessageType),
       description: "List of message from users",
       resolve: async () => {
-        let message = await Message.find();
+        let message = await Message.find().sort({ createdAt: -1 });
         return message;
+      },
+    },
+    // ====== get applicant's form ======
+    get_applications: {
+      type: new GraphQLList(ApplicationType),
+      description: "List of applicant's info",
+      resolve: async () => {
+        let app = await Application.find();
+        return app;
       },
     },
   },

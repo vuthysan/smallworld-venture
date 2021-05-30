@@ -6,6 +6,7 @@ import moment from "moment";
 import { Table, Spin, Button, Divider, Modal, Popconfirm, message } from "antd";
 
 function Messages() {
+  // === massage's modal state ===
   const [messageModal, setMessageModal] = useState({
     visible: false,
     msgId: null,
@@ -47,6 +48,7 @@ function Messages() {
         // console.log(data);
         return (
           <div>
+            {/* == set Id of message to modal state when click == */}
             <Button
               className="action-btn"
               onClick={() => setMessageModal({ visible: true, msgId: id })}
@@ -56,24 +58,37 @@ function Messages() {
             </Button>
             <Modal
               visible={messageModal.visible}
+              footer={null}
               onCancel={() => setMessageModal({ visible: false })}
             >
               {msgData.get_messages.map((res) => {
                 if (res.id === messageModal.msgId) {
                   return (
                     <div key={res.id}>
-                      <p>{res.fullname}</p>
-                      <p>{res.email}</p>
-                      <p>{res.message}</p>
+                      <p>
+                        <span
+                          style={{ fontWeight: "bold" }}
+                        >{`Full Name: `}</span>
+                        {res.fullname}
+                      </p>
+                      <p>
+                        <span style={{ fontWeight: "bold" }}>{`Email: `}</span>
+                        {res.email}
+                      </p>
+                      <p>
+                        <span
+                          style={{ fontWeight: "bold" }}
+                        >{`Message: `}</span>
+                        {res.message}
+                      </p>
                     </div>
                   );
+                } else {
+                  return "";
                 }
               })}
             </Modal>
-            {/* <MessageModal
-              modal={messageModal}
-              setVisible={setModalVisibility}
-            /> */}
+
             <Divider type="vertical" />
             <Popconfirm
               placement="topRight"
