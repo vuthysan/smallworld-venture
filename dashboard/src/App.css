@@ -18,6 +18,7 @@ label {
   font-weight: 600;
   font-size: 16px !important;
 }
+
 .dash-loading {
   margin: 0 100px;
 }
@@ -111,7 +112,7 @@ label {
 }
 /* === card 3 === */
 .card3 {
-  background-color: #f3477b4b;
+  background-color: #f3477b30;
 }
 .card-icon3 {
   background-color: #f0356d;
@@ -119,7 +120,26 @@ label {
 .card3 h1 {
   color: #f0356d;
 }
-
+/* === card 4 === */
+.card4 {
+  background-color: #d935f026;
+}
+.card-icon4 {
+  background-color: #d935f0ed;
+}
+.card4 h1 {
+  color: #d935f0ed;
+}
+/* === card 5 === */
+.card5 {
+  background-color: #ff57573b;
+}
+.card-icon5 {
+  background-color: #ff5757;
+}
+.card5 h1 {
+  color: #ff5757;
+}
 /* === Form design ===  */
 .ant-input {
   border-radius: 6px;
@@ -233,17 +253,26 @@ textarea {
   margin-top: 10px;
   color: #ff5c5e;
 }
+.input .ant-input {
+  color: white;
+  font-size: 23px;
+  font-weight: 600;
+  background-color: rgba(233, 233, 233, 0) !important;
+}
 .input-login {
   background-color: rgba(233, 233, 233, 0) !important;
-  color: white;
   border: none;
   font-size: 23px;
   border-radius: 0px;
   font-weight: 600;
   border-bottom: 2px solid #ffffffb4;
 }
-.input-login::placeholder {
-  color: #ffffffb4;
+.input .ant-input::placeholder {
+  color: #ffffffb4 !important;
+}
+
+.ant-input-password-icon {
+  color: #ffffffb4 !important;
 }
 .login-btn {
   width: 100%;
@@ -254,6 +283,22 @@ textarea {
   color: white;
   font-weight: 600;
   font-size: 20px;
+}
+.view-msg-label,
+.view-application-label {
+  font-weight: bold;
+  color: #1388d1;
+}
+.pdf-modal {
+  width: 90% !important;
+  margin-top: 0;
+}
+#download-cv {
+  border: 2px solid #1388d1;
+  padding: 7px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
 }
 /* ==== Top Nav ==== */
 .top-nav {

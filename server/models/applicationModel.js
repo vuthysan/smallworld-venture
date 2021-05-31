@@ -22,6 +22,18 @@ const applicationSchema = new Schema(
       type: String,
       required: true,
     },
+    company: {
+      type: String,
+      required: true,
+    },
+    department: {
+      type: String,
+      required: true,
+    },
+    position: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

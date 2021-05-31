@@ -5,10 +5,9 @@ import { useMutation } from "@apollo/client";
 import { Modal, Button, Form, Input, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-function ApplyNow() {
+function ApplyNow({ company, department, position }) {
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [fileName, setFileName] = useState("");
   const [file, setFile] = useState("");
 
   const [post_application] = useMutation(POST_APPLICATION);
@@ -39,10 +38,15 @@ function ApplyNow() {
           name: name,
           email: email,
           phone: phone,
-          additional: additional ? additional : "",
+          additional: additional ? additional : "N/A",
           cv: res.data,
+          company: company,
+          department: department,
+          position: position,
         };
         // console.log(newApp);
+        console.log(position);
+
         post_application({
           variables: newApp,
         }).then(
@@ -103,6 +107,7 @@ function ApplyNow() {
           >
             <Input />
           </Form.Item>
+          {/* sadjkf */}
           <Form.Item
             name="additional"
             label="Additional Information (Optional)"

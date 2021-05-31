@@ -5,7 +5,7 @@ import { GET_DEPARTMENTS } from "../../../graphql/query";
 import { DELETE_DEPARTMENT } from "../../../graphql/mutation";
 import axios from "axios";
 import moment from "moment";
-import { Table, Spin, Tag, Popconfirm, Divider, message } from "antd";
+import { Row, Col, Table, Spin, Tag, Popconfirm, Divider, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
 
 function Departments() {
@@ -72,7 +72,6 @@ function Departments() {
                   })
                   .catch((error) => {
                     console.log(error);
-                    return null;
                   });
                 // === delete image from public/upload folder in server ===
                 await axios.delete(
@@ -103,7 +102,14 @@ function Departments() {
 
   return (
     <div>
-      <h1> Departments</h1>
+      <Row justify="space-between">
+        <Col>
+          <h1>Departments </h1>
+        </Col>
+        <Col>
+          <h1>{data.get_departments.length}</h1>
+        </Col>
+      </Row>
       <Table
         pagination={{ pageSize: 10 }}
         columns={columns}

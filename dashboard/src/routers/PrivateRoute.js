@@ -14,6 +14,7 @@ function PrivateRoute({ component: Component, ...rest }) {
       return false;
     }
   };
+
   return (
     <Route
       {...rest}

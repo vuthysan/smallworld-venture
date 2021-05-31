@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_OPPORTUNITIES } from "../../../graphql/query";
 import { DELETE_OPPORTUNITY } from "../../../graphql/mutation";
-import { Spin, Table, Tag, Divider, Popconfirm, message } from "antd";
+import { Row, Col, Spin, Table, Tag, Divider, Popconfirm, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
 function Opportunities() {
   const { loading, data, refetch } = useQuery(GET_OPPORTUNITIES);
@@ -109,7 +109,14 @@ function Opportunities() {
   }
   return (
     <div>
-      <h1>Opportunities</h1>
+      <Row justify="space-between">
+        <Col>
+          <h1>Opportunities</h1>
+        </Col>
+        <Col>
+          <h1>{data.get_opportunities.length}</h1>
+        </Col>
+      </Row>
       <Table
         columns={columns}
         dataSource={data.get_opportunities}

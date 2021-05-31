@@ -3,7 +3,7 @@ import Cookie from "js-cookie";
 import { Route, Redirect } from "react-router-dom";
 
 function PublicRoute({ component: Component, restricted, ...rest }) {
-  console.log(restricted);
+  // console.log(restricted);
   const token = Cookie.get("swtoken");
   const isLogin = () => {
     if (!token) {

@@ -5,7 +5,7 @@ import { GET_COMPANIES } from "../../../graphql/query";
 import { DELETE_COMPANY } from "../../../graphql/mutation";
 import axios from "axios";
 import moment from "moment";
-import { Table, Spin, Tag, Divider, Popconfirm, message } from "antd";
+import { Row, Col, Table, Spin, Tag, Divider, Popconfirm, message } from "antd";
 
 import { BsTrash, BsPencil } from "react-icons/bs";
 
@@ -115,7 +115,14 @@ function Companies() {
   }
   return (
     <div>
-      <h1>Companies</h1>
+      <Row justify="space-between">
+        <Col>
+          <h1>Companies</h1>
+        </Col>
+        <Col>
+          <h1>{data.get_companies.length}</h1>
+        </Col>
+      </Row>
       <div>
         <Table
           columns={columns}

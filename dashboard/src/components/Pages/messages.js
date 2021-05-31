@@ -3,7 +3,17 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_MESSAGES } from "../../graphql/query";
 import { DELETE_MESSAGE } from "../../graphql/mutation";
 import moment from "moment";
-import { Table, Spin, Button, Divider, Modal, Popconfirm, message } from "antd";
+import {
+  Row,
+  Col,
+  Table,
+  Spin,
+  Button,
+  Divider,
+  Modal,
+  Popconfirm,
+  message,
+} from "antd";
 
 function Messages() {
   // === massage's modal state ===
@@ -52,35 +62,32 @@ function Messages() {
             <Button
               className="action-btn"
               onClick={() => setMessageModal({ visible: true, msgId: id })}
-              style={{ backgroundColor: "#38c838" }}
+              style={{ backgroundColor: "rgba(60, 192, 60, 0.68)" }}
             >
               View
             </Button>
             <Modal
               visible={messageModal.visible}
               footer={null}
+              width={1000}
               onCancel={() => setMessageModal({ visible: false })}
             >
               {msgData.get_messages.map((res) => {
                 if (res.id === messageModal.msgId) {
                   return (
                     <div key={res.id}>
-                      <p>
-                        <span
-                          style={{ fontWeight: "bold" }}
-                        >{`Full Name: `}</span>
+                      <h2>
+                        <span className="view-msg-label">{`Full Name: `}</span>
                         {res.fullname}
-                      </p>
-                      <p>
-                        <span style={{ fontWeight: "bold" }}>{`Email: `}</span>
+                      </h2>
+                      <h2>
+                        <span className="view-msg-label">{`Email: `}</span>
                         {res.email}
-                      </p>
-                      <p>
-                        <span
-                          style={{ fontWeight: "bold" }}
-                        >{`Message: `}</span>
+                      </h2>
+                      <h2>
+                        <span className="view-msg-label">{`Message: `}</span>
                         {res.message}
-                      </p>
+                      </h2>
                     </div>
                   );
                 } else {
@@ -104,7 +111,10 @@ function Messages() {
                 });
               }}
             >
-              <Button className="action-btn" style={{ backgroundColor: "red" }}>
+              <Button
+                className="action-btn"
+                style={{ backgroundColor: "#ff0000a3" }}
+              >
                 Delete
               </Button>
             </Popconfirm>
@@ -123,7 +133,14 @@ function Messages() {
 
   return (
     <div>
-      <h1>Messages</h1>
+      <Row justify="space-between">
+        <Col>
+          <h1>Messages</h1>
+        </Col>
+        <Col>
+          <h1>{msgData.get_messages.length}</h1>
+        </Col>
+      </Row>
       <Table
         pagination={{ pageSize: 10 }}
         columns={columns}

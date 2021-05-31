@@ -1,34 +1,33 @@
-// import React, { useState } from "react";
-// import { useMutation } from "@apollo/client";
-// import Cookie from "js-cookie";
-// import jwt from "jsonwebtoken";
-// import { LOGIN } from "../../graphql/mutation";
-import { Form, Input, Button } from "antd";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import Cookie from "js-cookie";
+import jwt from "jsonwebtoken";
+import { LOGIN } from "../../graphql/mutation";
+import { Form, Input, Button, message } from "antd";
 
 // === antd form layout ===
 
 function Login() {
-  // const [loading, setLoading] = useState(false);
-  // const [login] = useMutation(LOGIN);
+  const [loading, setLoading] = useState(false);
+  const [login] = useMutation(LOGIN);
   const onFinish = (values) => {
-    console.log(values);
-    // login({
-    //   variables: {
-    //     ...values,
-    //   },
-    // }).then(async (res) => {
-    //   Cookie.set("swtoken", res.data.login.token, { secure: true, expires: 1 });
-    //   const token = Cookie.get("swtoken");
-    //   const decoded = jwt.decode(token);
-    //   if (decoded) {
-    //     setLoading(true);
-    //     await message.success(res.data.login.message);
-    //     setLoading(false);
-    //     window.location.replace("/");
-    //   } else {
-    //     await message.error("Your email or password is incorrect!");
-    //   }
-    // });
+    // console.log(values);
+    login({
+      variables: {
+        ...values,
+      },
+    }).then(async (res) => {
+      Cookie.set("swtoken", res.data.login.token, { secure: true, expires: 1 });
+      const token = Cookie.get("swtoken");
+      const decoded = jwt.decode(token);
+      if (decoded) {
+        setLoading(true);
+        await message.success(res.data.login.message);
+        window.location.replace("/");
+      } else {
+        await message.error("Your email or password is incorrect!");
+      }
+    });
   };
 
   return (
@@ -75,10 +74,15 @@ function Login() {
               },
             ]}
           >
-            <Input placeholder="Password" className="input-login" />
+            <Input.Password placeholder="Password" className="input-login" />
           </Form.Item>
           <Form.Item>
-            <Button className="login-btn" type="primary" htmlType="submit">
+            <Button
+              className="login-btn"
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+            >
               Login
             </Button>
           </Form.Item>

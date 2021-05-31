@@ -9,6 +9,7 @@ import {
   ClusterOutlined,
   FileSearchOutlined,
   MailOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
@@ -95,6 +96,10 @@ function LeftNav() {
           <Menu.Item key="/admin/messages" icon={<MailOutlined />}>
             <Link to="/admin/messages" />
             Messages
+          </Menu.Item>
+          <Menu.Item key="/admin/applications" icon={<FileTextOutlined />}>
+            <Link to="/admin/applications" />
+            Applications
           </Menu.Item>
         </Menu>
       </Sider>

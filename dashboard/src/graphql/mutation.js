@@ -122,10 +122,20 @@ const DELETE_OPPORTUNITY = gql`
 `;
 
 // ======= Message part =======
+
 const DELETE_MESSAGE = gql`
   mutation ($id: ID!) {
     delete_message(id: $id) {
       respond
+    }
+  }
+`;
+// ====== Application part ======
+
+const DELETE_APPLICATION = gql`
+  mutation ($id: ID!) {
+    delete_application(id: $id) {
+      message
     }
   }
 `;
@@ -141,4 +151,5 @@ export {
   EDIT_OPPORTUNITY,
   DELETE_OPPORTUNITY,
   DELETE_MESSAGE,
+  DELETE_APPLICATION,
 };

@@ -35,6 +35,9 @@ const RootMutation = new GraphQLObjectType({
         phone: { type: GraphQLNonNull(GraphQLString) },
         additional: { type: GraphQLString },
         cv: { type: GraphQLNonNull(GraphQLString) },
+        company: { type: GraphQLNonNull(GraphQLString) },
+        department: { type: GraphQLNonNull(GraphQLString) },
+        position: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: async (parent, args) => {
         const newApplication = new Application({ ...args });

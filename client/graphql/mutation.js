@@ -16,6 +16,9 @@ const POST_APPLICATION = gql`
     $additional: String
     $phone: String!
     $cv: String!
+    $company: String!
+    $department: String!
+    $position: String!
   ) {
     post_application(
       name: $name
@@ -23,6 +26,9 @@ const POST_APPLICATION = gql`
       additional: $additional
       phone: $phone
       cv: $cv
+      company: $company
+      department: $department
+      position: $position
     ) {
       message
     }

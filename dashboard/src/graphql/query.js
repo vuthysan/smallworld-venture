@@ -101,6 +101,38 @@ const GET_MESSAGE = gql`
   }
 `;
 
+// === applications part ===
+
+const GET_APPLICATIONS = gql`
+  query {
+    get_applications {
+      id
+      name
+      email
+      phone
+      additional
+      cv
+      company
+      department
+      position
+    }
+  }
+`;
+
+const GET_APPLICATION = gql`
+  query ($id: ID!) {
+    get_application(id: $id) {
+      id
+      name
+      email
+      phone
+      additional
+      cv
+      company
+      department
+    }
+  }
+`;
 export {
   GET_COMPANIES,
   GET_COMPANY,
@@ -110,4 +142,6 @@ export {
   GET_OPPORTUNITY,
   GET_MESSAGES,
   GET_MESSAGE,
+  GET_APPLICATIONS,
+  GET_APPLICATION,
 };

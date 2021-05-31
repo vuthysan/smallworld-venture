@@ -104,7 +104,7 @@ function AddDepartment() {
             },
           ]}
         >
-          <Upload
+        <Upload
             action="http://localhost:5000/upload/image"
             name="image"
             maxCount={1}

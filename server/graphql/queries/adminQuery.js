@@ -100,6 +100,16 @@ const AdminQuery = new GraphQLObjectType({
         return app;
       },
     },
+    get_application: {
+      type: ApplicationType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (parent, args) => {
+        let app = await Application.findById(args.id);
+        return app;
+      },
+    },
   },
 });
 

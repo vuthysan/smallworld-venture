@@ -2,7 +2,7 @@ const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
 
 const ApplicantionType = new GraphQLObjectType({
-  name: "Accplicantion",
+  name: "Accplication",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
@@ -10,6 +10,9 @@ const ApplicantionType = new GraphQLObjectType({
     phone: { type: GraphQLString },
     additional: { type: GraphQLString },
     cv: { type: GraphQLString },
+    company: { type: GraphQLString },
+    department: { type: GraphQLString },
+    position: { type: GraphQLString },
     // === for response to frontend ===
     message: { type: GraphQLString },
   }),

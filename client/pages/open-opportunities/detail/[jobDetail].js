@@ -82,7 +82,12 @@ function JobDetail() {
           alt="arrow down"
         />
         <br />
-        <ApplyNow />
+        {/*  === props for application form === */}
+        <ApplyNow
+          company={companyName}
+          department={department.name}
+          position={position}
+        />
       </div>
     </div>
   );

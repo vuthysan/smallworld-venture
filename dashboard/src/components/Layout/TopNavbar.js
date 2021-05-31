@@ -1,10 +1,10 @@
 import React from "react";
-
+import Logout from "../Layout/Logout";
 import { Popover, Avatar } from "antd";
 function TopNavbar() {
   const content = (
     <div>
-      <a href="/#">Logout</a>
+      <Logout />
     </div>
   );
   return (

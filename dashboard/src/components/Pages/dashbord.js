@@ -5,10 +5,11 @@ import {
   GET_DEPARTMENTS,
   GET_COMPANIES,
   GET_MESSAGES,
+  GET_APPLICATIONS,
 } from "../../graphql/query";
 import { Row, Col, Spin } from "antd";
 // === icon ===
-import { FaNetworkWired } from "react-icons/fa";
+import { FaNetworkWired, FaRegIdBadge } from "react-icons/fa";
 import { GiBullseye } from "react-icons/gi";
 import { BsBuilding } from "react-icons/bs";
 import { GoMail } from "react-icons/go";
@@ -18,6 +19,8 @@ function Dashbord() {
   const { loading: loadingCom, data: comData } = useQuery(GET_COMPANIES);
   const { loading: loadingOpp, data: OppData } = useQuery(GET_OPPORTUNITIES);
   const { loading: loadingMsg, data: MsgData } = useQuery(GET_MESSAGES);
+  const { loading: loadingApp, data: AppData } = useQuery(GET_APPLICATIONS);
+
   // console.log(depData);
   // console.log(comData);
   // console.log(OppData);
@@ -80,15 +83,32 @@ function Dashbord() {
           {loadingMsg ? (
             <Spin className="dash-loading" size="large" />
           ) : (
-            <Row className="card card3" align="middle" gutter={20}>
+            <Row className="card card4" align="middle" gutter={20}>
               <Col>
-                <div className="card-icon card-icon3">
+                <div className="card-icon card-icon4">
                   <GoMail className="icon" />
                 </div>
               </Col>
               <Col>
                 <h1>{MsgData.get_messages.length}</h1>
                 <p>Total Messages</p>
+              </Col>
+            </Row>
+          )}
+        </Col>
+        <Col>
+          {loadingApp ? (
+            <Spin className="dash-loading" size="large" />
+          ) : (
+            <Row className="card card5" align="middle" gutter={20}>
+              <Col>
+                <div className="card-icon card-icon5">
+                  <FaRegIdBadge className="icon" />
+                </div>
+              </Col>
+              <Col>
+                <h1>{AppData.get_applications.length}</h1>
+                <p>Total Applications</p>
               </Col>
             </Row>
           )}
