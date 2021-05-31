@@ -20,6 +20,7 @@ import {
 } from "antd";
 // === comps ===
 import FormList from "../../Layout/FormList";
+import AppLayout from "../../Layout/Layout";
 
 const { Option } = Select;
 function EditOpportunity({ history }) {
@@ -56,7 +57,7 @@ function EditOpportunity({ history }) {
   }
 
   return (
-    <div>
+    <AppLayout>
       <h1>Edit Opportunity</h1>
       <Form
         form={form}
@@ -155,7 +156,7 @@ function EditOpportunity({ history }) {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </AppLayout>
   );
 }
 

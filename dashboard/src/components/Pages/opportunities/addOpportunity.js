@@ -19,8 +19,9 @@ import {
 } from "antd";
 
 // === comps ===
+// FormList = Repsonsibilities,Requirements,Conditions's Input
 import FormList from "../../Layout/FormList";
-// === FormList = Repsonsibilities,Requirements,Conditions's Input ===
+import AppLayout from "../../Layout/Layout";
 
 const { Option } = Select;
 function AddOpportunity() {
@@ -57,7 +58,7 @@ function AddOpportunity() {
   }
 
   return (
-    <div>
+    <AppLayout>
       <h1>Add Opportunity</h1>
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
@@ -150,7 +151,7 @@ function AddOpportunity() {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </AppLayout>
   );
 }
 

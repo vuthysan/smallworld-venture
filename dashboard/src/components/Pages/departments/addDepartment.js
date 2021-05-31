@@ -5,6 +5,10 @@ import { ADD_DEPARTMENT } from "../../../graphql/mutation";
 import axios from "axios";
 import { Form, Input, Button, Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+
+// === comps ===
+import AppLayout from "../../Layout/Layout";
+
 function AddDepartment() {
   const [form] = Form.useForm();
   // === icon of deparment's state ===
@@ -82,7 +86,7 @@ function AddDepartment() {
     });
   };
   return (
-    <div>
+    <AppLayout>
       <h1>Add Department</h1>
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
@@ -104,7 +108,7 @@ function AddDepartment() {
             },
           ]}
         >
-        <Upload
+          <Upload
             action="http://localhost:5000/upload/image"
             name="image"
             maxCount={1}
@@ -142,7 +146,7 @@ function AddDepartment() {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </AppLayout>
   );
 }
 

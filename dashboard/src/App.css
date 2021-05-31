@@ -289,10 +289,7 @@ textarea {
   font-weight: bold;
   color: #1388d1;
 }
-.pdf-modal {
-  width: 90% !important;
-  margin-top: 0;
-}
+
 #download-cv {
   border: 2px solid #1388d1;
   padding: 7px 20px;

@@ -4,7 +4,8 @@ import { GET_COMPANIES } from "../../../graphql/query";
 import { ADD_COMPANY } from "../../../graphql/mutation";
 import axios from "axios";
 import { Form, Input, Button, Row, Col, Upload, message } from "antd";
-
+// === comps ===
+import AppLayout from "../../Layout/Layout";
 function AddCompany() {
   const [form] = Form.useForm();
   const [state, setState] = useState({
@@ -94,7 +95,7 @@ function AddCompany() {
     },
   };
   return (
-    <div>
+    <AppLayout>
       <h1>Add Company</h1>
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Row gutter={60}>
@@ -160,7 +161,7 @@ function AddCompany() {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </AppLayout>
   );
 }
 

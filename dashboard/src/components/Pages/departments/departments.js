@@ -8,6 +8,8 @@ import moment from "moment";
 import { Row, Col, Table, Spin, Tag, Popconfirm, Divider, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
 
+// === comps ===
+import AppLayout from "../../Layout/Layout";
 function Departments() {
   const { loading, data, refetch } = useQuery(GET_DEPARTMENTS);
   const [delete_department] = useMutation(DELETE_DEPARTMENT);
@@ -101,7 +103,7 @@ function Departments() {
   }
 
   return (
-    <div>
+    <AppLayout>
       <Row justify="space-between">
         <Col>
           <h1>Departments </h1>
@@ -115,7 +117,7 @@ function Departments() {
         columns={columns}
         dataSource={data.get_departments}
       />
-    </div>
+    </AppLayout>
   );
 }
 

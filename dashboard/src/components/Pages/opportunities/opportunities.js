@@ -5,6 +5,10 @@ import { GET_OPPORTUNITIES } from "../../../graphql/query";
 import { DELETE_OPPORTUNITY } from "../../../graphql/mutation";
 import { Row, Col, Spin, Table, Tag, Divider, Popconfirm, message } from "antd";
 import { BsTrash, BsPencil } from "react-icons/bs";
+
+// === comps
+import AppLayout from "../../Layout/Layout";
+
 function Opportunities() {
   const { loading, data, refetch } = useQuery(GET_OPPORTUNITIES);
   const [delete_opportunity] = useMutation(DELETE_OPPORTUNITY);
@@ -108,7 +112,7 @@ function Opportunities() {
     );
   }
   return (
-    <div>
+    <AppLayout>
       <Row justify="space-between">
         <Col>
           <h1>Opportunities</h1>
@@ -122,7 +126,7 @@ function Opportunities() {
         dataSource={data.get_opportunities}
         pagination={{ pageSize: 10 }}
       />
-    </div>
+    </AppLayout>
   );
 }
 

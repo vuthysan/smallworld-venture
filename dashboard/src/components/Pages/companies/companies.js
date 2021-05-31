@@ -7,6 +7,9 @@ import axios from "axios";
 import moment from "moment";
 import { Row, Col, Table, Spin, Tag, Divider, Popconfirm, message } from "antd";
 
+// === comps ===
+import AppLayout from "../../Layout/Layout";
+
 import { BsTrash, BsPencil } from "react-icons/bs";
 
 function Companies() {
@@ -114,7 +117,7 @@ function Companies() {
     );
   }
   return (
-    <div>
+    <AppLayout>
       <Row justify="space-between">
         <Col>
           <h1>Companies</h1>
@@ -130,7 +133,7 @@ function Companies() {
           dataSource={data.get_companies}
         />
       </div>
-    </div>
+    </AppLayout>
   );
 }
 

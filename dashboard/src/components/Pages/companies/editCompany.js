@@ -6,6 +6,9 @@ import { GET_COMPANY } from "../../../graphql/query";
 import { EDIT_COMPANY } from "../../../graphql/mutation";
 import { Form, Input, Button, Row, Col, Upload, message, Spin } from "antd";
 
+// === comps ===
+import AppLayout from "../../Layout/Layout";
+
 function EditCompany({ history }) {
   const { id } = useParams();
   const [form] = Form.useForm();
@@ -106,7 +109,7 @@ function EditCompany({ history }) {
     );
   }
   return (
-    <div>
+    <AppLayout>
       <h1>Edit Company</h1>
       <Form
         form={form}
@@ -196,7 +199,7 @@ function EditCompany({ history }) {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </AppLayout>
   );
 }
 

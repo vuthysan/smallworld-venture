@@ -15,6 +15,7 @@ import {
 } from "antd";
 
 // ==== comps ====
+import AppLayout from "../Layout/Layout";
 
 function Applications() {
   // === pdf modal state ===
@@ -75,15 +76,16 @@ function Applications() {
                 return (
                   <Modal
                     footer={null}
-                    className="pdf-modal"
+                    width="60%"
+                    style={{ top: 20 }}
                     visible={pdfModal.visible}
                     onCancel={() => setPdfModal({ visible: false })}
                   >
                     <object
                       data={`http://localhost:5000/public/upload/pdf/${res.cv}`}
                       type="application/pdf"
-                      width="99%"
-                      height="1000px"
+                      width="98%"
+                      height="800px"
                       aria-labelledby="pdf viewer"
                     />
                   </Modal>
@@ -208,7 +210,7 @@ function Applications() {
 
   //   console.log(data);
   return (
-    <div>
+    <AppLayout>
       <Row justify="space-between">
         <Col>
           <h1>Applications</h1>
@@ -222,7 +224,7 @@ function Applications() {
         columns={columns}
         dataSource={applicationData.get_applications}
       />
-    </div>
+    </AppLayout>
   );
 }
 

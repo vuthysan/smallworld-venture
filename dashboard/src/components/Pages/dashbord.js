@@ -8,6 +8,9 @@ import {
   GET_APPLICATIONS,
 } from "../../graphql/query";
 import { Row, Col, Spin } from "antd";
+
+// === comps ===
+import AppLayout from "../Layout/Layout";
 // === icon ===
 import { FaNetworkWired, FaRegIdBadge } from "react-icons/fa";
 import { GiBullseye } from "react-icons/gi";
@@ -25,7 +28,7 @@ function Dashbord() {
   // console.log(comData);
   // console.log(OppData);
   return (
-    <React.Fragment>
+    <AppLayout>
       <h1>Overview</h1>
       <Row gutter={[40, 20]} align="middle">
         <Col>
@@ -114,7 +117,7 @@ function Dashbord() {
           )}
         </Col>
       </Row>
-    </React.Fragment>
+    </AppLayout>
   );
 }
 

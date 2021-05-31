@@ -15,6 +15,9 @@ import {
   message,
 } from "antd";
 
+// === comps ===
+import AppLayout from "../Layout/Layout";
+
 function Messages() {
   // === massage's modal state ===
   const [messageModal, setMessageModal] = useState({
@@ -132,7 +135,7 @@ function Messages() {
   }
 
   return (
-    <div>
+    <AppLayout>
       <Row justify="space-between">
         <Col>
           <h1>Messages</h1>
@@ -146,7 +149,7 @@ function Messages() {
         columns={columns}
         dataSource={msgData.get_messages}
       />
-    </div>
+    </AppLayout>
   );
 }
 
