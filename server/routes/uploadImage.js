@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
+const sharp = require("sharp");
 
 // === upload file mangement ===
 const storage = multer.diskStorage({
@@ -23,8 +24,23 @@ router.post("/upload/image", upload.single("image"), (req, res) => {
   if (!req.file) {
     res.send("There is no image to upload");
   }
+
+  sharp("./" + req.file.path)
+    .toBuffer()
+    .then((data) => {
+      sharp(data)
+        // .resize(300, 200)
+        .png({ quality: 80 })
+        .toFile("./" + req.file.path, () => {
+          return res.send(req.file.filename);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   //   console.log(req.file);
-  res.send(req.file.filename);
+  // res.send(req.file.filename);
 });
 
 module.exports = router;

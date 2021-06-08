@@ -13,6 +13,7 @@ function PdfModal() {
   }
   console.log(data);
   return (
+      
     <Modal visible={visible} footer={null} onCancel={() => setVisible(false)}>
       <h1>Hello</h1>
     </Modal>

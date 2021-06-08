@@ -100,6 +100,7 @@ const AdminQuery = new GraphQLObjectType({
         return app;
       },
     },
+    // ====== get application by id ======
     get_application: {
       type: ApplicationType,
       args: {

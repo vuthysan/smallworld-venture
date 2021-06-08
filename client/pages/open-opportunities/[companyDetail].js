@@ -26,6 +26,9 @@ function CompanyDetail() {
       </div>
     );
   }
+  // if (!data.get_company) {
+  //   return <h1>404 </h1>;
+  // }
   const { name, id, logo, description, opportunities } = data.get_company;
 
   return (
