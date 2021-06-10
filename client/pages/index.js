@@ -3,8 +3,9 @@ import Link from "next/link";
 //=== code spliting for performance ===
 import loadable from "@loadable/component";
 const Card = loadable(() => import("../comps/Card"));
-const CardBox = loadable(() => import("../comps/CardBox"));
+// const CardBox = loadable(() => import("../comps/CardBox"));
 
+import CardBox from "../comps/CardBox";
 // import Card from "../comps/Card";
 // import CardBox from "../comps/CardBox";
 import { Row, Col, Spin, Button } from "antd";
@@ -154,13 +155,8 @@ function Home() {
                 </div>
               ) : (
                 community.slice(0, 4).map((community) => {
-                  const {
-                    title,
-                    description,
-                    thumbnail,
-                    author,
-                    guid,
-                  } = community;
+                  const { title, description, thumbnail, author, guid } =
+                    community;
                   return (
                     <Col xs={24} sm={24} md={12} lg={8} xl={6} key={guid}>
                       <Card
