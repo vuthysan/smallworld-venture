@@ -23,7 +23,7 @@ function Navbar() {
               <img
                 width="130px"
                 height="75.84px"
-                src="/images/sw-white.png"
+                src="/images/home/sw-white.png"
                 alt="Smallworld Venture Logo"
               />
             </Link>

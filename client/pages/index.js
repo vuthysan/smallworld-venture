@@ -3,17 +3,16 @@ import Link from "next/link";
 //=== code spliting for performance ===
 import loadable from "@loadable/component";
 const Card = loadable(() => import("../comps/Card"));
-// const CardBox = loadable(() => import("../comps/CardBox"));
 
 import CardBox from "../comps/CardBox";
-// import Card from "../comps/Card";
-// import CardBox from "../comps/CardBox";
+
 import { Row, Col, Spin, Button } from "antd";
 import axios from "axios";
 import MetaTags from "../comps/MetaTags";
 
 // ==== json data ===
 import smallworld from "../data/smallworld.json";
+
 // Card for news
 // CardBox for smallworld info
 function Home() {
@@ -87,7 +86,7 @@ function Home() {
                   width="370px"
                   height="400px"
                   className="space-ship"
-                  src="/images/spaceship.png"
+                  src="/images/home/spaceship.png"
                   alt="space-ship image"
                 />
               </Col>

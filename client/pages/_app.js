@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
         <title>
           SmallWorld Venture | Homegrown startup community based in Phnom Penh
         </title>
-        <link rel="shortcut icon" href="/images/favicon.png" />
+        <link rel="shortcut icon" href="/images/home/favicon.png" />
       </Head>
       <Layout>
         <Component {...pageProps} />

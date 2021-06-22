@@ -1,4 +1,3 @@
-import Image from "next/image";
 function CardBox({ title, des, src }) {
   return (
     <div className="card-box-info">

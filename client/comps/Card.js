@@ -49,7 +49,7 @@ function Card({ image, title, desc, author }) {
           <div
             className="card-image"
             style={{
-              backgroundImage: `url("/images/default_img.png")`,
+              backgroundImage: `url("/images/home/default_img.png")`,
             }}
           />
         )}

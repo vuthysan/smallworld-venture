@@ -1,16 +1,46 @@
-import { Row, Col } from "antd";
 import MetaTags from "../../comps/MetaTags";
-
-// === comps ===
-import Departments from "../../comps/Departments";
-import Companies from "../../comps/Companies";
-
-//=== json data ====
-import values from "../../data/open-page-data/values.json";
-import workWithUs from "../../data/open-page-data/workWithUs.json";
-import recruiting from "../../data/open-page-data/recruiting.json";
+import { Row, Col, Dropdown, Button, Menu } from "antd";
 
 function index() {
+  // === Job seeker menu ===
+  const JobSeekerMenu = (
+    <Menu>
+      <Menu.Item>
+        <a
+          rel="noopener noreferrer"
+          href="/open-opportunities/jobseeker/signin"
+        >
+          Job Seeker
+        </a>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a rel="noopener noreferrer" href="/open-opportunities/employer/signin">
+          Employer
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
+
+  // === Emlployer Menu menu ===
+  const EmployerMenu = (
+    <Menu>
+      <Menu.Item>
+        <a
+          rel="noopener noreferrer"
+          href="/open-opportunities/jobseeker/signup"
+        >
+          Job Seeker
+        </a>
+      </Menu.Item>
+
+      <Menu.Item>
+        <a rel="noopener noreferrer" href="/open-opportunities/employer/signup">
+          Employer
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <>
       <MetaTags
@@ -29,7 +59,7 @@ function index() {
                   <Col>
                     <h1>
                       <span>&lt;</span>
-                      Open-Opportunities
+                      OPEN-OPPORTUNITIES
                       <span>/&gt;</span>
                     </h1>
                   </Col>
@@ -37,135 +67,37 @@ function index() {
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       In dictum suscipit quis lectus quam elementum volutpat. Ac
-                      potenti ameutpat. Ac potenti amet, cras magna. Lacus amet
-                      consectetur condimentum turpis sed sed at commodo.
+                      potenti ameutpat. Ac potenti amet, cras magna.
                     </p>
                   </Col>
                   <Col>
-                    <a
-                      href="#openning"
-                      className="sw-default-btn load-more-btn"
+                    <Dropdown
+                      overlay={JobSeekerMenu}
+                      placement="bottomCenter"
+                      trigger="click"
+                      arrow
                     >
-                      View Oppening
-                    </a>
+                      <Button className="opportunities-btn">Sign In</Button>
+                    </Dropdown>
+                    <Dropdown
+                      overlay={EmployerMenu}
+                      placement="bottomCenter"
+                      arrow
+                      trigger="click"
+                    >
+                      <Button className="opportunities-btn">Sign Up</Button>
+                    </Dropdown>
                   </Col>
                 </Row>
               </Col>
-              <Col xs={0} sm={0} md={5}>
+              <Col xs={0} sm={0} md={6}>
                 <img
-                  src="/images/open-opportunities/banner-image.svg"
+                  src="/images/open-opportunities/resume.svg"
                   alt="team work svg"
                 />
               </Col>
             </Row>
           </div>
-        </div>
-
-        {/* === values ===  */}
-        <div className="about-smallworld container">
-          <h2>
-            <span>&lt; </span>
-            OUR VALUES
-            <span> /&gt;</span>
-          </h2>
-          <Row gutter={[10, 5]}>
-            {values.map((value, i) => (
-              <Col key={i}>
-                <p className="value">{value}</p>
-              </Col>
-            ))}
-          </Row>
-
-          {/* === goal and vision === */}
-          <Row align="middle" justify="space-between">
-            <Col md={13}>
-              <h2>
-                <span>&lt; </span>
-                OUR GOAL AND VISION
-                <span> /&gt;</span>
-              </h2>
-              <p>
-                Our goal is to have fun, experiment, create, to do exceptional
-                work, build the best products, give proper attention to detail,
-                treat people right, tell the truth, never stop learning, and to
-                have a positive impact on the future. We want to inspire you to
-                do your best, dare you to achieve your dream, and encourage you
-                to be yourself.
-              </p>
-            </Col>
-            <Col className="goal-vision-img" xs={13} sm={10} md={7} xl={6}>
-              <img
-                src="/images/open-opportunities/goal-vision.svg"
-                alt="smallworld's goal and vision"
-              />
-            </Col>
-          </Row>
-          <Row gutter={[30]}>
-            <Col>
-              <div className="employees-brands">
-                <h1>100+</h1>
-                <h1>Employees</h1>
-              </div>
-            </Col>
-            <Col>
-              <div className="employees-brands">
-                <h1>11</h1>
-                <h1>Brands</h1>
-              </div>
-            </Col>
-          </Row>
-
-          {/* ==== choose department ==== */}
-          <Departments />
-
-          {/* === work with us === */}
-          <h2 className="center">
-            <span>&lt; </span>
-            WORK WITH US
-            <span> /&gt;</span>
-          </h2>
-          <Row gutter={[0, 30]}>
-            {workWithUs.map((work) => (
-              <Col key={work.id}>
-                <Row
-                  align="middle"
-                  justify="space-around"
-                  gutter={[0, 20]}
-                  className="work-with-us"
-                >
-                  <Col xs={10} sm={9} md={{ span: 4, order: work.imgOrder }}>
-                    <img src={work.img} alt="work with us" />
-                  </Col>
-                  <Col order={work.desOrder} sm={24} md={18}>
-                    <h3>{work.title}</h3>
-                    <p>{work.des}</p>
-                  </Col>
-                </Row>
-              </Col>
-            ))}
-          </Row>
-
-          {/* === recruiting === */}
-          <h2 className="center">
-            <span>&lt; </span>
-            RECRUITING TEAM MEMBER
-            <span> /&gt;</span>
-          </h2>
-          <Row gutter={[40, 20]}>
-            {recruiting.map((recruit, i) => (
-              <Col key={i} lg={8}>
-                <div className="recruit-card">
-                  <p>
-                    <span style={{ fontSize: "45px" }}>{`${i + 1}. `}</span>
-                    {recruit}
-                  </p>
-                </div>
-              </Col>
-            ))}
-          </Row>
-
-          {/* === choose company === */}
-          <Companies />
         </div>
       </div>
     </>

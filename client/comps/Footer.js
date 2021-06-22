@@ -16,7 +16,7 @@ function Footer() {
             width="130px"
             height="75.84px"
             loading="lazy"
-            src="/images/sw-white.png"
+            src="/images/home/sw-white.png"
             alt="smallworld-logo"
           />
           <div className="footer-menu">
