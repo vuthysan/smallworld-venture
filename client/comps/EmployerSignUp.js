@@ -126,7 +126,6 @@ function EmployerSignUp() {
     <center>
       <h1 style={{ marginTop: "40px" }}>Sign Up As Job Seeker</h1>
       <div className="steps-content">{steps[current].content}</div>
-
       <SignFooter />
     </center>
   );

@@ -1,46 +1,36 @@
+import React, { useState } from "react";
 import MetaTags from "../../comps/MetaTags";
-import { Row, Col, Dropdown, Button, Menu } from "antd";
+import { Row, Col, Input } from "antd";
+import DropDownMenu from "../../comps/DropDownMenu";
+import LatestJob from "../../comps/LatestJob";
+import InterestJob from "../../comps/InterestJob";
 
+const { Search } = Input;
+
+const steps = [
+  {
+    content: <LatestJob />,
+  },
+  {
+    content: <InterestJob />,
+  },
+];
 function index() {
-  // === Job seeker menu ===
-  const JobSeekerMenu = (
-    <Menu>
-      <Menu.Item>
-        <a
-          rel="noopener noreferrer"
-          href="/open-opportunities/jobseeker/signin"
-        >
-          Job Seeker
-        </a>
-      </Menu.Item>
+  const [current, setCurrent] = useState(0);
 
-      <Menu.Item>
-        <a rel="noopener noreferrer" href="/open-opportunities/employer/signin">
-          Employer
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+  const next = () => {
+    setCurrent(0);
+    document.getElementById("interest-btn").className += ` not-active`;
+    document.getElementById("latest-btn").className = "opportunities-btn";
+  };
 
-  // === Emlployer Menu menu ===
-  const EmployerMenu = (
-    <Menu>
-      <Menu.Item>
-        <a
-          rel="noopener noreferrer"
-          href="/open-opportunities/jobseeker/signup"
-        >
-          Job Seeker
-        </a>
-      </Menu.Item>
-
-      <Menu.Item>
-        <a rel="noopener noreferrer" href="/open-opportunities/employer/signup">
-          Employer
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+  const prev = () => {
+    setCurrent(1);
+    document.getElementById("latest-btn").className += ` not-active`;
+    document.getElementById("interest-btn").className = "opportunities-btn";
+  };
+  // == search job ==
+  const onSearch = (value) => console.log(value);
   return (
     <>
       <MetaTags
@@ -55,40 +45,18 @@ function index() {
           <div className="container">
             <Row align="middle" justify="space-between">
               <Col md={15} lg={14} xl={10}>
-                <Row gutter={[0, 20]}>
-                  <Col>
-                    <h1>
-                      <span>&lt;</span>
-                      OPEN-OPPORTUNITIES
-                      <span>/&gt;</span>
-                    </h1>
-                  </Col>
-                  <Col>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      In dictum suscipit quis lectus quam elementum volutpat. Ac
-                      potenti ameutpat. Ac potenti amet, cras magna.
-                    </p>
-                  </Col>
-                  <Col>
-                    <Dropdown
-                      overlay={JobSeekerMenu}
-                      placement="bottomCenter"
-                      trigger="click"
-                      arrow
-                    >
-                      <Button className="opportunities-btn">Sign In</Button>
-                    </Dropdown>
-                    <Dropdown
-                      overlay={EmployerMenu}
-                      placement="bottomCenter"
-                      arrow
-                      trigger="click"
-                    >
-                      <Button className="opportunities-btn">Sign Up</Button>
-                    </Dropdown>
-                  </Col>
-                </Row>
+                <h1>
+                  <span>&lt;</span>
+                  OPEN-OPPORTUNITIES
+                  <span>/&gt;</span>
+                </h1>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                  dictum suscipit quis lectus quam elementum volutpat. Ac
+                  potenti ameutpat. Ac potenti amet, cras magna.
+                </p>
+
+                <DropDownMenu />
               </Col>
               <Col xs={0} sm={0} md={6}>
                 <img
@@ -98,6 +66,30 @@ function index() {
               </Col>
             </Row>
           </div>
+        </div>
+        <div className="container">
+          <div className="search-job">
+            <Search
+              placeholder="input search text"
+              allowClear
+              enterButton="Search"
+              size="large"
+              onSearch={onSearch}
+            />
+          </div>
+
+          <button id="latest-btn" className="opportunities-btn" onClick={next}>
+            Latest Job
+          </button>
+          <button
+            id="interest-btn"
+            className="opportunities-btn not-active"
+            onClick={prev}
+          >
+            Your Interest
+          </button>
+
+          <div className="job-list steps-content">{steps[current].content}</div>
         </div>
       </div>
     </>

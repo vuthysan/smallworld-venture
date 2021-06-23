@@ -183,7 +183,6 @@ h2 span {
 }
 
 /* about */
-
 .about p {
   color: #919090;
 }
@@ -382,12 +381,12 @@ h2 span {
   position: absolute;
   bottom: 10px;
 }
-.ant-btn:hover,
+/* .ant-btn:hover,
 .ant-btn:focus,
 .ant-btn:active {
   background-color: #94bbd4 !important;
   color: #616161 !important;
-}
+} */
 .card-desc figure img,
 .card-des figure figcaption {
   display: none;
@@ -596,7 +595,9 @@ input[type="text"]:focus {
   font-size: 18px !important;
 }
 /* open-opportunities */
-
+.open input {
+  font-size: 18px;
+}
 .open-banner {
   position: unset;
   margin-top: -80px;
@@ -607,7 +608,9 @@ input[type="text"]:focus {
 .open-banner h1,
 .open-banner p {
   color: white;
-  margin: 0;
+}
+.open-banner p {
+  margin: 20px 0;
 }
 .open-banner h1 {
   font-size: 30px;
@@ -631,7 +634,17 @@ input[type="text"]:focus {
   width: 140px;
   height: 40px;
   font-size: 18px;
-  background: linear-gradient(180deg, #fce34b, #eac101) !important;
+  color: black;
+  background: linear-gradient(180deg, #fce34b, #eac101);
+}
+
+.opportunities-btn:hover {
+  cursor: pointer;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 24px !important;
+}
+
+.not-active {
+  background: white !important;
 }
 .ant-dropdown {
   border-radius: 4px;
@@ -641,6 +654,142 @@ input[type="text"]:focus {
 }
 .ant-dropdown-menu-item:hover {
   background-color: rgba(47, 137, 255, 0.185);
+}
+.search-job {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+.search-job .ant-btn {
+  height: 43px;
+  width: 130px;
+  font-size: 18px;
+  color: black;
+  border: none;
+  background: linear-gradient(180deg, #fce34b, #eac101) !important;
+}
+.ant-input-search {
+  width: 1000px;
+}
+.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.ant-input-search
+  > .ant-input-group
+  > .ant-input-group-addon:last-child
+  .ant-input-search-button {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+#latest-btn,
+#interest-btn {
+  margin: 0;
+}
+#interest-btn {
+  margin-left: -10px;
+}
+.job-list {
+  margin: 50px 0;
+}
+/* === job list card === */
+.job-card {
+  background-color: white;
+  padding: 17px 20px;
+  border-radius: 8px;
+  transition: 3ms;
+}
+.job-card:hover .apply-btn {
+  visibility: visible;
+}
+.job-card p {
+  margin: 0;
+}
+.job-card .position {
+  font-weight: 600;
+  color: black;
+}
+.job-card .company {
+  font-size: 18px;
+  color: #015e98;
+}
+.job-card .position:hover,
+.job-card .company:hover {
+  text-decoration: underline;
+}
+.job-card .city,
+.job-card .date {
+  font-size: 16px;
+  color: #b5b5b5;
+}
+.job-card .apply-btn {
+  visibility: hidden;
+}
+.apply-btn {
+  border: none;
+  border-radius: 4px;
+  width: 110px;
+  height: 30px;
+  font-size: 16px;
+  color: black;
+  margin-top: 20px;
+  background: linear-gradient(180deg, #fce34b, #eac101);
+}
+.apply-btn:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 24px !important;
+}
+.apply-btn a {
+  font-size: 16px;
+  color: black;
+}
+/* === position detail === */
+.position-detail {
+  margin: 40px 0 60px 0;
+}
+
+.position-detail h1,
+.position-detail p {
+  margin: 0;
+}
+.position-detail h3 {
+  font-weight: 600;
+  margin-top: 40px;
+}
+.position-detail h1 {
+  font-size: 35px;
+  font-weight: 600;
+  color: #015e98;
+}
+.position-detail .salary {
+  margin-top: 30px;
+  color: #015e98;
+}
+.position-detail li {
+  list-style: none;
+  font-size: 20px;
+  padding: 5px 0;
+}
+.position-detail li::before {
+  content: "\2022";
+  color: #fcc400;
+  font-weight: bold;
+  display: inline-block;
+  width: 2em;
+}
+.position-detail .recru-position {
+  color: #b5b5b5;
+  font-size: 18px;
+}
+.position-detail .contact-info {
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+.position-detail .svg {
+  margin-right: 30px;
+  width: 25px;
+  height: 25px;
 }
 /* footer */
 .footer {
@@ -685,7 +834,6 @@ input[type="text"]:focus {
 .contact-icons div {
   margin-bottom: 10px;
 }
-
 .contact-icons svg {
   font-size: 26px;
   margin-right: 20px;
