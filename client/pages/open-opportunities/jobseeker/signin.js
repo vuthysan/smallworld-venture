@@ -6,6 +6,11 @@ function JobSeekerSignIn() {
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log(values);
+    values = { ...values, role: "jobseeker", jobSeekerId: "1" };
+    // == testing with localstorage ==
+    const user = JSON.stringify(values);
+    localStorage.setItem("user", user);
+    window.location = "/open-opportunities";
   };
   return (
     <Row justify="center" align="middle" className="sign">

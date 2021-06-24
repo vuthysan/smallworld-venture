@@ -17,10 +17,14 @@ const steps = [
 ];
 function index() {
   const [current, setCurrent] = useState(0);
-
+  var user;
+  if (typeof window !== "undefined") {
+    user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+  }
   const next = () => {
     setCurrent(0);
-    document.getElementById("interest-btn").className += ` not-active`;
+    document.getElementById("inte      rest-btn").className += ` not-active`;
     document.getElementById("latest-btn").className = "opportunities-btn";
   };
 
@@ -56,7 +60,7 @@ function index() {
                   potenti ameutpat. Ac potenti amet, cras magna.
                 </p>
 
-                <DropDownMenu />
+                <DropDownMenu role={user ? user.role : null} />
               </Col>
               <Col xs={0} sm={0} md={6}>
                 <img

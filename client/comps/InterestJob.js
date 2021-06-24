@@ -21,7 +21,7 @@ function InterestJob() {
                 </a>
                 <br />
                 <a
-                  href={`/open-opportunities/${companyName}`}
+                  href={`/open-opportunities/${companyName.toLowerCase()}`}
                   className="company"
                 >
                   {companyName}

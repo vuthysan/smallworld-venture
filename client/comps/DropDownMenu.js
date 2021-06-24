@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown, Menu, Button } from "antd";
-function DropDownMenu() {
+function DropDownMenu({ role }) {
+  console.log(role);
   // === Job seeker menu ===
   const JobSeekerMenu = (
     <Menu>
@@ -42,22 +43,32 @@ function DropDownMenu() {
   );
   return (
     <React.Fragment>
-      <Dropdown
-        overlay={JobSeekerMenu}
-        placement="bottomCenter"
-        trigger="click"
-        arrow
-      >
-        <button className="opportunities-btn">Sign In</button>
-      </Dropdown>
-      <Dropdown
-        overlay={EmployerMenu}
-        placement="bottomCenter"
-        arrow
-        trigger="click"
-      >
-        <button className="opportunities-btn">Sign Up</button>
-      </Dropdown>
+      {role ? (
+        role === "employer" ? (
+          <button className="opportunities-btn">Employer</button>
+        ) : (
+          <button className="opportunities-btn">Job Seeker</button>
+        )
+      ) : (
+        <>
+          <Dropdown
+            overlay={JobSeekerMenu}
+            placement="bottomCenter"
+            trigger="click"
+            arrow
+          >
+            <button className="opportunities-btn">Sign In</button>
+          </Dropdown>
+          <Dropdown
+            overlay={EmployerMenu}
+            placement="bottomCenter"
+            arrow
+            trigger="click"
+          >
+            <button className="opportunities-btn">Sign Up</button>
+          </Dropdown>
+        </>
+      )}
     </React.Fragment>
   );
 }

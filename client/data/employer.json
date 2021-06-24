@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "name": "Sea Viseth",
+    "email": "seaviseth@gmail.com",
+    "phone": "010 101 222"
+  },
+  {
+    "id": "2",
+    "name": "John Deo",
+    "email": "john@gmail.com",
+    "phone": "010 101 333"
+  }
+]

@@ -15,11 +15,13 @@ body {
 p,
 a {
   font-size: 20px;
+
   font-weight: 400;
 }
 
 h1 {
   font-size: 40px;
+  margin: 0;
   font-weight: bolder;
 }
 h2 {
@@ -78,6 +80,37 @@ h2 span {
     font-size: 18px !important;
   }
 }
+.user-menu {
+  width: 270px;
+  border-radius: 4px;
+  padding: 10px 0;
+}
+.user-menu p {
+  margin: 0;
+  padding-left: 20px;
+  color: #015e98;
+}
+.user-menu .email {
+  color: #b5b5b5;
+  font-size: 18px;
+}
+.user-menu .menu {
+  /* display: flex;
+  align-items: center; */
+  padding: 12px 20px;
+}
+.user-menu img {
+  width: 30px;
+  margin-right: 15px;
+}
+.user-menu .menu a {
+  color: black;
+}
+
+/* .ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-title {
+  padding: 0;
+} */
 /* home */
 .home {
   z-index: 1;
@@ -781,15 +814,49 @@ input[type="text"]:focus {
   color: #b5b5b5;
   font-size: 18px;
 }
-.position-detail .contact-info {
+.contact-info {
   width: 300px;
   display: flex;
   align-items: center;
 }
-.position-detail .svg {
+.svg {
   margin-right: 30px;
   width: 25px;
   height: 25px;
+}
+
+/* === company detail === */
+.com-detail {
+  margin-bottom: 70px;
+}
+.com-detail h1,
+.com-detail p {
+  margin: 0;
+}
+.com-detail h2 {
+  font-weight: 600;
+  margin-top: 40px;
+}
+.com-banner {
+  background: #096faf15;
+  padding: 50px 0;
+  margin-bottom: 50px;
+}
+.com-banner h1 {
+  color: #015e98;
+}
+.com-banner .city {
+  color: #b5b5b5;
+  margin: 10px 0;
+}
+.com-banner .job-count {
+  color: #015e98;
+  font-size: 40px;
+}
+.com-banner .line {
+  margin-top: 30px;
+  height: 9px;
+  background: linear-gradient(180deg, #fce34b, #eac101);
 }
 /* footer */
 .footer {
@@ -1028,6 +1095,10 @@ input[type="text"]:focus {
 }
 
 @media only screen and (max-width: 1200px) {
+  #user-menu {
+    position: absolute;
+    right: 2.5%;
+  }
   .board-director .container p:nth-child(2) {
     padding: 0;
   }
