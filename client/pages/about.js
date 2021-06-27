@@ -99,7 +99,7 @@ function About() {
               {data.map((res) => {
                 const { fullName, photo, id, position } = res;
                 return (
-                  <div className="directors-back">
+                  <div key={id} className="directors-back">
                     <img src={photo} alt={fullName} />
                     <h3>{fullName}</h3>
                     <p>{position}</p>

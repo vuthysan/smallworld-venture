@@ -75,10 +75,8 @@ h2 span {
 .ant-menu-item-selected a:hover {
   color: #015e98;
 }
-@media only screen and (max-width: 900px) {
-  a {
-    font-size: 18px !important;
-  }
+#user-menu:hover {
+  cursor: pointer;
 }
 .user-menu {
   width: 270px;
@@ -95,23 +93,18 @@ h2 span {
   font-size: 18px;
 }
 .user-menu .menu {
-  /* display: flex;
-  align-items: center; */
   padding: 12px 20px;
 }
 .user-menu img {
   width: 30px;
   margin-right: 15px;
 }
-.user-menu .menu a {
+.user-menu .menu {
+  font-size: 10px;
   color: black;
 }
 
-/* .ant-dropdown-menu-item,
-.ant-dropdown-menu-submenu-title {
-  padding: 0;
-} */
-/* home */
+/* === home === */
 .home {
   z-index: 1;
 }
@@ -414,12 +407,6 @@ h2 span {
   position: absolute;
   bottom: 10px;
 }
-/* .ant-btn:hover,
-.ant-btn:focus,
-.ant-btn:active {
-  background-color: #94bbd4 !important;
-  color: #616161 !important;
-} */
 .card-desc figure img,
 .card-des figure figcaption {
   display: none;
@@ -691,7 +678,15 @@ input[type="text"]:focus {
 .search-job {
   margin: 50px 0;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+.search-job img:hover {
+  cursor: pointer;
+}
+.addjob-img,
+.addcom-img {
+  margin-right: 15px;
 }
 .search-job .ant-btn {
   height: 43px;
@@ -714,6 +709,9 @@ input[type="text"]:focus {
   .ant-input-search-button {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+.search-job .addjob-addcom {
+  margin-right: 20px;
 }
 
 #latest-btn,
@@ -858,6 +856,166 @@ input[type="text"]:focus {
   height: 9px;
   background: linear-gradient(180deg, #fce34b, #eac101);
 }
+
+/* === employer all page design === */
+
+.opp-container {
+  margin: 50px 23%;
+  padding: 30px 50px;
+  border-radius: 20px;
+  background: white;
+}
+
+.opp-container .view {
+  background: linear-gradient(180deg, #fce34b, #eac101) !important;
+  border: none;
+  margin-right: 10px;
+  padding: 0 7px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+.opp-container button a {
+  font-size: 16px;
+  color: black;
+}
+.opp-container label {
+  font-size: 18px !important;
+}
+
+.opp-container .upload-logo-btn {
+  background: none !important;
+  margin: 20px 0;
+}
+.opp-container .ant-input,
+.opp-container .ant-select-selector {
+  height: 40px;
+  margin: 10px 0;
+  font-size: 18px;
+  border-radius: 4px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 40px;
+  padding: 4px 11px;
+}
+.opp-container textarea {
+  height: 120px !important;
+}
+.opp-container .ant-btn {
+  width: 100%;
+  border-radius: 4px;
+  background: #015e98;
+  font-size: 18px;
+  height: 40px;
+  margin: 15px 0;
+}
+.profile input {
+  height: 40px;
+  background: #f8f8f8;
+  border: 1px solid #f8f8f8;
+  font-size: 18px;
+}
+.profile input:hover,
+.profile input:active,
+.profile input:focus {
+  border-color: #40a9ff !important;
+}
+.profile .ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input:hover,
+.ant-form-item-has-error .ant-input-affix-wrapper:hover {
+  border: 1px solid #ff4d4f;
+  background-color: #f8f8f8;
+}
+.profile .ant-input-password {
+  border: 1px solid #f8f8f8;
+  background: #f8f8f8;
+  height: 40px;
+  padding: 0 10px;
+}
+.profile input[type="password"]:hover {
+  border-color: red !important;
+}
+.profile input[type="password"] {
+  margin: 0 !important;
+  height: 38px;
+  background-color: none;
+}
+.profile .ant-input-affix-wrapper:hover {
+  border-color: #40a9ff !important;
+}
+.profile input,
+.profile .ant-input-password,
+.profile .ant-form-item-control-input-content {
+  margin: 7px 0;
+}
+.profile .profile-submit-btn {
+  width: 140px;
+}
+/* === divider === */
+.ant-divider-horizontal.ant-divider-with-text::before,
+.ant-divider-horizontal.ant-divider-with-text::after {
+  /* border-top: 2px solid #32323217; */
+  border-top: 2px solid #015e98;
+}
+.ant-divider-inner-text {
+  font-size: 25px;
+  font-weight: 600;
+  color: #015e98;
+}
+.opp-big-container {
+  margin: 50px 12.5%;
+}
+.opp-big-container .outter-card {
+  margin: 20px 0;
+}
+/* === posted job === */
+.posted-card {
+  padding: 20px 25px;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.posted-card p {
+  margin: 0;
+}
+.posted-card .position {
+  font-weight: 600;
+}
+.posted-card .company {
+  color: #015e98;
+  font-size: 18px;
+}
+.posted-card .city {
+  font-size: 16px;
+  color: #b5b5b5;
+}
+
+/* === companies part === */
+.com-card {
+  padding: 20px 25px;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.com-card .img {
+  height: 100px;
+  /* background: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.com-card p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+.com-card .content {
+  color: #015e98;
+  margin-right: 10px;
+}
+
 /* footer */
 .footer {
   padding: 20px 15%;
@@ -960,7 +1118,7 @@ input[type="text"]:focus {
   line-height: 0;
 }
 #sign-btn:hover {
-  color: black !important;
+  color: #1890ff !important;
 }
 /* === right side === */
 .right-sign {
@@ -1038,6 +1196,9 @@ input[type="text"]:focus {
     width: 90% !important;
     margin: 0 auto;
   }
+  .opp-big-container {
+    margin: 50px 5%;
+  }
   h2 {
     font-size: 26px !important;
   }
@@ -1095,6 +1256,9 @@ input[type="text"]:focus {
 }
 
 @media only screen and (max-width: 1200px) {
+  .side-nav a {
+    font-size: 18px;
+  }
   #user-menu {
     position: absolute;
     right: 2.5%;

@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "employerId": "1",
+    "recruiter": "Sea Viseth",
     "position": "Web Developer",
     "companyName": "Company Name Co LTD,",
     "city": "Phnom Penh",
@@ -20,7 +20,7 @@
   },
   {
     "id": "2",
-    "employerId": "2",
+    "recruiter": "John Doe",
     "position": "Web Developer",
     "companyName": "Company Name Co LTD,",
     "city": "Phnom Penh",
@@ -39,7 +39,7 @@
   },
   {
     "id": "3",
-    "employerId": "1",
+    "recruiter": "Sea Viseth",
     "position": "Web Developer",
     "companyName": "Company Name Co LTD,",
     "city": "Phnom Penh",
@@ -58,7 +58,7 @@
   },
   {
     "id": "4",
-    "employerId": "1",
+    "recruiter": "Sea Viseth",
     "position": "Web Developer",
     "companyName": "Company Name Co LTD,",
     "city": "Phnom Penh",
@@ -77,7 +77,7 @@
   },
   {
     "id": "5",
-    "employerId": "2",
+    "recruiter": "John Doe",
     "position": "Web Developer",
     "companyName": "Koompi",
     "city": "Phnom Penh",

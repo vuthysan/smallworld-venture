@@ -89,7 +89,7 @@ function Company() {
                 {comJob.map((res) => {
                   const { id, position, companyName, city, createdAt } = res;
                   return (
-                    <Col key={id} md={14}>
+                    <Col key={id} xs={24} sm={24} md={14}>
                       <Row
                         className="job-card"
                         align="middle"

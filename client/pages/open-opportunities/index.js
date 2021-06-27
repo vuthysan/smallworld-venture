@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import MetaTags from "../../comps/MetaTags";
-import { Row, Col, Input } from "antd";
+import { Row, Col, Input, Dropdown, Menu } from "antd";
 import DropDownMenu from "../../comps/DropDownMenu";
 import LatestJob from "../../comps/LatestJob";
 import InterestJob from "../../comps/InterestJob";
 
 const { Search } = Input;
 
+// == job list steps (latest and interest) ==
 const steps = [
   {
     content: <LatestJob />,
@@ -15,16 +16,49 @@ const steps = [
     content: <InterestJob />,
   },
 ];
+// === add job and company dropdown ===
+const addMenu = (
+  <Menu>
+    <Menu.Item>
+      <a rel="noopener noreferrer" href="#">
+        <img
+          className="addcom-img"
+          width="25"
+          height="25"
+          src="/images/open-opportunities/add-com-black.svg"
+          alt=""
+        />
+        Add Company
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a rel="noopener noreferrer" href="#">
+        <img
+          className="addjob-img"
+          width="25"
+          height="25"
+          src="/images/open-opportunities/addjob.svg"
+          alt=""
+        />
+        Add Job
+      </a>
+    </Menu.Item>
+  </Menu>
+);
 function index() {
   const [current, setCurrent] = useState(0);
+  // === get user info from local storage ===
   var user;
   if (typeof window !== "undefined") {
     user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
+    // console.log(user.role);
   }
+
+  // === steps for latest job and interest ===
+
   const next = () => {
     setCurrent(0);
-    document.getElementById("inte      rest-btn").className += ` not-active`;
+    document.getElementById("interest-btn").className += ` not-active`;
     document.getElementById("latest-btn").className = "opportunities-btn";
   };
 
@@ -33,6 +67,7 @@ function index() {
     document.getElementById("latest-btn").className += ` not-active`;
     document.getElementById("interest-btn").className = "opportunities-btn";
   };
+
   // == search job ==
   const onSearch = (value) => console.log(value);
   return (
@@ -71,10 +106,25 @@ function index() {
             </Row>
           </div>
         </div>
+        {/*  === end header ===  */}
         <div className="container">
           <div className="search-job">
+            {user && user.role === "employer" ? (
+              <Dropdown overlay={addMenu} placement="topCenter" arrow>
+                <img
+                  className="addjob-addcom"
+                  width="40"
+                  height="40"
+                  src="/images/open-opportunities/add-com-yellow.svg"
+                  alt="add svg"
+                />
+              </Dropdown>
+            ) : (
+              ""
+            )}
+
             <Search
-              placeholder="input search text"
+              placeholder="Search..."
               allowClear
               enterButton="Search"
               size="large"
@@ -92,7 +142,7 @@ function index() {
           >
             Your Interest
           </button>
-
+          {/* === job list === */}
           <div className="job-list steps-content">{steps[current].content}</div>
         </div>
       </div>

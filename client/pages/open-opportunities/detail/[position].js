@@ -4,11 +4,12 @@ import { Row, Col, Divider } from "antd";
 
 // === json data ===
 import jobs from "../../../data/jobs.json";
+// import employer from "../../../data/employer.json"
+
 import companies from "../../../data/companies.json";
 
 function Position() {
   const { position } = useRouter().query;
-
   const job = jobs.filter((res) => res.id === position);
   return (
     <div className="position-detail">
@@ -17,6 +18,7 @@ function Position() {
           const {
             id,
             position: name,
+            recruiter,
             companyName,
             createdAt,
             salary,
@@ -54,44 +56,40 @@ function Position() {
               </ul>
               <h3>About Company</h3>
               {companies.map((res, i) => {
-                const {
-                  about,
-                  recruiter,
-                  recruiterPosition: pos,
-                  phone,
-                  email,
-                } = res;
-                return (
-                  <div key={i}>
-                    <p>{about}</p>
-                    <h3>Contact Information</h3>
-                    <Row align="middle" gutter={60}>
-                      <Col>
-                        <p>{recruiter}</p>
-                        <p className="recru-position">{pos}</p>
-                      </Col>
-                      <Divider type="vertical" style={{ height: "70px" }} />
-                      <Col>
-                        <div className="contact-info">
-                          <img
-                            src="/images/open-opportunities/call.svg"
-                            alt="call icon"
-                            className="svg"
-                          />
-                          <p>{phone}</p>
-                        </div>
-                        <div className="contact-info">
-                          <img
-                            src="/images/open-opportunities/mail.svg"
-                            alt="call icon"
-                            className="svg"
-                          />
-                          <p>{email}</p>
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                );
+                if (res.recruiter === recruiter)
+                  return (
+                    <div key={i}>
+                      <p>{res.about}</p>
+                      <h3>Contact Information</h3>
+                      <Row align="middle" gutter={60}>
+                        <Col>
+                          <p>{recruiter}</p>
+                          <p className="recru-position">
+                            {res.recruiterPosition}
+                          </p>
+                        </Col>
+                        <Divider type="vertical" style={{ height: "70px" }} />
+                        <Col>
+                          <div className="contact-info">
+                            <img
+                              src="/images/open-opportunities/call.svg"
+                              alt="call icon"
+                              className="svg"
+                            />
+                            <p>{res.phone}</p>
+                          </div>
+                          <div className="contact-info">
+                            <img
+                              src="/images/open-opportunities/mail.svg"
+                              alt="call icon"
+                              className="svg"
+                            />
+                            <p>{res.email}</p>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  );
               })}
             </div>
           );
