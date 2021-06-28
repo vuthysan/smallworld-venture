@@ -1,10 +1,10 @@
 import React from "react";
 import { Divider, Form, Input, Button, Select } from "antd";
 // === comps ===
-import ArrayForm from "../../../comps/ArrayForm";
+import ArrayForm from "../../../../comps/ArrayForm";
 const { Option } = Select;
 
-function addjob() {
+function viewjob() {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -12,8 +12,18 @@ function addjob() {
   };
   return (
     <div className="opp-container">
-      <Divider orientation="left">Add Company</Divider>
-      <Form form={form} onFinish={onFinish} layout="vertical">
+      <Divider orientation="left">View/Edit Job</Divider>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        layout="vertical"
+        initialValues={{
+          position: "Web Developer",
+          company: "KOOMPI",
+          requirements: ["abcbhjasdf", "asdfasdf", "asdfasdf"],
+          descriptions: ["abcbhjasdf", "asdfasdf", "asdfasdf"],
+        }}
+      >
         <Form.Item
           label="Position"
           name="position"
@@ -50,7 +60,7 @@ function addjob() {
         <ArrayForm name="descriptions" message="Description"></ArrayForm>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Add Job
+            Edit Job
           </Button>
         </Form.Item>
       </Form>
@@ -58,4 +68,4 @@ function addjob() {
   );
 }
 
-export default addjob;
+export default viewjob;

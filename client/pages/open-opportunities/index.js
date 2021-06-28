@@ -47,7 +47,7 @@ const addMenu = (
 );
 function index() {
   const [current, setCurrent] = useState(0);
-  // === get user info from local storage ===
+  // === get user info from local storage === 
   var user;
   if (typeof window !== "undefined") {
     user = JSON.parse(localStorage.getItem("user"));

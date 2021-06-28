@@ -6,7 +6,7 @@ import { Row, Col, Drawer, Menu, Dropdown } from "antd";
 // === comps ===
 import UserNavMenu from "./UserNavMenu";
 
-function Navbar() {
+function Navbar() { 
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 

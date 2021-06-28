@@ -21,7 +21,9 @@ function companies() {
               with KOOMPI OS, are...
             </p>
             <button className="view">
-              <a href="#">View Company </a>
+              <a href={"/open-opportunities/employer/company/" + 1}>
+                View Company
+              </a>
             </button>
           </div>
         </Col>
@@ -41,7 +43,9 @@ function companies() {
               with KOOMPI OS, are...
             </p>
             <button className="view">
-              <a href="#">View Company </a>
+              <a href={"/open-opportunities/employer/company/" + 1}>
+                View Company
+              </a>
             </button>
           </div>
         </Col>{" "}
@@ -65,7 +69,9 @@ function companies() {
               with KOOMPI OS, are...
             </p>
             <button className="view">
-              <a href="#">View Company </a>
+              <a href={"/open-opportunities/employer/company/" + 1}>
+                View Company
+              </a>
             </button>
           </div>
         </Col>

@@ -43,7 +43,7 @@ function profile() {
         <Divider orientation="left">Password Setting</Divider>
         <Form.Item label="Old Password" name="oldpassword">
           <Input.Password />
-        </Form.Item>
+        </Form.Item> 
         <Row gutter={[12]}>
           <Col sm={12}>
             <Form.Item label="New Password" name="newpassword">
