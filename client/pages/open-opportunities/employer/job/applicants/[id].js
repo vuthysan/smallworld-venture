@@ -58,7 +58,7 @@ function Applicants() {
     },
   ];
   return (
-    <div style={{ height: "100%" }} className="opp-container opp-big-container">
+    <div  className="opp-container opp-big-container">
       <Divider orientation="left">Applicants</Divider>
       <Table
         pagination={{ pageSize: 10 }}

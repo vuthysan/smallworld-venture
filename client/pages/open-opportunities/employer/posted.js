@@ -7,7 +7,7 @@ export default function posted() {
       <Divider orientation="left">Posted Job</Divider>
       <Row className="outter-card" gutter={[12, 12]}>
         <Col xs={24} sm={12} md={8}>
-          <div className="posted-card">
+          <div className="card">
             <p className="position">Senior Front-End Web developer</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
@@ -22,7 +22,7 @@ export default function posted() {
           </div>
         </Col>
         <Col xs={24} sm={12} md={8}>
-          <div className="posted-card">
+          <div className="card">
             <p className="position">Senior Front-End Web</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
@@ -37,7 +37,7 @@ export default function posted() {
           </div>
         </Col>
         <Col xs={24} sm={12} md={8}>
-          <div className="posted-card">
+          <div className="card">
             <p className="position">Senior Front-End Web developer</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>

@@ -96,7 +96,11 @@ function UserNavMenu() {
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a className="menu" rel="noopener noreferrer" href="#">
+        <a
+          className="menu"
+          rel="noopener noreferrer"
+          href="/open-opportunities/jobseeker/record"
+        >
           <img src="/images/navbar/application.svg" alt="setting svg" />
           Application Record
         </a>

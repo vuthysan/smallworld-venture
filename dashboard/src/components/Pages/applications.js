@@ -76,7 +76,7 @@ function Applications() {
                 return (
                   <Modal
                     footer={null}
-                    width="60%"
+                  width="60%"
                     style={{ top: 20 }}
                     visible={pdfModal.visible}
                     onCancel={() => setPdfModal({ visible: false })}

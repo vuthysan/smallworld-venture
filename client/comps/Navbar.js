@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
-import { Row, Col, Drawer, Menu, Dropdown } from "antd";
+import { Row, Col, Drawer, Menu } from "antd";
 // === comps ===
 import UserNavMenu from "./UserNavMenu";
 
-function Navbar() { 
+function Navbar() {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 
