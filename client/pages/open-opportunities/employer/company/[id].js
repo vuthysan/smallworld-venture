@@ -82,7 +82,7 @@ function ViewCompany() {
           </Button>
         </Upload>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primsopary" htmlType="submit">
             Edit Company
           </Button>
         </Form.Item>

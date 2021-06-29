@@ -12,7 +12,7 @@ export default function posted() {
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
             <button className="view">
-              <a href="/open-opportunities/employer/job/viewjob">View Job</a>
+              <a href={"/open-opportunities/employer/job/" + 1}>View Job</a>
             </button>
             <button className="view">
               <a href={"/open-opportunities/employer/job/applicants/" + 1}>
@@ -27,7 +27,7 @@ export default function posted() {
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
             <button className="view">
-              <a href="/open-opportunities/employer/job/viewjob">View Job</a>
+              <a href={"/open-opportunities/employer/job/" + 1}>View Job</a>
             </button>
             <button className="view">
               <a href={"/open-opportunities/employer/job/applicants/" + 1}>
@@ -42,7 +42,7 @@ export default function posted() {
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
             <button className="view">
-              <a href="/open-opportunities/employer/job/viewjob">View Job</a>
+              <a href={"/open-opportunities/employer/job/" + 1}>View Job</a>
             </button>
             <button className="view">
               <a href={"/open-opportunities/employer/job/applicants/" + 1}>

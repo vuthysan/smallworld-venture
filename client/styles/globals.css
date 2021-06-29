@@ -864,6 +864,7 @@ input[type="text"]:focus {
   padding: 30px 50px;
   border-radius: 20px;
   background: white;
+  min-height: 485px;
 }
 
 .opp-container .view {
@@ -1024,7 +1025,22 @@ input[type="text"]:focus {
   color: #015e98;
   margin-right: 10px;
 }
-
+/* === applicants page === */
+.ant-table-cell {
+  font-size: 18px;
+}
+.applicant-btn {
+  border-radius: 0;
+  border: none;
+  margin-right: 10px;
+  padding: 0 3px;
+}
+.blue {
+  background-color: #1ba4fa48;
+}
+.red {
+  background-color: #f6343461;
+}
 /* footer */
 .footer {
   padding: 20px 15%;
