@@ -858,7 +858,12 @@ input[type="text"]:focus {
 }
 
 /* === employer all page design === */
-
+.opp-big-container {
+  margin: 50px 12.5%;
+}
+.opp-big-container .outter-card {
+  margin: 20px 0;
+}
 .opp-container {
   margin: 50px 23%;
   padding: 30px 50px;
@@ -866,8 +871,20 @@ input[type="text"]:focus {
   background: white;
   min-height: 485px;
 }
+.opp-container label {
+  font-size: 18px !important;
+}
 
-.opp-container .view {
+.opp-container .ant-btn {
+  width: 100% !important;
+  border-radius: 4px;
+  background: #015e98;
+  font-size: 18px;
+  height: 40px;
+  margin: 15px 0;
+  color: white;
+}
+.opp-container .view-btn {
   background: linear-gradient(180deg, #fce34b, #eac101) !important;
   border: none;
   margin-right: 10px;
@@ -878,9 +895,6 @@ input[type="text"]:focus {
 .opp-container button a {
   font-size: 16px;
   color: black;
-}
-.opp-container label {
-  font-size: 18px !important;
 }
 
 .opp-container .upload-logo-btn {
@@ -903,23 +917,11 @@ input[type="text"]:focus {
   height: 40px;
   padding: 4px 11px;
 }
-
-.opp-container .ant-btn {
-  width: 100% !important;
-  border-radius: 4px;
-  background: #015e98;
-  font-size: 18px;
-  height: 40px;
-  margin: 15px 0;
-  color: white;
-}
-
+/* === profile  === */
 .profile input,
 .profile .ant-select-selector {
-  height: 40px;
   background: #f8f8f8 !important;
   border: 1px solid #f8f8f8 !important;
-  font-size: 18px;
 }
 
 .profile input:hover,
@@ -938,16 +940,18 @@ input[type="text"]:focus {
 .profile .ant-input-password {
   border: 1px solid #f8f8f8;
   background: #f8f8f8;
-  height: 40px;
   padding: 0 10px;
 }
-.profile input[type="password"]:hover {
-  border-color: red !important;
+.profile input[type="password"]:hover,
+.profile input[type="password"]:active,
+.profile input[type="password"]:focus {
+  border: none !important;
 }
 .profile input[type="password"] {
   margin: 0 !important;
   height: 38px;
   background-color: none;
+  border: none !important;
 }
 .profile .ant-input-affix-wrapper:hover {
   border-color: #40a9ff !important;
@@ -967,7 +971,6 @@ input[type="text"]:focus {
 /* === divider === */
 .ant-divider-horizontal.ant-divider-with-text::before,
 .ant-divider-horizontal.ant-divider-with-text::after {
-  /* border-top: 2px solid #32323217; */
   border-top: 2px solid #015e98;
 }
 .ant-divider-inner-text {
@@ -975,12 +978,7 @@ input[type="text"]:focus {
   font-weight: 600;
   color: #015e98;
 }
-.opp-big-container {
-  margin: 50px 12.5%;
-}
-.opp-big-container .outter-card {
-  margin: 20px 0;
-}
+
 /* === posted job === */
 .opp-container .card {
   padding: 20px 25px;
@@ -1003,12 +1001,6 @@ input[type="text"]:focus {
   font-size: 16px;
   color: #b5b5b5;
 }
-/* .opp-container .date {
-  margin-top: 20px;
-  font-size: 16px;
-  padding: 0 5px;
-  background: linear-gradient(180deg, #fce34b, #eac101) !important;
-} */
 
 /* === companies part === */
 .com-card {

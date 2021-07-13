@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const OpportunitySchema = new Schema(
+const jobSchema = new Schema(
   {
     position: {
       type: String,
       required: true,
     },
-    status: {
-      type: Boolean,
+    salary: {
+      type: String,
       required: true,
     },
-    responsibilities: {
+    type: {
       type: Array,
       required: true,
     },
@@ -19,15 +19,15 @@ const OpportunitySchema = new Schema(
       type: Array,
       required: true,
     },
-    conditions: {
+    descriptions: {
       type: Array,
       required: true,
     },
-    companyName: {
+    company_name: {
       type: String,
       required: true,
     },
-    departmentId: {
+    employerId: {
       type: String,
       required: true,
     },
@@ -35,5 +35,5 @@ const OpportunitySchema = new Schema(
   { timestamps: true }
 );
 
-const OPPORTUNITY = mongoose.model("opportunities", OpportunitySchema);
-module.exports = OPPORTUNITY;
+const Job = mongoose.model("jobs", jobSchema);
+module.exports = Job;

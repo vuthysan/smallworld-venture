@@ -1,39 +1,42 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const companySchema = new Schema(
+const JobSeekerSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    website: {
+    email: {
       type: String,
       required: true,
     },
-    city: {
+    phone: {
+      type: Number,
+    },
+    password: {
       type: String,
       required: true,
     },
-    logo: {
+    gender: {
       type: String,
-      required: true,
     },
-    employer_position: {
+    birth_date: {
       type: String,
-      required: true,
     },
-    about: {
+    birth_place: {
       type: String,
-      required: true,
     },
-    employerId: {
+    interest: {
+      type: Array,
+    },
+    cv: {
       type: String,
-      required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
-
-const COMPANY = mongoose.model("companies", companySchema);
-module.exports = COMPANY;
+const JobSeeker = mongoose.model("jobseekers", JobSeekerSchema);
+module.exports = JobSeeker;

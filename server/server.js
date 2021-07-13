@@ -3,7 +3,8 @@ const path = require("path");
 const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
 const cors = require("cors");
-const adminSchema = require("./graphql/schema/adminSchema");
+("");
+// const adminSchema = require("./graphql/schema/adminSchema");
 const schema = require("./graphql/schema/schema");
 
 // === invoke express ===
@@ -15,13 +16,13 @@ app.use(cors());
 app.use("/public/", express.static(path.join(__dirname, "public")));
 
 // === for admin dashboard ===
-app.use(
-  "/admin",
-  graphqlHTTP({
-    schema: adminSchema,
-    graphiql: true,
-  })
-);
+// app.use(
+//   "/admin",
+//   graphqlHTTP({
+//     schema: adminSchema,
+//     graphiql: true,
+//   })
+// );
 
 app.use(
   "/graphql",
@@ -32,11 +33,13 @@ app.use(
 );
 
 // === upload file route ===
-app.use(require("./routes/uploadImage"));
-app.use(require("./routes/uploadPdf"));
+
+// app.use(require("./routes/uploadImage"));
+// app.use(require("./routes/uploadPdf"));
 
 // === delete file route ===
-app.use(require("./routes/deleteFile"));
+
+// app.use(require("./routes/deleteFile"));
 
 const PORT = process.env.PORT || 5000;
 // === connect database ===

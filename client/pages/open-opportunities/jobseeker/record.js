@@ -10,7 +10,7 @@ function Record() {
             <p className="position">Senior Front-End Web developer</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
-            <button class="view">Applied Date: July, 24th 2021</button>
+            <button class="view-btn">Applied Date: July, 24th 2021</button>
           </div>
         </Col>
         <Col xs={24} sm={12} md={8}>
@@ -18,7 +18,7 @@ function Record() {
             <p className="position">Senior Front-End Web developer</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
-            <button class="view">Applied Date: July, 24th 2021</button>
+            <button class="view-btn">Applied Date: July, 24th 2021</button>
           </div>
         </Col>
         <Col xs={24} sm={12} md={8}>
@@ -26,7 +26,7 @@ function Record() {
             <p className="position">Senior Front-End Web developer</p>
             <p className="company">Company name</p>
             <p className="city">Phnom Penh, July-15-2021</p>
-            <button class="view">Applied Date: July, 24th 2021</button>
+            <button class="view-btn">Applied Date: July, 24th 2021</button>
           </div>
         </Col>
       </Row>

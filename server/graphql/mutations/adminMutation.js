@@ -16,7 +16,7 @@ const {
 const CompanyType = require("../type/companyType");
 const DepartmentType = require("../type/departmentType");
 const OpportunityType = require("../type/opportunityType");
-const UserType = require("../type/userType");
+const UserType = require("../type/employerType");
 const MessageType = require("../type/messageType");
 const ApplicationType = require("../type/applicationType");
 
@@ -162,60 +162,7 @@ const AdminMutation = new GraphQLObjectType({
         }
       },
     },
-    // ====== add new department ======
-    add_department: {
-      type: DepartmentType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        icon: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (parent, args) => {
-        try {
-          const dep = await new Department({ ...args });
-          await dep.save();
-          return { message: "Add Successful!" };
-        } catch (err) {
-          console.log(err);
-          throw error;
-        }
-      },
-    },
-    // ====== delete department ======
-    delete_department: {
-      type: DepartmentType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve: async (parent, args) => {
-        try {
-          const deletedDep = await Department.findByIdAndDelete(args.id);
-          return { message: "Delete  Successful!" };
-        } catch (err) {
-          console.log(err);
-          throw err;
-        }
-      },
-    },
-    // ====== edit department ======
-    edit_department: {
-      type: DepartmentType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
-        icon: { type: GraphQLString },
-      },
-      resolve: async (parent, args) => {
-        try {
-          await Department.findByIdAndUpdate(args.id, {
-            ...args,
-          });
-          return { message: "Edit Successful!" };
-        } catch (err) {
-          console.log(err);
-          throw err;
-        }
-      },
-    },
+
     // ======= add new opportunity ======
     add_opportunity: {
       type: OpportunityType,

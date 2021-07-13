@@ -9,13 +9,13 @@ const {
 
 // ====== Model ======
 const Company = require("../../models/companyModel");
-const Department = require("../../models/departmentModel");
-const Opportunity = require("../../models/opportunityModel");
+const Job = require("../../models/jobModel");
+const Employer = require("../../models/employerModel");
 
 // ====== Type ======
 const CompanyType = require("../type/companyType");
-const DepartmentType = require("../type/departmentType");
-const OpportunityType = require("../type/opportunityType");
+const JobType = require("../type/jobType");
+const EmployerType = require("../type/employerType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -45,33 +45,42 @@ const RootQuery = new GraphQLObjectType({
         return com;
       },
     },
-    // ====== get all departments ======
-    get_departments: {
-      type: new GraphQLList(DepartmentType),
-      description: "List of departments",
+    // === get all jobs ===
+    get_jobs: {
+      type: new GraphQLList(JobType),
+      description: "List of jobs",
       resolve: async () => {
-        const dep = await Department.find().sort({ createdAt: -1 });
-        return dep;
+        const job = await Job.find().sort({ createdAt: -1 });
+        return job;
       },
     },
-    // ====== get opportunitiy by id ======
-    get_department: {
-      type: DepartmentType,
+    get_job: {
+      type: JobType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
+        id: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve: async (parent, args) => {
-        return Department.findById(args.id);
+      resolve: async (_, args) => {
+        const job = await Job.findById(args.id).sort({ createdAt: -1 });
+        return job;
       },
     },
-    // ====== get opportunity by id ======
-    get_opportunity: {
-      type: OpportunityType,
-      args: {
-        id: { type: new GraphQLNonNull(GraphQLID) },
+    // === get all employers ===
+    get_employers: {
+      type: new GraphQLList(EmployerType),
+      description: "List of employers",
+      resolve: async () => {
+        const ems = await Employer.find().sort({ createdAt: -1 });
+        return ems;
       },
-      resolve: async (parent, args) => {
-        return Opportunity.findById(args.id);
+    },
+    get_employer: {
+      type: EmployerType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        const em = await Employer.findById(args.id);
+        return em;
       },
     },
   },
