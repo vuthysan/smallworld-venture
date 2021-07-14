@@ -13,6 +13,7 @@ const Company = require("../../models/companyModel");
 const Job = require("../../models/jobModel");
 const Employer = require("../../models/employerModel");
 const JobSeeker = require("../../models/jobseekerModel");
+const Application = require("../../models/applicationModel");
 
 // ===== Types =====
 const MessageType = require("../type/messageType");
@@ -20,6 +21,7 @@ const CompanyType = require("../type/companyType");
 const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
 const JobSeekerType = require("../type/jobseekerType");
+const ApplicationType = require("../type/applicationType");
 
 const RootMutation = new GraphQLObjectType({
   name: "RootMutation",
@@ -209,6 +211,20 @@ const RootMutation = new GraphQLObjectType({
           console.log(err);
           throw err;
         }
+      },
+    },
+    // === post application ===
+    post_application: {
+      type: ApplicationType,
+      args: {
+        jobId: { type: GraphQLNonNull(GraphQLID) },
+        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+        additional: { type: GraphQLString },
+      },
+      resolve: async (_, args) => {
+        let newApp = new Application({ ...args });
+        await newApp.save();
+        return { message: "Apply Succesfull" };
       },
     },
   },

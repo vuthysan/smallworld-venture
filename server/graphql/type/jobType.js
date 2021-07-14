@@ -24,6 +24,7 @@ const JobType = new GraphQLObjectType({
     descriptions: { type: new GraphQLList(GraphQLString) },
 
     company_name: { type: GraphQLString },
+    // === companies of this job ===
     company: {
       type: CompanyType,
       resolve: async (parent) => {
@@ -32,6 +33,7 @@ const JobType = new GraphQLObjectType({
       },
     },
     employerId: { type: GraphQLID },
+    // === employer of this company ===
     employer: {
       type: EmployerType,
       resolve: async (parent) => {
@@ -39,6 +41,7 @@ const JobType = new GraphQLObjectType({
         return emp;
       },
     },
+    createdAt: { type: GraphQLString },
     message: { type: GraphQLString },
   }),
 });

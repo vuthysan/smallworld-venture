@@ -11,11 +11,15 @@ const {
 const Company = require("../../models/companyModel");
 const Job = require("../../models/jobModel");
 const Employer = require("../../models/employerModel");
+const JobSeeker = require("../../models/jobseekerModel");
+const Application = require("../../models/applicationModel");
 
 // ====== Type ======
 const CompanyType = require("../type/companyType");
 const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
+const JobSeekerType = require("../type/jobseekerType");
+const ApplicationType = require("../type/applicationType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -54,6 +58,7 @@ const RootQuery = new GraphQLObjectType({
         return job;
       },
     },
+    // === get job by id ===
     get_job: {
       type: JobType,
       args: {
@@ -64,6 +69,7 @@ const RootQuery = new GraphQLObjectType({
         return job;
       },
     },
+
     // === get all employers ===
     get_employers: {
       type: new GraphQLList(EmployerType),
@@ -73,6 +79,7 @@ const RootQuery = new GraphQLObjectType({
         return ems;
       },
     },
+    // === get employer by id ===
     get_employer: {
       type: EmployerType,
       args: {
@@ -81,6 +88,46 @@ const RootQuery = new GraphQLObjectType({
       resolve: async (_, args) => {
         const em = await Employer.findById(args.id);
         return em;
+      },
+    },
+    // === get all job seeker ===
+    get_jobseekers: {
+      type: GraphQLList(JobSeekerType),
+      description: "List of jobseekers",
+      resolve: async () => {
+        let seekers = await JobSeeker.find().sort({ createdAt: -1 });
+        return seekers;
+      },
+    },
+    // === get job seeker by id ===
+    get_jobseeker: {
+      type: JobSeekerType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve: async (_, args) => {
+        let seeker = await JobSeeker.findById(args.id);
+        return seeker;
+      },
+    },
+    //  === get job's applicants ===
+    get_job_applicants: {
+      type: GraphQLList(ApplicationType),
+      args: {
+        jobId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        let apps = await Application.find({ jobId: args.jobId });
+        return apps;
+      },
+    },
+    // === get jobseeker applications by jobseeker id ===
+    get_jobseeker_applications: {
+      type: GraphQLList(ApplicationType),
+      args: {
+        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        let apps = await Application.find({ jobSeekerId: args.jobSeekerId });
+        return apps;
       },
     },
   },

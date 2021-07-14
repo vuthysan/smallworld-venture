@@ -18,8 +18,9 @@ const CompanyType = new GraphQLObjectType({
     website: { type: GraphQLString },
     city: { type: GraphQLString },
     employer_position: { type: GraphQLString },
-    employerId: { type: GraphQLID },
     createdAt: { type: GraphQLString },
+    employerId: { type: GraphQLID },
+    // === employer of company ===
     employer: {
       // === employer type ===
       type: EmployerType,
@@ -28,6 +29,7 @@ const CompanyType = new GraphQLObjectType({
         return em;
       },
     },
+    // === jobs under this company ===
     jobs: {
       // === opporunity type ===
       type: new GraphQLList(require("./jobType")),

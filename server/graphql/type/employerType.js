@@ -15,6 +15,7 @@ const EmployerType = new GraphQLObjectType({
     // token: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
+    // === jobs under employer ===
     jobs: {
       // === Job Type ===
       type: GraphQLList(require("./jobType")),
@@ -23,6 +24,7 @@ const EmployerType = new GraphQLObjectType({
         return jobs;
       },
     },
+    // === companies under employer ===
     companies: {
       // === Company Type ===
       type: GraphQLList(require("./companyType")),
