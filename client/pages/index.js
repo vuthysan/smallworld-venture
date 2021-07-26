@@ -3,9 +3,7 @@ import Link from "next/link";
 //=== code spliting for performance ===
 import loadable from "@loadable/component";
 const Card = loadable(() => import("../comps/Card"));
-
 import CardBox from "../comps/CardBox";
-
 import { Row, Col, Spin, Button } from "antd";
 import axios from "axios";
 import MetaTags from "../comps/MetaTags";
@@ -22,14 +20,16 @@ function Home() {
   useEffect(() => {
     axios
       .get(
-        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/koompi"
+        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/koompi",
+        { withCredentials: false }
       )
       .then((res) => {
         setKoompi(res.data.items);
       });
     axios
       .get(
-        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/smallworldvc"
+        "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/smallworldvc",
+        { withCredentials: false }
       )
       .then((res) => {
         setCommunity(res.data.items);

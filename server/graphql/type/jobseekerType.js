@@ -9,7 +9,6 @@ const JobSeekerType = new GraphQLObjectType({
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     phone: { type: GraphQLString },
-    // token: { type: GraphQLString },
     gender: { type: GraphQLString },
     interest: { type: GraphQLList(GraphQLString) },
     birth_date: { type: GraphQLString },

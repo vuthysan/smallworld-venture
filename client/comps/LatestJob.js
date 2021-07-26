@@ -1,13 +1,20 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { GET_JOBS } from "../graphql/query";
 import { Row, Col } from "antd";
-// === json data ===
-import jobs from "../data/jobs.json";
+import moment from "moment";
 
 function LatestJob() {
+  const { loading, data } = useQuery(GET_JOBS);
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+  const { get_jobs } = data;
+
   return (
     <Row wrap={true} gutter={[0, 5]}>
-      {jobs.map((res) => {
-        const { id, position, companyName, city, createdAt } = res;
+      {get_jobs.map((res) => {
+        const { id, position, company, createdAt } = res;
         return (
           <Col key={id} xs={24} sm={24} md={14}>
             <Row className="job-card" align="middle" justify="space-between">
@@ -20,16 +27,18 @@ function LatestJob() {
                 </a>
                 <br />
                 <a
-                  href={`/open-opportunities/${companyName.toLowerCase()}`}
+                  href={`/open-opportunities/${company.name.toLowerCase()}`}
                   className="company"
                 >
-                  {companyName}
+                  {company.name.toUpperCase()}
                 </a>
                 <br />
-                <p className="city">{city}</p>
+                <p className="city">{company.city}</p>
               </Col>
               <Col>
-                <p className="date">{createdAt}</p>
+                <p className="date">
+                  {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
+                </p>
                 <button className="apply-btn">
                   <a href="/open-opportunities/jobseeker/signin">Apply Now</a>
                 </button>

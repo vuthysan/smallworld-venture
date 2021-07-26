@@ -1,16 +1,66 @@
 import { gql } from "@apollo/client";
 
-// === company part ===
-const GET_COMPANIES = gql`
+// ========== job part =========
+
+// === get all jobs ===
+const GET_JOBS = gql`
   query {
-    get_companies {
+    get_jobs {
       id
-      logo
-      name
+      position
+      type
+      createdAt
+      company {
+        name
+        city
+      }
     }
   }
 `;
 
+// === get employer by id ===
+const GET_EMPLOYER = gql`
+  query ($id: ID!) {
+    get_employer(id: $id) {
+      id
+      name
+      email
+      password
+    }
+  }
+`;
+// ========== jobseeker part ==========
+
+// === get jobseekr by id ===
+const GET_JOBSEEKER = gql`
+  query ($id: ID!) {
+    get_jobseeker(id: $id) {
+      id
+      name
+      email
+      gender
+    }
+  }
+`;
+// === get jobseeker's applications ===
+const GET_JOBSEEKER_APPLICATIONS = gql`
+  query ($jobseekerId: ID!) {
+    get_jobseeker_applications(jobseekerId: $jobseekerId) {
+      id
+      createdAt
+      job {
+        company {
+          name
+          city
+        }
+        position
+        createdAt
+      }
+    }
+  }
+`;
+
+// ========== company part ==========
 const GET_COMPANY = gql`
   query ($name: String!) {
     get_company(name: $name) {
@@ -30,53 +80,5 @@ const GET_COMPANY = gql`
     }
   }
 `;
-// === department ===
-const GET_DEPARTMENTS = gql`
-  query {
-    get_departments {
-      id
-      icon
-      name
-    }
-  }
-`;
-const GET_DEPARTMENT = gql`
-  query ($id: ID!) {
-    get_department(id: $id) {
-      id
-      name
-      opportunities {
-        id
-        position
-        status
-        companyName
-      }
-    }
-  }
-`;
 
-// === opportunity ===
-const GET_OPPORTUNITY = gql`
-  query ($id: ID!) {
-    get_opportunity(id: $id) {
-      id
-      position
-      requirements
-      conditions
-      responsibilities
-      companyName
-      department {
-        name
-        id
-      }
-    }
-  }
-`;
-
-export {
-  GET_COMPANIES,
-  GET_COMPANY,
-  GET_DEPARTMENTS,
-  GET_DEPARTMENT,
-  GET_OPPORTUNITY,
-};
+export { GET_JOBS, GET_EMPLOYER, GET_JOBSEEKER, GET_JOBSEEKER_APPLICATIONS };

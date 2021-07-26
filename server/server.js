@@ -2,17 +2,21 @@ const express = require("express");
 const path = require("path");
 const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
-("");
 // const adminSchema = require("./graphql/schema/adminSchema");
 const schema = require("./graphql/schema/schema");
+const { verify } = require("jsonwebtoken");
 
 // === invoke express ===
 const app = express();
 
 // === middleware
+
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(cookieParser());
+
 app.use("/public/", express.static(path.join(__dirname, "public")));
 
 // === for admin dashboard ===

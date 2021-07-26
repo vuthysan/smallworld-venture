@@ -1,5 +1,22 @@
 import { gql } from "@apollo/client";
 
+// === employer login ===
+const EMPLOYER_LOGIN = gql`
+  mutation ($email: String!, $password: String!) {
+    login_employer(email: $email, password: $password) {
+      message
+    }
+  }
+`;
+// === employer login ===
+const JOBSEEKER_LOGIN = gql`
+  mutation ($email: String!, $password: String!) {
+    login_jobseeker(email: $email, password: $password) {
+      message
+    }
+  }
+`;
+
 // === message ===
 const POST_MESSAGE = gql`
   mutation ($fullname: String!, $email: String!, $message: String!) {
@@ -34,4 +51,4 @@ const POST_APPLICATION = gql`
     }
   }
 `;
-export { POST_MESSAGE, POST_APPLICATION };
+export { EMPLOYER_LOGIN, JOBSEEKER_LOGIN, POST_MESSAGE, POST_APPLICATION };

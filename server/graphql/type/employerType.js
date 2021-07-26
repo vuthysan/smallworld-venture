@@ -12,7 +12,6 @@ const EmployerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    // token: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
     // === jobs under employer ===

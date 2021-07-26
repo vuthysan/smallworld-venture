@@ -1,4 +1,7 @@
 const graphql = require("graphql");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const { REFRESH_SECRET, ACCESS_SECRET } = process.env;
 const {
   GraphQLObjectType,
   GraphQLNonNull,
@@ -20,6 +23,7 @@ const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
 const JobSeekerType = require("../type/jobseekerType");
 const ApplicationType = require("../type/applicationType");
+const UserType = require("../type/userType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",

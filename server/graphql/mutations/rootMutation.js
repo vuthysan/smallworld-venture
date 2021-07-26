@@ -1,4 +1,7 @@
 const graphql = require("graphql");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
 const {
   GraphQLString,
   GraphQLList,
@@ -6,6 +9,8 @@ const {
   GraphQLNonNull,
   GraphQLObjectType,
 } = graphql;
+
+const { ACCESS_SECRET, REFRESH_SECRET } = process.env;
 
 // ===== Models =====
 const Message = require("../../models/messageModel");
@@ -22,126 +27,188 @@ const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
 const JobSeekerType = require("../type/jobseekerType");
 const ApplicationType = require("../type/applicationType");
+const UserType = require("../type/userType");
 
 const RootMutation = new GraphQLObjectType({
   name: "RootMutation",
   fields: {
-    // === message ===
-    post_message: {
-      type: MessageType,
-      args: {
-        fullname: { type: GraphQLNonNull(GraphQLString) },
-        email: { type: GraphQLNonNull(GraphQLString) },
-        message: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (parent, args) => {
-        let newMessage = new Message({ ...args });
-        await newMessage.save();
-        return { respond: "Message sent!" };
-      },
-    },
-    // === add company ===
-    add_company: {
-      type: CompanyType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        city: { type: GraphQLNonNull(GraphQLString) },
-        employer_position: { type: GraphQLNonNull(GraphQLString) },
-        about: { type: GraphQLNonNull(GraphQLString) },
-        logo: { type: GraphQLNonNull(GraphQLString) },
-        employerId: { type: GraphQLNonNull(GraphQLID) },
-        website: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (_, args) => {
-        let newCom = new Company({ ...args });
-        await newCom.save();
-        return { message: "Company Added!" };
-      },
-    },
-    // === edit company ===
-    edit_company: {
-      type: CompanyType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
-        logo: { type: GraphQLString },
-        website: { type: GraphQLString },
-        city: { type: GraphQLString },
-        about: { type: GraphQLString },
-        employer_position: { type: GraphQLString },
-      },
-      resolve: async (_, args) => {
-        try {
-          await Company.findByIdAndUpdate(args.id, {
-            ...args,
-          });
-          return { message: "Edit Successful!" };
-        } catch (err) {
-          console.log(err);
-          throw err;
-        }
-      },
-    },
-    // === add job ===
-    add_job: {
-      type: JobType,
-      args: {
-        position: { type: GraphQLNonNull(GraphQLString) },
-        salary: { type: GraphQLNonNull(GraphQLString) },
-        type: { type: GraphQLList(GraphQLString) },
-        requirements: { type: GraphQLList(GraphQLString) },
-        descriptions: { type: GraphQLList(GraphQLString) },
-        company_name: { type: GraphQLNonNull(GraphQLString) },
-        employerId: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve: async (_, args) => {
-        let newJob = new Job({ ...args });
-        newJob.save();
-        return { message: "Job Added!" };
-      },
-    },
-    // === edit job ===
-    edit_job: {
-      type: JobType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-        position: { type: GraphQLString },
-        salary: { type: GraphQLString },
-        type: { type: GraphQLList(GraphQLString) },
-        requirements: { type: GraphQLList(GraphQLString) },
-        descriptions: { type: GraphQLList(GraphQLString) },
-        company_name: { type: GraphQLString },
-        employerId: { type: GraphQLID },
-      },
-      resolve: async (_, args) => {
-        try {
-          await Job.findByIdAndUpdate(args.id, {
-            ...args,
-          });
-          return { message: "Edit Successful!" };
-        } catch (err) {
-          console.log(err);
-          throw err;
-        }
-      },
-    },
-    // === add employer ===
-    add_employer: {
+    // =========== register employer =============
+    register_employer: {
       type: EmployerType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
         gender: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: async (_, args) => {
-        let newEm = new Employer({ ...args });
-        newEm.save();
-        return { message: "Sign In Successful!" };
+        const existedEmail = await Employer.findOne({ email: args.email });
+        if (existedEmail) {
+          return { message: "Email already existed!" };
+        } else {
+          let salt = await bcrypt.genSalt();
+          let hashPassword = await bcrypt.hash(args.password, salt);
+          let newEm = new Employer({
+            ...args,
+            password: hashPassword,
+          });
+          await newEm.save();
+          return {
+            message: "Register Sucessfull!",
+          };
+        }
       },
     },
-    // === edit employer ===
+
+    // =========== register jobseeker ===========
+    register_jobseeker: {
+      type: JobSeekerType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        gender: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+        phone: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, args) => {
+        const existedEmail = await JobSeeker.findOne({ email: args.email });
+        if (existedEmail) {
+          return { message: "Email already existed!" };
+        } else {
+          let salt = await bcrypt.genSalt();
+          let hashPassword = await bcrypt.hash(args.password, salt);
+          let newSeeker = new JobSeeker({
+            interest: [],
+            birth_date: "",
+            birth_place: "",
+            cv: "",
+            ...args,
+            password: hashPassword,
+          });
+          await newSeeker.save();
+          return {
+            message: "Register Sucessfull!",
+          };
+        }
+      },
+    },
+    // =========== login employer ===========
+    login_employer: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, args, { res }) => {
+        try {
+          const existedUser = await Employer.findOne({ email: args.email });
+
+          if (!existedUser) {
+            return { message: "User with this email not found!" };
+          }
+          const validPassword = await bcrypt.compare(
+            args.password,
+            existedUser.password
+          );
+          if (!validPassword) {
+            return { message: "Email or password is incorrect!" };
+          }
+          const access_token = jwt.sign(
+            { id: existedUser.id, role: "employer" },
+
+            ACCESS_SECRET,
+            {
+              expiresIn: "30d",
+            }
+          );
+
+          const refresh_token = jwt.sign(
+            {
+              id: existedUser.id,
+            },
+            REFRESH_SECRET,
+            {
+              expiresIn: "30d",
+            }
+          );
+          res.cookie("access_token", access_token, {
+            secure: true,
+          });
+          res.cookie("refresh_token", refresh_token, {
+            secure: true,
+          });
+          return {
+            access_token,
+            refresh_token,
+            id: existedUser.id,
+            message: "Success!",
+          };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
+    // =========== login jobseeker ===========
+    login_jobseeker: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, args, { res }) => {
+        try {
+          const existedUser = await JobSeeker.findOne({ email: args.email });
+
+          if (!existedUser) {
+            return { message: "User with this email not found!" };
+          }
+          const validPassword = await bcrypt.compare(
+            args.password,
+            existedUser.password
+          );
+          if (!validPassword) {
+            return { message: "Email or password is incorrect!" };
+          }
+          const access_token = jwt.sign(
+            {
+              id: existedUser.id,
+              role: "jobseeker",
+            },
+            ACCESS_SECRET,
+            {
+              expiresIn: "30d",
+            }
+          );
+          const refresh_token = jwt.sign(
+            {
+              id: existedUser.id,
+            },
+            REFRESH_SECRET,
+            {
+              expiresIn: "30d",
+            }
+          );
+          res.cookie("access_token", access_token, {
+            secure: true,
+          });
+          res.cookie("refresh_token", refresh_token, {
+            secure: true,
+          });
+          return {
+            access_token,
+            refresh_token,
+            id: existedUser.id,
+            message: "Success!",
+          };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
+    // ========== edit employer ==========
     edit_employer: {
       type: EmployerType,
       args: {
@@ -164,29 +231,7 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
-    // === add jobseeker ===
-    add_jobseeker: {
-      type: JobSeekerType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        email: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
-        phone: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (_, args) => {
-        let newSeeker = new JobSeeker({
-          gender: "",
-          interest: [],
-          birth_date: "",
-          birth_place: "",
-          cv: "",
-          ...args,
-        });
-        await newSeeker.save();
-        return newSeeker;
-      },
-    },
-    // === edit jobseeker ===
+    // ========== edit jobseeker ==========
     edit_jobseeker: {
       type: JobSeekerType,
       args: {
@@ -213,7 +258,107 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
-    // === post application ===
+    // ========== smallworld message ============
+    post_message: {
+      type: MessageType,
+      args: {
+        fullname: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        message: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (parent, args) => {
+        let newMessage = new Message({ ...args });
+        await newMessage.save();
+        return { respond: "Message sent!" };
+      },
+    },
+    // ========== employer add new company ==========
+    add_company: {
+      type: CompanyType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        city: { type: GraphQLNonNull(GraphQLString) },
+        employer_position: { type: GraphQLNonNull(GraphQLString) },
+        about: { type: GraphQLNonNull(GraphQLString) },
+        logo: { type: GraphQLNonNull(GraphQLString) },
+        employerId: { type: GraphQLNonNull(GraphQLID) },
+        website: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, args) => {
+        let newCom = new Company({ ...args });
+        await newCom.save();
+        return { message: "Company Added!" };
+      },
+    },
+    // ========== edit company ==========
+    edit_company: {
+      type: CompanyType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        logo: { type: GraphQLString },
+        website: { type: GraphQLString },
+        city: { type: GraphQLString },
+        about: { type: GraphQLString },
+        employer_position: { type: GraphQLString },
+      },
+      resolve: async (_, args) => {
+        try {
+          await Company.findByIdAndUpdate(args.id, {
+            ...args,
+          });
+          return { message: "Edit Successful!" };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
+    // ========== employer add job ==========
+    add_job: {
+      type: JobType,
+      args: {
+        position: { type: GraphQLNonNull(GraphQLString) },
+        salary: { type: GraphQLNonNull(GraphQLString) },
+        type: { type: GraphQLList(GraphQLString) },
+        requirements: { type: GraphQLList(GraphQLString) },
+        descriptions: { type: GraphQLList(GraphQLString) },
+        company_name: { type: GraphQLNonNull(GraphQLString) },
+        employerId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        let newJob = new Job({ ...args });
+        newJob.save();
+        return { message: "Job Added!" };
+      },
+    },
+    // ========== edit job ==========
+    edit_job: {
+      type: JobType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        position: { type: GraphQLString },
+        salary: { type: GraphQLString },
+        type: { type: GraphQLList(GraphQLString) },
+        requirements: { type: GraphQLList(GraphQLString) },
+        descriptions: { type: GraphQLList(GraphQLString) },
+        company_name: { type: GraphQLString },
+        employerId: { type: GraphQLID },
+      },
+      resolve: async (_, args) => {
+        try {
+          await Job.findByIdAndUpdate(args.id, {
+            ...args,
+          });
+          return { message: "Edit Successful!" };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
+
+    // === job seeker apply for job (post appilication)===
     post_application: {
       type: ApplicationType,
       args: {

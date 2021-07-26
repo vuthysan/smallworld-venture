@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import MetaTags from "../../comps/MetaTags";
+import jwt from "jsonwebtoken";
+import Cookie from "js-cookie";
 import { Row, Col, Input, Dropdown, Menu } from "antd";
 import DropDownMenu from "../../comps/DropDownMenu";
 import LatestJob from "../../comps/LatestJob";
@@ -47,12 +49,10 @@ const addMenu = (
 );
 function index() {
   const [current, setCurrent] = useState(0);
-  // === get user info from local storage === 
-  var user;
-  if (typeof window !== "undefined") {
-    user = JSON.parse(localStorage.getItem("user"));
-    // console.log(user.role);
-  }
+
+  // === get user info from cookie ===
+  const token = Cookie.get("access_token");
+  const user = jwt.decode(token);
 
   // === steps for latest job and interest ===
 
@@ -94,7 +94,7 @@ function index() {
                   dictum suscipit quis lectus quam elementum volutpat. Ac
                   potenti ameutpat. Ac potenti amet, cras magna.
                 </p>
-
+                {/* =========== signin and signup menu  ========== */}
                 <DropDownMenu role={user ? user.role : null} />
               </Col>
               <Col xs={0} sm={0} md={6}>

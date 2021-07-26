@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { Row, Col, Drawer, Menu } from "antd";
 // === comps ===
-import UserNavMenu from "./UserNavMenu";
+import UserNavMenu from "../UserNavMenu";
 
 function Navbar() {
   const router = useRouter();
@@ -94,7 +94,8 @@ function Navbar() {
               </Col>
             </Row>
           </Col>
-          {/* === user menu bar === */}
+
+          {/* === employer / jobseeker menu bar === */}
           <UserNavMenu />
 
           {/* === responsive navbar === */}

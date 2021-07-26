@@ -1,28 +1,34 @@
 import Head from "next/head";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import Layout from "../comps/Layout";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { UserContextProvider } from "../context/userContext";
+import Layout from "../comps/Layout/Layout";
 import "antd/dist/antd.css";
 import "../styles/globals.css";
+import axios from "axios";
+import client from "../apollo-client";
 
-const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache(),
-});
-
+axios.defaults.withCredentials = true;
 function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charSet="utf-8" />
-        <title>
-          SmallWorld Venture | Homegrown startup community based in Phnom Penh
-        </title>
-        <link rel="shortcut icon" href="/images/home/favicon.png" />
-      </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <UserContextProvider>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="utf-8" />
+          <title>
+            SmallWorld Venture | Homegrown startup community based in Phnom Penh
+          </title>
+          <link rel="shortcut icon" href="/images/home/favicon.png" />
+        </Head>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </UserContextProvider>
     </ApolloProvider>
   );
 }

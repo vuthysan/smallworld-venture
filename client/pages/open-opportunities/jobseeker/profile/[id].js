@@ -1,10 +1,21 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { GET_JOBSEEKER } from "../../../../graphql/query";
+import { useQuery } from "@apollo/client";
 import { Divider, Form, Input, Button, Row, Col, Radio, Select } from "antd";
 
 const { Option } = Select;
 
 function profile() {
+  const { id } = useRouter().query;
   const [form] = Form.useForm();
+  //   === get jobseeker by id ===
+  const { loading, data } = useQuery(GET_JOBSEEKER, {
+    variables: { id },
+  });
+  if (loading) return "";
+  const { get_jobseeker } = data;
+
   const onFinish = (values) => {
     console.log(values);
   };
@@ -12,22 +23,27 @@ function profile() {
   return (
     <div className="opp-container profile">
       <Divider orientation="left">Employer Profile</Divider>
-      <Form layout="vertical" form={form} onFinish={onFinish}>
+      <Form
+        initialValues={get_jobseeker}
+        layout="vertical"
+        form={form}
+        onFinish={onFinish}
+      >
         <Row gutter={[12]}>
           <Col sm={12}>
             <Form.Item
               label="Username"
-              name="username"
+              name="name"
               rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
           </Col>
           <Col sm={12}>
-            <Form.Item label="Gender" name="gender" initialValue="male">
+            <Form.Item label="Gender" name="gender">
               <Radio.Group name="radiogroup">
-                <Radio value="male">Male</Radio>
-                <Radio value="female">Female</Radio>
+                <Radio value="Male">Male</Radio>
+                <Radio value="Female">Female</Radio>
               </Radio.Group>
             </Form.Item>
           </Col>
@@ -63,20 +79,13 @@ function profile() {
               <Input />
             </Form.Item>
           </Col>
-
           <Col sm={12}>
+            {/* === when add mode tag always show warning === */}
             <Form.Item label="Interest" name="interest">
-              <Select
-                mode="tags"
-                style={{ width: "100%" }}
-                // onChange={handleChange}
-                tokenSeparators={[","]}
-              >
-                <Option value={1}>1</Option>
-                <Option value={2}>2</Option>
-                <Option value={3}>3</Option>
-                <Option value={4}>4</Option>
-                <Option value={5}>5</Option>
+              <Select mode="tags">
+                <Option value="red">Red</Option>
+                <Option value="green">Green</Option>
+                <Option value="blue">Blue</Option>
               </Select>
             </Form.Item>
           </Col>

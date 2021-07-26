@@ -38,7 +38,7 @@ const JobType = new GraphQLObjectType({
       type: EmployerType,
       resolve: async (parent) => {
         const emp = await Employer.findById(parent.employerId);
-        return emp;
+      return emp;
       },
     },
     createdAt: { type: GraphQLString },
