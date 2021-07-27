@@ -16,7 +16,30 @@ const JOBSEEKER_LOGIN = gql`
     }
   }
 `;
-
+// === Empoyer add new company ===
+const ADD_COMPANY = gql`
+  mutation (
+    $name: String!
+    $city: String!
+    $employer_position: String!
+    $about: String!
+    $logo: String!
+    $employerId: ID!
+    $website: String!
+  ) {
+    add_company(
+      name: $name
+      city: $city
+      employer_position: $employer_position
+      about: $about
+      logo: $logo
+      employerId: $employerId
+      website: $website
+    ) {
+      message
+    }
+  }
+`;
 // === message ===
 const POST_MESSAGE = gql`
   mutation ($fullname: String!, $email: String!, $message: String!) {
@@ -51,4 +74,10 @@ const POST_APPLICATION = gql`
     }
   }
 `;
-export { EMPLOYER_LOGIN, JOBSEEKER_LOGIN, POST_MESSAGE, POST_APPLICATION };
+export {
+  EMPLOYER_LOGIN,
+  JOBSEEKER_LOGIN,
+  POST_MESSAGE,
+  POST_APPLICATION,
+  ADD_COMPANY,
+};

@@ -25,8 +25,8 @@ function FormList({ name, message }) {
                 Add {message}
               </Button>
             </Form.Item>
-            {fields.map(({ key, name, fieldKey, ...restField }) => (
-              <Space key={key} style={{ display: "flex" }} align="baseline">
+            {fields.map(({ key, name, fieldKey, ...restField }, i) => (
+              <Space key={i} style={{ display: "flex" }} align="baseline">
                 <Form.Item
                   {...restField}
                   name={[name]}

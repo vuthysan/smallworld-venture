@@ -38,12 +38,12 @@ app.use(
 
 // === upload file route ===
 
-// app.use(require("./routes/uploadImage"));
+app.use(require("./routes/uploadImage"));
 // app.use(require("./routes/uploadPdf"));
 
 // === delete file route ===
 
-// app.use(require("./routes/deleteFile"));
+app.use(require("./routes/deleteFile"));
 
 const PORT = process.env.PORT || 5000;
 // === connect database ===

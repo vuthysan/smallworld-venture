@@ -25,10 +25,44 @@ const GET_EMPLOYER = gql`
       id
       name
       email
+      phone
       password
+      gender
     }
   }
 `;
+// === get employer posted job ===
+const GET_EMPLOYER_POSTED_JOB = gql`
+  query ($id: ID!) {
+    get_employer(id: $id) {
+      jobs {
+        id
+        position
+        company {
+          name
+          city
+        }
+        createdAt
+      }
+    }
+  }
+`;
+// === get employer's companies ===
+const GET_EMPLOYER_COMPANIES = gql`
+  query ($id: ID!) {
+    get_employer(id: $id) {
+      id
+      companies {
+        id
+        name
+        city
+        createdAt
+        about
+      }
+    }
+  }
+`;
+
 // ========== jobseeker part ==========
 
 // === get jobseekr by id ===
@@ -81,4 +115,11 @@ const GET_COMPANY = gql`
   }
 `;
 
-export { GET_JOBS, GET_EMPLOYER, GET_JOBSEEKER, GET_JOBSEEKER_APPLICATIONS };
+export {
+  GET_JOBS,
+  GET_EMPLOYER,
+  GET_JOBSEEKER,
+  GET_JOBSEEKER_APPLICATIONS,
+  GET_EMPLOYER_POSTED_JOB,
+  GET_EMPLOYER_COMPANIES,
+};

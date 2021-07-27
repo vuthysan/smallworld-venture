@@ -21,7 +21,7 @@ function EmployerMenu({ id }) {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href="/open-opportunities/employer/profile"
+          href={"/open-opportunities/employer/profile/" + id}
         >
           <img src="/images/navbar/settings.svg" alt="setting svg" />
           Profile
@@ -31,7 +31,7 @@ function EmployerMenu({ id }) {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href="/open-opportunities/employer/posted"
+          href={"/open-opportunities/employer/posted/" + id}
         >
           <img src="/images/navbar/job.svg" alt="setting svg" />
           Posted Job
@@ -41,7 +41,7 @@ function EmployerMenu({ id }) {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href="/open-opportunities/employer/companies"
+          href={"/open-opportunities/employer/companies/" + id}
         >
           <img src="/images/navbar/company.svg" alt="setting svg" />
           Companies

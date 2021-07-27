@@ -7,6 +7,7 @@ import moment from "moment";
 function Record() {
   const { id: jobseekerId } = useRouter().query;
 
+  // === get job seeker applications by id ===
   const { loading, data } = useQuery(GET_JOBSEEKER_APPLICATIONS, {
     variables: { jobseekerId },
   });

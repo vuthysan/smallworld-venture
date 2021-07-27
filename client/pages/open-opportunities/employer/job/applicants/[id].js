@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Table, Button, Modal, Popconfirm, message } from "antd";
 const tableData = [
   {
+    id: "1",
     name: "Sea Viseth",
     cv: "",
     email: "seaviseth@gmail.com",
@@ -9,6 +10,7 @@ const tableData = [
     createdAt: "July, 19th 2021",
   },
   {
+    id: "2",
     name: "Tep Theavy",
     cv: "",
     email: "theavy@gmail.com",
@@ -58,7 +60,7 @@ function Applicants() {
     },
   ];
   return (
-    <div  className="opp-container opp-big-container">
+    <div className="opp-container opp-big-container">
       <Divider orientation="left">Applicants</Divider>
       <Table
         pagination={{ pageSize: 10 }}
