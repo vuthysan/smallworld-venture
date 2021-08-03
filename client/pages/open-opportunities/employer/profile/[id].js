@@ -1,22 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import { EDIT_EMPLOYER } from "../../../../graphql/mutation";
 import { GET_EMPLOYER } from "../../../../graphql/query";
-import { Divider, Form, Input, Button, Row, Col, Radio } from "antd";
+
+import { Divider, Form, Input, Button, Row, Col, Radio, message } from "antd";
 
 function profile() {
   const { id } = useRouter().query;
   const [form] = Form.useForm();
+  const [btnState, setState] = useState(true);
+
+  const [editEmployer] = useMutation(EDIT_EMPLOYER, { variables: { id } });
 
   // === get employer by id ===
-  const { loading, data } = useQuery(GET_EMPLOYER, {
+  const { loading, data, refetch } = useQuery(GET_EMPLOYER, {
     variables: { id },
   });
   if (loading) return "";
   const { get_employer } = data;
-  console.log(get_employer);
+
+  // === set submit button state to true when user edit their info ===
+
+  const onChange = () => {
+    setState(false);
+  };
+
+  // === edit employer info ===
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
+    if (values.newpassword !== values.verify) {
+      message.warn("Your new password does not match!");
+    } else {
+      delete values.verify;
+      // console.log(values);
+      editEmployer({
+        variables: { ...values },
+      })
+        .then(async (res) => {
+          await message.success(res.data.edit_employer.message);
+          await refetch();
+        })
+        .catch(async () => message.warn("Your old password is not correct!"));
+    }
   };
   return (
     <div className="opp-container profile">
@@ -24,6 +50,7 @@ function profile() {
       <Form
         layout="vertical"
         form={form}
+        onChange={onChange}
         onFinish={onFinish}
         initialValues={get_employer}
       >
@@ -46,7 +73,11 @@ function profile() {
             </Form.Item>
           </Col>
           <Col sm={12}>
-            <Form.Item label="Email" name="email" rules={[{ required: true }]}>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ type: "email", required: true }]}
+            >
               <Input />
             </Form.Item>
           </Col>
@@ -56,11 +87,11 @@ function profile() {
             </Form.Item>
           </Col>
         </Row>
-
         <Divider orientation="left">Password Setting</Divider>
-        <Form.Item label="Old Password" name="oldpassword">
-          <Input.Password />
+        <Form.Item label="Old Password" name="password">
+          <Input.Password className="password" />
         </Form.Item>
+
         <Row gutter={[12]}>
           <Col sm={12}>
             <Form.Item label="New Password" name="newpassword">
@@ -68,7 +99,7 @@ function profile() {
             </Form.Item>
           </Col>
           <Col sm={12}>
-            <Form.Item label="Verify Password" name="verify ">
+            <Form.Item label="Verify Password" name="verify">
               <Input.Password />
             </Form.Item>
           </Col>
@@ -78,6 +109,7 @@ function profile() {
             className="profile-submit-btn"
             type="primary"
             htmlType="submit"
+            disabled={btnState}
           >
             Submit
           </Button>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_EMPLOYER } from "../graphql/query";
 import Cookie from "js-cookie";
 import jwt from "jsonwebtoken";
 
@@ -10,7 +12,7 @@ const UserContextProvider = (props) => {
   function getUser() {
     const token = Cookie.get("access_token");
     if (!token) {
-      setUser({});
+      setUser(undefined);
     }
     setUser(jwt.decode(token));
   }

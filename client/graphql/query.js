@@ -1,7 +1,5 @@
 import { gql } from "@apollo/client";
 
-// ========== job part =========
-
 // === get all jobs ===
 const GET_JOBS = gql`
   query {
@@ -18,6 +16,8 @@ const GET_JOBS = gql`
   }
 `;
 
+// ==================== EMPLOYER PART ======================
+
 // === get employer by id ===
 const GET_EMPLOYER = gql`
   query ($id: ID!) {
@@ -26,7 +26,6 @@ const GET_EMPLOYER = gql`
       name
       email
       phone
-      password
       gender
     }
   }
@@ -58,13 +57,76 @@ const GET_EMPLOYER_COMPANIES = gql`
         city
         createdAt
         about
+        logo
       }
     }
   }
 `;
-
-// ========== jobseeker part ==========
-
+// === get company by company's id ===
+const GET_COMPANY = gql`
+  query ($id: ID!) {
+    get_company_by_id(id: $id) {
+      id
+      name
+      city
+      employer_position
+      employerId
+      about
+      logo
+      website
+    }
+  }
+`;
+// === get company by company's name ===
+const GET_COMPANY_BY_NAME = gql`
+  query ($name: String!) {
+    get_company(name: $name) {
+      name
+      createdAt
+      logo
+      about
+      city
+      website
+      employer_position
+      employer {
+        name
+        phone
+        email
+      }
+      jobs {
+        id
+        position
+        createdAt
+      }
+    }
+  }
+`;
+// === get job detail by job id ===
+const GET_JOB = gql`
+  query ($id: ID!) {
+    get_job(id: $id) {
+      id
+      position
+      company_name
+      salary
+      type
+      requirements
+      descriptions
+      createdAt
+      company {
+        name
+        about
+        employer_position
+      }
+      employer {
+        name
+        phone
+        email
+      }
+    }
+  }
+`;
+// ========================== jobseeker part ==========================
 // === get jobseekr by id ===
 const GET_JOBSEEKER = gql`
   query ($id: ID!) {
@@ -73,6 +135,9 @@ const GET_JOBSEEKER = gql`
       name
       email
       gender
+      phone
+      cv
+      interest
     }
   }
 `;
@@ -94,27 +159,6 @@ const GET_JOBSEEKER_APPLICATIONS = gql`
   }
 `;
 
-// ========== company part ==========
-const GET_COMPANY = gql`
-  query ($name: String!) {
-    get_company(name: $name) {
-      id
-      name
-      description
-      logo
-      opportunities {
-        id
-        position
-        status
-        companyName
-        department {
-          name
-        }
-      }
-    }
-  }
-`;
-
 export {
   GET_JOBS,
   GET_EMPLOYER,
@@ -122,4 +166,7 @@ export {
   GET_JOBSEEKER_APPLICATIONS,
   GET_EMPLOYER_POSTED_JOB,
   GET_EMPLOYER_COMPANIES,
+  GET_COMPANY_BY_NAME,
+  GET_COMPANY,
+  GET_JOB,
 };

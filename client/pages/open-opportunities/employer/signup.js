@@ -7,11 +7,13 @@ function employerSignUp() {
     <Row justify="center" align="middle" className="sign">
       <Col className="left-sign">
         <center>
-          <img
-            width="180"
-            src="/images/home/sw-white.png"
-            alt="smallworld logo"
-          />
+          <a href="/open-opportunities/">
+            <img
+              width="180"
+              src="/images/home/sw-white.png"
+              alt="smallworld logo"
+            />
+          </a>
           <div className="line"></div>
           <p>
             Lorem ipsum dolor sit consectetur consectetur amet consectetur

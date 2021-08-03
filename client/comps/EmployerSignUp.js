@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Form, Input, Select } from "antd";
-import SignFooter from "./SignFooter";
+import SignFooter from "./Layout/SignFooter";
 
 const { Option } = Select;
 

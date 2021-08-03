@@ -12,7 +12,8 @@ const JobSeekerSchema = new Schema(
       required: true,
     },
     phone: {
-      type: Number,
+      type: String,
+      required: true,
     },
     password: {
       type: String,
@@ -20,18 +21,21 @@ const JobSeekerSchema = new Schema(
     },
     gender: {
       type: String,
+      required: true,
     },
-    birth_date: {
-      type: String,
-    },
-    birth_place: {
-      type: String,
-    },
+    // birth_date: {
+    //   type: String,
+    // },
+    // birth_place: {
+    //   type: String,
+    // },
     interest: {
       type: Array,
+      required: true,
     },
     cv: {
       type: String,
+      required: true,
     },
   },
   {

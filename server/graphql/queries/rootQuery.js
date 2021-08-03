@@ -53,6 +53,17 @@ const RootQuery = new GraphQLObjectType({
         return com;
       },
     },
+    // === get company by company's id ===
+    get_company_by_id: {
+      type: CompanyType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        let com = await Company.findById(args.id);
+        return com;
+      },
+    },
     // === get all jobs ===
     get_jobs: {
       type: new GraphQLList(JobType),
@@ -112,7 +123,7 @@ const RootQuery = new GraphQLObjectType({
         return seeker;
       },
     },
-    //  === get job's applicants ===
+    //  === get job's applicants by jobId ===
     get_job_applicants: {
       type: GraphQLList(ApplicationType),
       args: {

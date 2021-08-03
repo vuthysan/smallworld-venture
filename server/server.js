@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 // const adminSchema = require("./graphql/schema/adminSchema");
 const schema = require("./graphql/schema/schema");
-const { verify } = require("jsonwebtoken");
 
 // === invoke express ===
 const app = express();
@@ -39,7 +38,7 @@ app.use(
 // === upload file route ===
 
 app.use(require("./routes/uploadImage"));
-// app.use(require("./routes/uploadPdf"));
+app.use(require("./routes/uploadPdf"));
 
 // === delete file route ===
 

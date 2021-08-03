@@ -15,10 +15,14 @@ function JobSeekerSignIn() {
   const onFinish = async (values) => {
     await signIn({
       variables: values,
-    }).then(async (res) => {
-      await message.success(res.data.login_jobseeker.message);
-      window.location.replace("/open-opportunities");
-    });
+    })
+      .then(async (res) => {
+        await message.success(res.data.login_jobseeker.message);
+        window.location.replace("/open-opportunities");
+      })
+      .catch(
+        async (err) => await message.error("Email or passowrd is incorrect!")
+      );
   };
   return (
     <>
@@ -27,11 +31,13 @@ function JobSeekerSignIn() {
         <Row justify="center" align="middle" className="sign">
           <Col className="left-sign">
             <center>
-              <img
-                width="180"
-                src="/images/home/sw-white.png"
-                alt="smallworld logo"
-              />
+              <a href="/open-opportunities/">
+                <img
+                  width="180"
+                  src="/images/home/sw-white.png"
+                  alt="smallworld logo"
+                />
+              </a>
               <div className="line"></div>
               <p>
                 Lorem ipsum dolor sit consectetur consectetur amet consectetur

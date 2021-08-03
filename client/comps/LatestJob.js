@@ -23,7 +23,7 @@ function LatestJob() {
                   href={`/open-opportunities/detail/${id}`}
                   className="position"
                 >
-                  {position}
+                  {position}         
                 </a>
                 <br />
                 <a

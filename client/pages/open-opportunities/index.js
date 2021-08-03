@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import MetaTags from "../../comps/MetaTags";
-import jwt from "jsonwebtoken";
-import Cookie from "js-cookie";
+import UserContext from "../../context/userContext";
 import { Row, Col, Input, Dropdown, Menu } from "antd";
+
+// ========== comps ==========
 import DropDownMenu from "../../comps/DropDownMenu";
 import LatestJob from "../../comps/LatestJob";
 import InterestJob from "../../comps/InterestJob";
@@ -22,7 +23,10 @@ const steps = [
 const addMenu = (
   <Menu>
     <Menu.Item>
-      <a rel="noopener noreferrer" href="#">
+      <a
+        rel="noopener noreferrer"
+        href={"/open-opportunities/employer/addcompany"}
+      >
         <img
           className="addcom-img"
           width="25"
@@ -34,7 +38,10 @@ const addMenu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a rel="noopener noreferrer" href="#">
+      <a
+        rel="noopener noreferrer"
+        href={"/open-opportunities/employer/addjob/"}
+      >
         <img
           className="addjob-img"
           width="25"
@@ -49,13 +56,9 @@ const addMenu = (
 );
 function index() {
   const [current, setCurrent] = useState(0);
-
-  // === get user info from cookie ===
-  const token = Cookie.get("access_token");
-  const user = jwt.decode(token);
+  const { user } = useContext(UserContext);
 
   // === steps for latest job and interest ===
-
   const next = () => {
     setCurrent(0);
     document.getElementById("interest-btn").className += ` not-active`;

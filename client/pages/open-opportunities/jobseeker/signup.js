@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Form, Input } from "antd";
-import SignFooter from "../../../comps/SignFooter";
+import SignFooter from "../../../comps//Layout/SignFooter";
 
 function JobSeekerSignUp() {
   const [form] = Form.useForm();
@@ -12,11 +12,13 @@ function JobSeekerSignUp() {
     <Row justify="center" align="middle" className="sign">
       <Col className="left-sign">
         <center>
-          <img
-            width="180"
-            src="/images/home/sw-white.png"
-            alt="smallworld logo"
-          />
+          <a href="/open-opportunities/">
+            <img
+              width="180"
+              src="/images/home/sw-white.png"
+              alt="smallworld logo"
+            />
+          </a>
           <div className="line"></div>
           <p>
             Lorem ipsum dolor sit consectetur consectetur amet consectetur

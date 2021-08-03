@@ -845,7 +845,6 @@ input[type="text"]:focus {
 }
 .com-banner .city {
   color: #b5b5b5;
-  margin: 10px 0;
 }
 .com-banner .job-count {
   color: #015e98;
@@ -940,22 +939,19 @@ input[type="text"]:focus {
 .profile .ant-input-password {
   border: 1px solid #f8f8f8;
   background: #f8f8f8;
-  padding: 0 10px;
+  height: 40px !important;
+  box-shadow: none;
 }
-.profile input[type="password"]:hover,
-.profile input[type="password"]:active,
-.profile input[type="password"]:focus {
-  border: none !important;
-}
-.profile input[type="password"] {
+
+.profile #password,
+.profile #newpassword,
+.profile #verify {
   margin: 0 !important;
-  height: 38px;
+  height: 100% !important;
   background-color: none;
   border: none !important;
 }
-.profile .ant-input-affix-wrapper:hover {
-  border-color: #40a9ff !important;
-}
+
 .profile input,
 .profile .ant-input-password,
 .profile .ant-form-item-control-input-content {

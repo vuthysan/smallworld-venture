@@ -104,7 +104,7 @@ function addcompany() {
         <Form.Item
           label="City"
           name="city"
-          initialValue="lucy"
+          initialValue="Phnom Penh"
           rules={[
             {
               required: true,
