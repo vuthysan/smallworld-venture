@@ -1,11 +1,25 @@
 import React from "react";
-import { Row, Col, Button, Form, Input } from "antd";
+import { useMutation } from "@apollo/client";
+import { REGISTER_JOBSEEKR } from "../../../graphql/mutation";
+import { Row, Col, Button, Form, Input, Radio, message } from "antd";
+// === comps ===
 import SignFooter from "../../../comps//Layout/SignFooter";
 
 function JobSeekerSignUp() {
   const [form] = Form.useForm();
+
+  // === register jobseeker function ===
+  const [registerSeeker] = useMutation(REGISTER_JOBSEEKR);
+
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
+    registerSeeker({
+      variables: values,
+    })
+      .then(async (res) => {
+        await message.success(res.data.register_jobseeker.message);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -31,16 +45,26 @@ function JobSeekerSignUp() {
       </Col>
       <Col className="right-sign sign-up">
         <center>
-          <h1 style={{ marginTop: "40px" }}>Sign Up As Job Seeker</h1>
+          <h1 style={{ marginTop: "25px" }}>Sign Up As Job Seeker</h1>
           <Form form={form} onFinish={onFinish} layout="vertical">
             <Form.Item
               label="Username"
-              name="username"
+              name="name"
               rules={[{ required: true }]}
             >
               <Input placeholder="Input username..." />
             </Form.Item>
-
+            <Form.Item
+              wrapperCol={{ span: 11 }}
+              label="Gender"
+              name="gender"
+              rules={[{ required: true }]}
+            >
+              <Radio.Group name="radiogroup">
+                <Radio value="Male">Male</Radio>
+                <Radio value="Female">Female</Radio>
+              </Radio.Group>
+            </Form.Item>
             <Form.Item label="Email" name="email" rules={[{ required: true }]}>
               <Input placeholder="Input email..." />
             </Form.Item>

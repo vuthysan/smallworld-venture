@@ -26,6 +26,7 @@ function profile() {
   const { id } = useRouter().query;
   const [form] = Form.useForm();
   const [file, setFile] = useState("");
+  const [btnDisable, setDisable] = useState(true);
 
   // === edit jobseeker function ===
   const [editSeeker] = useMutation(EDIT_JOBSEEKER, { variables: { id } });
@@ -38,7 +39,7 @@ function profile() {
   if (loading) {
     return (
       <center>
-        <Spin size="large" />{" "}
+        <Spin size="large" />
       </center>
     );
   }
@@ -121,6 +122,7 @@ function profile() {
         layout="vertical"
         form={form}
         onFinish={onFinish}
+        onChange={() => setDisable(false)}
       >
         <Row gutter={[12]}>
           <Col sm={12}>
@@ -218,6 +220,7 @@ function profile() {
             className="profile-submit-btn"
             type="primary"
             htmlType="submit"
+            disabled={btnDisable}
           >
             Submit
           </Button>

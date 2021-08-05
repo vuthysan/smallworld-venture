@@ -32,10 +32,16 @@ function addcompany() {
     }
     return isPng && isLt2M;
   }
-  const handleChange = (info) => {
+  const handleChange = async (info) => {
     if (info.file.status === "uploading") {
-      setState({ loading: true });
+      setState({ ...state, loading: true });
       return;
+    }
+    // === delete old upload from server when upload new photo ===
+    if (state.imageUrl) {
+      await axios
+        .delete("http://localhost:5000/image/delete/" + state.imageUrl)
+        .catch((err) => console.log(err));
     }
     if (info.file.status === "done") {
       // Get this imgurl from response in real world.
@@ -99,12 +105,11 @@ function addcompany() {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="Input company's name..." />
         </Form.Item>
         <Form.Item
           label="City"
           name="city"
-          initialValue="Phnom Penh"
           rules={[
             {
               required: true,
@@ -112,14 +117,14 @@ function addcompany() {
             },
           ]}
         >
-          <Select>
+          <Select placeholder="Select city...">
             <Option value="Phnom Penh">Phnom Penh</Option>
             <Option value="Battambang">Battambang</Option>
             <Option value="Kampong Cham">Kampong Cham</Option>
           </Select>
         </Form.Item>
         <Form.Item label="Website (Optional)" name="website">
-          <Input />
+          <Input placeholder="Input website..." />
         </Form.Item>
         <Form.Item
           label="Recruiter Position"
@@ -131,7 +136,7 @@ function addcompany() {
             },
           ]}
         >
-          <Input />
+          <Input placeholder="Your position..." />
         </Form.Item>
         <Form.Item
           label="About Company"
@@ -143,7 +148,11 @@ function addcompany() {
             },
           ]}
         >
-          <Input.TextArea maxLength="300" showCount />
+          <Input.TextArea
+            placeholde="Input about..."
+            maxLength="300"
+            showCount
+          />
         </Form.Item>
         <Form.Item
           name="logo"

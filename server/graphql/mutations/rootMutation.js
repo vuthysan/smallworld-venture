@@ -46,7 +46,7 @@ const RootMutation = new GraphQLObjectType({
       resolve: async (_, args) => {
         const existedEmail = await Employer.findOne({ email: args.email });
         if (existedEmail) {
-          return { message: "Email already existed!" };
+          throw { message: "Email already existed!" };
         } else {
           let salt = await bcrypt.genSalt();
           let hashPassword = await bcrypt.hash(args.password, salt);
@@ -54,8 +54,10 @@ const RootMutation = new GraphQLObjectType({
             ...args,
             password: hashPassword,
           });
-          await newEm.save();
+          const savedEm = await newEm.save();
+
           return {
+            id: savedEm.id,
             message: "Register Sucessfull!",
           };
         }
@@ -401,7 +403,12 @@ const RootMutation = new GraphQLObjectType({
       type: ApplicationType,
       args: {
         jobId: { type: GraphQLNonNull(GraphQLID) },
-        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        gender: { type: GraphQLNonNull(GraphQLString) },
+        phone: { type: GraphQLNonNull(GraphQLString) },
+        cv: { type: GraphQLNonNull(GraphQLString) },
+        // jobseekerId: { type: GraphQLNonNull(GraphQLID) },
         additional: { type: GraphQLString },
       },
       resolve: async (_, args) => {

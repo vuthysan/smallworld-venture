@@ -454,6 +454,7 @@ h2 span {
   scrollbar-width: thin;
   padding: 40px !important;
 }
+
 .ant-modal-body figure img {
   width: 100% !important;
 }
@@ -724,6 +725,9 @@ input[type="text"]:focus {
 .job-list {
   margin: 50px 0;
 }
+.ant-pagination {
+  margin-top: 40px;
+}
 /* === job list card === */
 .job-card {
   background-color: white;
@@ -855,7 +859,30 @@ input[type="text"]:focus {
   height: 9px;
   background: linear-gradient(180deg, #fce34b, #eac101);
 }
+/* === apply detail === */
+.apply-job h2 {
+  font-weight: 600;
+  font-size: 25px;
+  margin: 0;
+}
 
+.apply-job #apply-btn {
+  width: auto !important;
+  padding: 0 40px;
+  background: linear-gradient(180deg, #fce34b, #eac101);
+  border: none;
+  color: black;
+}
+.apply-job .apply-note {
+  font-size: 18px;
+}
+.apply-job .apply-note a {
+  background: linear-gradient(180deg, #fce34b, #eac101);
+  padding: 0 10px;
+  border-radius: 2px;
+  color: black;
+  margin: 0 5px;
+}
 /* === employer all page design === */
 .opp-big-container {
   margin: 50px 12.5%;
@@ -1032,11 +1059,20 @@ input[type="text"]:focus {
   margin-right: 10px;
   padding: 0 3px;
 }
+#download-cv {
+  background: linear-gradient(180deg, #fce34b, #eac101);
+  color: black;
+  padding: 6px 20px;
+  border-radius: 2px;
+}
 .blue {
   background-color: #1ba4fa48;
 }
 .red {
   background-color: #f6343461;
+}
+.applicants-detail {
+  color: #015e98;
 }
 /* footer */
 .footer {
@@ -1108,6 +1144,10 @@ input[type="text"]:focus {
   opacity: 0.4;
   background-color: #053f64;
 }
+/* .sign #gender {
+  float: left;
+} */
+
 /* === left side === */
 .left-sign {
   color: white;
@@ -1143,13 +1183,21 @@ input[type="text"]:focus {
   color: #1890ff !important;
 }
 /* === right side === */
+.sign .ant-radio-wrapper {
+  padding-right: 20px;
+  margin: 0 !important;
+}
 .right-sign {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   padding: 0 30px;
   width: 515px;
   height: 680px;
   background-color: white;
   border-radius: 0 8px 8px 0;
 }
+
 .right-sign h1 {
   color: #015e98;
 }
@@ -1164,13 +1212,16 @@ input[type="text"]:focus {
   font-size: 18px !important;
 }
 .right-sign label {
-  margin: 15px 0 !important;
-  color: #015e98;
+  margin: 18px 0 !important;
+}
+.right-sign .ant-upload {
+  width: 100%;
 }
 .right-sign .ant-btn {
   width: 100%;
   margin-top: 30px;
   background-color: #015e98;
+  color: white;
   border-radius: 4px;
   font-size: 18px;
   height: 40px;
@@ -1180,9 +1231,10 @@ input[type="text"]:focus {
   color: white !important;
 }
 .sign-footer {
-  position: absolute;
+  margin: 40px 0;
+  /* position: absolute;
   bottom: 30px;
-  left: 94px;
+  left: 94px; */
 }
 .sign-footer a {
   margin: 0 10px;
@@ -1190,6 +1242,11 @@ input[type="text"]:focus {
 .sign-footer a div svg {
   color: #015e98;
 }
+.ant-radio {
+  position: relative;
+  top: -2px;
+}
+
 /* === turn off required field warnning === */
 .sign-up .ant-form-item-explain.ant-form-item-explain-error,
 .sign-up .ant-form-item-explain.ant-form-item-explain-success {

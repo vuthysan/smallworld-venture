@@ -1,5 +1,26 @@
 import { gql } from "@apollo/client";
 
+// === register employer ===
+const REGISTER_EMPLOYER = gql`
+  mutation (
+    $name: String!
+    $email: String!
+    $gender: String!
+    $phone: String!
+    $password: String!
+  ) {
+    register_employer(
+      name: $name
+      email: $email
+      gender: $gender
+      phone: $phone
+      password: $password
+    ) {
+      id
+      message
+    }
+  }
+`;
 // === employer login ===
 const EMPLOYER_LOGIN = gql`
   mutation ($email: String!, $password: String!) {
@@ -27,6 +48,26 @@ const EDIT_EMPLOYER = gql`
       phone: $phone
       password: $password
       newpassword: $newpassword
+    ) {
+      message
+    }
+  }
+`;
+// === register jobseeker ===
+const REGISTER_JOBSEEKR = gql`
+  mutation (
+    $name: String!
+    $email: String!
+    $gender: String!
+    $phone: String!
+    $password: String!
+  ) {
+    register_jobseeker(
+      name: $name
+      email: $email
+      gender: $gender
+      phone: $phone
+      password: $password
     ) {
       message
     }
@@ -173,39 +214,41 @@ const POST_MESSAGE = gql`
   }
 `;
 // === application ===
-// const POST_APPLICATION = gql`
-//   mutation (
-//     $name: String!
-//     $email: String!
-//     $additional: String
-//     $phone: String!
-//     $cv: String!
-//     $company: String!
-//     $department: String!
-//     $position: String!
-//   ) {
-//     post_application(
-//       name: $name
-//       email: $email
-//       additional: $additional
-//       phone: $phone
-//       cv: $cv
-//       company: $company
-//       department: $department
-//       position: $position
-//     ) {
-//       message
-//     }
-//   }
-// `;
+const POST_APPLICATION = gql`
+  mutation (
+    $jobId: ID!
+    $additional: String!
+    $name: String!
+    $email: String!
+    $gender: String!
+    $phone: String!
+    $cv: String!
+  ) {
+    post_application(
+      jobId: $jobId
+      name: $name
+      email: $email
+      gender: $gender
+      phone: $phone
+      cv: $cv
+      additional: $additional
+    ) {
+      message
+    }
+  }
+`;
+
 export {
   EDIT_EMPLOYER,
   EMPLOYER_LOGIN,
+  REGISTER_EMPLOYER,
   JOBSEEKER_LOGIN,
   EDIT_JOBSEEKER,
+  REGISTER_JOBSEEKR,
   ADD_COMPANY,
   EDIT_COMPANY,
   ADD_JOB,
   EDIT_JOB,
   POST_MESSAGE,
+  POST_APPLICATION,
 };

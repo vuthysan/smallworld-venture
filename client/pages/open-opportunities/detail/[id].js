@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../../../context/userContext";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_JOB } from "../../../graphql/query";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, Divider, Spin, message } from "antd";
 import moment from "moment";
 function Position() {
   const { id } = useRouter().query;
+  const { user } = useContext(UserContext);
 
   // === get job detail by job id ===
   const { loading, data } = useQuery(GET_JOB, { variables: { id } });
-  if (loading) return "";
+  if (loading) {
+    return (
+      <center>
+        <Spin size="large" />
+      </center>
+    );
+  }
   const { get_job } = data;
 
   return (
@@ -31,7 +39,22 @@ function Position() {
                 .unix(get_job.createdAt / 1000)
                 .format("MMMM-DD-YYYY")}`}</p>
               <button className="apply-btn">
-                <a href="/open-opportunities/jobseeker/signin">Apply Now</a>
+                {user && user.role === "jobseeker" ? (
+                  <a href={"/open-opportunities/apply/" + get_job.id}>
+                    Apply Now
+                  </a>
+                ) : (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      message.warn(
+                        "Please signin / register as jobseeker to apply for jobs!"
+                      );
+                    }}
+                  >
+                    Apply Now
+                  </a>
+                )}
               </button>
             </Col>
           </Row>
@@ -53,7 +76,7 @@ function Position() {
             <h3>Contact Information</h3>
             <Row align="middle" gutter={60}>
               <Col>
-                <p>{get_job.employer.name}</p>
+                <p>{get_job.employer.name.toUpperCase()}</p>
                 <p className="recru-position">
                   {get_job.company.employer_position}
                 </p>

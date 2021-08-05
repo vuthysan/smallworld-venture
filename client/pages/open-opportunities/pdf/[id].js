@@ -1,6 +1,9 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 function ViewPDF() {
+  const { id } = useRouter().query;
+
   return (
     <div
       style={{
@@ -12,8 +15,8 @@ function ViewPDF() {
       }}
     >
       <object
-        //   data={`http://localhost:5000/public/upload/pdf/${res.cv}`}
-        data="/images/sample.pdf"
+        data={`http://localhost:5000/public/upload/pdf/${id && id}`}
+        // data="/images/sample.pdf"
         type="application/pdf"
         width="100%"
         height="100%"

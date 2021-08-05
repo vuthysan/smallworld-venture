@@ -16,6 +16,7 @@ function ViewCompany() {
     imageUrl: null,
     loading: false,
   });
+
   // === get company by id ===
   const { loading, data } = useQuery(GET_COMPANY, { variables: { id } });
 
@@ -40,10 +41,17 @@ function ViewCompany() {
   }
   const handleChange = async (info) => {
     if (info.file.status === "uploading") {
-      setState({ loading: true });
+      setState({ ...state, loading: true });
       return;
     }
+
     // === delete old logo from server when upload new photo ===
+    if (state.imageUrl) {
+      await axios
+        .delete("http://localhost:5000/image/delete/" + state.imageUrl)
+        .catch((err) => console.log(err));
+    }
+
     await axios
       .delete("http://localhost:5000/image/delete/" + get_company_by_id.logo)
       .catch((err) => console.log(err));
@@ -75,6 +83,7 @@ function ViewCompany() {
         imageUrl: null,
         loading: false,
       });
+      x;
     },
   };
 

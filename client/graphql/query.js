@@ -16,7 +16,31 @@ const GET_JOBS = gql`
   }
 `;
 
-// ==================== EMPLOYER PART ======================
+// === get job detail by job id ===
+const GET_JOB = gql`
+  query ($id: ID!) {
+    get_job(id: $id) {
+      id
+      position
+      company_name
+      salary
+      type
+      requirements
+      descriptions
+      createdAt
+      company {
+        name
+        about
+        employer_position
+      }
+      employer {
+        name
+        phone
+        email
+      }
+    }
+  }
+`;
 
 // === get employer by id ===
 const GET_EMPLOYER = gql`
@@ -101,32 +125,7 @@ const GET_COMPANY_BY_NAME = gql`
     }
   }
 `;
-// === get job detail by job id ===
-const GET_JOB = gql`
-  query ($id: ID!) {
-    get_job(id: $id) {
-      id
-      position
-      company_name
-      salary
-      type
-      requirements
-      descriptions
-      createdAt
-      company {
-        name
-        about
-        employer_position
-      }
-      employer {
-        name
-        phone
-        email
-      }
-    }
-  }
-`;
-// ========================== jobseeker part ==========================
+
 // === get jobseekr by id ===
 const GET_JOBSEEKER = gql`
   query ($id: ID!) {
@@ -141,7 +140,7 @@ const GET_JOBSEEKER = gql`
     }
   }
 `;
-// === get jobseeker's applications ===
+// === get jobseeker's applications record ===
 const GET_JOBSEEKER_APPLICATIONS = gql`
   query ($jobseekerId: ID!) {
     get_jobseeker_applications(jobseekerId: $jobseekerId) {
@@ -159,6 +158,25 @@ const GET_JOBSEEKER_APPLICATIONS = gql`
   }
 `;
 
+// ===== get job's applicants ====
+const GET_JOB_APPLICANTS = gql`
+  query ($jobId: ID!) {
+    get_job_applicants(jobId: $jobId) {
+      id
+      createdAt
+      name
+      email
+      gender
+      phone
+      cv
+      additional
+      job {
+        position
+        company_name
+      }
+    }
+  }
+`;
 export {
   GET_JOBS,
   GET_EMPLOYER,
@@ -169,4 +187,5 @@ export {
   GET_COMPANY_BY_NAME,
   GET_COMPANY,
   GET_JOB,
+  GET_JOB_APPLICANTS,
 };

@@ -14,10 +14,16 @@ const ApplicantionType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     jobId: { type: GraphQLID },
-    jobseekerId: { type: GraphQLID },
     createdAt: { type: GraphQLID },
     additional: { type: GraphQLString },
+    // ==== job seeker ====
+    // jobseekerId: { type: GraphQLID },
     message: { type: GraphQLString },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    gender: { type: GraphQLString },
+    phone: { type: GraphQLString },
+    cv: { type: GraphQLString },
     // === job info of this application ===
     job: {
       type: JobType,
@@ -27,13 +33,13 @@ const ApplicantionType = new GraphQLObjectType({
       },
     },
     // === job seeker of this application ===
-    jobseeker: {
-      type: JobSeekerType,
-      resolve: async (parent) => {
-        let seekers = await JobSeeker.findById(parent.jobseekerId);
-        return seekers;
-      },
-    },
+    // jobseeker: {
+    //   type: JobSeekerType,
+    //   resolve: async (parent) => {
+    //     let seekers = await JobSeeker.findById(parent.jobseekerId);
+    //     return seekers;
+    //   },
+    // },
   }),
 });
 

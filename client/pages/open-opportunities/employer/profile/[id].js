@@ -3,8 +3,17 @@ import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_EMPLOYER } from "../../../../graphql/mutation";
 import { GET_EMPLOYER } from "../../../../graphql/query";
-
-import { Divider, Form, Input, Button, Row, Col, Radio, message } from "antd";
+import {
+  Divider,
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Radio,
+  message,
+  Spin,
+} from "antd";
 
 function profile() {
   const { id } = useRouter().query;
@@ -17,7 +26,13 @@ function profile() {
   const { loading, data, refetch } = useQuery(GET_EMPLOYER, {
     variables: { id },
   });
-  if (loading) return "";
+  if (loading) {
+    return (
+      <center>
+        <Spin size="large" />
+      </center>
+    );
+  }
   const { get_employer } = data;
 
   // === set submit button state to true when user edit their info ===

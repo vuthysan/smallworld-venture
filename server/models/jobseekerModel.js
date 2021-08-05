@@ -30,12 +30,12 @@ const JobSeekerSchema = new Schema(
     //   type: String,
     // },
     interest: {
-      type: Array,
-      required: true,
+      type: Array ,
+      // required: true,
     },
     cv: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {
