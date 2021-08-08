@@ -22,7 +22,7 @@ function ApplyNow() {
 
   if (jobLoading || seekerLoading) {
     return (
-      <center className="spin-loading">
+      <center className="loading-data">
         <Spin size="large" />
       </center>
     );

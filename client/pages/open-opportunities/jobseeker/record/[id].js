@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_JOBSEEKER_APPLICATIONS } from "../../../../graphql/query";
-import { Divider, Row, Col } from "antd";
+import { Divider, Row, Col, Spin } from "antd";
 import moment from "moment";
 function Record() {
   const { id: jobseekerId } = useRouter().query;
@@ -11,7 +11,13 @@ function Record() {
   const { loading, data } = useQuery(GET_JOBSEEKER_APPLICATIONS, {
     variables: { jobseekerId },
   });
-  if (loading) return "";
+  if (loading) {
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
 
   const { get_jobseeker_applications } = data;
 

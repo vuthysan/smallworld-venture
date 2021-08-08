@@ -59,7 +59,7 @@ function EmployerSignIn() {
                   name="email"
                   rules={[
                     {
-                      required: true,
+                      required: true, 
                       type: "email",
                       message: "Please input your Email!",
                     },

@@ -34,8 +34,9 @@ function addjob() {
       variables: newJob,
     }).then(async (res) => {
       await setBtnState(true);
-      await message.success(res.data.add_job.message);
+      await form.resetFields();
       await setBtnState(false);
+      await message.success(res.data.add_job.message);
     });
   };
   return (

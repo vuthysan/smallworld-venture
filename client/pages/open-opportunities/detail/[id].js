@@ -13,7 +13,7 @@ function Position() {
   const { loading, data } = useQuery(GET_JOB, { variables: { id } });
   if (loading) {
     return (
-      <center>
+      <center className="loading-data">
         <Spin size="large" />
       </center>
     );

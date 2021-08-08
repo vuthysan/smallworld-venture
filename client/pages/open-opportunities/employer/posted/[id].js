@@ -1,19 +1,40 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_EMPLOYER_POSTED_JOB } from "../../../../graphql/query";
-import { Divider, Row, Col, Spin } from "antd";
+import { DELETE_JOB } from "../../../../graphql/mutation";
+import { Divider, Row, Col, Spin, Popconfirm, message } from "antd";
+import { TiDeleteOutline } from "react-icons/ti";
 import moment from "moment";
+
 function posted() {
   const { id } = useRouter().query;
 
+  // === delete job function ===
+  const [deleteJob] = useMutation(DELETE_JOB);
+
+  function confirm(id) {
+    deleteJob({
+      variables: { id },
+    })
+      .then(async (res) => {
+        await refetch();
+        await message.success(res.data.delete_job.message);
+      })
+      .catch((err) => console.log(err));
+  }
+
   //   === get employer posted job ===
-  const { loading, data } = useQuery(GET_EMPLOYER_POSTED_JOB, {
+  const { loading, data, refetch } = useQuery(GET_EMPLOYER_POSTED_JOB, {
     variables: { id },
   });
 
   if (loading) {
-    return <Spin size="large" />;
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
   }
   const { get_employer } = data;
 
@@ -29,11 +50,21 @@ function posted() {
             return (
               <Col key={id} xs={24} sm={12} md={8}>
                 <div className="card">
+                  <Popconfirm
+                    title="Are you sure to delete this job?"
+                    onConfirm={() => confirm(id)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <a id="delete_job" href="#">
+                      <TiDeleteOutline />
+                    </a>
+                  </Popconfirm>
                   <p className="position">{position}</p>
-                  <p className="company">{company.name}</p>
+                  <p className="company">{company.name.toUpperCase()}</p>
                   <p className="city">{`${company.city}, ${moment
                     .unix(createdAt / 1000)
-                    .format("YYYY-MM-DD")}`}</p>
+                    .format("MMMM-DD-YYYY")}`}</p>
                   <button className="view-btn">
                     <a href={"/open-opportunities/employer/job/" + id}>
                       View Job

@@ -16,7 +16,6 @@ function ViewPDF() {
     >
       <object
         data={`http://localhost:5000/public/upload/pdf/${id && id}`}
-        // data="/images/sample.pdf"
         type="application/pdf"
         width="100%"
         height="100%"

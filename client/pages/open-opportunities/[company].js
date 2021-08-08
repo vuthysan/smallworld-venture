@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_COMPANY_BY_NAME } from "../../graphql/query";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, Divider, Spin } from "antd";
 import moment from "moment";
 
 function Company() {
@@ -11,7 +11,14 @@ function Company() {
   const { loading, data } = useQuery(GET_COMPANY_BY_NAME, {
     variables: { name: company },
   });
-  if (loading) return "";
+
+  if (loading) {
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
   const { get_company } = data;
   // console.log(get_company);
   return (

@@ -157,6 +157,15 @@ const EDIT_COMPANY = gql`
     }
   }
 `;
+// === delete company and jobs in company ===
+const DELETE_COMPANY = gql`
+  mutation ($id: ID!, $name: String!) {
+    delete_company(id: $id, name: $name) {
+      message
+    }
+  }
+`;
+
 //  === add job ===
 const ADD_JOB = gql`
   mutation (
@@ -205,6 +214,14 @@ const EDIT_JOB = gql`
     }
   }
 `;
+// === delete job ===
+const DELETE_JOB = gql`
+  mutation ($id: ID!) {
+    delete_job(id: $id) {
+      message
+    }
+  }
+`;
 // === message ===
 const POST_MESSAGE = gql`
   mutation ($fullname: String!, $email: String!, $message: String!) {
@@ -247,8 +264,10 @@ export {
   REGISTER_JOBSEEKR,
   ADD_COMPANY,
   EDIT_COMPANY,
+  DELETE_COMPANY,
   ADD_JOB,
   EDIT_JOB,
+  DELETE_JOB,
   POST_MESSAGE,
   POST_APPLICATION,
 };

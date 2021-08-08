@@ -24,7 +24,6 @@ function InterestJob() {
 
   // === get curent post ===
   const indexOfLastPost = current * postsPerPage;
-
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   console.log(currentPosts);

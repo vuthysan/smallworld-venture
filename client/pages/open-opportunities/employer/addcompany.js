@@ -87,8 +87,9 @@ function addcompany() {
       variables: newCom,
     }).then(async (res) => {
       await setState({ loading: true });
-      await message.success(res.data.add_company.message);
       await setState({ loading: false });
+      await form.resetFields();
+      await message.success(res.data.add_company.message);
     });
   };
   return (

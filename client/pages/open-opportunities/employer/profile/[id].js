@@ -28,7 +28,7 @@ function profile() {
   });
   if (loading) {
     return (
-      <center>
+      <center className="loading-data">
         <Spin size="large" />
       </center>
     );

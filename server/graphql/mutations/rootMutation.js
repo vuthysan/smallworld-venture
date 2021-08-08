@@ -354,6 +354,40 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
+    // ============ delete company (and jobs of company) =========
+    delete_company: {
+      type: CompanyType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (parent, args) => {
+        try {
+          // === delete company ===
+          await Company.findByIdAndRemove(args.id);
+
+          // ====== find jobs by company's nam ======
+          try {
+            //  == regex use to prevent case sensitive ===
+            let jobs = await Job.find({
+              company_name: {
+                $regex: new RegExp(args.name, "i"),
+              },
+            });
+            // === remove jobs related to company ===
+            await jobs.forEach(async (res) => {
+              // console.log(res.id )
+              await Job.findByIdAndRemove(res.id);
+            });
+          } catch {}
+
+          return { message: "Done" };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
     // ========== employer add job ==========
     add_job: {
       type: JobType,
@@ -391,6 +425,19 @@ const RootMutation = new GraphQLObjectType({
             ...args,
           });
           return { message: "Edit Successful!" };
+        } catch (err) {
+          console.log(err);
+          throw err;
+        }
+      },
+    },
+    delete_job: {
+      type: JobType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve: async (_, args) => {
+        try {
+          await Job.findByIdAndRemove(args.id);
+          return { message: "Deleted!" };
         } catch (err) {
           console.log(err);
           throw err;
