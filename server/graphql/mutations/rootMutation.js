@@ -388,6 +388,20 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
+    search: {
+      type: new GraphQLList(JobType),
+      args: {
+        search: { type: GraphQLString },
+      },
+      resolve: async (_, args) => {
+        const { search } = args;
+        const regex = new RegExp(search, "gi");
+
+        return search === ""
+          ? Job.find().sort({ createdAt: -1 })
+          : Job.find({ position: regex }).sort({ createdAt: -1 });
+      },
+    },
     // ========== employer add job ==========
     add_job: {
       type: JobType,

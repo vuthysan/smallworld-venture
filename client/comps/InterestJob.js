@@ -26,14 +26,14 @@ function InterestJob() {
   const indexOfLastPost = current * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(currentPosts);
+  // console.log(currentPosts);
   return (
     <>
       <h1>Interest Job</h1>
       {currentPosts.map((res) => {
         const { id, title } = res;
         return (
-          <div style={{ background: "yellow", margin: "10px 0" }}>
+          <div key={id} style={{ background: "yellow", margin: "10px 0" }}>
             <h2>{title}</h2>
             <p>{id}</p>
           </div>

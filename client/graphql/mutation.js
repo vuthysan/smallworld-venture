@@ -166,6 +166,20 @@ const DELETE_COMPANY = gql`
   }
 `;
 
+// === search job ===
+const SEARCH = gql`
+  mutation ($search: String!) {
+    search(search: $search) {
+      position
+      id
+      createdAt
+      company {
+        name
+        city
+      }
+    }
+  }
+`;
 //  === add job ===
 const ADD_JOB = gql`
   mutation (
@@ -265,6 +279,7 @@ export {
   ADD_COMPANY,
   EDIT_COMPANY,
   DELETE_COMPANY,
+  SEARCH,
   ADD_JOB,
   EDIT_JOB,
   DELETE_JOB,

@@ -1,24 +1,18 @@
 import React, { useState, useContext } from "react";
 import MetaTags from "../../comps/MetaTags";
 import UserContext from "../../context/userContext";
+import { useMutation } from "@apollo/client";
+import { SEARCH } from "../../graphql/mutation";
 import { Row, Col, Input, Dropdown, Menu } from "antd";
 
 // ========== comps ==========
 import DropDownMenu from "../../comps/DropDownMenu";
 import LatestJob from "../../comps/LatestJob";
 import InterestJob from "../../comps/InterestJob";
+import SearchJob from "../../comps/SearchJob";
 
 const { Search } = Input;
 
-// == job list steps (latest and interest) ==
-const steps = [
-  {
-    content: <LatestJob />,
-  },
-  {
-    content: <InterestJob />,
-  },
-];
 // === add job and company dropdown ===
 const addMenu = (
   <Menu>
@@ -54,9 +48,14 @@ const addMenu = (
     </Menu.Item>
   </Menu>
 );
+
 function index() {
   const [current, setCurrent] = useState(0);
   const { user } = useContext(UserContext);
+  const [searched, setSearched] = useState();
+
+  // === search job grahql function ===
+  const [searchJob] = useMutation(SEARCH);
 
   // === steps for latest job and interest ===
   const next = () => {
@@ -72,7 +71,30 @@ function index() {
   };
 
   // == search job ==
-  const onSearch = (value) => console.log(value);
+  const onSearch = async (value) => {
+    await searchJob({ variables: { search: value } })
+      .then(async (res) => {
+        await setSearched(res.data.search);
+        await setCurrent(2);
+        document.getElementById("interest-btn").className += ` not-active`;
+        document.getElementById("latest-btn").className += ` not-active`;
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // == job list steps (latest and interest) ==
+  const steps = [
+    {
+      content: <LatestJob />,
+    },
+    {
+      content: <InterestJob />,
+    },
+    {
+      content: <SearchJob jobs={searched} />,
+    },
+  ];
+
   return (
     <>
       <MetaTags
@@ -145,7 +167,7 @@ function index() {
           >
             Your Interest
           </button>
-          {/* === job list === */}
+          {/* === job list (latest or interest jobs) === */}
           <div className="job-list steps-content">{steps[current].content}</div>
         </div>
       </div>

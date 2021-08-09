@@ -1,19 +1,10 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_JOBS } from "../graphql/query";
 import { Row, Col, Pagination } from "antd";
 import moment from "moment";
 
-function LatestJob() {
+function SearchJob({ jobs }) {
   const [current, setCurrent] = useState(1);
   const [jobsPerPage] = useState(2);
-
-  const { loading, data } = useQuery(GET_JOBS);
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
-  const { get_jobs } = data;
-
   const onChange = (page) => {
     setCurrent(page);
   };
@@ -21,12 +12,8 @@ function LatestJob() {
   // === get curent jobs ===
   const indexOfLastPost = current * jobsPerPage;
   const indexOfFirstPost = indexOfLastPost - jobsPerPage;
-  const currentJobs =
-    get_jobs && get_jobs.slice(indexOfFirstPost, indexOfLastPost);
+  const currentJobs = jobs.slice(indexOfFirstPost, indexOfLastPost);
 
-  // console.log(currentJobs, get_jobs);
-
-  // console.log(get_jobs.length % postsPerPage);
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>
@@ -67,12 +54,11 @@ function LatestJob() {
       </Row>
       <Pagination
         onChange={onChange}
-        size="small"
         pageSize={jobsPerPage}
-        total={get_jobs.length}
+        total={jobs.length}
       />
     </>
   );
 }
 
-export default LatestJob;
+export default SearchJob;
