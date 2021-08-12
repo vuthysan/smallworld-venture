@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_JOBS } from "../graphql/query";
-import { Row, Col, Pagination } from "antd";
+import { Row, Col, Pagination, Spin } from "antd";
 import moment from "moment";
 
 function LatestJob() {
@@ -10,7 +10,7 @@ function LatestJob() {
 
   const { loading, data } = useQuery(GET_JOBS);
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Spin size="large" className="loading-data" />;
   }
   const { get_jobs } = data;
 
