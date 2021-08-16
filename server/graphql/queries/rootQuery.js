@@ -23,7 +23,6 @@ const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
 const JobSeekerType = require("../type/jobseekerType");
 const ApplicationType = require("../type/applicationType");
-const UserType = require("../type/userType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -121,17 +120,6 @@ const RootQuery = new GraphQLObjectType({
       resolve: async (_, args) => {
         let seeker = await JobSeeker.findById(args.id);
         return seeker;
-      },
-    },
-    //  === get job's applicants by jobId ===
-    get_job_applicants: {
-      type: GraphQLList(ApplicationType),
-      args: {
-        jobId: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve: async (_, args) => {
-        let apps = await Application.find({ jobId: args.jobId });
-        return apps;
       },
     },
     // === get jobseeker applications by jobseeker id ===

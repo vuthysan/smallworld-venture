@@ -38,6 +38,16 @@ const GET_JOB = gql`
         phone
         email
       }
+      applicants {
+        id
+        name
+        createdAt
+        additional
+        gender
+        email
+        phone
+        cv
+      }
     }
   }
 `;
@@ -159,24 +169,25 @@ const GET_JOBSEEKER_APPLICATIONS = gql`
 `;
 
 // ===== get job's applicants ====
-const GET_JOB_APPLICANTS = gql`
-  query ($jobId: ID!) {
-    get_job_applicants(jobId: $jobId) {
-      id
-      createdAt
-      name
-      email
-      gender
-      phone
-      cv
-      additional
-      job {
-        position
-        company_name
-      }
-    }
-  }
-`;
+// const GET_JOB_APPLICANTS = gql`
+//   query ($jobId: ID!) {
+//     get_job_applicants(jobId: $jobId) {
+//       id
+//       createdAt
+//       name
+//       email
+//       gender
+//       phone
+//       cv
+//       additional
+//       # job {
+//       #   position
+//       #   company_name
+//       # }
+//     }
+//   }
+// `;
+
 export {
   GET_JOBS,
   GET_JOB,
@@ -187,5 +198,4 @@ export {
   GET_EMPLOYER_COMPANIES,
   GET_COMPANY_BY_NAME,
   GET_COMPANY,
-  GET_JOB_APPLICANTS,
 };

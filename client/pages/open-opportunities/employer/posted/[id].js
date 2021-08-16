@@ -26,7 +26,7 @@ function posted() {
 
   //   === get employer posted job ===
   const { loading, data, refetch } = useQuery(GET_EMPLOYER_POSTED_JOB, {
-    variables: { id },
+    variables: { id: id && id },
   });
 
   if (loading) {
@@ -36,16 +36,15 @@ function posted() {
       </center>
     );
   }
-  const { get_employer } = data;
 
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Posted Job</Divider>
-      {get_employer.jobs.length < 1 ? (
+      {data && data.get_employer.jobs.length < 1 ? (
         <center>No Data</center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
-          {get_employer.jobs.map((res) => {
+          {data.get_employer.jobs.map((res) => {
             const { company, id, createdAt, position } = res;
             return (
               <Col key={id} xs={24} sm={12} md={8}>

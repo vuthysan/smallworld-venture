@@ -83,7 +83,7 @@ function Navbar() {
                 <Link href="/open-opportunities">
                   <a
                     className={
-                      router.pathname == "/open-opportunities"
+                      router.pathname.includes("/open-opportunities")
                         ? "nav-active"
                         : ""
                     }

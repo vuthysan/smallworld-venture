@@ -6,6 +6,9 @@ import { ADD_JOB } from "../../../graphql/mutation";
 import { Divider, Form, Input, Button, Select, message } from "antd";
 // === comps ===
 import ArrayForm from "../../../comps/ArrayForm";
+// === json data ===
+import Interests from "../../../data/interests.json";
+
 const { Option } = Select;
 
 function addjob() {
@@ -70,7 +73,7 @@ function addjob() {
               const { name, id } = res;
               return (
                 <Option key={id} value={name}>
-                  {name}
+                  {name.toUpperCase()}
                 </Option>
               );
             })}
@@ -89,10 +92,12 @@ function addjob() {
             },
           ]}
         >
-          <Select mode="tags">
-            <Option value="red">Red</Option>
-            <Option value="green">Green</Option>
-            <Option value="blue">Blue</Option>
+          <Select mode="multiple">
+            {Interests.map((res, i) => (
+              <Option key={i} value={res}>
+                {res.toUpperCase()}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         {/* === requirements array === */}

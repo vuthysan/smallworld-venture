@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { GET_JOB_APPLICANTS } from "../../../../../graphql/query";
+import { GET_JOB } from "../../../../../graphql/query";
 import { Divider, Table, Button, Modal, Popconfirm, message, Spin } from "antd";
 import moment from "moment";
 
@@ -13,8 +13,8 @@ function Applicants() {
     id: null,
   });
 
-  const { loading, data } = useQuery(GET_JOB_APPLICANTS, {
-    variables: { jobId: id && id },
+  const { loading, data } = useQuery(GET_JOB, {
+    variables: { id: id && id },
   });
 
   if (loading) {
@@ -24,7 +24,6 @@ function Applicants() {
       </center>
     );
   }
-  // console.log(data);
 
   const columns = [
     {
@@ -74,7 +73,7 @@ function Applicants() {
             >
               View
             </button>
-            {data.get_job_applicants.map((res) => {
+            {data.get_job.applicants.map((res) => {
               const { id, name, cv, email, gender, phone, additional } = res;
 
               if (id === seekerModal.id) {
@@ -133,13 +132,13 @@ function Applicants() {
         <>
           <Divider orientation="left">
             {`${
-              data.get_job_applicants[0].job.position
-            } (${data.get_job_applicants[0].job.company_name.toUpperCase()})`}
+              data.get_job.position
+            } (${data.get_job.company_name.toUpperCase()})`}
           </Divider>
           <Table
             pagination={{ pageSize: 10 }}
             columns={columns}
-            dataSource={data.get_job_applicants}
+            dataSource={data.get_job.applicants}
           />
           {/* <Button type="primary" onClick={showModal}>
             Open Modal

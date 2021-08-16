@@ -5,6 +5,8 @@ import { ADD_COMPANY } from "../graphql/mutation";
 import { Button, Form, Input, Select, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 const { Option } = Select;
+// === json data ===
+import Cities from "../data/cities.json";
 
 function EmployerNewCompany({ employerId }) {
   const [form] = Form.useForm();
@@ -80,11 +82,7 @@ function EmployerNewCompany({ employerId }) {
 
   return (
     <Form form={form} onFinish={onFinish} layout="vertical">
-      <Form.Item
-        label="Company  pName"
-        name="name"
-        rules={[{ required: true }]}
-      >
+      <Form.Item label="Company Name" name="name" rules={[{ required: true }]}>
         <Input placeholder="Input company name..." />
       </Form.Item>
       <Form.Item label="Website (Optional)" name="website">
@@ -108,14 +106,12 @@ function EmployerNewCompany({ employerId }) {
         </Upload>
       </Form.Item>
       <Form.Item label="City" name="city" rules={[{ required: true }]}>
-        <Select
-          //   showSearch
-
-          placeholder="Select a city"
-        >
-          <Option value="Phnom Penh">Phnom Penh</Option>
-          <Option value="Battambang">Battambang</Option>
-          <Option value="Kampong Cham">Kampong Cham</Option>
+        <Select showSearch placeholder="Select a city">
+          {Cities.map((res, i) => (
+            <Option key={i} value={res}>
+              {res.toUpperCase()}
+            </Option>
+          ))}
         </Select>
       </Form.Item>
       <Form.Item

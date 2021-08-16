@@ -35,54 +35,58 @@ function InterestJob() {
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>
-        {data.get_jobs.map((res) => {
-          const { type, position, company, createdAt, id } = res;
-          let match = false;
-          type.forEach((t) => {
-            seekerData.get_jobseeker.interest.forEach((j) => {
-              if (j === t) {
-                match = true;
-              }
+        {user && user.role === "jobseeker" ? (
+          data.get_jobs.map((res) => {
+            const { type, position, company, createdAt, id } = res;
+            let match = false;
+            type.forEach((t) => {
+              seekerData.get_jobseeker.interest.forEach((j) => {
+                if (j === t) {
+                  match = true;
+                }
+              });
             });
-          });
-          if (match) {
-            return (
-              <Col key={id} xs={24} sm={24} md={14}>
-                <Row
-                  className="job-card"
-                  align="middle"
-                  justify="space-between"
-                >
-                  <Col>
-                    <a
-                      href={`/open-opportunities/detail/${id}`}
-                      className="position"
-                    >
-                      {position}
-                    </a>
-                    <br />
-                    <a
-                      href={`/open-opportunities/${company.name.toLowerCase()}`}
-                      className="company"
-                    >
-                      {company.name}
-                    </a>
-                    <br />
-                    <p className="city">{company.city}</p>
-                  </Col>
-                  <Col>
-                    <p className="date">{createdAt}</p>
-                    <button className="apply-btn">
-                      <a href="/open-opportunities/jobseeker/signin">
-                        Apply Now
+            if (match) {
+              return (
+                <Col key={id} xs={24} sm={24} md={14}>
+                  <Row
+                    className="job-card"
+                    align="middle"
+                    justify="space-between"
+                  >
+                    <Col>
+                      <a
+                        href={`/open-opportunities/detail/${id}`}
+                        className="position"
+                      >
+                        {position}
                       </a>
-                    </button>
-                  </Col>
-                </Row>
-              </Col>
-            );
-          } else return "";
-        })}
+                      <br />
+                      <a
+                        href={`/open-opportunities/${company.name.toLowerCase()}`}
+                        className="company"
+                      >
+                        {company.name}
+                      </a>
+                      <br />
+                      <p className="city">{company.city}</p>
+                    </Col>
+                  <Col>
+                      <p className="date">{createdAt}</p>
+                      <button className="apply-btn">
+                        <a href="/open-opportunities/jobseeker/signin">
+                          Apply Now
+                        </a>
+                      </button>
+                    </Col>
+                  </Row>
+                </Col>
+              );
+            } else return "";
+          })
+        ) : (
+          <h2>Signup as Jobseeker first</h2>
+        )}
       </Row>
       {/* <Pagination onChange={onChange} total={100} /> */}
     </>

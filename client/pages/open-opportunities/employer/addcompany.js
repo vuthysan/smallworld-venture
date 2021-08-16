@@ -5,6 +5,9 @@ import { useMutation } from "@apollo/client";
 import { ADD_COMPANY } from "../../../graphql/mutation";
 import { UploadOutlined } from "@ant-design/icons";
 import { Divider, Form, Input, Button, Select, Upload, message } from "antd";
+// === json data ===
+import Cities from "../../../data/cities.json";
+
 const { Option } = Select;
 
 function addcompany() {
@@ -118,10 +121,12 @@ function addcompany() {
             },
           ]}
         >
-          <Select placeholder="Select city...">
-            <Option value="Phnom Penh">Phnom Penh</Option>
-            <Option value="Battambang">Battambang</Option>
-            <Option value="Kampong Cham">Kampong Cham</Option>
+          <Select showSearch placeholder="Select city...">
+            {Cities.map((res, i) => (
+              <Option key={i} value={res}>
+                {res.toUpperCase()}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item label="Website (Optional)" name="website">

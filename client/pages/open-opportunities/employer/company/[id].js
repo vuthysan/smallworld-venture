@@ -6,6 +6,9 @@ import { EDIT_COMPANY } from "../../../../graphql/mutation";
 import { GET_COMPANY } from "../../../../graphql/query";
 import { UploadOutlined } from "@ant-design/icons";
 import { Divider, Form, Input, Button, Select, Upload, message } from "antd";
+// === json data ===
+import Cities from "../../../../data/cities.json";
+
 const { Option } = Select;
 
 function ViewCompany() {
@@ -133,10 +136,12 @@ function ViewCompany() {
             },
           ]}
         >
-          <Select>
-            <Option value="Phnom Penh">Phnom Penh</Option>
-            <Option value="Battambang">Battambang</Option>
-            <Option value="Kampong Cham">Kampong Cham</Option>
+          <Select showSearch>
+            {Cities.map((res, i) => (
+              <Option key={i} value={res}>
+                {res.toUpperCase()}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item

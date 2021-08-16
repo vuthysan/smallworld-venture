@@ -19,6 +19,8 @@ import {
   Spin,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+// === json data ===
+import Interests from "../../../../data/interests.json";
 
 const { Option } = Select;
 
@@ -161,10 +163,12 @@ function profile() {
           <Col sm={12}>
             {/* === when add mode tag always show warning === */}
             <Form.Item label="Interest" name="interest">
-              <Select mode="tags">
-                <Option value="red">Red</Option>
-                <Option value="green">Green</Option>
-                <Option value="blue">Blue</Option>
+              <Select mode="multiple">
+                {Interests.map((res, i) => (
+                  <Option key={i} value={res}>
+                    {res.toUpperCase()}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
