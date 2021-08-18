@@ -26,8 +26,9 @@ function JobSeekerSignIn() {
   };
   return (
     <>
-      {user && window.location.replace("/")}
-      {!user && (
+      {user && user.role == "jobseeker" ? (
+        window.location.replace("/open-opportunities")
+      ) : (
         <Row justify="center" align="middle" className="sign">
           <Col className="left-sign">
             <center>

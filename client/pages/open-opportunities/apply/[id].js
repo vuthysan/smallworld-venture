@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../../../context/userContext";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
@@ -9,13 +9,17 @@ import { Divider, Spin, Form, Input, Button, message } from "antd";
 function ApplyNow() {
   const { id } = useRouter().query;
   const { user } = useContext(UserContext);
+  const [submitState, setSubmit] = useState(false);
 
   //   ===== post application function ===
   const [postApp] = useMutation(POST_APPLICATION);
 
+  // === get job by id ===
   const { loading: jobLoading, data: jobData } = useQuery(GET_JOB, {
     variables: { id },
   });
+
+  // === get seeker info ===
   const { loading: seekerLoading, data: seekerData } = useQuery(GET_JOBSEEKER, {
     variables: { id: user && user.id },
   });
@@ -32,6 +36,7 @@ function ApplyNow() {
     const application = {
       additional: values.additional ? values.additional : "",
       jobId: id,
+      jobseekerId: seekerData.get_jobseeker.id,
       name: seekerData.get_jobseeker.name,
       email: seekerData.get_jobseeker.email,
       cv: seekerData.get_jobseeker.cv,
@@ -43,7 +48,9 @@ function ApplyNow() {
       variables: application,
     })
       .then(async (res) => {
+        await setSubmit(true);
         await message.success(res.data.post_application.message);
+        await setSubmit(false);
         await window.location.replace("/open-opportunities");
       })
       .catch((err) => console.log(err));
@@ -74,7 +81,12 @@ function ApplyNow() {
           {/* ===== check if user have cv yet or not ===== */}
           <Form.Item>
             {seekerData.get_jobseeker.cv ? (
-              <Button id="apply-btn" type="primary" htmlType="submit">
+              <Button
+                id="apply-btn"
+                type="primary"
+                htmlType="submit"
+                loading={submitState}
+              >
                 Submit Application
               </Button>
             ) : (

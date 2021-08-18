@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_JOB } from "../../../../../graphql/query";
-import { Divider, Table, Button, Modal, Popconfirm, message, Spin } from "antd";
+import { DELETE_APPLICATION } from "../../../../../graphql/mutation";
+import { Divider, Table, Modal, Popconfirm, message, Spin } from "antd";
 import moment from "moment";
 
 function Applicants() {
@@ -13,13 +14,28 @@ function Applicants() {
     id: null,
   });
 
-  const { loading, data } = useQuery(GET_JOB, {
+  // === delete seeeker's application graphql function ===
+  const [deleteApp] = useMutation(DELETE_APPLICATION);
+
+  const handleDelete = (id) => {
+    deleteApp({
+      variables: { id },
+    })
+      .then(async (res) => {
+        await message.success(res.data.delete_application.message);
+        await refetch();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // === get job by job id ===
+  const { loading, data, refetch } = useQuery(GET_JOB, {
     variables: { id: id && id },
   });
 
   if (loading) {
     return (
-      <center>
+      <center className="loading-data">
         <Spin size="large" />
       </center>
     );
@@ -62,6 +78,7 @@ function Applicants() {
     {
       title: "Action",
       dataIndex: "action",
+
       render: (_, apps) => {
         const { id } = apps;
 
@@ -71,7 +88,7 @@ function Applicants() {
               onClick={() => setModal({ visible: true, id: id })}
               className="applicant-btn blue"
             >
-              View
+              <a href="#">View</a>
             </button>
             {data.get_job.applicants.map((res) => {
               const { id, name, cv, email, gender, phone, additional } = res;
@@ -120,7 +137,16 @@ function Applicants() {
                 );
               }
             })}
-            <button className="applicant-btn red ">Delete</button>
+            <Popconfirm
+              title="Are you sure to delete this task?"
+              onConfirm={() => handleDelete(id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <button className="applicant-btn red">
+                <a href="#">Delete</a>
+              </button>
+            </Popconfirm>
           </>
         );
       },
@@ -140,9 +166,6 @@ function Applicants() {
             columns={columns}
             dataSource={data.get_job.applicants}
           />
-          {/* <Button type="primary" onClick={showModal}>
-            Open Modal
-          </Button> */}
         </>
       )}
     </div>

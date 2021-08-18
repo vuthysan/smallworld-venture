@@ -46,7 +46,7 @@ function JobSeekerMenu({ id }) {
   return (
     <Dropdown
       overlay={SeekerMenu}
-      placement="bottomCenter"
+      placement="bottomRight"
       arrow
       trigger="click"
     >

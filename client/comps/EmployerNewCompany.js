@@ -75,7 +75,7 @@ function EmployerNewCompany({ employerId }) {
     })
       .then(async (res) => {
         await message.success(res.data.add_company.message);
-        // await window.location.replace("/open-opportunities/employer/signin")
+        window.location.replace("/open-opportunities/employer/signin");
       })
       .catch((err) => console.log(err));
   };

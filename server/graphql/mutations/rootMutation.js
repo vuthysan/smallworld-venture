@@ -469,13 +469,24 @@ const RootMutation = new GraphQLObjectType({
         gender: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
         cv: { type: GraphQLNonNull(GraphQLString) },
-        // jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
         additional: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         let newApp = new Application({ ...args });
         await newApp.save();
         return { message: "Apply Succesfull" };
+      },
+    },
+
+    delete_application: {
+      type: ApplicationType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve: async (_, args) => {
+        await Application.findByIdAndRemove(args.id);
+        return {
+          message: "Deleted",
+        };
       },
     },
   },

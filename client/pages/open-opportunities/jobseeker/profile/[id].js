@@ -45,7 +45,6 @@ function profile() {
       </center>
     );
   }
-  const { get_jobseeker } = data;
 
   // === cv(pdf) upload props ===
   const props = {
@@ -58,9 +57,9 @@ function profile() {
     },
     onChange: async (info) => {
       // === remove old cv(pdf) file from server if user upload new cv(pdf) ===
-      if (info.file.status === "done" && get_jobseeker.cv) {
+      if (info.file.status === "done" && data.get_jobseeker.cv) {
         await axios
-          .delete("http://localhost:5000/pdf/delete/" + get_jobseeker.cv)
+          .delete("http://localhost:5000/pdf/delete/" + data.get_jobseeker.cv)
           .catch((err) => console.log(err));
       }
     },
@@ -110,126 +109,129 @@ function profile() {
           window.location.replace(
             "/open-opportunities/jobseeker/profile/" + id
           );
-          x;
         })
-        .catch(async () => message.warn("Your old password is not correct!"));
+        .catch(
+          async () => await message.warn("Your old password is not correct!")
+        );
     }
   };
 
   return (
     <div className="opp-container profile">
-      <Divider orientation="left">Employer Profile</Divider>
-      <Form
-        initialValues={get_jobseeker}
-        layout="vertical"
-        form={form}
-        onFinish={onFinish}
-        onChange={() => setDisable(false)}
-      >
-        <Row gutter={[12]}>
-          <Col sm={12}>
-            <Form.Item
-              label="Username"
-              name="name"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col sm={12}>
-            <Form.Item label="Gender" name="gender">
-              <Radio.Group name="radiogroup">
-                <Radio value="Male">Male</Radio>
-                <Radio value="Female">Female</Radio>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
-
-          <Col sm={12}>
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ type: "email", required: true }]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item label="Phone Number" name="phone">
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            {/* === when add mode tag always show warning === */}
-            <Form.Item label="Interest" name="interest">
-              <Select mode="multiple">
-                {Interests.map((res, i) => (
-                  <Option key={i} value={res}>
-                    {res.toUpperCase()}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col sm={24}>
-            <Form.Item
-              onChange={(e) => setFile(e.target.files[0])}
-              label="CV/Resume"
-              name="cv"
-              valuePropName="pdf"
-              rules={[{ required: true }]}
-            >
-              <Upload
-                {...props}
-                defaultFileList={
-                  get_jobseeker.cv
-                    ? [
-                        {
-                          name: get_jobseeker.cv,
-                          // === response for onRemove when user remove image ===
-                          // response: get_jobseeker.cv,
-                          url:
-                            "http://localhost:5000/public/upload/pdf/" +
-                            get_jobseeker.cv,
-                        },
-                      ]
-                    : ""
-                }
+      <Divider orientation="left">JobSeeker Profile</Divider>
+      {data && (
+        <Form
+          initialValues={data.get_jobseeker}
+          layout="vertical"
+          form={form}
+          onFinish={onFinish}
+          onChange={() => setDisable(false)}
+        >
+          <Row gutter={[12]}>
+            <Col sm={12}>
+              <Form.Item
+                label="Username"
+                name="name"
+                rules={[{ required: true }]}
               >
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-              </Upload>
-            </Form.Item>
-          </Col>
-        </Row>
+                <Input />
+              </Form.Item>
+            </Col>
 
-        <Divider orientation="left">Password Setting</Divider>
-        <Form.Item label="Old Password" name="password">
-          <Input.Password />
-        </Form.Item>
-        <Row gutter={[12]}>
-          <Col sm={12}>
-            <Form.Item label="New Password" name="newpassword">
-              <Input.Password />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item label="Verify Password" name="verify">
-              <Input.Password />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Form.Item wrapperCol={{ offset: 19 }}>
-          <Button
-            className="profile-submit-btn"
-            type="primary"
-            htmlType="submit"
-            disabled={btnDisable}
-          >
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+            <Col sm={12}>
+              <Form.Item label="Gender" name="gender">
+                <Radio.Group name="radiogroup">
+                  <Radio value="Male">Male</Radio>
+                  <Radio value="Female">Female</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Col>
+
+            <Col sm={12}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ type: "email", required: true }]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item label="Phone Number" name="phone">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              {/* === when add mode tag always show warning === */}
+              <Form.Item label="Interest" name="interest">
+                <Select mode="multiple" onChange={() => setDisable(false)}>
+                  {Interests.map((res, i) => (
+                    <Option key={i} value={res}>
+                      {res.toUpperCase()}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col sm={24}>
+              <Form.Item
+                onChange={(e) => setFile(e.target.files[0])}
+                label="CV/Resume"
+                name="cv"
+                valuePropName="pdf"
+                rules={[{ required: true }]}
+              >
+                <Upload
+                  {...props}
+                  defaultFileList={
+                    data.get_jobseeker.cv
+                      ? [
+                          {
+                            name: data.get_jobseeker.cv,
+                            // === response for onRemove when user remove image ===
+                            // response: get_jobseeker.cv,
+                            url:
+                              "http://localhost:5000/public/upload/pdf/" +
+                              data.get_jobseeker.cv,
+                          },
+                        ]
+                      : ""
+                  }
+                >
+                  <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Divider orientation="left">Password Setting</Divider>
+          <Form.Item label="Old Password" name="password">
+            <Input.Password />
+          </Form.Item>
+          <Row gutter={[12]}>
+            <Col sm={12}>
+              <Form.Item label="New Password" name="newpassword">
+                <Input.Password />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item label="Verify Password" name="verify">
+                <Input.Password />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item wrapperCol={{ offset: 19 }}>
+            <Button
+              className="profile-submit-btn"
+              type="primary"
+              htmlType="submit"
+              disabled={btnDisable}
+            >
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
     </div>
   );
 }

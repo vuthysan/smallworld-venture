@@ -9,8 +9,13 @@ function LatestJob() {
   const [jobsPerPage] = useState(2);
 
   const { loading, data } = useQuery(GET_JOBS);
+
   if (loading) {
-    return <Spin size="large" className="loading-data" />;
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
   }
   const { get_jobs } = data;
 
@@ -18,15 +23,12 @@ function LatestJob() {
     setCurrent(page);
   };
 
-  // === get curent jobs ===
+  // === get curent jobs depend on jobs/page ===
   const indexOfLastPost = current * jobsPerPage;
   const indexOfFirstPost = indexOfLastPost - jobsPerPage;
   const currentJobs =
     get_jobs && get_jobs.slice(indexOfFirstPost, indexOfLastPost);
 
-  // console.log(currentJobs, get_jobs);
-
-  // console.log(get_jobs.length % postsPerPage);
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>

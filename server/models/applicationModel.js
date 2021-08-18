@@ -7,10 +7,10 @@ const applicationSchema = new Schema(
       type: String,
       required: true,
     },
-    // jobseekerId: {
-    //   type: String,
-    //   required: true,
-    // },
+    jobseekerId: {
+      type: String,
+      required: true,
+    },
     additional: {
       type: String,
     },

@@ -71,6 +71,13 @@ h2 span {
 .loading-data {
   margin: 100px 0;
 }
+/* === no data icon === */
+.no-data {
+  display: flex;
+
+  width: 100%;
+  justify-content: center;
+}
 .nav-active {
   color: #fae045 !important;
 }

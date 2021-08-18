@@ -24,7 +24,7 @@ function companies() {
   }
   //   === get employer by id ===
   const { loading, data, refetch } = useQuery(GET_EMPLOYER_COMPANIES, {
-    variables: { id },
+    variables: { id: id && id },
   });
 
   if (loading) {
@@ -34,59 +34,61 @@ function companies() {
       </center>
     );
   }
-  const { get_employer } = data;
 
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Companies</Divider>
-      {get_employer.companies.length < 1 ? (
+      {data && data.get_employer.companies.length < 1 ? (
         <center>No data</center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
-          {get_employer.companies.map((res) => {
-            const { id, name, createdAt, city, logo } = res;
-            return (
-              <Col key={id} md={8}>
-                <div className="com-card">
-                  {/* === delete compny === */}
-                  <Popconfirm
-                    title="Are you sure to delete this job?"
-                    onConfirm={() => confirmDelete(id, name)}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <a href="#" id="delete_company">
-                      <TiDeleteOutline />
-                    </a>
-                  </Popconfirm>
-                  <div className="img">
-                    <img
-                      height="60"
-                      src={"http://localhost:5000/public/upload/images/" + logo}
-                      alt="company logo"
-                    />
+          {data &&
+            data.get_employer.companies.map((res) => {
+              const { id, name, createdAt, city, logo } = res;
+              return (
+                <Col key={id} md={8}>
+                  <div className="com-card">
+                    {/* === delete compny === */}
+                    <Popconfirm
+                      title="Are you sure to delete this job?"
+                      onConfirm={() => confirmDelete(id, name)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <a href="#" id="delete_company">
+                        <TiDeleteOutline />
+                      </a>
+                    </Popconfirm>
+                    <div className="img">
+                      <img
+                        height="60"
+                        src={
+                          "http://localhost:5000/public/upload/images/" + logo
+                        }
+                        alt="company logo"
+                      />
+                    </div>
+                    <p>
+                      <span className="content"> Company Name:</span>
+                      {name.toUpperCase()}
+                    </p>
+                    <p>
+                      <span className="content"> Company City:</span>
+                      {city}
+                    </p>
+                    <p>
+                      <span className="content"> Added Date:</span>
+                      {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
+                    </p>
+                    <button className="view-btn">
+                      <a href={"/open-opportunities/employer/company/" + id}>
+                        View Company
+                      </a>
+                    </button>
                   </div>
-                  <p>
-                    <span className="content"> Company Name:</span>
-                    {name.toUpperCase()}
-                  </p>
-                  <p>
-                    <span className="content"> Company City:</span>
-                    {city}
-                  </p>
-                  <p>
-                    <span className="content"> Added Date:</span>
-                    {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
-                  </p>
-                  <button className="view-btn">
-                    <a href={"/open-opportunities/employer/company/" + id}>
-                      View Company
-                    </a>
-                  </button>
-                </div>
-              </Col>
-            );
-          })}
+                </Col>
+              );
+            })}
         </Row>
       )}
     </div>

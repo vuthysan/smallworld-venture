@@ -18,91 +18,92 @@ function Position() {
       </center>
     );
   }
-  const { get_job } = data;
 
   return (
     <div className="position-detail">
       <div className="container">
-        <div key={id}>
-          <Row justify="space-between" align="middle">
-            <Col>
-              <h1>{get_job.position}</h1>
-              <a
-                href={`/open-opportunities/${get_job.company.name.toLowerCase()}`}
-              >
-                {get_job.company.name.toUpperCase()}
-              </a>
-              <p className="salary">{`Salary: ${get_job.salary}`}</p>
-            </Col>
-            <Col>
-              <p>{`Posted Date: ${moment
-                .unix(get_job.createdAt / 1000)
-                .format("MMMM-DD-YYYY")}`}</p>
-              <button className="apply-btn">
-                {user && user.role === "jobseeker" ? (
-                  <a href={"/open-opportunities/apply/" + get_job.id}>
-                    Apply Now
-                  </a>
-                ) : (
-                  <a
-                    href="#"
-                    onClick={() => {
-                      message.warn(
-                        "Please signin / register as jobseeker to apply for jobs!"
-                      );
-                    }}
-                  >
-                    Apply Now
-                  </a>
-                )}
-              </button>
-            </Col>
-          </Row>
-          <h3>Requirements</h3>
-          <ul>
-            {get_job.requirements.map((res, i) => {
-              return <li key={i}>{res}</li>;
-            })}
-          </ul>
-          <h3>Descriptions</h3>
-          <ul>
-            {get_job.descriptions.map((res, i) => {
-              return <li key={i}>{res}</li>;
-            })}
-          </ul>
-          <h3>About Company</h3>
-          <div>
-            <p>{get_job.company.about}</p>
-            <h3>Contact Information</h3>
-            <Row align="middle" gutter={60}>
+        {data && (
+          <div key={id}>
+            <Row justify="space-between" align="middle">
               <Col>
-                <p>{get_job.employer.name.toUpperCase()}</p>
-                <p className="recru-position">
-                  {get_job.company.employer_position}
-                </p>
+                <h1>{data.get_job.position}</h1>
+                <a
+                  href={`/open-opportunities/${data.get_job.company.name.toLowerCase()}`}
+                >
+                  {data.get_job.company.name.toUpperCase()}
+                </a>
+                <p className="salary">{`Salary: ${data.get_job.salary}`}</p>
               </Col>
-              <Divider type="vertical" style={{ height: "70px" }} />
               <Col>
-                <div className="contact-info">
-                  <img
-                    src="/images/open-opportunities/call.svg"
-                    alt="call icon"
-                    className="svg"
-                  />
-                  <p>{get_job.employer.phone}</p>
-                </div>
-                <div className="contact-info">
-                  <img
-                    src="/images/open-opportunities/mail.svg"
-                    alt="call icon"
-                    className="svg"
-                  />
-                  <p>{get_job.employer.email}</p>
-                </div>
+                <p>{`Posted Date: ${moment
+                  .unix(data.get_job.createdAt / 1000)
+                  .format("MMMM-DD-YYYY")}`}</p>
+                <button className="apply-btn">
+                  {user && user.role === "jobseeker" ? (
+                    <a href={"/open-opportunities/apply/" + data.get_job.id}>
+                      Apply Now
+                    </a>
+                  ) : (
+                    <a
+                      href="#"
+                      onClick={() => {
+                        message.warn(
+                          "Please signin / register as jobseeker to apply for jobs!"
+                        );
+                      }}
+                    >
+                      Apply Now
+                    </a>
+                  )}
+                </button>
               </Col>
             </Row>
+            <h3>Requirements</h3>
+            <ul>
+              {data.get_job.requirements.map((res, i) => {
+                return <li key={i}>{res}</li>;
+              })}
+            </ul>
+            <h3>Descriptions</h3>
+            <ul>
+              {data.get_job.descriptions.map((res, i) => {
+                return <li key={i}>{res}</li>;
+              })}
+            </ul>
+            <h3>About Company</h3>
+            <div>
+              <p>{data.get_job.company.about}</p>
+              <h3>Contact Information</h3>
+              <Row align="middle" gutter={60}>
+                <Col>
+                  <p>{data.get_job.employer.name.toUpperCase()}</p>
+                  <p className="recru-position">
+                    {data.get_job.company.employer_position}
+                  </p>
+                </Col>
+                <Divider type="vertical" style={{ height: "70px" }} />
+                <Col>
+                  <div className="contact-info">
+                    <img
+                      src="/images/open-opportunities/call.svg"
+                      alt="call icon"
+                      className="svg"
+                    />
+                    <p>{data.get_job.employer.phone}</p>
+                  </div>
+                  <div className="contact-info">
+                    <img
+                      src="/images/open-opportunities/mail.svg"
+                      alt="call icon"
+                      className="svg"
+                    />
+                    <p>{data.get_job.employer.email}</p>
+                  </div>
+                </Col>
+              </Row>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

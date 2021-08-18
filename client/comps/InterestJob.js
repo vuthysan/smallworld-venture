@@ -2,128 +2,132 @@ import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_JOBS, GET_JOBSEEKER } from "../graphql/query";
 import UserContext from "../context/userContext";
-import { Row, Col, Pagination, Spin } from "antd";
-
-// === json data ===
-// import jobs from "../data/jobs.json";
+import { Row, Col, Pagination, Spin, Empty } from "antd";
+import moment from "moment";
 
 function InterestJob() {
+  const [current, setCurrent] = useState(1);
+  const [jobsPerPage] = useState(2);
+
   const { user } = useContext(UserContext);
 
-  const { loading: seekerLoading, data: seekerData } = useQuery(GET_JOBSEEKER, {
-    variables: { id: user && user.id },
-  });
+  // === get jobseeker info(interest) ===
+  const { loading: seekerLoading, data: seekerData } = user
+    ? useQuery(GET_JOBSEEKER, {
+        variables: { id: user && user.id },
+      })
+    : "";
+
+  // === get all jobs ===
   const { loading, data } = useQuery(GET_JOBS);
 
   if (loading || seekerLoading) {
-    return <Spin size="large" className="loading-data" />;
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
+  // === filter jobs for jobseeker's interest only ===
+  let interestJobs;
+  if (user && user.role === "jobseeker") {
+    interestJobs =
+      data &&
+      data.get_jobs.filter((res) => {
+        const { type } = res;
+        let match = false;
+        type.forEach((t) => {
+          user &&
+            seekerData.get_jobseeker.interest.forEach((j) => {
+              if (t === j) {
+                match = true;
+              }
+            });
+        });
+        if (match) {
+          return res;
+        }
+      });
   }
 
-  // const [posts, setPosts] = useState([]);
-  // const [current, setCurrent] = useState(1);
-  // const [postsPerPage] = useState(10);
-
-  // const onChange = (page) => {
-  //   setCurrent(page);
-  // };
-
-  // === get curent post ===
-  // const indexOfLastPost = current * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // === get curent jobs depend on jobsPerPage ===
+  const indexOfLastPost = current * jobsPerPage;
+  const indexOfFirstPost = indexOfLastPost - jobsPerPage;
+  const currentJobs =
+    interestJobs && interestJobs.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>
         {user && user.role === "jobseeker" ? (
-          data.get_jobs.map((res) => {
-            const { type, position, company, createdAt, id } = res;
-            let match = false;
-            type.forEach((t) => {
-              seekerData.get_jobseeker.interest.forEach((j) => {
-                if (j === t) {
-                  match = true;
-                }
-              });
-            });
-            if (match) {
-              return (
-                <Col key={id} xs={24} sm={24} md={14}>
-                  <Row
-                    className="job-card"
-                    align="middle"
-                    justify="space-between"
-                  >
-                    <Col>
-                      <a
-                        href={`/open-opportunities/detail/${id}`}
-                        className="position"
-                      >
-                        {position}
-                      </a>
-                      <br />
-                      <a
-                        href={`/open-opportunities/${company.name.toLowerCase()}`}
-                        className="company"
-                      >
-                        {company.name}
-                      </a>
-                      <br />
-                      <p className="city">{company.city}</p>
-                    </Col>
+          currentJobs.map((res) => {
+            const { position, company, createdAt, id } = res;
+            return (
+              <Col key={id} xs={24} sm={24} md={14}>
+                <Row
+                  className="job-card"
+                  align="middle"
+                  justify="space-between"
+                >
                   <Col>
-                      <p className="date">{createdAt}</p>
-                      <button className="apply-btn">
-                        <a href="/open-opportunities/jobseeker/signin">
-                          Apply Now
-                        </a>
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              );
-            } else return "";
+                    <a
+                      href={`/open-opportunities/detail/${id}`}
+                      className="position"
+                    >
+                      {position}
+                    </a>
+                    <br />
+                    <a
+                      href={`/open-opportunities/${company.name.toLowerCase()}`}
+                      className="company"
+                    >
+                      {company.name}
+                    </a>
+                    <br />
+                    <p className="city">{company.city}</p>
+                  </Col>
+                  <Col>
+                    <p className="date">
+                      {" "}
+                      {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
+                    </p>
+                    <button className="apply-btn">
+                      <a href={`/open-opportunities/detail/${id}`}>Apply Now</a>
+                    </button>
+                  </Col>
+                </Row>
+              </Col>
+            );
           })
         ) : (
-          <h2>Signup as Jobseeker first</h2>
+          <>
+            <div className="no-data">
+              <Empty
+                description={
+                  <p>
+                    Please{" "}
+                    <a href="/open-opportunities/jobseeker/signin">signin</a> /{" "}
+                    <a href="open-opportunities/jobseeker/signup">register</a>{" "}
+                    as jobseeker to view your job interest!
+                  </p>
+                }
+              />
+            </div>
+          </>
         )}
       </Row>
-      {/* <Pagination onChange={onChange} total={100} /> */}
+      {/* === pagination === */}
+      {user && user.role === "jobseeker" ? (
+        <Pagination
+          onChange={(page) => setCurrent(page)}
+          size="small"
+          pageSize={jobsPerPage}
+          total={interestJobs.length}
+        />
+      ) : (
+        ""
+      )}
     </>
-    // <Row wrap={true} gutter={[0, 5]}>
-    //   {jobs.map((res) => {
-    //     const { id, position, companyName, city, createdAt } = res;
-    //     return (
-    //       <Col key={id} xs={24} sm={24} md={14}>
-    //         <Row className="job-card" align="middle" justify="space-between">
-    //           <Col>
-    //             <a
-    //               href={`/open-opportunities/detail/${id}`}
-    //               className="position"
-    //             >
-    //               {position}
-    //             </a>
-    //             <br />
-    //             <a
-    //               href={`/open-opportunities/${companyName.toLowerCase()}`}
-    //               className="company"
-    //             >
-    //               {companyName}
-    //             </a>
-    //             <br />
-    //             <p className="city">{city}</p>
-    //           </Col>
-    //           <Col>
-    //             <p className="date">{createdAt}</p>
-    //             <button className="apply-btn">
-    //               <a href="/open-opportunities/jobseeker/signin">Apply Now</a>
-    //             </button>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     );
-    //   })}
-    // </Row>
   );
 }
 

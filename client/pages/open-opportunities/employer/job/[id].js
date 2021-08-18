@@ -4,7 +4,7 @@ import UserContext from "../../../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_JOB, GET_EMPLOYER_COMPANIES } from "../../../../graphql/query";
 import { EDIT_JOB } from "../../../../graphql/mutation";
-import { Divider, Form, Input, Button, Select, message } from "antd";
+import { Divider, Form, Input, Button, Select, message, Spin } from "antd";
 // === comps ===
 import ArrayForm from "../../../../comps/ArrayForm";
 // === json data ===
@@ -31,10 +31,14 @@ function viewjob() {
       variables: { id: user && user.id },
     }
   );
-  if (loading || loadingCom) return "";
 
-  const { get_job } = data;
-  const { get_employer } = comData;
+  if (loading || loadingCom) {
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
 
   const onFinish = (values) => {
     const job = {
@@ -58,7 +62,7 @@ function viewjob() {
         form={form}
         onFinish={onFinish}
         layout="vertical"
-        initialValues={get_job}
+        initialValues={data.get_job}
       >
         <Form.Item
           label="Position"
@@ -84,7 +88,7 @@ function viewjob() {
         >
           {/* ===== select company ===== */}
           <Select>
-            {get_employer.companies.map((res) => {
+            {comData.get_employer.companies.map((res) => {
               const { name, id } = res;
               return (
                 <Option key={id} value={name}>

@@ -18,6 +18,7 @@ function JobSeekerSignUp() {
     })
       .then(async (res) => {
         await message.success(res.data.register_jobseeker.message);
+        window.location.replace("/open-opportunities/jobseeker/signin");
       })
       .catch((err) => console.log(err));
   };

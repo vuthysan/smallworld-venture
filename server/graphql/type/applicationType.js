@@ -15,11 +15,19 @@ const ApplicationType = new GraphQLObjectType({
     createdAt: { type: GraphQLID },
     additional: { type: GraphQLString },
     message: { type: GraphQLString },
+    jobseekerId: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
     cv: { type: GraphQLString },
+    job: {
+      type: JobType,
+      resolve: async (parent) => {
+        const job = await Job.findById(parent.jobId);
+        return job;
+      },
+    },
   }),
 });
 

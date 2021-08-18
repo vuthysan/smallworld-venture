@@ -28,8 +28,9 @@ function EmployerSignIn() {
 
   return (
     <>
-      {user && window.location.replace("/")}
-      {!user && (
+      {user && user.role == "employer" ? (
+        window.location.replace("/open-opportunities")
+      ) : (
         <Row justify="center" align="middle" className="sign">
           <Col className="left-sign">
             <center>
@@ -59,7 +60,7 @@ function EmployerSignIn() {
                   name="email"
                   rules={[
                     {
-                      required: true, 
+                      required: true,
                       type: "email",
                       message: "Please input your Email!",
                     },

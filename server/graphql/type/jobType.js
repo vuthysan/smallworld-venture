@@ -4,7 +4,7 @@ const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString } = graphql;
 // === Type Section
 const CompanyType = require("./companyType");
 const EmployerType = require("./employerType");
-const ApplicationType = require("./applicationType");
+// const ApplicationType = require("./applicationType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
@@ -45,7 +45,7 @@ const JobType = new GraphQLObjectType({
     },
     // === applicanttion for this job ===
     applicants: {
-      type: new GraphQLList(ApplicationType),
+      type: new GraphQLList(require("./applicationType")),
       resolve: async (parent) => {
         const app = await Application.find({ jobId: parent.id });
         return app;

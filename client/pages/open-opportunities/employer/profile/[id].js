@@ -24,8 +24,9 @@ function profile() {
 
   // === get employer by id ===
   const { loading, data, refetch } = useQuery(GET_EMPLOYER, {
-    variables: { id },
+    variables: { id: id && id },
   });
+
   if (loading) {
     return (
       <center className="loading-data">
@@ -33,10 +34,8 @@ function profile() {
       </center>
     );
   }
-  const { get_employer } = data;
 
   // === set submit button state to true when user edit their info ===
-
   const onChange = () => {
     setState(false);
   };
@@ -62,74 +61,81 @@ function profile() {
   return (
     <div className="opp-container profile">
       <Divider orientation="left">Employer Profile</Divider>
-      <Form
-        layout="vertical"
-        form={form}
-        onChange={onChange}
-        onFinish={onFinish}
-        initialValues={get_employer}
-      >
-        <Row gutter={[12]}>
-          <Col sm={12}>
-            <Form.Item
-              label="Username"
-              name="name"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item label="Gender" name="gender">
-              <Radio.Group name="radiogroup">
-                <Radio value="Male">Male</Radio>
-                <Radio value="Female">Female</Radio>
-              </Radio.Group>
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ type: "email", required: true }]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item label="Phone" name="phone" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Divider orientation="left">Password Setting</Divider>
-        <Form.Item label="Old Password" name="password">
-          <Input.Password className="password" />
-        </Form.Item>
 
-        <Row gutter={[12]}>
-          <Col sm={12}>
-            <Form.Item label="New Password" name="newpassword">
-              <Input.Password />
-            </Form.Item>
-          </Col>
-          <Col sm={12}>
-            <Form.Item label="Verify Password" name="verify">
-              <Input.Password />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Form.Item wrapperCol={{ offset: 19 }}>
-          <Button
-            className="profile-submit-btn"
-            type="primary"
-            htmlType="submit"
-            disabled={btnState}
-          >
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+      {data && (
+        <Form
+          layout="vertical"
+          form={form}
+          onChange={onChange}
+          onFinish={onFinish}
+          initialValues={data.get_employer}
+        >
+          <Row gutter={[12]}>
+            <Col sm={12}>
+              <Form.Item
+                label="Username"
+                name="name"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item label="Gender" name="gender">
+                <Radio.Group name="radiogroup">
+                  <Radio value="Male">Male</Radio>
+                  <Radio value="Female">Female</Radio>
+                </Radio.Group>
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ type: "email", required: true }]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item
+                label="Phone"
+                name="phone"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider orientation="left">Password Setting</Divider>
+          <Form.Item label="Old Password" name="password">
+            <Input.Password className="password" />
+          </Form.Item>
+
+          <Row gutter={[12]}>
+            <Col sm={12}>
+              <Form.Item label="New Password" name="newpassword">
+                <Input.Password />
+              </Form.Item>
+            </Col>
+            <Col sm={12}>
+              <Form.Item label="Verify Password" name="verify">
+                <Input.Password />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item wrapperCol={{ offset: 19 }}>
+            <Button
+              className="profile-submit-btn"
+              type="primary"
+              htmlType="submit"
+              disabled={btnState}
+            >
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
     </div>
   );
 }

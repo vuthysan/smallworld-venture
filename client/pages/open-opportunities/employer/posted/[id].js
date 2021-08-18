@@ -21,7 +21,6 @@ function posted() {
         await refetch();
         await message.success(res.data.delete_job.message);
       })
-      .catch((err) => console.log(err));
   }
 
   //   === get employer posted job ===
@@ -44,42 +43,45 @@ function posted() {
         <center>No Data</center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
-          {data.get_employer.jobs.map((res) => {
-            const { company, id, createdAt, position } = res;
-            return (
-              <Col key={id} xs={24} sm={12} md={8}>
-                <div className="card">
-                  <Popconfirm
-                    title="Are you sure to delete this job?"
-                    onConfirm={() => confirm(id)}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <a id="delete_job" href="#">
-                      <TiDeleteOutline />
-                    </a>
-                  </Popconfirm>
-                  <p className="position">{position}</p>
-                  <p className="company">{company.name.toUpperCase()}</p>
-                  <p className="city">{`${company.city}, ${moment
-                    .unix(createdAt / 1000)
-                    .format("MMMM-DD-YYYY")}`}</p>
-                  <button className="view-btn">
-                    <a href={"/open-opportunities/employer/job/" + id}>
-                      View Job
-                    </a>
-                  </button>
-                  <button className="view-btn">
-                    <a
-                      href={"/open-opportunities/employer/job/applicants/" + id}
+          {data &&
+            data.get_employer.jobs.map((res) => {
+              const { company, id, createdAt, position } = res;
+              return (
+                <Col key={id} xs={24} sm={12} md={8}>
+                  <div className="card">
+                    <Popconfirm
+                      title="Are you sure to delete this job?"
+                      onConfirm={() => confirm(id)}
+                      okText="Yes"
+                      cancelText="No"
                     >
-                      View Applicants
-                    </a>
-                  </button>
-                </div>
-              </Col>
-            );
-          })}
+                      <a id="delete_job" href="#">
+                        <TiDeleteOutline />
+                      </a>
+                    </Popconfirm>
+                    <p className="position">{position}</p>
+                    <p className="company">{company.name.toUpperCase()}</p>
+                    <p className="city">{`${company.city}, ${moment
+                      .unix(createdAt / 1000)
+                      .format("MMMM-DD-YYYY")}`}</p>
+                    <button className="view-btn">
+                      <a href={"/open-opportunities/employer/job/" + id}>
+                        View Job
+                      </a>
+                    </button>
+                    <button className="view-btn">
+                      <a
+                        href={
+                          "/open-opportunities/employer/job/applicants/" + id
+                        }
+                      >
+                        View Applicants
+                      </a>
+                    </button>
+                  </div>
+                </Col>
+              );
+            })}
         </Row>
       )}
     </div>

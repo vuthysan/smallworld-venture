@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Pagination } from "antd";
+import { Row, Col, Pagination, Empty } from "antd";
 import moment from "moment";
 
 function SearchJob({ jobs }) {
@@ -18,7 +18,9 @@ function SearchJob({ jobs }) {
     <>
       <Row wrap={true} gutter={[0, 5]}>
         {jobs.length < 1 ? (
-          <h1>NoData</h1>
+          <div className="no-data">
+            <Empty description="Not Found!" />
+          </div>
         ) : (
           currentJobs.map((res) => {
             const { id, position, company, createdAt } = res;
@@ -60,11 +62,16 @@ function SearchJob({ jobs }) {
           })
         )}
       </Row>
-      <Pagination
-        onChange={onChange}
-        pageSize={jobsPerPage}
-        total={jobs.length}
-      />
+      {jobs.length < 1 ? (
+        ""
+      ) : (
+        <Pagination
+          onChange={onChange}
+          size="small"
+          pageSize={jobsPerPage}
+          total={jobs.length}
+        />
+      )}
     </>
   );
 }

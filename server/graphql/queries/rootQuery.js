@@ -129,7 +129,9 @@ const RootQuery = new GraphQLObjectType({
         jobseekerId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve: async (_, args) => {
-        let apps = await Application.find({ jobSeekerId: args.jobSeekerId });
+        let apps = await Application.find({
+          jobseekerId: args.jobseekerId,
+        });
         return apps;
       },
     },

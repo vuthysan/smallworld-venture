@@ -249,6 +249,7 @@ const POST_APPLICATION = gql`
   mutation (
     $jobId: ID!
     $additional: String!
+    $jobseekerId: ID!
     $name: String!
     $email: String!
     $gender: String!
@@ -257,18 +258,27 @@ const POST_APPLICATION = gql`
   ) {
     post_application(
       jobId: $jobId
+      additional: $additional
+      jobseekerId: $jobseekerId
       name: $name
       email: $email
       gender: $gender
       phone: $phone
       cv: $cv
-      additional: $additional
     ) {
       message
     }
   }
 `;
 
+// === delete application ===
+const DELETE_APPLICATION = gql`
+  mutation ($id: ID!) {
+    delete_application(id: $id) {
+      message
+    }
+  }
+`;
 export {
   EDIT_EMPLOYER,
   EMPLOYER_LOGIN,
@@ -285,4 +295,5 @@ export {
   DELETE_JOB,
   POST_MESSAGE,
   POST_APPLICATION,
+  DELETE_APPLICATION,
 };

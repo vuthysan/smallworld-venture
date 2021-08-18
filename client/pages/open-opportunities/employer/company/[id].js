@@ -5,7 +5,16 @@ import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_COMPANY } from "../../../../graphql/mutation";
 import { GET_COMPANY } from "../../../../graphql/query";
 import { UploadOutlined } from "@ant-design/icons";
-import { Divider, Form, Input, Button, Select, Upload, message } from "antd";
+import {
+  Divider,
+  Form,
+  Input,
+  Button,
+  Select,
+  Upload,
+  message,
+  Spin,
+} from "antd";
 // === json data ===
 import Cities from "../../../../data/cities.json";
 
@@ -26,7 +35,14 @@ function ViewCompany() {
   // === edit company function ===
   const [editCom] = useMutation(EDIT_COMPANY, { variables: { id } });
 
-  if (loading) return "";
+  if (loading) {
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
+
   const { get_company_by_id } = data;
 
   // ====== file management =======

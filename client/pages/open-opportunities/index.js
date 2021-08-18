@@ -70,7 +70,7 @@ function index() {
     document.getElementById("interest-btn").className = "opportunities-btn";
   };
 
-  // == search job ==
+  // === search job ===
   const onSearch = async (value) => {
     await searchJob({ variables: { search: value } })
       .then(async (res) => {
