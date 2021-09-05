@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3200",
     "build": "next build",
-    "start": "next start -p 4404"
+    "start": "next start -p 3200"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",

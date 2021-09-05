@@ -31,7 +31,7 @@ function Company() {
             <div className="container">
               <Row justify="space-between" align="middle">
                 <Col>
-                  <h1>{data.get_company.name}</h1>
+                  <h1>{data.get_company.name.toUpperCase()}</h1>
                   <p className="city">{data.get_company.city}</p>
                 </Col>
                 <Col>

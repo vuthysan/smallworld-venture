@@ -17,7 +17,7 @@ function LatestJob() {
       </center>
     );
   }
-  const { get_jobs } = data;
+  // const { get_jobs } = data;
 
   const onChange = (page) => {
     setCurrent(page);
@@ -27,7 +27,7 @@ function LatestJob() {
   const indexOfLastPost = current * jobsPerPage;
   const indexOfFirstPost = indexOfLastPost - jobsPerPage;
   const currentJobs =
-    get_jobs && get_jobs.slice(indexOfFirstPost, indexOfLastPost);
+    data.get_jobs && data.get_jobs.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <>
@@ -71,7 +71,7 @@ function LatestJob() {
         onChange={onChange}
         size="small"
         pageSize={jobsPerPage}
-        total={get_jobs.length}
+        total={data.get_jobs.length}
       />
     </>
   );

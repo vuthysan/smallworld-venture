@@ -859,6 +859,7 @@ input[type="text"]:focus {
 }
 .com-banner .city {
   color: #b5b5b5;
+  margin-bottom: 10px;
 }
 .com-banner .job-count {
   color: #015e98;
