@@ -26,7 +26,7 @@ function Position() {
           <div key={id}>
             <Row justify="space-between" align="middle">
               <Col>
-                <h1>{data.get_job.position}</h1>
+                <h1>{data.get_job.position.toUpperCase()}</h1>
                 <a
                   href={`/open-opportunities/${data.get_job.company.name.toLowerCase()}`}
                 >
@@ -48,7 +48,23 @@ function Position() {
                       href="#"
                       onClick={() => {
                         message.warn(
-                          "Please signin / register as jobseeker to apply for jobs!"
+                          <>
+                            Please{" "}
+                            <a
+                              href="/open-opportunities/jobseeker/signin"
+                              style={{ fontSize: "16px" }}
+                            >
+                              sign in
+                            </a>{" "}
+                            /{" "}
+                            <a
+                              href="/open-opportunities/jobseeker/signup"
+                              style={{ fontSize: "16px" }}
+                            >
+                              register
+                            </a>{" "}
+                            as jobseeker to apply for jobs!
+                          </>
                         );
                       }}
                     >

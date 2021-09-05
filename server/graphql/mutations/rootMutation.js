@@ -85,9 +85,7 @@ const RootMutation = new GraphQLObjectType({
             interest: [],
             cv: "",
             ...args,
-            password: hashPassword,
           });
-          await newSeeker.save();
           return {
             message: "Register Sucessfull!",
           };
@@ -101,7 +99,7 @@ const RootMutation = new GraphQLObjectType({
         email: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
       },
-      resolve: async (_, args, { res }) => {
+      resolve: async (_, args, { res }, req) => {
         try {
           const existedUser = await Employer.findOne({ email: args.email });
 
@@ -133,12 +131,18 @@ const RootMutation = new GraphQLObjectType({
               expiresIn: "30d",
             }
           );
+
           res.cookie("access_token", access_token, {
             secure: true,
+            httpOnly: true,
+            sameSite: "none",
           });
           res.cookie("refresh_token", refresh_token, {
             secure: true,
+            httpOnly: true,
+            sameSite: "none",
           });
+
           return {
             access_token,
             refresh_token,
@@ -192,9 +196,13 @@ const RootMutation = new GraphQLObjectType({
           );
           res.cookie("access_token", access_token, {
             secure: true,
+            httpOnly: true,
+            sameSite: "none",
           });
           res.cookie("refresh_token", refresh_token, {
             secure: true,
+            httpOnly: true,
+            sameSite: "none",
           });
           return {
             access_token,
@@ -205,6 +213,29 @@ const RootMutation = new GraphQLObjectType({
         } catch (err) {
           throw err;
         }
+      },
+    },
+    // ========== logout ==========
+    logout: {
+      type: UserType,
+      resolve: (_, __, { res }) => {
+        try {
+          res.cookie("access_token", "", {
+            httpOnly: true,
+            expires: new Date(0),
+            secure: true,
+            sameSite: "none",
+          });
+          res.cookie("refresh_token", "", {
+            httpOnly: true,
+            expires: new Date(0),
+            secure: true,
+            sameSite: "none",
+          });
+        } catch {}
+        return {
+          message: "Logged Out!",
+        };
       },
     },
     // ========== edit employer ==========

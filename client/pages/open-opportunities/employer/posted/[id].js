@@ -16,11 +16,10 @@ function posted() {
   function confirm(id) {
     deleteJob({
       variables: { id },
-    })
-      .then(async (res) => {
-        await refetch();
-        await message.success(res.data.delete_job.message);
-      })
+    }).then(async (res) => {
+      await refetch();
+      await message.success(res.data.delete_job.message);
+    });
   }
 
   //   === get employer posted job ===
@@ -47,7 +46,7 @@ function posted() {
             data.get_employer.jobs.map((res) => {
               const { company, id, createdAt, position } = res;
               return (
-                <Col key={id} xs={24} sm={12} md={8}>
+                <Col key={id} xs={24} sm={12} md={6}>
                   <div className="card">
                     <Popconfirm
                       title="Are you sure to delete this job?"

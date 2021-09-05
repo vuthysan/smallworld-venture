@@ -1,10 +1,5 @@
 import Head from "next/head";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { UserContextProvider } from "../context/userContext";
 import Layout from "../comps/Layout/Layout";
 import "antd/dist/antd.css";

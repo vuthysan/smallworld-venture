@@ -3,18 +3,20 @@ import { useQuery } from "@apollo/client";
 import { GET_EMPLOYER } from "../graphql/query";
 import Cookie from "js-cookie";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 const UserContext = createContext();
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState(undefined);
 
-  function getUser() {
-    const token = Cookie.get("access_token");
-    if (!token) {
-      setUser(undefined);
-    }
-    setUser(jwt.decode(token));
+  async function getUser() {
+    const res = await axios.get(
+      "https://backend.smallworldventure.com/user/verifyToken"
+    );
+    const data = res.data;
+    setUser(data);
+    console.log(data);
   }
 
   useEffect(() => {

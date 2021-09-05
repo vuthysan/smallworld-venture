@@ -46,7 +46,7 @@ function companies() {
             data.get_employer.companies.map((res) => {
               const { id, name, createdAt, city, logo } = res;
               return (
-                <Col key={id} md={8}>
+                <Col key={id} md={6}>
                   <div className="com-card">
                     {/* === delete compny === */}
                     <Popconfirm
@@ -63,21 +63,22 @@ function companies() {
                       <img
                         height="60"
                         src={
-                          "http://localhost:5000/public/upload/images/" + logo
+                          "https://backend.smallworldventure.com/public/upload/images/" +
+                          logo
                         }
                         alt="company logo"
                       />
                     </div>
                     <p>
-                      <span className="content"> Company Name:</span>
-                      {name.toUpperCase()}
+                      <span className="content">Name:</span>
+                      {name}
                     </p>
                     <p>
-                      <span className="content"> Company City:</span>
+                      <span className="content">City:</span>
                       {city}
                     </p>
                     <p>
-                      <span className="content"> Added Date:</span>
+                      <span className="content">Added Date:</span>
                       {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
                     </p>
                     <button className="view-btn">

@@ -23,6 +23,7 @@ const JobType = require("../type/jobType");
 const EmployerType = require("../type/employerType");
 const JobSeekerType = require("../type/jobseekerType");
 const ApplicationType = require("../type/applicationType");
+const UserType = require("../type/userType");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",

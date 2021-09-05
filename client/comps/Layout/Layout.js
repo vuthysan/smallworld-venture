@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 function Layout({ children }) {
   const { route } = useRouter();
-
   return (
     <>
       <div>

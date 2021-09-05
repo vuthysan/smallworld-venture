@@ -895,7 +895,7 @@ input[type="text"]:focus {
 }
 /* === employer all page design === */
 .opp-big-container {
-  margin: 50px 12.5%;
+  margin: 50px 12.5% !important;
 }
 .opp-big-container .outter-card {
   margin: 20px 0;

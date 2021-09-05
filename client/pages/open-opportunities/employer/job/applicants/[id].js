@@ -138,7 +138,7 @@ function Applicants() {
               }
             })}
             <Popconfirm
-              title="Are you sure to delete this task?"
+              title="Are you sure to delete this applicant?"
               onConfirm={() => handleDelete(id)}
               okText="Yes"
               cancelText="No"

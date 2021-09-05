@@ -8,8 +8,19 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+// const authLink = setContext((_, { headers }) => {
+// get the authentication token from local storage if it exists
+//   const token = localStorage.getItem("token");
+// return the headers to the context so httpLink can read them
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : "",
+//     },
+//   };
+// });
 
-const result = " http://localhost:5000/graphql";
+const result = "https://backend.smallworldventure.com/graphql?";
 
 const httpLink = createHttpLink({
   uri: result,
@@ -18,8 +29,6 @@ const httpLink = createHttpLink({
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  // uri: "http://localhost:3600/graphql",
-  // uri: "http://localhost:3500/api",
   cache: new InMemoryCache(),
 });
 

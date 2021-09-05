@@ -67,12 +67,17 @@ function ViewCompany() {
     // === delete old logo from server when upload new photo ===
     if (state.imageUrl) {
       await axios
-        .delete("http://localhost:5000/image/delete/" + state.imageUrl)
+        .delete(
+          "https://backend.smallworldventure.com/image/delete/" + state.imageUrl
+        )
         .catch((err) => console.log(err));
     }
 
     await axios
-      .delete("http://localhost:5000/image/delete/" + get_company_by_id.logo)
+      .delete(
+        "https://backend.smallworldventure.com/image/delete/" +
+          get_company_by_id.logo
+      )
       .catch((err) => console.log(err));
 
     if (info.file.status === "done") {
@@ -87,7 +92,7 @@ function ViewCompany() {
 
   // ====== upload dragger props ======
   const upload = {
-    action: "http://localhost:5000/upload/image",
+    action: "https://backend.smallworldventure.com/upload/image",
     name: "image",
     maxCount: 1,
     beforeUpload: beforeUpload,
@@ -95,7 +100,9 @@ function ViewCompany() {
     onRemove: async (data) => {
       // console.log(data.response);
       await axios
-        .delete("http://localhost:5000/image/delete/" + data.response)
+        .delete(
+          "https://backend.smallworldventure.com/image/delete/" + data.response
+        )
         .catch((err) => console.log(err));
 
       setState({
@@ -214,7 +221,7 @@ function ViewCompany() {
                 // === response for onRemove when user remove image ===
                 response: get_company_by_id.logo,
                 url:
-                  "http://localhost:5000/public/upload/images/" +
+                  "https://backend.smallworldventure.com/public/upload/images/" +
                   get_company_by_id.logo,
               },
             ]}

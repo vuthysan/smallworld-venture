@@ -43,7 +43,9 @@ function addcompany() {
     // === delete old upload from server when upload new photo ===
     if (state.imageUrl) {
       await axios
-        .delete("http://localhost:5000/image/delete/" + state.imageUrl)
+        .delete(
+          "https://backend.smallworldventure.com/image/delete/" + state.imageUrl
+        )
         .catch((err) => console.log(err));
     }
     if (info.file.status === "done") {
@@ -58,7 +60,7 @@ function addcompany() {
 
   // ====== upload dragger props ======
   const upload = {
-    action: "http://localhost:5000/upload/image",
+    action: "https://backend.smallworldventure.com/upload/image",
     name: "image",
     maxCount: 1,
     beforeUpload: beforeUpload,
@@ -66,7 +68,9 @@ function addcompany() {
     onRemove: async (data) => {
       // console.log(data.response);
       await axios
-        .delete("http://localhost:5000/image/delete/" + data.response)
+        .delete(
+          "https://backend.smallworldventure.com/image/delete/" + data.response
+        )
         .catch((err) => console.log(err));
 
       setState({

@@ -279,6 +279,7 @@ const DELETE_APPLICATION = gql`
     }
   }
 `;
+
 export {
   EDIT_EMPLOYER,
   EMPLOYER_LOGIN,

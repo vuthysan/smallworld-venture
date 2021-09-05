@@ -106,7 +106,7 @@ function InterestJob() {
                 description={
                   <p>
                     Please{" "}
-                    <a href="/open-opportunities/jobseeker/signin">signin</a> /{" "}
+                    <a href="/open-opportunities/jobseeker/signin">sign in</a> /{" "}
                     <a href="open-opportunities/jobseeker/signup">register</a>{" "}
                     as jobseeker to view your job interest!
                   </p>
