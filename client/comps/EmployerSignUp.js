@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Select, Radio, message } from "antd";
+import { Button, Form, Select } from "antd";
 // === comps ===
 import SignFooter from "./Layout/SignFooter";
 import RegisterEmployer from "./RegisterEmployer";
 import EmployerNewCompany from "./EmployerNewCompany";
-const { Option } = Select;
 
 function EmployerSignUp() {
-  const [form] = Form.useForm();
-
   // === steps state ===
   const [current, setCurrent] = useState(0);
 
@@ -20,17 +17,6 @@ function EmployerSignUp() {
     setCurrent(current + 1);
   };
 
-  // const prev = () => {
-  //   setCurrent(current - 1);
-  // };
-
-  const onFinishCom = (values) => {
-    console.log({
-      ...values,
-      employerId,
-      website: values.website ? values.website : "N/A",
-    });
-  };
   const steps = [
     {
       content: (

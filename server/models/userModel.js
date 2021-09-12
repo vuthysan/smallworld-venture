@@ -1,39 +1,40 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const companySchema = new Schema(
+const UserSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    logo: {
+    email: {
       type: String,
       required: true,
     },
-    about: {
+    phone: {
       type: String,
       required: true,
     },
-    website: {
+    password: {
       type: String,
       required: true,
     },
-    city: {
+    gender: {
       type: String,
       required: true,
     },
-    user_position: {
-      type: String,
+    interest: {
+      type: Array,
       required: true,
     },
-    userId: {
+    cv: {
       type: String,
-      required: true,
+      //   required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
-
-const COMPANY = mongoose.model("companies", companySchema);
-module.exports = COMPANY;
+const User = mongoose.model("users", UserSchema);
+module.exports = User;

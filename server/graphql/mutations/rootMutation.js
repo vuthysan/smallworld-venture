@@ -20,6 +20,7 @@ const Job = require("../../models/jobModel");
 const Employer = require("../../models/employerModel");
 const JobSeeker = require("../../models/jobseekerModel");
 const Application = require("../../models/applicationModel");
+const User = require("../../models/userModel");
 
 // ===== Types =====
 const MessageType = require("../type/messageType");
@@ -33,58 +34,28 @@ const UserType = require("../type/userType");
 const RootMutation = new GraphQLObjectType({
   name: "RootMutation",
   fields: {
-    // =========== register employer =============
-    register_employer: {
-      type: EmployerType,
+    // ========== register user ==========
+    register_user: {
+      type: UserType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
-        email: { type: GraphQLNonNull(GraphQLString) },
         gender: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: async (_, args) => {
-        const existedEmail = await Employer.findOne({ email: args.email });
+        const existedEmail = await User.findOne({ email: args.email });
         if (existedEmail) {
-          throw { message: "Email already existed!" };
+          throw { message: "User with this email is already existed!" };
         } else {
           let salt = await bcrypt.genSalt();
           let hashPassword = await bcrypt.hash(args.password, salt);
-          let newEm = new Employer({
+          let newUser = new User({
             ...args,
-            password: hashPassword,
-          });
-          const savedEm = await newEm.save();
-
-          return {
-            id: savedEm.id,
-            message: "Register Sucessfull!",
-          };
-        }
-      },
-    },
-
-    // =========== register jobseeker ===========
-    register_jobseeker: {
-      type: JobSeekerType,
-      args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
-        email: { type: GraphQLNonNull(GraphQLString) },
-        gender: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
-        phone: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (_, args) => {
-        const existedEmail = await JobSeeker.findOne({ email: args.email });
-        if (existedEmail) {
-          return { message: "Email already existed!" };
-        } else {
-          let salt = await bcrypt.genSalt();
-          let hashPassword = await bcrypt.hash(args.password, salt);
-          let newSeeker = new JobSeeker({
             interest: [],
             cv: "",
-            ...args,
+            password: hashPassword,
           });
           return {
             message: "Register Sucessfull!",
@@ -92,8 +63,9 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
-    // =========== login employer ===========
-    login_employer: {
+
+    // =========== login user ===========
+    login: {
       type: UserType,
       args: {
         email: { type: GraphQLNonNull(GraphQLString) },
@@ -101,7 +73,7 @@ const RootMutation = new GraphQLObjectType({
       },
       resolve: async (_, args, { res }, req) => {
         try {
-          const existedUser = await Employer.findOne({ email: args.email });
+          const existedUser = await User.findOne({ email: args.email });
 
           if (!existedUser) {
             throw { message: "User with this email not found!" };
@@ -114,7 +86,7 @@ const RootMutation = new GraphQLObjectType({
             throw { message: "Password is incorrect!" };
           }
           const access_token = jwt.sign(
-            { id: existedUser.id, role: "employer" },
+            { id: existedUser.id },
 
             ACCESS_SECRET,
             {
@@ -144,70 +116,6 @@ const RootMutation = new GraphQLObjectType({
           });
 
           return {
-            access_token,
-            refresh_token,
-            id: existedUser.id,
-            message: "Success!",
-          };
-        } catch (err) {
-          throw err;
-        }
-      },
-    },
-    // =========== login jobseeker ===========
-    login_jobseeker: {
-      type: UserType,
-      args: {
-        email: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
-      },
-      resolve: async (_, args, { res }) => {
-        try {
-          const existedUser = await JobSeeker.findOne({ email: args.email });
-
-          if (!existedUser) {
-            throw { message: "User with this email not found!" };
-          }
-          const validPassword = await bcrypt.compare(
-            args.password,
-            existedUser.password
-          );
-          if (!validPassword) {
-            throw { message: "Password is incorrect!" };
-          }
-          const access_token = jwt.sign(
-            {
-              id: existedUser.id,
-              role: "jobseeker",
-            },
-            ACCESS_SECRET,
-            {
-              expiresIn: "30d",
-            }
-          );
-          const refresh_token = jwt.sign(
-            {
-              id: existedUser.id,
-            },
-            REFRESH_SECRET,
-            {
-              expiresIn: "30d",
-            }
-          );
-          res.cookie("access_token", access_token, {
-            secure: true,
-            httpOnly: true,
-            sameSite: "none",
-          });
-          res.cookie("refresh_token", refresh_token, {
-            secure: true,
-            httpOnly: true,
-            sameSite: "none",
-          });
-          return {
-            access_token,
-            refresh_token,
-            id: existedUser.id,
             message: "Success!",
           };
         } catch (err) {
@@ -238,67 +146,22 @@ const RootMutation = new GraphQLObjectType({
         };
       },
     },
-    // ========== edit employer ==========
-    edit_employer: {
-      type: EmployerType,
+    edit_user: {
+      type: UserType,
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
-        email: { type: GraphQLString },
-        password: { type: GraphQLString },
-        newpassword: { type: GraphQLString },
         gender: { type: GraphQLString },
-        phone: { type: GraphQLString },
-      },
-      resolve: async (_, args) => {
-        const existedUser = await Employer.findById(args.id);
-
-        if (args.password) {
-          const validPassword = await bcrypt.compare(
-            args.password,
-            existedUser.password
-          );
-
-          if (!validPassword) {
-            throw { message: "Your old password is incorrect!" };
-          }
-
-          let salt = await bcrypt.genSalt();
-          let hashPassword = await bcrypt.hash(args.newpassword, salt);
-
-          await Employer.findByIdAndUpdate(args.id, {
-            ...args,
-            password: hashPassword,
-          });
-        } else {
-          await Employer.findByIdAndUpdate(args.id, {
-            ...args,
-            password: existedUser.password,
-          });
-        }
-
-        return {
-          message: "Done",
-        };
-      },
-    },
-    // ========== edit jobseeker ==========
-    edit_jobseeker: {
-      type: JobSeekerType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-        name: { type: GraphQLString },
         email: { type: GraphQLString },
         phone: { type: GraphQLString },
-        gender: { type: GraphQLString },
         interest: { type: GraphQLList(GraphQLString) },
         cv: { type: GraphQLString },
         password: { type: GraphQLString },
         newpassword: { type: GraphQLString },
       },
       resolve: async (_, args) => {
-        // === check for existing jobseeker ===
-        const existedUser = await JobSeeker.findById(args.id);
+        // === find user ===
+        const existedUser = await User.findById(args.id);
 
         if (args.password) {
           const validPassword = await bcrypt.compare(
@@ -309,18 +172,19 @@ const RootMutation = new GraphQLObjectType({
           if (!validPassword) {
             throw { message: "Your old password is incorrect!" };
           }
-
+          if (!args.newpassword) {
+            throw "Please input your new password!";
+          }
           let salt = await bcrypt.genSalt();
           let hashPassword = await bcrypt.hash(args.newpassword, salt);
 
-          await JobSeeker.findByIdAndUpdate(args.id, {
+          await User.findByIdAndUpdate(args.id, {
             ...args,
             password: hashPassword,
           });
         } else {
-          await JobSeeker.findByIdAndUpdate(args.id, {
+          await User.findByIdAndUpdate(args.id, {
             ...args,
-            password: existedUser.password,
           });
         }
 
@@ -343,17 +207,17 @@ const RootMutation = new GraphQLObjectType({
         return { respond: "Message sent!" };
       },
     },
-    // ========== employer add new company ==========
+    // ========== user add new company ==========
     add_company: {
       type: CompanyType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
-        city: { type: GraphQLNonNull(GraphQLString) },
-        employer_position: { type: GraphQLNonNull(GraphQLString) },
-        about: { type: GraphQLNonNull(GraphQLString) },
         logo: { type: GraphQLNonNull(GraphQLString) },
-        employerId: { type: GraphQLNonNull(GraphQLID) },
+        about: { type: GraphQLNonNull(GraphQLString) },
         website: { type: GraphQLNonNull(GraphQLString) },
+        city: { type: GraphQLNonNull(GraphQLString) },
+        user_position: { type: GraphQLNonNull(GraphQLString) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve: async (_, args) => {
         let newCom = new Company({ ...args });
@@ -368,10 +232,10 @@ const RootMutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
         logo: { type: GraphQLString },
-        website: { type: GraphQLString },
-        city: { type: GraphQLString },
         about: { type: GraphQLString },
-        employer_position: { type: GraphQLString },
+        city: { type: GraphQLString },
+        website: { type: GraphQLString },
+        user_position: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         try {
@@ -380,7 +244,6 @@ const RootMutation = new GraphQLObjectType({
           });
           return { message: "Edit Successful!" };
         } catch (err) {
-          console.log(err);
           throw err;
         }
       },
@@ -419,6 +282,7 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
+    // ========== search job ==========
     search: {
       type: new GraphQLList(JobType),
       args: {
@@ -443,7 +307,7 @@ const RootMutation = new GraphQLObjectType({
         requirements: { type: GraphQLList(GraphQLString) },
         descriptions: { type: GraphQLList(GraphQLString) },
         company_name: { type: GraphQLNonNull(GraphQLString) },
-        employerId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve: async (_, args) => {
         let newJob = new Job({ ...args });
@@ -458,22 +322,20 @@ const RootMutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
         position: { type: GraphQLString },
         salary: { type: GraphQLString },
-        company_name: { type: GraphQLString },
-        employerId: { type: GraphQLID },
         type: { type: GraphQLList(GraphQLString) },
         requirements: { type: GraphQLList(GraphQLString) },
         descriptions: { type: GraphQLList(GraphQLString) },
+        company_name: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         try {
           await Job.findByIdAndUpdate(args.id, {
             ...args,
           });
-          return { message: "Edit Successful!" };
         } catch (err) {
-          console.log(err);
-          throw err;
+          throw { message: "Job not found!" };
         }
+        return { message: "Edit Successful!" };
       },
     },
     delete_job: {
@@ -500,7 +362,7 @@ const RootMutation = new GraphQLObjectType({
         gender: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
         cv: { type: GraphQLNonNull(GraphQLString) },
-        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
         additional: { type: GraphQLString },
       },
       resolve: async (_, args) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { GET_JOBSEEKER_APPLICATIONS } from "../../../../graphql/query";
-import { Divider, Row, Col, Spin } from "antd";
+import { Divider, Row, Col, Spin, Empty } from "antd";
 import moment from "moment";
 function Record() {
   const { id: jobseekerId } = useRouter().query;
@@ -24,7 +24,9 @@ function Record() {
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Applications Record</Divider>
       {data && data.get_jobseeker_applications.length < 1 ? (
-        <center>No Data</center>
+        <center>
+          <Empty />
+        </center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
           {data &&

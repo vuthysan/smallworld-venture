@@ -3,12 +3,12 @@ const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString } = graphql;
 
 // === Type Section
 const CompanyType = require("./companyType");
-const EmployerType = require("./employerType");
+const UserType = require("./userType");
 // const ApplicationType = require("./applicationType");
 
 // === Model Section ===
 const Company = require("../../models/companyModel");
-const Employer = require("../../models/employerModel");
+const User = require("../../models/userModel");
 const Application = require("../../models/applicationModel");
 
 const JobType = new GraphQLObjectType({
@@ -24,7 +24,6 @@ const JobType = new GraphQLObjectType({
       type: new GraphQLList(GraphQLString),
     },
     descriptions: { type: new GraphQLList(GraphQLString) },
-
     company_name: { type: GraphQLString },
     // === companies of this job ===
     company: {
@@ -34,12 +33,12 @@ const JobType = new GraphQLObjectType({
         return com;
       },
     },
-    employerId: { type: GraphQLID },
-    // === employer of this job ===
-    employer: {
-      type: EmployerType,
+    userId: { type: GraphQLID },
+    // === user of this job ===
+    user: {
+      type: UserType,
       resolve: async (parent) => {
-        const emp = await Employer.findById(parent.employerId);
+        const emp = await User.findById(parent.userId);
         return emp;
       },
     },

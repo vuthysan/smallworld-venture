@@ -3,10 +3,10 @@ const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLString } = graphql;
 
 // === Model ===
 const Job = require("../../models/jobModel");
-const Employer = require("../../models/employerModel");
+const User = require("../../models/userModel");
 
 // === Type ===
-const EmployerType = require("./employerType");
+const UserType = require("./userType");
 
 const CompanyType = new GraphQLObjectType({
   name: "company",
@@ -17,21 +17,20 @@ const CompanyType = new GraphQLObjectType({
     about: { type: GraphQLString },
     website: { type: GraphQLString },
     city: { type: GraphQLString },
-    employer_position: { type: GraphQLString },
+    user_postion: { type: GraphQLString },
+    userId: { type: GraphQLID },
     createdAt: { type: GraphQLString },
-    employerId: { type: GraphQLID },
-    // === employer of company ===
-    employer: {
-      // === employer type ===
-      type: EmployerType,
+    message: { type: GraphQLString },
+    // === user of company ===
+    user: {
+      type: UserType,
       resolve: async (parent) => {
-        let em = await Employer.findById(parent.employerId);
+        let em = await User.findById(parent.userId);
         return em;
       },
     },
     // === jobs under this company ===
     jobs: {
-      // === opporunity type ===
       type: new GraphQLList(require("./jobType")),
       resolve: async (parent) => {
         let job = await Job.find({ company_name: parent.name }).sort({
@@ -40,7 +39,6 @@ const CompanyType = new GraphQLObjectType({
         return job;
       },
     },
-    message: { type: GraphQLString },
   }),
 });
 

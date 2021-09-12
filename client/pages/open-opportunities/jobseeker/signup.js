@@ -20,7 +20,9 @@ function JobSeekerSignUp() {
         await message.success(res.data.register_jobseeker.message);
         window.location.replace("/open-opportunities/jobseeker/signin");
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        message.warn("User with this email is already existed!");
+      });
   };
 
   return (

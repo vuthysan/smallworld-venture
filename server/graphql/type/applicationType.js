@@ -15,7 +15,7 @@ const ApplicationType = new GraphQLObjectType({
     createdAt: { type: GraphQLID },
     additional: { type: GraphQLString },
     message: { type: GraphQLString },
-    jobseekerId: { type: GraphQLID },
+    userId: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     gender: { type: GraphQLString },

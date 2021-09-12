@@ -55,11 +55,10 @@ function InterestJob() {
   const indexOfFirstPost = indexOfLastPost - jobsPerPage;
   const currentJobs =
     interestJobs && interestJobs.slice(indexOfFirstPost, indexOfLastPost);
-
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>
-        {user && user.role === "jobseeker" ? (
+        {user && currentJobs.length > 1 ? (
           currentJobs.map((res) => {
             const { position, company, createdAt, id } = res;
             return (
@@ -117,7 +116,7 @@ function InterestJob() {
         )}
       </Row>
       {/* === pagination === */}
-      {user && user.role === "jobseeker" ? (
+      {user && currentJobs.length > 1 ? (
         <Pagination
           onChange={(page) => setCurrent(page)}
           size="small"

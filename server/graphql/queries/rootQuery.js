@@ -16,6 +16,7 @@ const Job = require("../../models/jobModel");
 const Employer = require("../../models/employerModel");
 const JobSeeker = require("../../models/jobseekerModel");
 const Application = require("../../models/applicationModel");
+const User = require("../../models/userModel");
 
 // ====== Type ======
 const CompanyType = require("../type/companyType");
@@ -85,13 +86,23 @@ const RootQuery = new GraphQLObjectType({
       },
     },
 
-    // === get all employers ===
-    get_employers: {
-      type: new GraphQLList(EmployerType),
-      description: "List of employers",
+    // === get all users ===
+    get_users: {
+      type: new GraphQLList(UserType),
+      description: "List of users",
       resolve: async () => {
-        const ems = await Employer.find().sort({ createdAt: -1 });
-        return ems;
+        const users = await User.find().sort({ createdAt: -1 });
+        return users;
+      },
+    },
+    get_user: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (_, args) => {
+        const user = await User.findById(args.id);
+        return user;
       },
     },
     // === get employer by id ===
@@ -105,15 +116,7 @@ const RootQuery = new GraphQLObjectType({
         return em;
       },
     },
-    // === get all job seeker ===
-    get_jobseekers: {
-      type: GraphQLList(JobSeekerType),
-      description: "List of jobseekers",
-      resolve: async () => {
-        let seekers = await JobSeeker.find().sort({ createdAt: -1 });
-        return seekers;
-      },
-    },
+
     // === get job seeker by id ===
     get_jobseeker: {
       type: JobSeekerType,
@@ -124,10 +127,10 @@ const RootQuery = new GraphQLObjectType({
       },
     },
     // === get jobseeker applications by jobseeker id ===
-    get_jobseeker_applications: {
+    get_user_applications: {
       type: GraphQLList(ApplicationType),
       args: {
-        jobseekerId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve: async (_, args) => {
         let apps = await Application.find({

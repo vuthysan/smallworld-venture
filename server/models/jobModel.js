@@ -27,7 +27,7 @@ const jobSchema = new Schema(
       type: String,
       required: true,
     },
-    employerId: {
+    userId: {
       type: String,
       required: true,
     },

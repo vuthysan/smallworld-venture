@@ -7,7 +7,7 @@ const applicationSchema = new Schema(
       type: String,
       required: true,
     },
-    jobseekerId: {
+    userId: {
       type: String,
       required: true,
     },

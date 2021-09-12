@@ -70,7 +70,7 @@ function ApplyNow() {
         </Form.Item>
         <center>
           <p className="apply-note">
-            Please update your personal info in{" "}
+            Please upload your CV/Resume in{" "}
             <a href={`/open-opportunities/jobseeker/profile/${user.id}`}>
               Profile
             </a>
