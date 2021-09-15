@@ -1,88 +1,24 @@
 import { gql } from "@apollo/client";
 
-// === register employer ===
-const REGISTER_EMPLOYER = gql`
-  mutation (
-    $name: String!
-    $email: String!
-    $gender: String!
-    $phone: String!
-    $password: String!
-  ) {
-    register_employer(
-      name: $name
-      email: $email
-      gender: $gender
-      phone: $phone
-      password: $password
-    ) {
-      id
+// === register user ===
+const REGISTER_USER = gql`
+  mutation ($name: String!, $email: String!, $password: String!) {
+    register_user(name: $name, email: $email, password: $password) {
       message
     }
   }
 `;
-// === employer login ===
-const EMPLOYER_LOGIN = gql`
+// === login ===
+const USER_LOGIN = gql`
   mutation ($email: String!, $password: String!) {
-    login_employer(email: $email, password: $password) {
+    login(email: $email, password: $password) {
       message
     }
   }
 `;
-// === edit employer info ===
-const EDIT_EMPLOYER = gql`
-  mutation (
-    $id: ID!
-    $name: String!
-    $email: String!
-    $gender: String!
-    $phone: String!
-    $password: String
-    $newpassword: String
-  ) {
-    edit_employer(
-      id: $id
-      name: $name
-      email: $email
-      gender: $gender
-      phone: $phone
-      password: $password
-      newpassword: $newpassword
-    ) {
-      message
-    }
-  }
-`;
-// === register jobseeker ===
-const REGISTER_JOBSEEKR = gql`
-  mutation (
-    $name: String!
-    $email: String!
-    $gender: String!
-    $phone: String!
-    $password: String!
-  ) {
-    register_jobseeker(
-      name: $name
-      email: $email
-      gender: $gender
-      phone: $phone
-      password: $password
-    ) {
-      message
-    }
-  }
-`;
-// === employer login ===
-const JOBSEEKER_LOGIN = gql`
-  mutation ($email: String!, $password: String!) {
-    login_jobseeker(email: $email, password: $password) {
-      message
-    }
-  }
-`;
-// === edit jobseeker info ===
-const EDIT_JOBSEEKER = gql`
+
+// === edit user info ===
+const EDIT_USER = gql`
   mutation (
     $id: ID!
     $name: String!
@@ -94,7 +30,7 @@ const EDIT_JOBSEEKER = gql`
     $password: String
     $newpassword: String
   ) {
-    edit_jobseeker(
+    edit_user(
       id: $id
       name: $name
       email: $email
@@ -109,24 +45,24 @@ const EDIT_JOBSEEKER = gql`
     }
   }
 `;
-// === Employer add new company ===
+// === add new company ===
 const ADD_COMPANY = gql`
   mutation (
     $name: String!
     $city: String!
-    $employer_position: String!
+    $user_poisition: String!
     $about: String!
     $logo: String!
-    $employerId: ID!
+    $userId: ID!
     $website: String!
   ) {
     add_company(
       name: $name
       city: $city
-      employer_position: $employer_position
+      user_position: $user_position
       about: $about
       logo: $logo
-      employerId: $employerId
+      userId: $userId
       website: $website
     ) {
       message
@@ -139,7 +75,7 @@ const EDIT_COMPANY = gql`
     $id: ID!
     $name: String!
     $city: String!
-    $employer_position: String!
+    $user_position: String!
     $about: String!
     $logo: String!
     $website: String!
@@ -148,7 +84,7 @@ const EDIT_COMPANY = gql`
       id: $id
       name: $name
       city: $city
-      employer_position: $employer_position
+      user_position: $user_position
       about: $about
       logo: $logo
       website: $website
@@ -189,7 +125,7 @@ const ADD_JOB = gql`
     $type: [String]!
     $requirements: [String]!
     $descriptions: [String]!
-    $employerId: ID!
+    $userId: ID!
   ) {
     add_job(
       position: $position
@@ -198,7 +134,7 @@ const ADD_JOB = gql`
       type: $type
       requirements: $requirements
       descriptions: $descriptions
-      employerId: $employerId
+      userId: $userId
     ) {
       message
     }
@@ -236,7 +172,7 @@ const DELETE_JOB = gql`
     }
   }
 `;
-// === message ===
+// === smallworld message ===
 const POST_MESSAGE = gql`
   mutation ($fullname: String!, $email: String!, $message: String!) {
     post_message(fullname: $fullname, email: $email, message: $message) {
@@ -249,7 +185,7 @@ const POST_APPLICATION = gql`
   mutation (
     $jobId: ID!
     $additional: String!
-    $jobseekerId: ID!
+    $userId: ID!
     $name: String!
     $email: String!
     $gender: String!
@@ -259,7 +195,7 @@ const POST_APPLICATION = gql`
     post_application(
       jobId: $jobId
       additional: $additional
-      jobseekerId: $jobseekerId
+      userId: $userId
       name: $name
       email: $email
       gender: $gender
@@ -281,12 +217,8 @@ const DELETE_APPLICATION = gql`
 `;
 
 export {
-  EDIT_EMPLOYER,
-  EMPLOYER_LOGIN,
-  REGISTER_EMPLOYER,
-  JOBSEEKER_LOGIN,
-  EDIT_JOBSEEKER,
-  REGISTER_JOBSEEKR,
+  REGISTER_USER,
+  USER_LOGIN,
   ADD_COMPANY,
   EDIT_COMPANY,
   DELETE_COMPANY,

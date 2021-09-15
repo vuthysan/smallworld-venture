@@ -17,7 +17,7 @@ const CompanyType = new GraphQLObjectType({
     about: { type: GraphQLString },
     website: { type: GraphQLString },
     city: { type: GraphQLString },
-    user_postion: { type: GraphQLString },
+    user_position: { type: GraphQLString },
     userId: { type: GraphQLID },
     createdAt: { type: GraphQLString },
     message: { type: GraphQLString },

@@ -12,15 +12,15 @@ const ApplicationType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     jobId: { type: GraphQLID },
-    createdAt: { type: GraphQLID },
-    additional: { type: GraphQLString },
-    message: { type: GraphQLString },
     userId: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
     cv: { type: GraphQLString },
+    additional: { type: GraphQLString },
+    createdAt: { type: GraphQLID },
+    message: { type: GraphQLString },
     job: {
       type: JobType,
       resolve: async (parent) => {

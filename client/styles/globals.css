@@ -668,6 +668,13 @@ input[type="text"]:focus {
   color: black;
   background: linear-gradient(180deg, #fce34b, #eac101);
 }
+.view-openning {
+  width: 180px;
+}
+.opportunities-btn a {
+  color: black;
+  font-size: 18px;
+}
 
 .opportunities-btn:hover {
   cursor: pointer;
@@ -1182,9 +1189,6 @@ input[type="text"]:focus {
   opacity: 0.4;
   background-color: #053f64;
 }
-/* .sign #gender {
-  float: left;
-} */
 
 /* === left side === */
 .left-sign {
@@ -1221,39 +1225,29 @@ input[type="text"]:focus {
   color: #1890ff !important;
 }
 /* === right side === */
-.sign .ant-radio-wrapper {
-  padding-right: 20px;
-  margin: 0 !important;
+.right-sign h1 {
+  color: #015e98;
 }
 .right-sign {
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   padding: 0 30px;
   width: 515px;
   height: 680px;
   background-color: white;
   border-radius: 0 8px 8px 0;
 }
-
-.right-sign h1 {
-  color: #015e98;
+.right-sign .ant-input-affix-wrapper {
+  padding: auto 0;
 }
-.right-sign p,
-.right-sign a {
-  font-size: 1 6px;
-}
-
 .right-sign input[type="text"],
 .right-sign input[type="password"],
+.right-sign input[type="search"],
+.right-sign textarea,
 .right-sign label {
   font-size: 18px !important;
 }
 .right-sign label {
-  margin: 18px 0 !important;
-}
-.right-sign .ant-upload {
-  width: 100%;
+  margin: 12px 0 !important;
+  color: #015e98;
 }
 .right-sign .ant-btn {
   width: 100%;
@@ -1264,15 +1258,8 @@ input[type="text"]:focus {
   font-size: 18px;
   height: 40px;
 }
-.right-sign .ant-btn:hover {
-  background-color: #015e98 !important;
-  color: white !important;
-}
 .sign-footer {
   margin: 40px 0;
-  /* position: absolute;
-  bottom: 30px;
-  left: 94px; */
 }
 .sign-footer a {
   margin: 0 10px;
@@ -1280,29 +1267,14 @@ input[type="text"]:focus {
 .sign-footer a div svg {
   color: #015e98;
 }
-.ant-radio {
-  position: relative;
-  top: -2px;
+.right-sign .ant-form-item-has-error input[type="password"]:hover {
+  border: none;
 }
 
 /* === turn off required field warnning === */
-.sign-up .ant-form-item-explain.ant-form-item-explain-error,
-.sign-up .ant-form-item-explain.ant-form-item-explain-success {
+.right-sign .ant-form-item-explain.ant-form-item-explain-error,
+.right-sign .ant-form-item-explain.ant-form-item-explain-success {
   display: none;
-}
-.sign-up input[type="text"],
-.sign-up input[type="password"],
-.sign-up input[type="search"],
-.sign-up textarea,
-.sign-up label {
-  font-size: 16px !important;
-}
-.sign-up label {
-  margin: 10px 0 !important;
-  color: #015e98;
-}
-.sign-up .ant-btn {
-  margin-top: 15px;
 }
 .ant-select-selection-placeholder {
   position: absolute;

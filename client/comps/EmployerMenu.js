@@ -1,21 +1,21 @@
 import React from "react";
 import { Dropdown, Menu } from "antd";
-import { GET_EMPLOYER } from "../graphql/query";
-import { useQuery } from "@apollo/client";
+// import { GET_EMPLOYER } from "../graphql/query";
+// import { useQuery } from "@apollo/client";
 // === comps ===
 import SignOut from "./SignOut";
 
 function EmployerMenu({ id }) {
-  const { loading, data } = useQuery(GET_EMPLOYER, {
-    variables: { id },
-  });
-  if (loading) return "";
-  const { get_employer } = data;
+  // const { loading, data } = useQuery(GET_EMPLOYER, {
+  //   variables: { id },
+  // });
+  // if (loading) return "";
+  // const { get_employer } = data;
 
   // === employer menu ===
   const EmployerMenu = (
     <Menu className="user-menu">
-      <p>{get_employer.name.toUpperCase()}</p>
+      {/* <p>{get_employer.name.toUpperCase()}</p>
       <p className="email">{get_employer.email}</p>
       <Menu.Item>
         <a
@@ -67,9 +67,10 @@ function EmployerMenu({ id }) {
           Add job
         </a>
       </Menu.Item>
-      <Menu.Item>
+      */}
+      {/* <Menu.Item>
         <SignOut />
-      </Menu.Item>
+      </Menu.Item>  */}
     </Menu>
   );
   return (

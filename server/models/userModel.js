@@ -11,17 +11,15 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    phone: {
-      type: String,
-      required: true,
-    },
     password: {
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+    },
     gender: {
       type: String,
-      required: true,
     },
     interest: {
       type: Array,
@@ -29,7 +27,6 @@ const UserSchema = new Schema(
     },
     cv: {
       type: String,
-      //   required: true,
     },
   },
   {

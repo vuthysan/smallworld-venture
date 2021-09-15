@@ -31,9 +31,9 @@ const GET_JOB = gql`
       company {
         name
         about
-        employer_position
+        user_position
       }
-      employer {
+      user {
         name
         phone
         email
@@ -53,9 +53,9 @@ const GET_JOB = gql`
 `;
 
 // === get employer by id ===
-const GET_EMPLOYER = gql`
+const GET_USER = gql`
   query ($id: ID!) {
-    get_employer(id: $id) {
+    get_user(id: $id) {
       id
       name
       email
@@ -64,10 +64,11 @@ const GET_EMPLOYER = gql`
     }
   }
 `;
+
 // === get employer posted job ===
-const GET_EMPLOYER_POSTED_JOB = gql`
+const GET_USER_POSTED_JOB = gql`
   query ($id: ID!) {
-    get_employer(id: $id) {
+    get_user(id: $id) {
       jobs {
         id
         position
@@ -80,10 +81,11 @@ const GET_EMPLOYER_POSTED_JOB = gql`
     }
   }
 `;
+
 // === get employer's companies ===
-const GET_EMPLOYER_COMPANIES = gql`
+const GET_USER_COMPANIES = gql`
   query ($id: ID!) {
-    get_employer(id: $id) {
+    get_userr(id: $id) {
       id
       companies {
         id
@@ -103,8 +105,8 @@ const GET_COMPANY = gql`
       id
       name
       city
-      employer_position
-      employerId
+      userId
+      user_position
       about
       logo
       website
@@ -121,8 +123,8 @@ const GET_COMPANY_BY_NAME = gql`
       about
       city
       website
-      employer_position
-      employer {
+      user_position
+      user {
         name
         phone
         email
@@ -136,66 +138,22 @@ const GET_COMPANY_BY_NAME = gql`
   }
 `;
 
-// === get jobseekr by id ===
-const GET_JOBSEEKER = gql`
-  query ($id: ID!) {
-    get_jobseeker(id: $id) {
-      id
-      name
-      email
-      gender
-      phone
-      cv
-      interest
-    }
-  }
-`;
 // === get jobseeker's applications record ===
-const GET_JOBSEEKER_APPLICATIONS = gql`
-  query ($jobseekerId: ID!) {
-    get_jobseeker_applications(jobseekerId: $jobseekerId) {
-      id
-      createdAt
-      job {
-        company {
-          name
-          city
-        }
-        position
-        createdAt
-      }
-    }
-  }
-`;
-
-// ===== get job's applicants ====
-// const GET_JOB_APPLICANTS = gql`
-//   query ($jobId: ID!) {
-//     get_job_applicants(jobId: $jobId) {
+// const GET_JOBSEEKER_APPLICATIONS = gql`
+//   query ($jobseekerId: ID!) {
+//     get_jobseeker_applications(jobseekerId: $jobseekerId) {
 //       id
 //       createdAt
-//       name
-//       email
-//       gender
-//       phone
-//       cv
-//       additional
-//       # job {
-//       #   position
-//       #   company_name
-//       # }
+//       job {
+//         company {
+//           name
+//           city
+//         }
+//         position
+//         createdAt
+//       }
 //     }
 //   }
 // `;
 
-export {
-  GET_JOBS,
-  GET_JOB,
-  GET_EMPLOYER,
-  GET_JOBSEEKER,
-  GET_JOBSEEKER_APPLICATIONS,
-  GET_EMPLOYER_POSTED_JOB,
-  GET_EMPLOYER_COMPANIES,
-  GET_COMPANY_BY_NAME,
-  GET_COMPANY,
-};
+export { GET_JOBS, GET_JOB, GET_COMPANY_BY_NAME, GET_COMPANY };

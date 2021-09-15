@@ -6,20 +6,22 @@ const UserContext = createContext();
 const UserContextProvider = (props) => {
   const [user, setUser] = useState(undefined);
 
-  async function getUser() {
-    const res = await axios.get(
-      "https://backend.smallworldventure.com/user/verifyToken"
-    );
-    const data = res.data;
+  async function getLoggedIn() {
+    // const res = await axios.get(
+    //   "https://backend.smallworldventure.com/user/verifyToken"
+    // );
+
+    const res = await axios.get("http://localhost:5000/user/verifyToken");
+    const data = await res.data;
     setUser(data);
   }
 
   useEffect(() => {
-    getUser();
+    getLoggedIn();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, getUser }}>
+    <UserContext.Provider value={{ user, getLoggedIn }}>
       {props.children}
     </UserContext.Provider>
   );

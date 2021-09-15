@@ -1,28 +1,31 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
-import { REGISTER_USER } from "../../../graphql/mutation";
-import { Row, Col, Button, Form, Input, Radio, message } from "antd";
+import { REGISTER_USER } from "../../graphql/mutation";
+import { Row, Col, Button, Form, Input, message } from "antd";
 // === comps ===
-import SignFooter from "../../../comps//Layout/SignFooter";
+import SignFooter from "../../comps//Layout/SignFooter";
 
 function JobSeekerSignUp() {
   const [form] = Form.useForm();
 
   // === register jobseeker function ===
-  const [registerSeeker] = useMutation(REGISTER_USER);
+  const [register] = useMutation(REGISTER_USER);
 
   const onFinish = (values) => {
-    // console.log(values);
-    registerSeeker({
-      variables: values,
-    })
-      .then(async (res) => {
-        await message.success(res.data.register_jobseeker.message);
-        window.location.replace("/open-opportunities/jobseeker/signin");
+    if (values.password !== values.verify) {
+      message.error("Password does not match");
+    } else {
+      register({
+        variables: values,
       })
-      .catch(() => {
-        message.warn("User with this email is already existed!");
-      });
+        .then(async (res) => {
+          await message.success(res.data.register_user.message);
+          window.location.replace("/open-opportunities/signin");
+        })
+        .catch(async () => {
+          message.error("User with this email is already existed!");
+        });
+    }
   };
 
   return (
@@ -48,7 +51,7 @@ function JobSeekerSignUp() {
       </Col>
       <Col className="right-sign sign-up">
         <center>
-          <h1 style={{ marginTop: "25px" }}>Sign Up As Job Seeker</h1>
+          <h1 style={{ marginTop: "25px" }}>Sign Up</h1>
           <Form form={form} onFinish={onFinish} layout="vertical">
             <Form.Item
               label="Username"
@@ -58,26 +61,13 @@ function JobSeekerSignUp() {
               <Input placeholder="Input username..." />
             </Form.Item>
             <Form.Item
-              wrapperCol={{ span: 11 }}
-              label="Gender"
-              name="gender"
-              rules={[{ required: true }]}
+              label="Email"
+              name="email"
+              rules={[{ required: true, type: "email" }]}
             >
-              <Radio.Group name="radiogroup">
-                <Radio value="Male">Male</Radio>
-                <Radio value="Female">Female</Radio>
-              </Radio.Group>
-            </Form.Item>
-            <Form.Item label="Email" name="email" rules={[{ required: true }]}>
               <Input placeholder="Input email..." />
             </Form.Item>
-            <Form.Item
-              label="Phone Number"
-              name="phone"
-              rules={[{ required: true }]}
-            >
-              <Input placeholder="Input phone number..." />
-            </Form.Item>
+
             <Form.Item
               label="Password"
               name="password"
@@ -85,7 +75,13 @@ function JobSeekerSignUp() {
             >
               <Input.Password placeholder="Input password..." />
             </Form.Item>
-
+            <Form.Item
+              label="Verify Password"
+              name="verify"
+              rules={[{ required: true }]}
+            >
+              <Input.Password placeholder="Verify password..." />
+            </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
                 Sign Up

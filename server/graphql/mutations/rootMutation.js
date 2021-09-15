@@ -26,8 +26,6 @@ const User = require("../../models/userModel");
 const MessageType = require("../type/messageType");
 const CompanyType = require("../type/companyType");
 const JobType = require("../type/jobType");
-const EmployerType = require("../type/employerType");
-const JobSeekerType = require("../type/jobseekerType");
 const ApplicationType = require("../type/applicationType");
 const UserType = require("../type/userType");
 
@@ -39,9 +37,7 @@ const RootMutation = new GraphQLObjectType({
       type: UserType,
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
-        gender: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
-        phone: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: async (_, args) => {
@@ -54,9 +50,13 @@ const RootMutation = new GraphQLObjectType({
           let newUser = new User({
             ...args,
             interest: [],
+            phone: "",
+            gender: "",
             cv: "",
             password: hashPassword,
           });
+          await newUser.save();
+
           return {
             message: "Register Sucessfull!",
           };
@@ -86,7 +86,11 @@ const RootMutation = new GraphQLObjectType({
             throw { message: "Password is incorrect!" };
           }
           const access_token = jwt.sign(
-            { id: existedUser.id },
+            {
+              id: existedUser.id,
+              name: existedUser.name,
+              email: existedUser.email,
+            },
 
             ACCESS_SECRET,
             {
@@ -357,12 +361,12 @@ const RootMutation = new GraphQLObjectType({
       type: ApplicationType,
       args: {
         jobId: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
         gender: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
         cv: { type: GraphQLNonNull(GraphQLString) },
-        userId: { type: GraphQLNonNull(GraphQLID) },
         additional: { type: GraphQLString },
       },
       resolve: async (_, args) => {

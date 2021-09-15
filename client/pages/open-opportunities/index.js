@@ -120,7 +120,7 @@ function index() {
                   potenti ameutpat. Ac potenti amet, cras magna.
                 </p>
                 {/* =========== signin and signup menu  ========== */}
-                <DropDownMenu role={user ? user.role : null} />
+                <DropDownMenu user={user} />
               </Col>
               <Col xs={0} sm={0} md={6}>
                 <img
@@ -132,9 +132,9 @@ function index() {
           </div>
         </div>
         {/*  === end header ===  */}
-        <div className="container">
+        <div className="container" id="joblist">
           <div className="search-job">
-            {user && user.role === "employer" ? (
+            {user && user.loggedIn ? (
               <Dropdown overlay={addMenu} placement="topCenter" arrow>
                 <img
                   className="addjob-addcom"

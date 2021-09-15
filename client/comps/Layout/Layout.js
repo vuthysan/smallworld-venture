@@ -9,7 +9,7 @@ function Layout({ children }) {
       <div>
         {route.includes("signin") || route.includes("signup") ? "" : <Navbar />}
         {children}
-        <Footer />
+        {route.includes("signin") || route.includes("signup") ? "" : <Footer />}
       </div>
     </>
   );

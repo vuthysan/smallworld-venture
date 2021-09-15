@@ -12,12 +12,11 @@ function LatestJob() {
 
   if (loading) {
     return (
-      <center className="loading-data">
+      <div className="loading-data">
         <Spin size="large" />
-      </center>
+      </div>
     );
   }
-  // const { get_jobs } = data;
 
   const onChange = (page) => {
     setCurrent(page);

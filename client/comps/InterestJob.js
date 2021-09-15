@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_JOBS, GET_JOBSEEKER } from "../graphql/query";
+// import { useQuery } from "@apollo/client";
+// import { GET_JOBS, GET_JOBSEEKER } from "../graphql/query";
 import UserContext from "../context/userContext";
 import { Row, Col, Pagination, Spin, Empty } from "antd";
 import moment from "moment";
@@ -12,52 +12,53 @@ function InterestJob() {
   const { user } = useContext(UserContext);
 
   // === get jobseeker info(interest) ===
-  const { loading: seekerLoading, data: seekerData } = user
-    ? useQuery(GET_JOBSEEKER, {
-        variables: { id: user && user.id },
-      })
-    : "";
+  // const { loading: seekerLoading, data: seekerData } = user
+  //   ? useQuery(GET_JOBSEEKER, {
+  //       variables: { id: user && user.id },
+  //     })
+  //   : "";
 
   // === get all jobs ===
-  const { loading, data } = useQuery(GET_JOBS);
+  // const { loading, data } = useQuery(GET_JOBS);
 
-  if (loading || seekerLoading) {
-    return (
-      <center className="loading-data">
-        <Spin size="large" />
-      </center>
-    );
-  }
+  // if (loading || seekerLoading) {
+  //   return (
+  //     <center className="loading-data">
+  //       <Spin size="large" />
+  //     </center>
+  //   );
+  // }
   // === filter jobs for jobseeker's interest only ===
-  let interestJobs;
-  if (user && user.role === "jobseeker") {
-    interestJobs =
-      data &&
-      data.get_jobs.filter((res) => {
-        const { type } = res;
-        let match = false;
-        type.forEach((t) => {
-          user &&
-            seekerData.get_jobseeker.interest.forEach((j) => {
-              if (t === j) {
-                match = true;
-              }
-            });
-        });
-        if (match) {
-          return res;
-        }
-      });
-  }
+  // let interestJobs;
+  // if (user && user.role === "jobseeker") {
+  //   interestJobs =
+  //     data &&
+  //     data.get_jobs.filter((res) => {
+  //       const { type } = res;
+  //       let match = false;
+  //       type.forEach((t) => {
+  //         user &&
+  //           seekerData.get_jobseeker.interest.forEach((j) => {
+  //             if (t === j) {
+  //               match = true;
+  //             }
+  //           });
+  //       });
+  //       if (match) {
+  //         return res;
+  //       }
+  //     });
+  // }
 
   // === get curent jobs depend on jobsPerPage ===
-  const indexOfLastPost = current * jobsPerPage;
-  const indexOfFirstPost = indexOfLastPost - jobsPerPage;
-  const currentJobs =
-    interestJobs && interestJobs.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = current * jobsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - jobsPerPage;
+  // const currentJobs =
+  //   interestJobs && interestJobs.slice(indexOfFirstPost, indexOfLastPost);
   return (
     <>
-      <Row wrap={true} gutter={[0, 5]}>
+      hello
+      {/* <Row wrap={true} gutter={[0, 5]}>
         {user && currentJobs.length > 1 ? (
           currentJobs.map((res) => {
             const { position, company, createdAt, id } = res;
@@ -115,7 +116,7 @@ function InterestJob() {
           </>
         )}
       </Row>
-      {/* === pagination === */}
+      
       {user && currentJobs.length > 1 ? (
         <Pagination
           onChange={(page) => setCurrent(page)}
@@ -125,7 +126,7 @@ function InterestJob() {
         />
       ) : (
         ""
-      )}
+      )} */}
     </>
   );
 }

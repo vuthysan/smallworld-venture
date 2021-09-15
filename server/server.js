@@ -13,7 +13,7 @@ const app = express();
 
 // === middleware
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:3200"], credentials: true }));
 app.use(cookieParser());
 
 app.use("/public/", express.static(path.join(__dirname, "public")));

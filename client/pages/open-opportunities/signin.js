@@ -1,32 +1,32 @@
 import React, { useContext } from "react";
 import { useMutation } from "@apollo/client";
-import UserContext from "../../../context/userContext";
-import { USER_LOGIN } from "../../../graphql/mutation";
+import UserContext from "../../context/userContext";
+import { USER_LOGIN } from "../../graphql/mutation";
 import { Row, Col, Button, Form, Input, message } from "antd";
 // === comps ===
-import SignFooter from "../../../comps/Layout/SignFooter";
+import SignFooter from "../../comps/Layout/SignFooter";
 
 function JobSeekerSignIn() {
   const [form] = Form.useForm();
   const { user } = useContext(UserContext);
 
-  const [signIn] = useMutation(USER_LOGIN);
+  const [login] = useMutation(USER_LOGIN);
 
   const onFinish = async (values) => {
-    await signIn({
+    await login({
       variables: values,
     })
       .then(async (res) => {
-        await message.success(res.data.login_jobseeker.message);
+        await message.success(res.data.login.message);
         window.location.replace("/open-opportunities");
       })
-      .catch(
-        async (err) => await message.error("Email or passowrd is incorrect!")
-      );
+      .catch(async (err) => {
+        await message.error("Email or password is incorrect!");
+      });
   };
   return (
     <>
-      {user && user.role == "jobseeker" ? (
+      {user && user.loggedIn ? (
         window.location.replace("/open-opportunities")
       ) : (
         <Row justify="center" align="middle" className="sign">
@@ -75,13 +75,13 @@ function JobSeekerSignIn() {
 
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
-                    Sign In As Job Seeker
+                    Sign In
                   </Button>
                 </Form.Item>
               </Form>
               <p>
                 No Account?{" "}
-                <a href="/open-opportunities/jobseeker/signup">Register Now</a>
+                <a href="/open-opportunities/signup">Register Now</a>
               </p>
               <SignFooter />
             </center>
