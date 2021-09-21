@@ -45,7 +45,7 @@ function JobSeekerSignUp() {
             adipisicing elit. Illo itaque
           </p>
           <Button id="sign-btn">
-            <a href="/open-opportunities/jobseeker/signin">Sign In</a>
+            <a href="/open-opportunities/signin">Sign In</a>
           </Button>
         </center>
       </Col>

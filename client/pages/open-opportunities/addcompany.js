@@ -1,16 +1,18 @@
 import React, { useState, useContext } from "react";
-import UserContext from "../../../context/userContext";
+import UserContext from "../../context/userContext";
 import axios from "axios";
 import { useMutation } from "@apollo/client";
-import { ADD_COMPANY } from "../../../graphql/mutation";
+import { ADD_COMPANY } from "../../graphql/mutation";
 import { UploadOutlined } from "@ant-design/icons";
 import { Divider, Form, Input, Button, Select, Upload, message } from "antd";
 // === json data ===
-import Cities from "../../../data/cities.json";
+import Cities from "../../data/cities.json";
 
 const { Option } = Select;
 
 function addcompany() {
+  // https://backend.smallworldventure.com
+  const url = "http://localhost:5000";
   const [form] = Form.useForm();
   const { user } = useContext(UserContext);
   // console.log(user);
@@ -43,9 +45,7 @@ function addcompany() {
     // === delete old upload from server when upload new photo ===
     if (state.imageUrl) {
       await axios
-        .delete(
-          "https://backend.smallworldventure.com/image/delete/" + state.imageUrl
-        )
+        .delete(url + "/image/delete/" + state.imageUrl)
         .catch((err) => console.log(err));
     }
     if (info.file.status === "done") {
@@ -60,7 +60,7 @@ function addcompany() {
 
   // ====== upload dragger props ======
   const upload = {
-    action: "https://backend.smallworldventure.com/upload/image",
+    action: url + "/upload/image",
     name: "image",
     maxCount: 1,
     beforeUpload: beforeUpload,
@@ -68,9 +68,7 @@ function addcompany() {
     onRemove: async (data) => {
       // console.log(data.response);
       await axios
-        .delete(
-          "https://backend.smallworldventure.com/image/delete/" + data.response
-        )
+        .delete(url + "/image/delete/" + data.response)
         .catch((err) => console.log(err));
 
       setState({
@@ -87,7 +85,7 @@ function addcompany() {
       ...values,
       website: website ? website : "N/A",
       logo: state.imageUrl,
-      employerId: user.id,
+      userId: user.id,
     };
     // console.log(newCom);
     addCom({
@@ -138,7 +136,7 @@ function addcompany() {
         </Form.Item>
         <Form.Item
           label="Recruiter Position"
-          name="employer_position"
+          name="user_position"
           rules={[
             {
               required: true,

@@ -1,15 +1,15 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import UserContext from "../../context/userContext";
 import { useQuery } from "@apollo/client";
-import { GET_JOBSEEKER_APPLICATIONS } from "../../../../graphql/query";
+import { GET_USER_APPLICATIONS } from "../../graphql/query";
 import { Divider, Row, Col, Spin, Empty } from "antd";
 import moment from "moment";
 function Record() {
-  const { id: jobseekerId } = useRouter().query;
+  const { user } = useContext(UserContext);
 
   // === get job seeker applications by id ===
-  const { loading, data } = useQuery(GET_JOBSEEKER_APPLICATIONS, {
-    variables: { jobseekerId },
+  const { loading, data } = useQuery(GET_USER_APPLICATIONS, {
+    variables: { userId: user && user.id },
   });
 
   if (loading) {
@@ -23,14 +23,14 @@ function Record() {
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Applications Record</Divider>
-      {data && data.get_jobseeker_applications.length < 1 ? (
+      {data && data.get_user_applications.length < 1 ? (
         <center>
           <Empty />
         </center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
           {data &&
-            data.get_jobseeker_applications.map((res) => {
+            data.get_user_applications.map((res) => {
               const { id, createdAt, job } = res;
               return (
                 <Col xs={24} sm={12} md={8} key={id}>

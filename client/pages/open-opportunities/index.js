@@ -17,10 +17,7 @@ const { Search } = Input;
 const addMenu = (
   <Menu>
     <Menu.Item>
-      <a
-        rel="noopener noreferrer"
-        href={"/open-opportunities/employer/addcompany"}
-      >
+      <a rel="noopener noreferrer" href={"/open-opportunities/addcompany"}>
         <img
           className="addcom-img"
           width="25"
@@ -32,10 +29,7 @@ const addMenu = (
       </a>
     </Menu.Item>
     <Menu.Item>
-      <a
-        rel="noopener noreferrer"
-        href={"/open-opportunities/employer/addjob/"}
-      >
+      <a rel="noopener noreferrer" href={"/open-opportunities/addjob/"}>
         <img
           className="addjob-img"
           width="25"

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import UserContext from "../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_JOBSEEKER } from "../../../../graphql/query";
-import { EDIT_JOBSEEKER } from "../../../../graphql/mutation";
+import { GET_USER } from "../../graphql/query";
+import { EDIT_USER } from "../../graphql/mutation";
 
 import {
   Divider,
@@ -20,22 +21,26 @@ import {
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 // === json data ===
-import Interests from "../../../../data/interests.json";
+import Interests from "../../data/interests.json";
 
 const { Option } = Select;
 
 function profile() {
-  const { id } = useRouter().query;
+  // const { id } = useRouter().query;
+  const { user } = useContext(UserContext);
+
   const [form] = Form.useForm();
   const [file, setFile] = useState("");
   const [btnDisable, setDisable] = useState(true);
 
   // === edit jobseeker function ===
-  const [editSeeker] = useMutation(EDIT_JOBSEEKER, { variables: { id } });
+  const [editUser] = useMutation(EDIT_USER, {
+    variables: { id: user && user.id },
+  });
 
   //   === get jobseeker by id ===
-  const { loading, data } = useQuery(GET_JOBSEEKER, {
-    variables: { id },
+  const { loading, data, refetch } = useQuery(GET_USER, {
+    variables: { id: user && user.id },
   });
 
   if (loading) {
@@ -57,9 +62,9 @@ function profile() {
     },
     onChange: async (info) => {
       // === remove old cv(pdf) file from server if user upload new cv(pdf) ===
-      if (info.file.status === "done" && data.get_jobseeker.cv) {
+      if (info.file.status === "done" && data.get_user.cv) {
         await axios
-          .delete("http://localhost:5000/pdf/delete/" + data.get_jobseeker.cv)
+          .delete("http://localhost:5000/pdf/delete/" + data.get_user.cv)
           .catch((err) => console.log(err));
       }
     },
@@ -88,11 +93,11 @@ function profile() {
           // === remove verify from values ===
           delete values.verify;
 
-          editSeeker({
+          editUser({
             variables: { ...values, cv: res.data },
           })
             .then(async (res) => {
-              await message.success(res.data.edit_jobseeker.message);
+              await message.success(res.data.edit_user.message);
             })
             .catch(async () =>
               message.warn("Your old password is not correct!")
@@ -101,14 +106,13 @@ function profile() {
     } else {
       // === remove verify from values ===
       delete values.verify;
-      editSeeker({
+      editUser({
         variables: { ...values },
       })
         .then(async (res) => {
-          await message.success(res.data.edit_jobseeker.message);
-          window.location.replace(
-            "/open-opportunities/jobseeker/profile/" + id
-          );
+          await message.success(res.data.edit_user.message);
+          // window.location.replace("/open-opportunities/profile");
+          await refetch();
         })
         .catch(
           async () => await message.warn("Your old password is not correct!")
@@ -118,10 +122,10 @@ function profile() {
 
   return (
     <div className="opp-container profile">
-      <Divider orientation="left">JobSeeker Profile</Divider>
+      <Divider orientation="left">Profile</Divider>
       {data && (
         <Form
-          initialValues={data.get_jobseeker}
+          initialValues={data.get_user}
           layout="vertical"
           form={form}
           onFinish={onFinish}
@@ -132,7 +136,7 @@ function profile() {
               <Form.Item
                 label="Username"
                 name="name"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "Username is required!" }]}
               >
                 <Input />
               </Form.Item>
@@ -151,23 +155,32 @@ function profile() {
               <Form.Item
                 label="Email"
                 name="email"
-                rules={[{ type: "email", required: true }]}
+                rules={[
+                  {
+                    type: "email",
+                    required: true,
+                    message: "Email is required!",
+                  },
+                ]}
               >
                 <Input />
               </Form.Item>
             </Col>
             <Col sm={12}>
-              <Form.Item label="Phone Number" name="phone">
+              <Form.Item
+                label="Phone Number"
+                name="phone"
+                rules={[{ required: true, message: "Phone is required!" }]}
+              >
                 <Input />
               </Form.Item>
             </Col>
-            <Col sm={12}>
-              {/* === when add mode tag always show warning === */}
+            <Col sm={24}>
               <Form.Item label="Interest" name="interest">
                 <Select mode="multiple" onChange={() => setDisable(false)}>
                   {Interests.map((res, i) => (
                     <Option key={i} value={res}>
-                      {res.toUpperCase()}
+                      {res}
                     </Option>
                   ))}
                 </Select>
@@ -179,20 +192,22 @@ function profile() {
                 label="CV/Resume"
                 name="cv"
                 valuePropName="pdf"
-                rules={[{ required: true }]}
+                rules={[
+                  { required: "true", message: "CV/Resume is required!" },
+                ]}
               >
                 <Upload
                   {...props}
                   defaultFileList={
-                    data.get_jobseeker.cv
+                    data.get_user.cv
                       ? [
                           {
-                            name: data.get_jobseeker.cv,
+                            name: data.get_user.cv,
                             // === response for onRemove when user remove image ===
-                            // response: get_jobseeker.cv,
+                            // response: get_user.cv,
                             url:
                               "http://localhost:5000/public/upload/pdf/" +
-                              data.get_jobseeker.cv,
+                              data.get_user.cv,
                           },
                         ]
                       : ""
@@ -203,7 +218,6 @@ function profile() {
               </Form.Item>
             </Col>
           </Row>
-
           <Divider orientation="left">Password Setting</Divider>
           <Form.Item label="Old Password" name="password">
             <Input.Password />

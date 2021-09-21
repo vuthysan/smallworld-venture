@@ -17,7 +17,7 @@ function UserNavMenu() {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href={"/open-opportunities/profile/" + user.id}
+          href={"/open-opportunities/profile"}
         >
           <img src="/images/navbar/settings.svg" alt="setting svg" />
           Profile
@@ -27,7 +27,7 @@ function UserNavMenu() {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href={"/open-opportunities/posted/" + user.id}
+          href={"/open-opportunities/posted"}
         >
           <img src="/images/navbar/job.svg" alt="setting svg" />
           Posted Job
@@ -37,17 +37,17 @@ function UserNavMenu() {
         <a
           className="menu"
           rel="noopener noreferrer"
-          href={"/open-opportunities/companies/" + user.id}
+          href={"/open-opportunities/company"}
         >
           <img src="/images/navbar/company.svg" alt="setting svg" />
-          Companies
+          Company
         </a>
       </Menu.Item>
       <Menu.Item>
         <a
           className="menu"
           rel="noopener noreferrer"
-          href={"/open-opportunities/record/" + user.id}
+          href={"/open-opportunities/record"}
         >
           <img src="/images/navbar/application.svg" alt="setting svg" />
           Application Record

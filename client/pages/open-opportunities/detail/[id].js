@@ -39,33 +39,24 @@ function Position() {
                   .unix(data.get_job.createdAt / 1000)
                   .format("MMMM-DD-YYYY")}`}</p>
                 <button className="apply-btn">
-                  {user && user.role === "jobseeker" ? (
+                  {user && user.loggedIn && user.id !== data.get_job.user.id ? (
                     <a href={"/open-opportunities/apply/" + data.get_job.id}>
+                      Apply Now
+                    </a>
+                  ) : user && data.get_job.user.id == user.id ? (
+                    <a
+                      href="#"
+                      onClick={() => {
+                        message.warn("You can not apply your own posted job!");
+                      }}
+                    >
                       Apply Now
                     </a>
                   ) : (
                     <a
                       href="#"
                       onClick={() => {
-                        message.warn(
-                          <>
-                            Please{" "}
-                            <a
-                              href="/open-opportunities/jobseeker/signin"
-                              style={{ fontSize: "16px" }}
-                            >
-                              sign in
-                            </a>{" "}
-                            /{" "}
-                            <a
-                              href="/open-opportunities/jobseeker/signup"
-                              style={{ fontSize: "16px" }}
-                            >
-                              register
-                            </a>{" "}
-                            as jobseeker to apply for jobs!
-                          </>
-                        );
+                        message.warn("Please login or register before apply!");
                       }}
                     >
                       Apply Now
@@ -92,9 +83,9 @@ function Position() {
               <h3>Contact Information</h3>
               <Row align="middle" gutter={60}>
                 <Col>
-                  <p>{data.get_job.employer.name.toUpperCase()}</p>
+                  <p>{data.get_job.user.name.toUpperCase()}</p>
                   <p className="recru-position">
-                    {data.get_job.company.employer_position}
+                    {data.get_job.company.user_position}
                   </p>
                 </Col>
                 <Divider type="vertical" style={{ height: "70px" }} />
@@ -105,7 +96,7 @@ function Position() {
                       alt="call icon"
                       className="svg"
                     />
-                    <p>{data.get_job.employer.phone}</p>
+                    <p>{data.get_job.user.phone}</p>
                   </div>
                   <div className="contact-info">
                     <img
@@ -113,7 +104,7 @@ function Position() {
                       alt="call icon"
                       className="svg"
                     />
-                    <p>{data.get_job.employer.email}</p>
+                    <p>{data.get_job.user.email}</p>
                   </div>
                 </Col>
               </Row>

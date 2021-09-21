@@ -1,38 +1,29 @@
-import React, { useContext, useState } from "react";
-import { useRouter } from "next/router";
-import UserContext from "../../../../context/userContext";
+import React, { useState, useContext } from "react";
+import UserContext from "../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_JOB, GET_EMPLOYER_COMPANIES } from "../../../../graphql/query";
-import { EDIT_JOB } from "../../../../graphql/mutation";
+import { GET_USER_COMPANIES } from "../../graphql/query";
+import { ADD_JOB } from "../../graphql/mutation";
 import { Divider, Form, Input, Button, Select, message, Spin } from "antd";
 // === comps ===
-import ArrayForm from "../../../../comps/ArrayForm";
+import ArrayForm from "../../comps/ArrayForm";
 // === json data ===
-import Interests from "../../../../data/interests.json";
+import Interests from "../../data/interests.json";
 
 const { Option } = Select;
 
-function viewjob() {
-  const { id } = useRouter().query;
+function addjob() {
   const [form] = Form.useForm();
   const { user } = useContext(UserContext);
-  const [btnLoading, setBtnLoading] = useState(false);
+  const [btnState, setBtnState] = useState(false);
 
-  // === edit job function ===
-  const [editJob] = useMutation(EDIT_JOB, { variables: { id } });
-
-  // === get job by job id ===
-  const { loading, data } = useQuery(GET_JOB, { variables: { id } });
+  // === add new job function ===
+  const [addJob] = useMutation(ADD_JOB);
 
   // === get employer's companies ===
-  const { loading: loadingCom, data: comData } = useQuery(
-    GET_EMPLOYER_COMPANIES,
-    {
-      variables: { id: user && user.id },
-    }
-  );
-
-  if (loading || loadingCom) {
+  const { loading, data } = useQuery(GET_USER_COMPANIES, {
+    variables: { id: user && user.id },
+  });
+  if (loading) {
     return (
       <center className="loading-data">
         <Spin size="large" />
@@ -41,29 +32,24 @@ function viewjob() {
   }
 
   const onFinish = (values) => {
-    const job = {
+    const newJob = {
       ...values,
       salary: values.salary ? values.salary : "Negotable",
+      userId: user.id,
     };
-
-    editJob({
-      variables: job,
+    addJob({
+      variables: newJob,
     }).then(async (res) => {
-      await setBtnLoading(true);
-      await message.success(res.data.edit_job.message);
-      await setBtnLoading(false);
+      await setBtnState(true);
+      await form.resetFields();
+      await setBtnState(false);
+      await message.success(res.data.add_job.message);
     });
   };
-
   return (
     <div className="opp-container">
-      <Divider orientation="left">View/Edit Job</Divider>
-      <Form
-        form={form}
-        onFinish={onFinish}
-        layout="vertical"
-        initialValues={data.get_job}
-      >
+      <Divider orientation="left">Add Job</Divider>
+      <Form form={form} onFinish={onFinish} layout="vertical">
         <Form.Item
           label="Position"
           name="position"
@@ -86,22 +72,31 @@ function viewjob() {
             },
           ]}
         >
-          {/* ===== select company ===== */}
           <Select>
-            {comData.get_employer.companies.map((res) => {
-              const { name, id } = res;
-              return (
-                <Option key={id} value={name}>
-                  {name.toUpperCase()}
-                </Option>
-              );
-            })}
+            {data &&
+              data.get_user.companies.map((res) => {
+                const { name, id } = res;
+                return (
+                  <Option key={id} value={name}>
+                    {name.toUpperCase()}
+                  </Option>
+                );
+              })}
           </Select>
         </Form.Item>
         <Form.Item label="Salary$ (Optional)" name="salary">
           <Input />
         </Form.Item>
-        <Form.Item label="Type" name="type">
+        <Form.Item
+          label="Type"
+          name="type"
+          rules={[
+            {
+              required: true,
+              message: "Please select types of this job!",
+            },
+          ]}
+        >
           <Select mode="multiple">
             {Interests.map((res, i) => (
               <Option key={i} value={res}>
@@ -115,8 +110,8 @@ function viewjob() {
         {/* === decriptions array === */}
         <ArrayForm name="descriptions" message="Description"></ArrayForm>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={btnLoading}>
-            Edit Job
+          <Button type="primary" htmlType="submit" loading={btnState}>
+            Add Job
           </Button>
         </Form.Item>
       </Form>
@@ -124,4 +119,4 @@ function viewjob() {
   );
 }
 
-export default viewjob;
+export default addjob;

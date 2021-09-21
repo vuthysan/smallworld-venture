@@ -6,11 +6,11 @@ import { Row, Col, Divider, Spin } from "antd";
 import moment from "moment";
 
 function Company() {
-  const { company } = useRouter().query;
+  const { company_name } = useRouter().query;
 
   // === get company by company name ===
   const { loading, data } = useQuery(GET_COMPANY_BY_NAME, {
-    variables: { name: company },
+    variables: { name: company_name },
   });
 
   if (loading) {
@@ -39,7 +39,7 @@ function Company() {
                     // width="200"
                     height="90"
                     src={
-                      "https://backend.smallworldventure.com/public/upload/images/" +
+                      "http://localhost:5000/public/upload/images/" +
                       data.get_company.logo
                     }
                     alt="logo of company"
@@ -52,7 +52,11 @@ function Company() {
                 </Col>
                 <Col>
                   <p className="job-count">{data.get_company.jobs.length}</p>
-                  <p>Jobs Available</p>
+                  {data.get_company.jobs.length > 1 ? (
+                    <p>Jobs Available</p>
+                  ) : (
+                    <p>Job Available</p>
+                  )}
                 </Col>
               </Row>
               <div className="line"></div>
@@ -67,9 +71,9 @@ function Company() {
             <h2>Contact Information</h2>
             <Row align="middle" gutter={60}>
               <Col>
-                <p>{data.get_company.employer.name.toUpperCase()}</p>
+                <p>{data.get_company.user.name.toUpperCase()}</p>
                 <p className="recru-position">
-                  {data.get_company.employer_position}
+                  {data.get_company.user_position}
                 </p>
               </Col>
               <Divider type="vertical" style={{ height: "70px" }} />
@@ -80,7 +84,7 @@ function Company() {
                     alt="call icon"
                     className="svg"
                   />
-                  <p>{data.get_company.employer.phone}</p>
+                  <p>{data.get_company.user.phone}</p>
                 </div>
                 <div className="contact-info">
                   <img
@@ -88,7 +92,7 @@ function Company() {
                     alt="call icon"
                     className="svg"
                   />
-                  <p>{data.get_company.employer.email}</p>
+                  <p>{data.get_company.user.email}</p>
                 </div>
               </Col>
             </Row>

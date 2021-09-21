@@ -6,6 +6,7 @@ const JobType = require("./jobType");
 
 // === Model ===
 const Job = require("../../models/jobModel");
+const User = require("../../models/userModel");
 
 const ApplicationType = new GraphQLObjectType({
   name: "applications",
@@ -17,7 +18,13 @@ const ApplicationType = new GraphQLObjectType({
     email: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
-    cv: { type: GraphQLString },
+    cv: {
+      type: GraphQLString,
+      resolve: async (parent) => {
+        const user = await User.findById(parent.userId);
+        return user.cv;
+      },
+    },
     additional: { type: GraphQLString },
     createdAt: { type: GraphQLID },
     message: { type: GraphQLString },

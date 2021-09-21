@@ -1,5 +1,4 @@
-import { Row, Col, Form, Input, Button, notification, message } from "antd";
-// import axios from "axios";
+import { Row, Col, Form, Input, Button, message } from "antd";
 import { useMutation } from "@apollo/client";
 import { POST_MESSAGE } from "../graphql/mutation";
 import { useState } from "react";
@@ -11,21 +10,8 @@ function Contact() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [post_message] = useMutation(POST_MESSAGE);
-  // const onFinish = async (values) => {
-  //   await axios
-  //     .post("http://localhost:4405/api/form", { ...values })
-  //     .then(() => {
-  //       setIsLoading(true);
-  //       notification["success"]({
-  //         message: "Success",
-  //         description: "Thank you for reaching out. Please check your email.",
-  //       });
-  //       setIsLoading(false);
-  //     });
-  // };
 
   const onFinish = (values) => {
-    // console.log(values);
     post_message({
       variables: values,
     }).then(async (res) => {

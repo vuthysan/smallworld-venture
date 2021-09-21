@@ -43,13 +43,13 @@ const JobType = new GraphQLObjectType({
       },
     },
     // === applicanttion for this job ===
-    // applicants: {
-    //   type: new GraphQLList(require("./applicationType")),
-    //   resolve: async (parent) => {
-    //     const app = await Application.find({ jobId: parent.id });
-    //     return app;
-    //   },
-    // },
+    applicants: {
+      type: new GraphQLList(require("./applicationType")),
+      resolve: async (parent) => {
+        const app = await Application.find({ jobId: parent.id });
+        return app;
+      },
+    },
     // === applicants of this job ===
     createdAt: { type: GraphQLString },
     message: { type: GraphQLString },

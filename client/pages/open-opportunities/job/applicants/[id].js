@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_JOB } from "../../../../../graphql/query";
-import { DELETE_APPLICATION } from "../../../../../graphql/mutation";
+import { GET_JOB_APPLICANTS } from "../../../../graphql/query";
+import { DELETE_APPLICATION } from "../../../../graphql/mutation";
 import { Divider, Table, Modal, Popconfirm, message, Spin } from "antd";
 import moment from "moment";
 
@@ -29,7 +29,7 @@ function Applicants() {
   };
 
   // === get job by job id ===
-  const { loading, data, refetch } = useQuery(GET_JOB, {
+  const { loading, data, refetch } = useQuery(GET_JOB_APPLICANTS, {
     variables: { id: id && id },
   });
 

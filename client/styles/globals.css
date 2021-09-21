@@ -967,7 +967,14 @@ input[type="text"]:focus {
   background: #f8f8f8 !important;
   border: 1px solid #f8f8f8 !important;
 }
-
+#gender {
+  display: flex;
+  margin-top: 13px;
+}
+.ant-radio-wrapper {
+  display: flex;
+  align-items: center;
+}
 .profile input:hover,
 .profile input:active,
 .profile input:focus,
@@ -1245,6 +1252,7 @@ input[type="text"]:focus {
 .right-sign label {
   font-size: 18px !important;
 }
+
 .right-sign label {
   margin: 12px 0 !important;
   color: #015e98;

@@ -1,14 +1,14 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import UserContext from "../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_EMPLOYER_POSTED_JOB } from "../../../../graphql/query";
-import { DELETE_JOB } from "../../../../graphql/mutation";
-import { Divider, Row, Col, Spin, Popconfirm, message } from "antd";
+import { GET_USER_POSTED_JOB } from "../../graphql/query";
+import { DELETE_JOB } from "../../graphql/mutation";
+import { Divider, Row, Col, Spin, Popconfirm, message, Empty } from "antd";
 import { TiDeleteOutline } from "react-icons/ti";
 import moment from "moment";
 
 function posted() {
-  const { id } = useRouter().query;
+  const { user } = useContext(UserContext);
 
   // === delete job function ===
   const [deleteJob] = useMutation(DELETE_JOB);
@@ -23,8 +23,8 @@ function posted() {
   }
 
   //   === get employer posted job ===
-  const { loading, data, refetch } = useQuery(GET_EMPLOYER_POSTED_JOB, {
-    variables: { id: id && id },
+  const { loading, data, refetch } = useQuery(GET_USER_POSTED_JOB, {
+    variables: { id: user && user.id },
   });
 
   if (loading) {
@@ -38,12 +38,14 @@ function posted() {
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Posted Job</Divider>
-      {data && data.get_employer.jobs.length < 1 ? (
-        <center>No Data</center>
+      {data && data.get_user.jobs.length < 1 ? (
+        <center>
+          <Empty />
+        </center>
       ) : (
         <Row className="outter-card" gutter={[12, 12]}>
           {data &&
-            data.get_employer.jobs.map((res) => {
+            data.get_user.jobs.map((res) => {
               const { company, id, createdAt, position } = res;
               return (
                 <Col key={id} xs={24} sm={12} md={6}>
@@ -62,18 +64,12 @@ function posted() {
                     <p className="company">{company.name.toUpperCase()}</p>
                     <p className="city">{`${company.city}, ${moment
                       .unix(createdAt / 1000)
-                      .format("MMMM-DD-YYYY")}`}</p>
+                      .format("MMM-DD-YYYY")}`}</p>
                     <button className="view-btn">
-                      <a href={"/open-opportunities/employer/job/" + id}>
-                        View Job
-                      </a>
+                      <a href={"/open-opportunities/job/" + id}>View Job</a>
                     </button>
                     <button className="view-btn">
-                      <a
-                        href={
-                          "/open-opportunities/employer/job/applicants/" + id
-                        }
-                      >
+                      <a href={"/open-opportunities/job/applicants/" + id}>
                         View Applicants
                       </a>
                     </button>

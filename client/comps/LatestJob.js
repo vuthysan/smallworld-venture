@@ -6,7 +6,7 @@ import moment from "moment";
 
 function LatestJob() {
   const [current, setCurrent] = useState(1);
-  const [jobsPerPage] = useState(2);
+  const [jobsPerPage] = useState(10);
 
   const { loading, data } = useQuery(GET_JOBS);
 

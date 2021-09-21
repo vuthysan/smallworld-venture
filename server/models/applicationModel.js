@@ -26,10 +26,6 @@ const applicationSchema = new Schema(
       type: String,
       required: true,
     },
-    cv: {
-      type: String,
-      required: true,
-    },
     phone: {
       type: String,
       required: true,

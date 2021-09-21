@@ -50,7 +50,7 @@ const ADD_COMPANY = gql`
   mutation (
     $name: String!
     $city: String!
-    $user_poisition: String!
+    $user_position: String!
     $about: String!
     $logo: String!
     $userId: ID!
@@ -190,7 +190,6 @@ const POST_APPLICATION = gql`
     $email: String!
     $gender: String!
     $phone: String!
-    $cv: String!
   ) {
     post_application(
       jobId: $jobId
@@ -200,7 +199,6 @@ const POST_APPLICATION = gql`
       email: $email
       gender: $gender
       phone: $phone
-      cv: $cv
     ) {
       message
     }
@@ -219,13 +217,14 @@ const DELETE_APPLICATION = gql`
 export {
   REGISTER_USER,
   USER_LOGIN,
+  EDIT_USER,
   ADD_COMPANY,
   EDIT_COMPANY,
   DELETE_COMPANY,
-  SEARCH,
   ADD_JOB,
   EDIT_JOB,
   DELETE_JOB,
+  SEARCH,
   POST_MESSAGE,
   POST_APPLICATION,
   DELETE_APPLICATION,
