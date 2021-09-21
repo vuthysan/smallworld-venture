@@ -39,6 +39,17 @@ const GET_JOB = gql`
         phone
         email
       }
+      applicants {
+        id
+        name
+        userId
+        createdAt
+        additional
+        gender
+        email
+        phone
+        cv
+      }
     }
   }
 `;

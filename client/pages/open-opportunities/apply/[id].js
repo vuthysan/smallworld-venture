@@ -42,17 +42,24 @@ function ApplyNow() {
       additional: values.additional ? values.additional : "",
     };
     console.log(application);
-    // postApp({
-    //   variables: application,
-    // })
-    //   .then(async (res) => {
-    //     await setSubmit(true);
-    //     await message.success(res.data.post_application.message);
-    //     await setSubmit(false);
-    //     await window.location.replace("/open-opportunities");
-    //   })
-    //   .catch((err) => console.log(err));
+    postApp({
+      variables: application,
+    })
+      .then(async (res) => {
+        await setSubmit(true);
+        await message.success(res.data.post_application.message);
+        await setSubmit(false);
+        await window.location.replace("/open-opportunities");
+      })
+      .catch((err) => console.log(err));
   };
+
+  // === check if user aleady applied for this job or not ===
+  let applied;
+  jobData.get_job.applicants.forEach((res) => {
+    res.userId == user.id ? (applied = true) : (applied = false);
+  });
+
   return (
     <div className="opp-container apply-job">
       <Divider orientation="left">Submit Your Application</Divider>
@@ -77,7 +84,16 @@ function ApplyNow() {
         <center>
           {/* ===== check if user have cv yet or not ===== */}
           <Form.Item>
-            {userData.get_user.cv ? (
+            {user && applied ? (
+              <Button
+                id="apply-btn"
+                onClick={() =>
+                  message.warn("You already applied for this job!")
+                }
+              >
+                Submit Application
+              </Button>
+            ) : userData.get_user.cv ? (
               <Button
                 id="apply-btn"
                 type="primary"
