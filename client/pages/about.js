@@ -73,11 +73,13 @@ function About() {
                 {startups.map((startup, i) => {
                   return (
                     <Col key={i} span={7}>
-                      <img
-                        loading="lazy"
-                        src={`/images/about/${startup.logo}`}
-                        alt={`${startup.name} logo`}
-                      />
+                      <a href={startup.url} target="_blank">
+                        <img
+                          loading="lazy"
+                          src={`/images/about/${startup.logo}`}
+                          alt={`${startup.name} logo`}
+                        />
+                      </a>
                     </Col>
                   );
                 })}

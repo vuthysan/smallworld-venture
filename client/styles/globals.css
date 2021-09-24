@@ -73,8 +73,8 @@ h2 span {
 }
 /* === no data icon === */
 .no-data {
+  margin: 100px 0;
   display: flex;
-
   width: 100%;
   justify-content: center;
 }

@@ -16,8 +16,6 @@ function Companies() {
   const { loading, data, refetch } = useQuery(GET_COMPANIES);
   const [delete_company] = useMutation(DELETE_COMPANY);
 
-  // console.log(data);
-
   // === table data management ===
   const columns = [
     {

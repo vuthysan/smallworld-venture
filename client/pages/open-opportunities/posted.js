@@ -39,7 +39,7 @@ function posted() {
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Posted Job</Divider>
       {data && data.get_user.jobs.length < 1 ? (
-        <center>
+        <center className="no-data">
           <Empty />
         </center>
       ) : (

@@ -4,7 +4,7 @@ import moment from "moment";
 
 function SearchJob({ jobs }) {
   const [current, setCurrent] = useState(1);
-  const [jobsPerPage] = useState(2);
+  const [jobsPerPage] = useState(10);
   const onChange = (page) => {
     setCurrent(page);
   };

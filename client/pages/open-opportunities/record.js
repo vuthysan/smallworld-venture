@@ -24,7 +24,7 @@ function Record() {
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Applications Record</Divider>
       {data && data.get_user_applications.length < 1 ? (
-        <center>
+        <center className="no-data">
           <Empty />
         </center>
       ) : (

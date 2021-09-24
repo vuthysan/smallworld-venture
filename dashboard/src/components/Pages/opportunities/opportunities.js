@@ -8,6 +8,7 @@ import { BsTrash, BsPencil } from "react-icons/bs";
 
 // === comps
 import AppLayout from "../../Layout/Layout";
+import MetaTags from "../../../../../client/comps/MetaTags";
 
 function Opportunities() {
   const { loading, data, refetch } = useQuery(GET_OPPORTUNITIES);
@@ -64,6 +65,12 @@ function Opportunities() {
         const { id } = data;
         return (
           <div>
+            <MetaTags
+              title="About Us"
+              description="Smallworld Open-Opportunities is something......!"
+              canonical="https://smallworldventure.com/open-opportunities"
+              thumbnail="https://smallworldventure.com/images/thumbnail/opporunities.png"
+            />
             <Link to={`/admin/edit-opportunity/${id}`}>
               <Tag className="edit-btn">
                 <BsPencil

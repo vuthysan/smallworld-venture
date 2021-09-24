@@ -3,45 +3,51 @@
     "name": "koompi",
     "logo": "KOOMPI.png",
     "url": "https://www.koompi.com"
-  }, {
+  },
+  {
     "name": "selendra",
     "logo": "selendra.png",
     "url": "https://www.selendra.com"
-  },{
+  },
+  {
     "name": "vitaminair",
     "logo": "vitaminair.png",
     "url": "https://www.vitaminair.org"
-  },{
+  },
+  {
     "name": "grood",
     "logo": "grood.png",
     "url": "https://www.getgrood.com"
-  },{
+  },
+  {
     "name": "seavphojivit",
     "logo": "seavphojivit.png",
-    "url": ""
-  },{
+    "url": "https://www.seavphovjivet.com/"
+  },
+  {
     "name": "hospicare",
     "logo": "hospicare.png",
-    "url": ""
+    "url": "https://hospicare.co/"
   },
-  
+
   {
     "name": "fado",
     "logo": "fado.png",
-    "url": ""
-  },{
+    "url": "https://fado168.com/"
+  },
+  {
     "name": "bookmebus",
     "logo": "bookmebus.png",
     "url": "https://bookmebus.com/"
-  },{
+  },
+  {
     "name": "toursanak",
     "logo": "toursanak.png",
-    "url": ""
+    "url": "https://toursanak.com/"
   },
   {
     "name": "codingate",
     "logo": "codingate.png",
     "url": "https://www.codingate.com/"
   }
-  
 ]

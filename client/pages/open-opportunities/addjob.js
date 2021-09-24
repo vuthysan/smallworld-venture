@@ -56,7 +56,7 @@ function addjob() {
           rules={[
             {
               required: true,
-              message: "Please input job position",
+              message: "Please input job position!",
             },
           ]}
         >
@@ -68,7 +68,10 @@ function addjob() {
           rules={[
             {
               required: true,
-              message: "Please select a company!",
+              message:
+                data && data.get_user.companies.length < 1
+                  ? "Please add company first before post a job."
+                  : "Please select a company!",
             },
           ]}
         >

@@ -25,12 +25,11 @@ function Contact() {
   return (
     <>
       <MetaTags
-        title="Contact"
+        title="Open-Opportunities"
         description="We look forward to assisting you at any working hour. There are several startups in the same building, so you just have to know who you are looking for."
         canonical="https://smallworldventure.com/contact"
         thumbnail="https://smallworldventure.com/images/thumbnail/contact.png"
       />
-
       <div className="container">
         <div className="contact-page">
           <Row gutter={50}>

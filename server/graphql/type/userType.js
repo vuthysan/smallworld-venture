@@ -33,9 +33,6 @@ const UserType = new GraphQLObjectType({
         return coms;
       },
     },
-    // === old ===
-    access_token: { type: GraphQLString },
-    refresh_token: { type: GraphQLString },
   }),
 });
 

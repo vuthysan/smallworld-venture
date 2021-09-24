@@ -129,7 +129,7 @@ function AddCompany() {
               rules={[
                 {
                   required: true,
-                  message: "Please input logo!",
+                  message: "Please upload your company's logo!",
                 },
               ]}
             >

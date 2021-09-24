@@ -33,12 +33,12 @@ function companies() {
       </center>
     );
   }
-
+  console.log(data);
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Companies</Divider>
       {data && data.get_user.companies.length < 1 ? (
-        <center>
+        <center className="no-data">
           <Empty />
         </center>
       ) : (
@@ -51,7 +51,12 @@ function companies() {
                   <div className="com-card">
                     {/* === delete compny === */}
                     <Popconfirm
-                      title="Are you sure to delete this job?"
+                      title={() => (
+                        <>
+                          Delete this company will also delete jobs inside it.{" "}
+                          <br /> Are you sure you want to delete this company?
+                        </>
+                      )}
                       onConfirm={() => confirmDelete(id, name)}
                       okText="Yes"
                       cancelText="No"
