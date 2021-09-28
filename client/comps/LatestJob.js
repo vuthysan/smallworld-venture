@@ -12,9 +12,9 @@ function LatestJob() {
 
   if (loading) {
     return (
-      <div className="loading-data">
+      <center className="loading-data">
         <Spin size="large" />
-      </div>
+      </center>
     );
   }
 

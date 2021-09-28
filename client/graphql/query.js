@@ -34,7 +34,7 @@ const GET_JOB = gql`
         user_position
       }
       user {
-        id
+        userId
         name
         phone
         email
@@ -76,9 +76,10 @@ const GET_JOB_APPLICANTS = gql`
 
 // === get employer by id ===
 const GET_USER = gql`
-  query ($id: ID!) {
-    get_user(id: $id) {
+  query {
+    get_user {
       id
+      userId
       name
       email
       phone
@@ -91,8 +92,8 @@ const GET_USER = gql`
 
 // === get employer posted job ===
 const GET_USER_POSTED_JOB = gql`
-  query ($id: ID!) {
-    get_user(id: $id) {
+  query {
+    get_user {
       jobs {
         id
         position
@@ -108,8 +109,8 @@ const GET_USER_POSTED_JOB = gql`
 
 // === get employer's companies ===
 const GET_USER_COMPANIES = gql`
-  query ($id: ID!) {
-    get_user(id: $id) {
+  query {
+    get_user {
       id
       companies {
         id
@@ -165,8 +166,8 @@ const GET_COMPANY_BY_NAME = gql`
 
 // === get jobseeker's applications record ===
 const GET_USER_APPLICATIONS = gql`
-  query ($userId: ID!) {
-    get_user_applications(userId: $userId) {
+  query {
+    get_user_applications {
       id
       createdAt
       job {
@@ -181,7 +182,17 @@ const GET_USER_APPLICATIONS = gql`
   }
 `;
 
+const GET_USERS = gql`
+  query {
+    get_users {
+      name
+      id
+    }
+  }
+`;
+
 export {
+  GET_USERS,
   GET_USER,
   GET_USER_POSTED_JOB,
   GET_USER_APPLICATIONS,

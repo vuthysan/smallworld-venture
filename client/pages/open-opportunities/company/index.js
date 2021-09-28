@@ -33,7 +33,7 @@ function companies() {
       </center>
     );
   }
-  console.log(data);
+
   return (
     <div className="opp-container opp-big-container">
       <Divider orientation="left">Companies</Divider>

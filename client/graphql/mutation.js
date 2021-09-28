@@ -20,26 +20,20 @@ const USER_LOGIN = gql`
 // === edit user info ===
 const EDIT_USER = gql`
   mutation (
-    $id: ID!
     $name: String!
     $email: String!
     $phone: String!
     $gender: String!
     $interest: [String]
     $cv: String
-    $password: String
-    $newpassword: String
   ) {
     edit_user(
-      id: $id
       name: $name
       email: $email
       gender: $gender
       phone: $phone
       interest: $interest
       cv: $cv
-      password: $password
-      newpassword: $newpassword
     ) {
       message
     }
@@ -53,7 +47,6 @@ const ADD_COMPANY = gql`
     $user_position: String!
     $about: String!
     $logo: String!
-    $userId: ID!
     $website: String!
   ) {
     add_company(
@@ -62,7 +55,6 @@ const ADD_COMPANY = gql`
       user_position: $user_position
       about: $about
       logo: $logo
-      userId: $userId
       website: $website
     ) {
       message
@@ -125,7 +117,6 @@ const ADD_JOB = gql`
     $type: [String]!
     $requirements: [String]!
     $descriptions: [String]!
-    $userId: ID!
   ) {
     add_job(
       position: $position
@@ -134,7 +125,6 @@ const ADD_JOB = gql`
       type: $type
       requirements: $requirements
       descriptions: $descriptions
-      userId: $userId
     ) {
       message
     }

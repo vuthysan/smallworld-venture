@@ -38,22 +38,18 @@ const RootMutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
-        password: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: async (_, args) => {
         const existedEmail = await User.findOne({ email: args.email });
         if (existedEmail) {
           throw { message: "User with this email is already existed!" };
         } else {
-          let salt = await bcrypt.genSalt();
-          let hashPassword = await bcrypt.hash(args.password, salt);
           let newUser = new User({
             ...args,
             interest: [],
             phone: "",
             gender: "",
             cv: "",
-            password: hashPassword,
           });
           await newUser.save();
 
@@ -153,44 +149,21 @@ const RootMutation = new GraphQLObjectType({
     edit_user: {
       type: UserType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
         gender: { type: GraphQLString },
         email: { type: GraphQLString },
         phone: { type: GraphQLString },
         interest: { type: GraphQLList(GraphQLString) },
         cv: { type: GraphQLString },
-        password: { type: GraphQLString },
-        newpassword: { type: GraphQLString },
       },
-      resolve: async (_, args) => {
+      resolve: async (_, args, context) => {
         // === find user ===
-        const existedUser = await User.findById(args.id);
-
-        if (args.password) {
-          const validPassword = await bcrypt.compare(
-            args.password,
-            existedUser.password
-          );
-
-          if (!validPassword) {
-            throw { message: "Your old password is incorrect!" };
-          }
-          if (!args.newpassword) {
-            throw "Please input your new password!";
-          }
-          let salt = await bcrypt.genSalt();
-          let hashPassword = await bcrypt.hash(args.newpassword, salt);
-
-          await User.findByIdAndUpdate(args.id, {
+        await User.findOneAndUpdate(
+          { userId: context.id },
+          {
             ...args,
-            password: hashPassword,
-          });
-        } else {
-          await User.findByIdAndUpdate(args.id, {
-            ...args,
-          });
-        }
+          }
+        );
 
         return {
           message: "Done",
@@ -221,12 +194,14 @@ const RootMutation = new GraphQLObjectType({
         website: { type: GraphQLNonNull(GraphQLString) },
         city: { type: GraphQLNonNull(GraphQLString) },
         user_position: { type: GraphQLNonNull(GraphQLString) },
-        userId: { type: GraphQLNonNull(GraphQLID) },
+        // userId: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve: async (_, args) => {
-        let newCom = new Company({ ...args });
-        await newCom.save();
-        return { message: "Company Added!" };
+      resolve: async (_, args, context) => {
+        try {
+          let newCom = new Company({ ...args, userId: context.id });
+          await newCom.save();
+          return { message: "Company Added!" };
+        } catch {}
       },
     },
     // ========== edit company ==========
@@ -311,12 +286,13 @@ const RootMutation = new GraphQLObjectType({
         requirements: { type: GraphQLList(GraphQLString) },
         descriptions: { type: GraphQLList(GraphQLString) },
         company_name: { type: GraphQLNonNull(GraphQLString) },
-        userId: { type: GraphQLNonNull(GraphQLID) },
       },
-      resolve: async (_, args) => {
-        let newJob = new Job({ ...args });
-        newJob.save();
-        return { message: "Job Added!" };
+      resolve: async (_, args, context) => {
+        try {
+          let newJob = new Job({ ...args, userId: context.id });
+          newJob.save();
+          return { message: "Job Added!" };
+        } catch {}
       },
     },
     // ========== edit job ==========
@@ -355,9 +331,8 @@ const RootMutation = new GraphQLObjectType({
         }
       },
     },
-
-    // === job seeker apply for job (post appilication)===
-    post_application: {
+    // === user apply for job ===
+    apply: {
       type: ApplicationType,
       args: {
         jobId: { type: GraphQLNonNull(GraphQLID) },

@@ -86,30 +86,25 @@ const RootQuery = new GraphQLObjectType({
     get_users: {
       type: new GraphQLList(UserType),
       description: "List of users",
-      resolve: async () => {
+      resolve: async (_, __) => {
         const users = await User.find().sort({ createdAt: -1 });
         return users;
       },
     },
+    // ==== get one user ====
     get_user: {
       type: UserType,
-      args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve: async (_, args) => {
-        const user = await User.findById(args.id);
+      resolve: async (_, __, context) => {
+        const user = await User.findOne({ userId: context.id });
         return user;
       },
     },
     // === get user's applications by id ===
     get_user_applications: {
       type: GraphQLList(ApplicationType),
-      args: {
-        userId: { type: GraphQLNonNull(GraphQLID) },
-      },
-      resolve: async (_, args) => {
+      resolve: async (_, args, context) => {
         let apps = await Application.find({
-          userId: args.userId,
+          userId: context.id,
         });
         return apps;
       },

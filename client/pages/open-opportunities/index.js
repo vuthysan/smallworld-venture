@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import MetaTags from "../../comps/MetaTags";
-import UserContext from "../../context/userContext";
+// import UserContext from "../../context/userContext";
+import AuthContext from "../../context/auth";
 import { useMutation } from "@apollo/client";
 import { SEARCH } from "../../graphql/mutation";
+import { GET_USERS } from "../../graphql/query";
 import { Row, Col, Input, Dropdown, Menu } from "antd";
 
 // ========== comps ==========
@@ -45,7 +47,8 @@ const addMenu = (
 
 function index() {
   const [current, setCurrent] = useState(0);
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const { token } = useContext(AuthContext);
   const [searched, setSearched] = useState();
 
   // === search job grahql function ===
@@ -114,7 +117,8 @@ function index() {
                   potenti ameutpat. Ac potenti amet, cras magna.
                 </p>
                 {/* =========== signin and signup menu  ========== */}
-                <DropDownMenu user={user} />
+
+                <DropDownMenu token={token} />
               </Col>
               <Col xs={0} sm={0} md={6}>
                 <img
@@ -128,7 +132,7 @@ function index() {
         {/*  === end header ===  */}
         <div className="container" id="joblist">
           <div className="search-job">
-            {user && user.loggedIn ? (
+            {token !== "" ? (
               <Dropdown overlay={addMenu} placement="topCenter" arrow>
                 <img
                   className="addjob-addcom"

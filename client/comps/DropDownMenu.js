@@ -1,9 +1,9 @@
 import React from "react";
 import { Dropdown, Menu } from "antd";
-function DropDownMenu({ user }) {
+function DropDownMenu({ token }) {
   return (
     <React.Fragment>
-      {user && user.loggedIn ? (
+      {token !== "" ? (
         <button className="opportunities-btn view-openning">
           <a href="#joblist">View Openning</a>
         </button>

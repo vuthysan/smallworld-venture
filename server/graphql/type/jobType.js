@@ -38,7 +38,7 @@ const JobType = new GraphQLObjectType({
     user: {
       type: UserType,
       resolve: async (parent) => {
-        const emp = await User.findById(parent.userId);
+        const emp = await User.findOne({ userId: parent.userId });
         return emp;
       },
     },

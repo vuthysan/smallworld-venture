@@ -1,13 +1,10 @@
 import React from "react";
-import axios from "axios";
 
 function SignOut() {
   const handleLogout = async () => {
-    // const res = await axios.get(
-    //   "https://backend.smallworldventure.com/user/logout"
-    // );
-    await axios.get("http://localhost:5000/user/logout");
-    window.location.replace("/open-opportunities");
+    await localStorage.removeItem("access_token");
+    await localStorage.removeItem("refresh_token");
+    await window.location.replace("/open-opportunities");
   };
 
   return (

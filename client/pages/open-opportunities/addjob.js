@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import UserContext from "../../context/userContext";
+// import UserContext from "../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USER_COMPANIES } from "../../graphql/query";
 import { ADD_JOB } from "../../graphql/mutation";
@@ -13,16 +13,15 @@ const { Option } = Select;
 
 function addjob() {
   const [form] = Form.useForm();
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const [btnState, setBtnState] = useState(false);
 
   // === add new job function ===
   const [addJob] = useMutation(ADD_JOB);
 
   // === get employer's companies ===
-  const { loading, data } = useQuery(GET_USER_COMPANIES, {
-    variables: { id: user && user.id },
-  });
+  const { loading, data } = useQuery(GET_USER_COMPANIES);
+
   if (loading) {
     return (
       <center className="loading-data">
@@ -35,7 +34,6 @@ function addjob() {
     const newJob = {
       ...values,
       salary: values.salary ? values.salary : "Negotable",
-      userId: user.id,
     };
     addJob({
       variables: newJob,

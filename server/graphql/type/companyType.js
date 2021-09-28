@@ -25,7 +25,7 @@ const CompanyType = new GraphQLObjectType({
     user: {
       type: UserType,
       resolve: async (parent) => {
-        let em = await User.findById(parent.userId);
+        let em = await User.findOne({ userId: parent.userId });
         return em;
       },
     },

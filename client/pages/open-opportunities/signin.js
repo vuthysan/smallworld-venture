@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
+import axios from "axios";
 import { useMutation } from "@apollo/client";
 import UserContext from "../../context/userContext";
 import { USER_LOGIN } from "../../graphql/mutation";
 import { Row, Col, Button, Form, Input, message } from "antd";
 // === comps ===
 import SignFooter from "../../comps/Layout/SignFooter";
+
+const ACCOUNTS_URL = process.env.ACCOUNTS_URL;
 
 function JobSeekerSignIn() {
   const [form] = Form.useForm();
@@ -13,16 +16,27 @@ function JobSeekerSignIn() {
   const [login] = useMutation(USER_LOGIN);
 
   const onFinish = async (values) => {
-    await login({
-      variables: values,
-    })
+    axios
+      .post(`${ACCOUNTS_URL}/login`, { ...values })
       .then(async (res) => {
-        await message.success(res.data.login.message);
-        window.location.replace("/open-opportunities");
+        const { access_token, refresh_token } = res.data;
+        await localStorage.setItem("access_token", access_token);
+        await localStorage.setItem("refresh_token", refresh_token);
+        await message.success("ចូលទៅគណនីដោយទទួល ជោគជ័យ");
+        await window.location.replace("/open-opportunities");
       })
-      .catch(async (err) => {
-        await message.error("Email or password is incorrect!");
-      });
+      .catch((err) => console.log(err));
+
+    // await login({
+    //   variables: values,
+    // })
+    //   .then(async (res) => {
+    //     await message.success(res.data.login.message);
+    //     window.location.replace("/open-opportunities");
+    //   })
+    //   .catch(async (err) => {
+    //     await message.error("Email or password is incorrect!");
+    //   });
   };
   return (
     <>

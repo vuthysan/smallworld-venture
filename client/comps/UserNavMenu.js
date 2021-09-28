@@ -1,18 +1,22 @@
 import React, { useContext } from "react";
-import UserContext from "../context/userContext";
+// import UserContext from "../context/userContext";
+import AuthContext from "../context/auth";
 import { Dropdown, Menu } from "antd";
 
 // === comps ===
 import SignOut from "./SignOut";
 
 function UserNavMenu() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const { token } = useContext(AuthContext);
 
   // === user menu ===
-  const UserMenu = user && user.loggedIn && (
+  const UserMenu = token !== "" && (
     <Menu className="user-menu">
-      <p>{user.name.toUpperCase()}</p>
-      <p className="email">{user.email}</p>
+      {/* <p>{user.name.toUpperCase()}</p>
+      <p className="email">{user.email}</p> */}
+      <p>testing</p>
+      <p className="email">email@gmail.com</p>
       <Menu.Item>
         <a
           className="menu"
@@ -82,7 +86,7 @@ function UserNavMenu() {
 
   return (
     <>
-      {user && user.loggedIn && (
+      {token !== "" && (
         <Dropdown
           overlay={UserMenu}
           placement="bottomRight"

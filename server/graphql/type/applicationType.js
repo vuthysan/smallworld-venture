@@ -21,7 +21,7 @@ const ApplicationType = new GraphQLObjectType({
     cv: {
       type: GraphQLString,
       resolve: async (parent) => {
-        const user = await User.findById(parent.userId);
+        const user = await User.findOne({ userId: parent.userId });
         return user.cv;
       },
     },

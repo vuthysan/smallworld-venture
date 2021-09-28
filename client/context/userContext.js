@@ -5,13 +5,9 @@ const UserContext = createContext();
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState(undefined);
-
+  const API_URL = process.env.API_URL1;
   async function getLoggedIn() {
-    // const res = await axios.get(
-    //   "https://backend.smallworldventure.com/user/verifyToken"
-    // );
-
-    const res = await axios.get("http://localhost:5000/user/verifyToken");
+    const res = await axios.get(API_URL + "/user/verifyToken");
     const data = await res.data;
     setUser(data);
   }

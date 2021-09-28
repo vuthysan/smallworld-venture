@@ -9,19 +9,19 @@ const UserType = new GraphQLObjectType({
   name: "user",
   fields: () => ({
     id: { type: GraphQLID },
+    userId: { type: GraphQLID },
     name: { type: GraphQLString },
     gender: { type: GraphQLString },
     phone: { type: GraphQLString },
     email: { type: GraphQLString },
     interest: { type: GraphQLList(GraphQLString) },
     cv: { type: GraphQLString },
-    password: { type: GraphQLString },
     message: { type: GraphQLString },
     // ==== user's jobs ===
     jobs: {
       type: GraphQLList(require("./jobType")),
       resolve: async (parent) => {
-        let jobs = await Job.find({ userId: parent.id });
+        let jobs = await Job.find({ userId: parent.userId });
         return jobs;
       },
     },
@@ -29,7 +29,7 @@ const UserType = new GraphQLObjectType({
     companies: {
       type: GraphQLList(require("./companyType")),
       resolve: async (parent) => {
-        let coms = await Company.find({ userId: parent.id });
+        let coms = await Company.find({ userId: parent.userId });
         return coms;
       },
     },

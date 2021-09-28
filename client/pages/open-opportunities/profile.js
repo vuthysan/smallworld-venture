@@ -34,14 +34,10 @@ function profile() {
   const [btnDisable, setDisable] = useState(true);
 
   // === edit jobseeker function ===
-  const [editUser] = useMutation(EDIT_USER, {
-    variables: { id: user && user.id },
-  });
+  const [editUser] = useMutation(EDIT_USER);
 
   //   === get jobseeker by id ===
-  const { loading, data, refetch } = useQuery(GET_USER, {
-    variables: { id: user && user.id },
-  });
+  const { loading, data, refetch } = useQuery(GET_USER);
 
   if (loading) {
     return (
@@ -106,6 +102,9 @@ function profile() {
     } else {
       // === remove verify from values ===
       delete values.verify;
+      delete values.password;
+      delete values.newpassword;
+
       editUser({
         variables: { ...values },
       })

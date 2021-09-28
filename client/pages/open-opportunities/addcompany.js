@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import UserContext from "../../context/userContext";
+// import UserContext from "../../context/userContext";
 import axios from "axios";
 import { useMutation } from "@apollo/client";
 import { ADD_COMPANY } from "../../graphql/mutation";
@@ -14,7 +14,7 @@ function addcompany() {
   // https://backend.smallworldventure.com
   const url = "http://localhost:5000";
   const [form] = Form.useForm();
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   // console.log(user);
 
   const [state, setState] = useState({
@@ -85,7 +85,6 @@ function addcompany() {
       ...values,
       website: website ? website : "N/A",
       logo: state.imageUrl,
-      userId: user.id,
     };
     // console.log(newCom);
     addCom({

@@ -1,16 +1,14 @@
 import React, { useContext } from "react";
-import UserContext from "../../context/userContext";
+// import UserContext from "../../context/userContext";
 import { useQuery } from "@apollo/client";
 import { GET_USER_APPLICATIONS } from "../../graphql/query";
 import { Divider, Row, Col, Spin, Empty } from "antd";
 import moment from "moment";
 function Record() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   // === get job seeker applications by id ===
-  const { loading, data } = useQuery(GET_USER_APPLICATIONS, {
-    variables: { userId: user && user.id },
-  });
+  const { loading, data } = useQuery(GET_USER_APPLICATIONS);
 
   if (loading) {
     return (

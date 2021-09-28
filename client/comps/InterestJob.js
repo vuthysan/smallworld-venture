@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_JOBS, GET_USER } from "../graphql/query";
-import UserContext from "../context/userContext";
+import AuthContext from "../context/auth";
 import { Row, Col, Pagination, Spin, Empty } from "antd";
 import moment from "moment";
 
@@ -9,14 +9,10 @@ function InterestJob() {
   const [current, setCurrent] = useState(1);
   const [jobsPerPage] = useState(10);
 
-  const { user } = useContext(UserContext);
+  const { token } = useContext(AuthContext);
 
   // === get jobseeker info(interest) ===
-  const { loading: seekerLoading, data: seekerData } = user
-    ? useQuery(GET_USER, {
-        variables: { id: user && user.id },
-      })
-    : "";
+  const { loading: seekerLoading, data: seekerData } = useQuery(GET_USER);
 
   // === get all jobs ===
   const { loading, data } = useQuery(GET_JOBS);
@@ -31,19 +27,18 @@ function InterestJob() {
 
   // === filter jobs for jobseeker's interest only ===
   let interestJobs;
-  if (user && user.loggedIn) {
+  if (token !== "") {
     interestJobs =
       data &&
       data.get_jobs.filter((res) => {
         const { type } = res;
         let match = false;
         type.forEach((t) => {
-          user &&
-            seekerData.get_user.interest.forEach((j) => {
-              if (t === j) {
-                match = true;
-              }
-            });
+          seekerData.get_user.interest.forEach((j) => {
+            if (t === j) {
+              match = true;
+            }
+          });
         });
         if (match) {
           return res;
@@ -61,7 +56,7 @@ function InterestJob() {
   return (
     <>
       <Row wrap={true} gutter={[0, 5]}>
-        {user && user.loggedIn ? (
+        {token !== "" ? (
           currentJobs.length > 0 ? (
             currentJobs.map((res) => {
               const { position, company, createdAt, id } = res;
@@ -126,7 +121,7 @@ function InterestJob() {
         )}
       </Row>
 
-      {user && user.loggedIn && interestJobs.length > 0 ? (
+      {token !== "" && interestJobs.length > 0 ? (
         <Pagination
           onChange={(page) => setCurrent(page)}
           size="small"
