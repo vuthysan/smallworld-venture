@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 // import UserContext from "../context/userContext";
+import { GET_USER } from "../graphql/query";
+import { useQuery } from "@apollo/client";
 import AuthContext from "../context/auth";
-import { Dropdown, Menu } from "antd";
+import { Dropdown, Menu, Spin } from "antd";
 
 // === comps ===
 import SignOut from "./SignOut";
@@ -9,14 +11,21 @@ import SignOut from "./SignOut";
 function UserNavMenu() {
   // const { user } = useContext(UserContext);
   const { token } = useContext(AuthContext);
+  const { loading, data } = useQuery(GET_USER);
+
+  if (loading) {
+    return (
+      <center className="loading-data">
+        <Spin size="large" />
+      </center>
+    );
+  }
 
   // === user menu ===
   const UserMenu = token !== "" && (
     <Menu className="user-menu">
-      {/* <p>{user.name.toUpperCase()}</p>
-      <p className="email">{user.email}</p> */}
-      <p>testing</p>
-      <p className="email">email@gmail.com</p>
+      <p>{data.get_user.name.toUpperCase()}</p>
+      <p className="email">{data.get_user.email}</p>
       <Menu.Item>
         <a
           className="menu"

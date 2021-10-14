@@ -133,7 +133,12 @@ function index() {
         <div className="container" id="joblist">
           <div className="search-job">
             {token !== "" ? (
-              <Dropdown overlay={addMenu} placement="topCenter" arrow>
+              <Dropdown
+                overlay={addMenu}
+                placement="bottomRight"
+                arrow
+                trigger="click"
+              >
                 <img
                   className="addjob-addcom"
                   width="40"
@@ -155,14 +160,10 @@ function index() {
             />
           </div>
 
-          <button id="latest-btn" className="opportunities-btn" onClick={next}>
+          <button id="latest-btn" onClick={next}>
             Latest Job
           </button>
-          <button
-            id="interest-btn"
-            className="opportunities-btn not-active"
-            onClick={prev}
-          >
+          <button id="interest-btn" className="not-active" onClick={prev}>
             Your Interest
           </button>
           {/* === job list (latest or interest jobs) === */}

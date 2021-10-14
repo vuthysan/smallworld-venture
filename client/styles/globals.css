@@ -85,13 +85,19 @@ h2 span {
 .ant-menu-item-selected a:hover {
   color: #015e98;
 }
+
+/* ==== user's menu ==== */
 #user-menu:hover {
   cursor: pointer;
 }
 .user-menu {
-  width: 270px;
+  width: 280px;
   border-radius: 4px;
   padding: 10px 0;
+}
+.user-menu a {
+  display: flex;
+  align-items: center;
 }
 .user-menu p {
   margin: 0;
@@ -644,7 +650,7 @@ input[type="text"]:focus {
   margin: 20px 0;
 }
 .open-banner h1 {
-  font-size: 30px;
+  font-size: 30 px;
   font-weight: 800;
 }
 .open-banner h1 span:first-child {
@@ -702,6 +708,7 @@ input[type="text"]:focus {
 .search-job img:hover {
   cursor: pointer;
 }
+
 .addjob-img,
 .addcom-img {
   margin-right: 15px;
@@ -735,6 +742,13 @@ input[type="text"]:focus {
 #latest-btn,
 #interest-btn {
   margin: 0;
+  border: none;
+  border-radius: 8px;
+  width: 140px;
+  height: 40px;
+  font-size: 18px;
+  color: black;
+  background: linear-gradient(180deg, #fce34b, #eac101);
 }
 #interest-btn {
   margin-left: -10px;
@@ -1402,7 +1416,6 @@ input[type="text"]:focus {
   .nav-menu {
     display: none;
   }
-
   .open-menu-btn {
     display: block;
     z-index: 1;
@@ -1419,6 +1432,16 @@ input[type="text"]:focus {
   .open-banner {
     padding: 90px 0 50px 0;
   }
+  .open-banner h1 {
+    font-size: 30px;
+  }
+  .opportunities-btn {
+    width: 130px;
+    height: 38px;
+  }
+  .view-openning {
+    width: 165px;
+  }
   .about .about-info {
     margin: 50px 0 0px 2.5% !important;
   }
@@ -1426,9 +1449,26 @@ input[type="text"]:focus {
     display: flex;
     justify-content: center !important;
   }
+  .job-card .position {
+    font-size: 18px;
+  }
+  .job-card .company,
+  .job-card .city,
+  .job-card .date {
+    font-size: 16px !important;
+  }
+  .right-sign a {
+    font-size: 18px;
+  }
+  .no-data a {
+    font-size: 18px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
+  #user-menu {
+    right: 2.5%;
+  }
   .smallworld .info {
     padding: 30px 5%;
   }
@@ -1445,8 +1485,24 @@ input[type="text"]:focus {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 30px;
   }
+  .user-menu img {
+    width: 25px;
+  }
+  .opportunities-btn {
+    width: 120px;
+    margin-right: 10px;
+  }
+  .view-openning {
+    width: 165px;
+  }
+  .search-job {
+    margin: 35px 0;
+  }
 }
 @media only screen and (max-width: 768px) {
+  #user-menu {
+    right: 2.5%;
+  }
   .works-content {
     margin: 40px 0;
   }
@@ -1457,10 +1513,19 @@ input[type="text"]:focus {
   .idea-banner {
     background-position: unset;
   }
-
   .directors {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 40px;
+  }
+  .job-list {
+    margin: 35px 0;
+  }
+  .job-card {
+    background-color: white;
+    padding: 15px 17px;
+  }
+  .search-job .ant-btn {
+    width: 110px;
   }
 }
 @media only screen and (max-width: 700px) {
@@ -1496,7 +1561,19 @@ input[type="text"]:focus {
   }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
+  .user-menu {
+    width: 240px;
+  }
+  .user-menu p {
+    padding-left: 15px;
+  }
+  .user-menu .menu {
+    padding: 12px 15px;
+  }
+  #user-menu {
+    right: 5%;
+  }
   h1 {
     font-size: 30px !important;
   }
@@ -1507,5 +1584,68 @@ input[type="text"]:focus {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 50px;
     grid-row-gap: 30px;
+  }
+  .opportunities-btn {
+    width: 100px;
+    height: 35px;
+    border-radius: 6px;
+  }
+
+  .opportunities-btn a {
+    font-size: 16px;
+  }
+  .view-openning {
+    width: 145px;
+  }
+  .search-job img {
+    width: 30px;
+    height: 30px;
+  }
+  .search-job .ant-input-affix-wrapper-lg {
+    padding: 5px 11px;
+  }
+  .search-job input {
+    font-size: 16px;
+  }
+  .search-job .ant-btn {
+    height: 38px;
+    width: 100px;
+    font-size: 16px;
+  }
+  .ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  .ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button {
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+  }
+  #latest-btn,
+  #interest-btn {
+    border-radius: 6px;
+    width: 115px;
+    height: 35px;
+    font-size: 16px;
+  }
+  .no-data p,
+  .no-data a {
+    font-size: 16px;
+  }
+  .no-data {
+    margin: 50px 0;
+  }
+  .job-card .apply-btn {
+    width: 100px;
+    height: 30px;
+  }
+
+  .job-card .apply-btn a {
+    font-size: 14px;
+  }
+  .ant-dropdown a {
+    font-size: 16px !important;
   }
 }

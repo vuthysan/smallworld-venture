@@ -9,14 +9,13 @@ function DropDownMenu({ token }) {
         </button>
       ) : (
         <>
-          <button className="opportunities-btn">
-            <a href="/open-opportunities/signin">Sign In</a>
-          </button>
-
-          <button className="opportunities-btn">
-            {" "}
-            <a href="/open-opportunities/signup">Sign Up</a>
-          </button>
+          {" "}
+          <a href="/open-opportunities/signin">
+            <button className="opportunities-btn">Sign In</button>
+          </a>
+          <a href="/open-opportunities/signup">
+            <button className="opportunities-btn"> Sign Up</button>
+          </a>
         </>
       )}
     </React.Fragment>

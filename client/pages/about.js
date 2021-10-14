@@ -109,28 +109,6 @@ function About() {
                 );
               })}
             </div>
-            {/* <Row className="directors" gutter={[24, 24]}>
-              {data.map((res) => {
-                const { fullName, photo, id, position } = res;
-                return (
-                  <Col
-                    // className="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-8 ant-col-xl-5"
-                    xs={12}
-                    sm={12}
-                    md={8}
-                    xl={5}
-                    xxl={5}
-                    key={id}
-                  >
-                    <div className="directors-back">
-                      <img src={photo} alt={fullName} />
-                      <h3>{fullName}</h3>
-                      <p>{position}</p>
-                    </div>
-                  </Col>
-                );
-              })}
-            </Row> */}
           </div>
         </div>
         <div className="container">
@@ -149,14 +127,16 @@ function About() {
                 align="midle"
               >
                 {partners.map((partner) => {
-                  const { photo, name, id } = partner;
+                  const { photo, name, id, url } = partner;
                   return (
                     <Col xs={8} sm={8} md={6} key={id}>
-                      <img
-                        src={photo}
-                        alt={`${name} logo`}
-                        className="img-responsive"
-                      />
+                      <a href={url} target="_blank">
+                        <img
+                          src={photo}
+                          alt={`${name} logo`}
+                          className="img-responsive"
+                        />
+                      </a>
                     </Col>
                   );
                 })}

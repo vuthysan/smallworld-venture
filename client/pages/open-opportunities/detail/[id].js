@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import UserContext from "../../../context/userContext";
+// import UserContext from "../../../context/userContext";
 import AuthContext from "../../../context/auth";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
@@ -8,12 +8,13 @@ import { Row, Col, Divider, Spin, message } from "antd";
 import moment from "moment";
 function Position() {
   const { id } = useRouter().query;
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
   const { token } = useContext(AuthContext);
 
   // === get job detail by job id ===
   const { loading, data } = useQuery(GET_JOB, { variables: { id } });
   const { loading: userLoading, data: userData } = useQuery(GET_USER);
+
   if (loading || userLoading) {
     return (
       <center className="loading-data">
@@ -21,7 +22,6 @@ function Position() {
       </center>
     );
   }
-  const { userId } = userData.get_user;
 
   return (
     <div className="position-detail">
@@ -43,11 +43,13 @@ function Position() {
                   .unix(data.get_job.createdAt / 1000)
                   .format("MMMM-DD-YYYY")}`}</p>
                 <button className="apply-btn">
-                  {token !== "" && userId !== data.get_job.user.userId ? (
+                  {token !== "" &&
+                  userData.get_user.userId !== data.get_job.user.userId ? (
                     <a href={"/open-opportunities/apply/" + data.get_job.id}>
                       Apply Now
                     </a>
-                  ) : token !== "" && data.get_job.user.userId == userId ? (
+                  ) : token !== "" &&
+                    data.get_job.user.userId == userData.get_user.userId ? (
                     <a
                       href="#"
                       onClick={() => {

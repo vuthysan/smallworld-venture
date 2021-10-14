@@ -1,16 +1,20 @@
 [
-    {
-        "id": "1",
-        "photo": "/images/about/Doer.png",
-        "name": "doer"
-    },
-    {
-        "id": "2",
-        "photo": "/images/about/sabay.png",
-        "name": "sabay"
-    },{
-        "id": "3",
-        "photo": "/images/about/ISI.png",
-        "name": "ISI"
-    }
+  {
+    "id": "1",
+    "photo": "/images/about/Doer.png",
+    "name": "doer",
+    "url": "https://doersasean.com/"
+  },
+  {
+    "id": "2",
+    "photo": "/images/about/sabay.png",
+    "name": "sabay",
+    "url": "https://sabay.com/"
+  },
+  {
+    "id": "3",
+    "photo": "/images/about/ISI.png",
+    "name": "ISI",
+    "url": "https://www.isigroup.com.kh/#1"
+  }
 ]

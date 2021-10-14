@@ -61,7 +61,7 @@ function InterestJob() {
             currentJobs.map((res) => {
               const { position, company, createdAt, id } = res;
               return (
-                <Col key={id} xs={24} sm={24} md={14}>
+                <Col key={id} xs={24} sm={24} md={14} lg={13}>
                   <Row
                     className="job-card"
                     align="middle"

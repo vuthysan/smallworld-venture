@@ -34,7 +34,7 @@ function LatestJob() {
         {currentJobs.map((res) => {
           const { id, position, company, createdAt } = res;
           return (
-            <Col key={id} xs={24} sm={24} md={14}>
+            <Col key={id} xs={24} sm={24} md={16} lg={13}>
               <Row className="job-card" align="middle" justify="space-between">
                 <Col>
                   <a
@@ -48,7 +48,7 @@ function LatestJob() {
                     href={`/open-opportunities/${company.name.toLowerCase()}`}
                     className="company"
                   >
-                    {company.name.toUpperCase()}
+                    {company.name}
                   </a>
                   <br />
                   <p className="city">{company.city}</p>
