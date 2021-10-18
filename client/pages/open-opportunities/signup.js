@@ -29,7 +29,7 @@ function JobSeekerSignUp() {
   };
 
   return (
-    <Row justify="center" align="middle" className="sign">
+    <Row justify="center" align="middle" className="sign sign-up">
       <Col className="left-sign">
         <center>
           <a href="/open-opportunities/">

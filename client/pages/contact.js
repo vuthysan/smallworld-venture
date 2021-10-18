@@ -136,6 +136,7 @@ function Contact() {
             Phnom, Khan Daun Penh
           </p>
         </Col>
+
         <Col xs={24} sm={24} md={12} style={{ lineHeight: "0" }}>
           {" "}
           <iframe

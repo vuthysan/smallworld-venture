@@ -34,7 +34,7 @@ function Position() {
                 <a
                   href={`/open-opportunities/${data.get_job.company.name.toLowerCase()}`}
                 >
-                  {data.get_job.company.name.toUpperCase()}
+                  {data.get_job.company.name}
                 </a>
                 <p className="salary">{`Salary: ${data.get_job.salary}`}</p>
               </Col>

@@ -48,7 +48,7 @@ function posted() {
             data.get_user.jobs.map((res) => {
               const { company, id, createdAt, position } = res;
               return (
-                <Col key={id} xs={24} sm={12} md={6}>
+                <Col key={id} xs={24} sm={24} md={12} lg={8} xxl={6}>
                   <div className="card">
                     <Popconfirm
                       title="Are you sure to delete this job?"
@@ -62,9 +62,10 @@ function posted() {
                     </Popconfirm>
                     <p className="position">{position}</p>
                     <p className="company">{company.name.toUpperCase()}</p>
-                    <p className="city">{`${company.city}, ${moment
-                      .unix(createdAt / 1000)
-                      .format("MMM-DD-YYYY")}`}</p>
+                    <p className="city">{company.city}</p>
+                    <p className="city">
+                      {moment.unix(createdAt / 1000).format("MMM-DD-YYYY")}
+                    </p>
                     <button className="view-btn">
                       <a href={"/open-opportunities/job/" + id}>View Job</a>
                     </button>

@@ -47,7 +47,7 @@ function companies() {
             data.get_user.companies.map((res) => {
               const { id, name, createdAt, city, logo } = res;
               return (
-                <Col key={id} md={6}>
+                <Col key={id} xs={24} sm={12} md={12} lg={8} xxl={6}>
                   <div className="com-card">
                     {/* === delete compny === */}
                     <Popconfirm

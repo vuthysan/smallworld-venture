@@ -29,7 +29,7 @@ function Company() {
           {/* === top banner === */}
           <div className="com-banner">
             <div className="container">
-              <Row justify="space-between" align="middle">
+              <Row justify="space-between" gutter={[0, 15]} align="middle">
                 <Col>
                   <h1>{data.get_company.name.toUpperCase()}</h1>
                   <p className="city">{data.get_company.city}</p>
@@ -46,9 +46,10 @@ function Company() {
                   />
                 </Col>
               </Row>
-              <Row justify="space-between" align="middle">
-                <Col md={10}>
+              <Row className="about-com" justify="space-between" align="start">
+                <Col xs={24} md={10}>
                   <p>{data.get_company.about}</p>
+                  <div className="line"></div>
                 </Col>
                 <Col>
                   <p className="job-count">{data.get_company.jobs.length}</p>
@@ -59,16 +60,15 @@ function Company() {
                   )}
                 </Col>
               </Row>
-              <div className="line"></div>
             </div>
           </div>
           {/* === end top banner === */}
           {/* === webste === */}
           <div className="container">
-            <h2>Website</h2>
+            <h3>Website</h3>
             <a>{data.get_company.website}</a>
             {/* === contact === */}
-            <h2>Contact Information</h2>
+            <h3>Contact Information</h3>
             <Row align="middle" gutter={60}>
               <Col>
                 <p>{data.get_company.user.name.toUpperCase()}</p>
@@ -97,7 +97,7 @@ function Company() {
               </Col>
             </Row>
             {/* === job available === */}
-            <h2>Company Job Available</h2>
+            <h3>Company Job Available</h3>
             <Row gutter={[0, 5]}>
               {data.get_company.jobs.map((res) => {
                 const { id, position } = res;

@@ -866,7 +866,7 @@ input[type="text"]:focus {
 .com-detail p {
   margin: 0;
 }
-.com-detail h2 {
+.com-detail h3 {
   font-weight: 600;
   margin-top: 40px;
 }
@@ -885,9 +885,10 @@ input[type="text"]:focus {
 .com-banner .job-count {
   color: #015e98;
   font-size: 40px;
+  font-weight: 600;
 }
 .com-banner .line {
-  margin-top: 30px;
+  margin-top: 20px;
   height: 9px;
   background: linear-gradient(180deg, #fce34b, #eac101);
 }
@@ -915,7 +916,7 @@ input[type="text"]:focus {
   color: black;
   margin: 0 5px;
 }
-/* === employer all page design === */
+/* === user all page design === */
 .opp-big-container {
   margin: 50px 12.5% !important;
 }
@@ -923,7 +924,7 @@ input[type="text"]:focus {
   margin: 20px 0;
 }
 .opp-container {
-  margin: 50px 23%;
+  margin: 50px 25%;
   padding: 30px 50px;
   border-radius: 20px;
   background: white;
@@ -958,14 +959,17 @@ input[type="text"]:focus {
 .opp-container .upload-logo-btn {
   background: none !important;
   margin: 20px 0;
+
   color: black !important;
 }
 .opp-container .ant-input,
 .opp-container .ant-select-selector {
-  height: 40px;
   margin: 10px 0;
   font-size: 18px;
   border-radius: 4px !important;
+}
+.opp-container .ant-input {
+  height: 40px;
 }
 .opp-container textarea {
   height: 140px !important;
@@ -1232,7 +1236,7 @@ input[type="text"]:focus {
 }
 #sign-btn {
   font-size: 18px;
-  border: 2 px solid white;
+  border: 1px solid white;
   color: white;
   background: none;
   width: 160px;
@@ -1277,7 +1281,7 @@ input[type="text"]:focus {
   background-color: #015e98;
   color: white;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 19px;
   height: 40px;
 }
 .sign-footer {
@@ -1429,6 +1433,7 @@ input[type="text"]:focus {
   .p-description {
     width: 100%;
   }
+  /* ==== opportunities home page ==== */
   .open-banner {
     padding: 90px 0 50px 0;
   }
@@ -1462,6 +1467,24 @@ input[type="text"]:focus {
   }
   .no-data a {
     font-size: 18px;
+  }
+  /* === position & company detail page === */
+  .position-detail h1,
+  .com-detail h1 {
+    font-size: 30px;
+  }
+  .position-detail li {
+    font-size: 18px;
+  }
+  .com-banner .job-count {
+    font-size: 40px !important;
+  }
+  /* === user menu all page === */
+  .opp-container {
+    margin: 50px 18%;
+  }
+  .opp-big-container {
+    margin: 50px 5% !important;
   }
 }
 
@@ -1498,6 +1521,21 @@ input[type="text"]:focus {
   .search-job {
     margin: 35px 0;
   }
+  /* === sign page === */
+  .left-sign,
+  .right-sign {
+    width: 400px;
+    height: 600px;
+  }
+  .right-sign h1 {
+    font-size: 30px;
+  }
+  .sign-up .sign-footer {
+    display: none;
+  }
+  .left-sign {
+    padding: 120px 30px 0 30px;
+  }
 }
 @media only screen and (max-width: 768px) {
   #user-menu {
@@ -1526,6 +1564,36 @@ input[type="text"]:focus {
   }
   .search-job .ant-btn {
     width: 110px;
+  }
+  /* === position & company detail page === */
+  .position-detail h1,
+  .com-detail h1 {
+    font-size: 25px !important;
+  }
+  .position-detail li {
+    font-size: 18px;
+  }
+  .position-detail h3,
+  .com-detail h3 {
+    margin-top: 30px;
+  }
+  /* === sign page === */
+  .left-sign,
+  .right-sign {
+    width: 350px;
+  }
+  #sign-btn {
+    width: 140px;
+  }
+  #sign-btn a {
+    font-size: 18px;
+  }
+  .right-sign {
+    padding: 0 20px;
+  }
+  /* === user menu all page === */
+  .opp-container {
+    margin: 50px 6%;
   }
 }
 @media only screen and (max-width: 700px) {
@@ -1647,5 +1715,73 @@ input[type="text"]:focus {
   }
   .ant-dropdown a {
     font-size: 16px !important;
+  }
+  /* === position detail page === */
+  .position-detail h1 {
+    font-size: 25px !important;
+  }
+  .position-detail li {
+    font-size: 16px;
+  }
+  .position-detail li::before {
+    width: 1em;
+  }
+  .com-detail h1 {
+    font-size: 25px !important;
+  }
+  .com-banner .job-count {
+    font-size: 30px !important;
+  }
+  .com-detail .about-com {
+    margin-top: 20px;
+  }
+  .com-banner {
+    margin-bottom: 30px;
+  }
+  .com-banner .line {
+    height: 5px;
+    margin: 20px 0;
+  }
+  /* === sign page === */
+  .left-sign {
+    display: none;
+  }
+  .right-sign {
+    width: 90%;
+    height: 540px;
+    border-radius: 8px;
+    padding: 0 15px;
+  }
+  .sign-up .right-sign h1 {
+    margin-top: 30px !important;
+  }
+  .sign-up .right-sign label {
+    margin: 7px 0 !important;
+  }
+  .right-sign h1 {
+    margin-top: 50px !important;
+  }
+  .right-sign a,
+  .right-sign .ant-btn,
+  .right-sign input[type="text"],
+  .right-sign input[type="password"],
+  .right-sign input[type="search"],
+  .right-sign textarea,
+  .right-sign label,
+  .opp-container label,
+  .opp-container .ant-input,
+  .opp-container .ant-btn,
+  .opp-container .ant-select-selector,
+  .opp-container .upload-logo-btn {
+    font-size: 16px !important;
+  }
+  /* === user menu all page === */
+  .opp-container {
+    margin: 40px 4% !important;
+    padding: 20px 20px;
+  }
+
+  .outter-card {
+    margin: 20px 0 !important;
   }
 }

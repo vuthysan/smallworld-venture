@@ -31,7 +31,7 @@ function Record() {
             data.get_user_applications.map((res) => {
               const { id, createdAt, job } = res;
               return (
-                <Col xs={24} sm={12} md={8} key={id}>
+                <Col xs={24} sm={24} md={12} lg={8} xxl={6} key={id}>
                   <div className="card">
                     <p className="position">{job.position}</p>
                     <p className="company">{job.company.name.toUpperCase()}</p>
