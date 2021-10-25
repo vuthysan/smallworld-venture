@@ -1,12 +1,13 @@
 import React from "react";
-import { Dropdown, Menu } from "antd";
-function DropDownMenu({ token }) {
+function CheckSignIn({ token }) {
   return (
     <React.Fragment>
       {token !== "" ? (
-        <button className="opportunities-btn view-openning">
-          <a href="#joblist">View Openning</a>
-        </button>
+        <a href="#joblist">
+          <button className="opportunities-btn view-openning">
+            View Openning
+          </button>
+        </a>
       ) : (
         <>
           {" "}
@@ -22,4 +23,4 @@ function DropDownMenu({ token }) {
   );
 }
 
-export default DropDownMenu;
+export default CheckSignIn;

@@ -39,7 +39,8 @@ function Company() {
                     // width="200"
                     height="90"
                     src={
-                      "http://localhost:5000/public/upload/images/" +
+                      "https://backend.smallworldventure.com/public/upload/images/" +
+                      // "http://localhost:5000/public/upload/images/" +
                       data.get_company.logo
                     }
                     alt="logo of company"

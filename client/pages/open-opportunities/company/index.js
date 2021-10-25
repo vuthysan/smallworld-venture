@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import UserContext from "../../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USER_COMPANIES } from "../../../graphql/query";
 import { DELETE_COMPANY } from "../../../graphql/mutation";
@@ -7,7 +6,8 @@ import { Divider, Row, Col, Spin, Popconfirm, message, Empty } from "antd";
 import { TiDeleteOutline } from "react-icons/ti";
 import moment from "moment";
 function companies() {
-  const { user } = useContext(UserContext);
+  const API = process.env.API_URL;
+
   // === delete company function ===
   const [deleteCom] = useMutation(DELETE_COMPANY);
 
@@ -22,9 +22,7 @@ function companies() {
       .catch((err) => console.log(err));
   }
   //   === get employer by id ===
-  const { loading, data, refetch } = useQuery(GET_USER_COMPANIES, {
-    variables: { id: user && user.id },
-  });
+  const { loading, data, refetch } = useQuery(GET_USER_COMPANIES);
 
   if (loading) {
     return (
@@ -68,13 +66,7 @@ function companies() {
                     <div className="img">
                       <img
                         height="60"
-                        // src={
-                        //   "https://backend.smallworldventure.com/public/upload/images/" +
-                        //   logo
-                        // }
-                        src={
-                          "http://localhost:5000/public/upload/images/" + logo
-                        }
+                        src={API + "/public/upload/images/" + logo}
                         alt="company logo"
                       />
                     </div>

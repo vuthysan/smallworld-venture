@@ -917,6 +917,9 @@ input[type="text"]:focus {
   margin: 0 5px;
 }
 /* === user all page design === */
+.opp-container .ant-upload-list-item-card-actions-btn {
+  display: none;
+}
 .opp-big-container {
   margin: 50px 12.5% !important;
 }
@@ -1259,7 +1262,14 @@ input[type="text"]:focus {
   height: 680px;
   background-color: white;
   border-radius: 0 8px 8px 0;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.right-sign::-webkit-scrollbar {
+  display: none;
+}
+
 .right-sign .ant-input-affix-wrapper {
   padding: auto 0;
 }
@@ -1298,9 +1308,14 @@ input[type="text"]:focus {
 }
 
 /* === turn off required field warnning === */
-.right-sign .ant-form-item-explain.ant-form-item-explain-error,
+/* .right-sign .ant-form-item-explain.ant-form-item-explain-error,
 .right-sign .ant-form-item-explain.ant-form-item-explain-success {
   display: none;
+} */
+.ant-form-item-explain,
+.ant-form-item-explain-error {
+  position: relative;
+  left: 0;
 }
 .ant-select-selection-placeholder {
   position: absolute;

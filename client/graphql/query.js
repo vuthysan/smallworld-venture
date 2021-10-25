@@ -182,17 +182,17 @@ const GET_USER_APPLICATIONS = gql`
   }
 `;
 
-const GET_USERS = gql`
-  query {
-    get_users {
-      name
-      id
-    }
-  }
-`;
+// const GET_USERS = gql`
+//   query {
+//     get_users {
+//       name
+//       id
+//     }
+//   }
+// `;
 
 export {
-  GET_USERS,
+  // GET_USERS,
   GET_USER,
   GET_USER_POSTED_JOB,
   GET_USER_APPLICATIONS,

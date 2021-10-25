@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { graphqlHTTP } = require("express-graphql");
+// const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -16,7 +16,11 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3200", "http://localhost:3000"],
+    origin: [
+      "http://localhost:3200",
+      "http://localhost:3000",
+      "https://demo.smallworldventure.com",
+    ],
     credentials: true,
   })
 );
@@ -35,13 +39,6 @@ app.use("/public/", express.static(path.join(__dirname, "public")));
 
 // ==== api route ===
 app.use(apiRoute);
-// app.use(
-//   "/graphql",
-//   graphqlHTTP({
-//     schema,
-//     graphiql: true,
-//   })
-// );
 
 // ==== verify and decode token ===
 app.use("/user", require("./routes/userRoute"));

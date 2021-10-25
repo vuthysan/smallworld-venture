@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-// import UserContext from "../../context/userContext";
+import React, { useState } from "react";
 import axios from "axios";
 import { useMutation } from "@apollo/client";
 import { ADD_COMPANY } from "../../graphql/mutation";
@@ -11,11 +10,8 @@ import Cities from "../../data/cities.json";
 const { Option } = Select;
 
 function addcompany() {
-  // https://backend.smallworldventure.com
-  const url = "http://localhost:5000";
+  const API = process.env.API_URL1;
   const [form] = Form.useForm();
-  // const { user } = useContext(UserContext);
-  // console.log(user);
 
   const [state, setState] = useState({
     imageUrl: null,
@@ -45,7 +41,7 @@ function addcompany() {
     // === delete old upload from server when upload new photo ===
     if (state.imageUrl) {
       await axios
-        .delete(url + "/image/delete/" + state.imageUrl)
+        .delete(API + "/image/delete/" + state.imageUrl)
         .catch((err) => console.log(err));
     }
     if (info.file.status === "done") {
@@ -60,7 +56,7 @@ function addcompany() {
 
   // ====== upload dragger props ======
   const upload = {
-    action: url + "/upload/image",
+    action: API + "/upload/image",
     name: "image",
     maxCount: 1,
     beforeUpload: beforeUpload,
@@ -68,7 +64,7 @@ function addcompany() {
     onRemove: async (data) => {
       // console.log(data.response);
       await axios
-        .delete(url + "/image/delete/" + data.response)
+        .delete(API + "/image/delete/" + data.response)
         .catch((err) => console.log(err));
 
       setState({

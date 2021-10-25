@@ -10,6 +10,7 @@ import { Form, Input, Button, Row, Col, Upload, message, Spin } from "antd";
 import AppLayout from "../../Layout/Layout";
 
 function EditCompany({ history }) {
+  const API = process.env.API_URL1;
   const { id } = useParams();
   const [form] = Form.useForm();
 
@@ -61,7 +62,7 @@ function EditCompany({ history }) {
 
   // ====== upload dragger props ======
   const upload = {
-    action: "http://localhost:5000/upload/image",
+    action: API + "/upload/image",
     name: "image",
     className: "avatar-uploader",
     // maxCount: 1,
@@ -71,7 +72,7 @@ function EditCompany({ history }) {
       // console.log(data);
       // ===== delete image from server folder =====
       await axios
-        .delete("http://localhost:5000/image/delete/" + data.response)
+        .delete(API + "/image/delete/" + data.response)
         .then()
         .catch((err) => console.log(err));
       setState({
@@ -164,7 +165,8 @@ function EditCompany({ history }) {
                     // === response for onRemove when user remove image ===
                     response: companyData.get_company.logo,
                     url:
-                      "http://localhost:5000/public/upload/images" +
+                      API +
+                      "/public/upload/images" +
                       companyData.get_company.logo,
                   },
                 ]}
@@ -174,14 +176,17 @@ function EditCompany({ history }) {
                   {state.imageUrl ? (
                     <img
                       width="300"
-                      src={`http://localhost:5000/public/upload/images/${state.imageUrl}`}
+                      src={API + `/public/upload/images/${state.imageUrl}`}
                       alt="uploaed logo"
                     />
                   ) : // === original image before deleted or change ===
                   defaultImg ? (
                     <img
                       width="300"
-                      src={`http://localhost:5000/public/upload/images/${companyData.get_company.logo}`}
+                      src={
+                        API +
+                        `/public/upload/images/${companyData.get_company.logo}`
+                      }
                       alt=""
                     />
                   ) : (

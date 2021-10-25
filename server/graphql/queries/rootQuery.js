@@ -1,7 +1,5 @@
 const graphql = require("graphql");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { REFRESH_SECRET, ACCESS_SECRET } = process.env;
 const {
   GraphQLObjectType,
   GraphQLNonNull,

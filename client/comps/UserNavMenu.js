@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import UserContext from "../context/userContext";
 import { GET_USER } from "../graphql/query";
 import { useQuery } from "@apollo/client";
 import AuthContext from "../context/auth";
@@ -9,16 +8,11 @@ import { Dropdown, Menu, Spin } from "antd";
 import SignOut from "./SignOut";
 
 function UserNavMenu() {
-  // const { user } = useContext(UserContext);
   const { token } = useContext(AuthContext);
   const { loading, data } = useQuery(GET_USER);
 
   if (loading) {
-    return (
-      <center className="loading-data">
-        <Spin size="large" />
-      </center>
-    );
+    return <Spin size="large" />;
   }
 
   // === user menu ===

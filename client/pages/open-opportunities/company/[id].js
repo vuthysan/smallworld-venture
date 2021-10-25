@@ -21,7 +21,8 @@ import Cities from "../../../data/cities.json";
 const { Option } = Select;
 
 function ViewCompany() {
-  // const url = "https://backend.smallworldventure.com";
+  const url = "https://backend.smallworldventure.com";
+  // const url = "http://localhost:5000";
   const { id } = useRouter().query;
   const [btnLoading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -66,14 +67,12 @@ function ViewCompany() {
     // === delete old logo from server when upload new photo ===
     if (state.imageUrl) {
       await axios
-        .delete("http://localhost:5000/image/delete/" + state.imageUrl)
+        .delete(url + "/image/delete/" + state.imageUrl)
         .catch((err) => console.log(err));
     }
 
     await axios
-      .delete(
-        "http://localhost:5000/image/delete/" + data.get_company_by_id.logo
-      )
+      .delete(url + "/image/delete/" + data.get_company_by_id.logo)
       .catch((err) => console.log(err));
 
     if (info.file.status === "done") {
@@ -88,7 +87,7 @@ function ViewCompany() {
 
   // ====== upload dragger props ======
   const upload = {
-    action: "http://localhost:5000/upload/image",
+    action: url + "/upload/image",
     name: "image",
     maxCount: 1,
     beforeUpload: beforeUpload,
@@ -96,7 +95,7 @@ function ViewCompany() {
     onRemove: async (data) => {
       // console.log(data.response);
       await axios
-        .delete("http://localhost:5000/image/delete/" + data.response)
+        .delete(url + "/image/delete/" + data.response)
         .catch((err) => console.log(err));
 
       setState({
@@ -207,7 +206,8 @@ function ViewCompany() {
                   // === response for onRemove when user remove image ===
                   response: data.get_company_by_id.logo,
                   url:
-                    "http://localhost:5000/public/upload/images/" +
+                    url +
+                    "/public/upload/images/" +
                     data.get_company_by_id.logo,
                 },
               ]}

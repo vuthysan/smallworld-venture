@@ -26,7 +26,7 @@ function LatestJob() {
   const indexOfLastPost = current * jobsPerPage;
   const indexOfFirstPost = indexOfLastPost - jobsPerPage;
   const currentJobs =
-    data.get_jobs && data.get_jobs.slice(indexOfFirstPost, indexOfLastPost);
+    data && data.get_jobs.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <>

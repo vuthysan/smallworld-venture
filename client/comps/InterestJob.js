@@ -25,7 +25,7 @@ function InterestJob() {
     );
   }
 
-  // === filter jobs for jobseeker's interest only ===
+  // === filter jobs for user's interest only ===
   let interestJobs;
   if (token !== "") {
     interestJobs =
@@ -45,7 +45,6 @@ function InterestJob() {
         }
       });
   }
-  console.log(interestJobs);
 
   // === get curent jobs depend on jobsPerPage ===
   const indexOfLastPost = current * jobsPerPage;
@@ -55,71 +54,73 @@ function InterestJob() {
 
   return (
     <>
-      <Row wrap={true} gutter={[0, 5]}>
-        {token !== "" ? (
-          currentJobs.length > 0 ? (
-            currentJobs.map((res) => {
-              const { position, company, createdAt, id } = res;
-              return (
-                <Col key={id} xs={24} sm={24} md={14} lg={13}>
-                  <Row
-                    className="job-card"
-                    align="middle"
-                    justify="space-between"
-                  >
-                    <Col>
-                      <a
-                        href={`/open-opportunities/detail/${id}`}
-                        className="position"
-                      >
-                        {position}
-                      </a>
-                      <br />
-                      <a
-                        href={`/open-opportunities/${company.name.toLowerCase()}`}
-                        className="company"
-                      >
-                        {company.name}
-                      </a>
-                      <br />
-                      <p className="city">{company.city}</p>
-                    </Col>
-                    <Col>
-                      <p className="date">
-                        {" "}
-                        {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
-                      </p>
-                      <button className="apply-btn">
-                        <a href={`/open-opportunities/detail/${id}`}>
-                          Apply Now
+      {token !== "" ? (
+        <>
+          <Row wrap={true} gutter={[0, 5]}>
+            {currentJobs.length > 0 ? (
+              currentJobs.map((res) => {
+                const { position, company, createdAt, id } = res;
+                return (
+                  <Col key={id} xs={24} sm={24} md={14} lg={13}>
+                    <Row
+                      className="job-card"
+                      align="middle"
+                      justify="space-between"
+                    >
+                      <Col>
+                        <a
+                          href={`/open-opportunities/detail/${id}`}
+                          className="position"
+                        >
+                          {position}
                         </a>
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              );
-            })
-          ) : (
-            <div className="no-data">
-              <Empty description="No data matches your interest!" />
-            </div>
-          )
-        ) : (
-          <>
-            <div className="no-data">
-              <Empty
-                description={
-                  <p>
-                    Please <a href="/open-opportunities/signin">sign in</a> /{" "}
-                    <a href="open-opportunities/signup">register</a> to view
-                    your interest jobs!
-                  </p>
-                }
-              />
-            </div>
-          </>
-        )}
-      </Row>
+                        <br />
+                        <a
+                          href={`/open-opportunities/${company.name.toLowerCase()}`}
+                          className="company"
+                        >
+                          {company.name}
+                        </a>
+                        <br />
+                        <p className="city">{company.city}</p>
+                      </Col>
+                      <Col>
+                        <p className="date">
+                          {" "}
+                          {moment.unix(createdAt / 1000).format("YYYY-MM-DD")}
+                        </p>
+                        <button className="apply-btn">
+                          <a href={`/open-opportunities/detail/${id}`}>
+                            Apply Now
+                          </a>
+                        </button>
+                      </Col>
+                    </Row>
+                  </Col>
+                );
+              })
+            ) : (
+              <div className="no-data">
+                <Empty description="No data matches your interest!" />
+              </div>
+            )}
+          </Row>
+        </>
+      ) : (
+        <>
+          <div className="no-data">
+            <Empty
+              description={
+                <p>
+                  Please <a href="/open-opportunities/signin">sign in</a> /{" "}
+                  <a href="open-opportunities/signup">register</a> to view your
+                  interest jobs!
+                </p>
+              }
+            />
+          </div>
+        </>
+      )}
 
       {token !== "" && interestJobs.length > 0 ? (
         <Pagination

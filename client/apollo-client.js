@@ -11,8 +11,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// const result = "https://backend.smallworldventure.com/graphql?";
-const result = "http://localhost:5000/graphql?";
+const result = "https://backend.smallworldventure.com/graphql?";
+// const result = "http://localhost:5000/graphql?";
 
 const httpLink = createHttpLink({
   uri: result,

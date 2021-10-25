@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import UserContext from "../../../context/userContext";
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_JOB, GET_USER } from "../../../graphql/query";
@@ -7,7 +6,7 @@ import { POST_APPLICATION } from "../../../graphql/mutation";
 import { Divider, Spin, Form, Input, Button, message } from "antd";
 function ApplyNow() {
   const { id } = useRouter().query;
-  const { user } = useContext(UserContext);
+
   const [submitState, setSubmit] = useState(false);
 
   //   ===== post application function ===
@@ -19,9 +18,7 @@ function ApplyNow() {
   });
 
   // === get seeker info ===
-  const { loading: userLoading, data: userData } = useQuery(GET_USER, {
-    variables: { id: user && user.id },
-  });
+  const { loading: userLoading, data: userData } = useQuery(GET_USER);
 
   if (jobLoading || userLoading) {
     return (
@@ -55,10 +52,10 @@ function ApplyNow() {
   };
 
   // === check if user aleady applied for this job or not ===
-  let applied;
-  jobData.get_job.applicants.forEach((res) => {
-    res.userId == user.id ? (applied = true) : (applied = false);
-  });
+  // let applied;
+  // jobData.get_job.applicants.forEach((res) => {
+  //   res.userId == user.id ? (applied = true) : (applied = false);
+  // });
 
   return (
     <div className="opp-container apply-job">
@@ -84,7 +81,7 @@ function ApplyNow() {
         <center>
           {/* ===== check if user have cv yet or not ===== */}
           <Form.Item>
-            {user && applied ? (
+            {/* {user && applied ? (
               <Button
                 id="apply-btn"
                 onClick={() =>
@@ -93,7 +90,8 @@ function ApplyNow() {
               >
                 Submit Application
               </Button>
-            ) : userData.get_user.cv ? (
+            ) : userData.get_user.cv ? ( */}
+            {userData.get_user.cv ? (
               <Button
                 id="apply-btn"
                 type="primary"

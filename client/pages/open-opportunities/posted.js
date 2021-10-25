@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import UserContext from "../../context/userContext";
+import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USER_POSTED_JOB } from "../../graphql/query";
 import { DELETE_JOB } from "../../graphql/mutation";
@@ -8,8 +7,6 @@ import { TiDeleteOutline } from "react-icons/ti";
 import moment from "moment";
 
 function posted() {
-  const { user } = useContext(UserContext);
-
   // === delete job function ===
   const [deleteJob] = useMutation(DELETE_JOB);
 
@@ -23,9 +20,7 @@ function posted() {
   }
 
   //   === get employer posted job ===
-  const { loading, data, refetch } = useQuery(GET_USER_POSTED_JOB, {
-    variables: { id: user && user.id },
-  });
+  const { loading, data, refetch } = useQuery(GET_USER_POSTED_JOB);
 
   if (loading) {
     return (

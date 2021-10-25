@@ -1,14 +1,12 @@
 import React, { useState, useContext } from "react";
 import MetaTags from "../../comps/MetaTags";
-// import UserContext from "../../context/userContext";
 import AuthContext from "../../context/auth";
 import { useMutation } from "@apollo/client";
 import { SEARCH } from "../../graphql/mutation";
-import { GET_USERS } from "../../graphql/query";
 import { Row, Col, Input, Dropdown, Menu } from "antd";
 
 // ========== comps ==========
-import DropDownMenu from "../../comps/DropDownMenu";
+import CheckSignIn from "../../comps/CheckSignIn";
 import LatestJob from "../../comps/LatestJob";
 import InterestJob from "../../comps/InterestJob";
 import SearchJob from "../../comps/SearchJob";
@@ -47,8 +45,8 @@ const addMenu = (
 
 function index() {
   const [current, setCurrent] = useState(0);
-  // const { user } = useContext(UserContext);
   const { token } = useContext(AuthContext);
+  // === search job state ===
   const [searched, setSearched] = useState();
 
   // === search job grahql function ===
@@ -79,7 +77,7 @@ function index() {
       .catch((err) => console.log(err));
   };
 
-  // == job list steps (latest and interest) ==
+  // == job list steps (latest, interest and search jobs) ==
   const steps = [
     {
       content: <LatestJob />,
@@ -116,9 +114,9 @@ function index() {
                   dictum suscipit quis lectus quam elementum volutpat. Ac
                   potenti ameutpat. Ac potenti amet, cras magna.
                 </p>
-                {/* =========== signin and signup menu  ========== */}
+                {/* =========== check if user already signed in or not  ========== */}
 
-                <DropDownMenu token={token} />
+                <CheckSignIn token={token} />
               </Col>
               <Col xs={0} sm={0} md={6}>
                 <img
@@ -150,7 +148,6 @@ function index() {
             ) : (
               ""
             )}
-
             <Search
               placeholder="Search..."
               allowClear

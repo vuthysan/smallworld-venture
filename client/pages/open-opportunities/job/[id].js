@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import UserContext from "../../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_JOB, GET_USER_COMPANIES } from "../../../graphql/query";
 import { EDIT_JOB } from "../../../graphql/mutation";
@@ -14,7 +13,7 @@ const { Option } = Select;
 
 function viewjob() {
   const { id } = useRouter().query;
-  const { user } = useContext(UserContext);
+
   const [form] = Form.useForm();
   const [btnLoading, setBtnLoading] = useState(false);
 
@@ -25,9 +24,7 @@ function viewjob() {
   const { loading, data } = useQuery(GET_JOB, { variables: { id } });
 
   // === get user's companies ===
-  const { loading: loadingCom, data: comData } = useQuery(GET_USER_COMPANIES, {
-    variables: { id: user && user.id },
-  });
+  const { loading: loadingCom, data: comData } = useQuery(GET_USER_COMPANIES);
 
   if (loading || loadingCom) {
     return (

@@ -15,10 +15,10 @@ function ViewPDF() {
       }}
     >
       <object
-        // data={`https://backend.smallworldventure.com/public/upload/pdf/${
-        //   id && id
-        // }`}
-        data={`http://localhost:5000/public/upload/pdf/${id && id}`}
+        data={`https://backend.smallworldventure.com/public/upload/pdf/${
+          id && id
+        }`}
+        // data={`http://localhost:5000/public/upload/pdf/${id && id}`}
         type="application/pdf"
         width="100%"
         height="100%"

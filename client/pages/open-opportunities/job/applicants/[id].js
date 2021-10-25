@@ -22,8 +22,8 @@ function Applicants() {
       variables: { id },
     })
       .then(async (res) => {
-        await message.success(res.data.delete_application.message);
         await refetch();
+        await message.success(res.data.delete_application.message);
       })
       .catch((err) => console.log(err));
   };

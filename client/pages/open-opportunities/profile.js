@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
-import UserContext from "../../context/userContext";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_USER } from "../../graphql/query";
 import { EDIT_USER } from "../../graphql/mutation";
@@ -26,9 +24,7 @@ import Interests from "../../data/interests.json";
 const { Option } = Select;
 
 function profile() {
-  // const { id } = useRouter().query;
-  const { user } = useContext(UserContext);
-
+  const API = process.env.API_URL1;
   const [form] = Form.useForm();
   const [file, setFile] = useState("");
   const [btnDisable, setDisable] = useState(true);
@@ -57,65 +53,53 @@ function profile() {
       return file.type === "application/pdf" ? true : Upload.LIST_IGNORE;
     },
     onChange: async (info) => {
-      // === remove old cv(pdf) file from server if user upload new cv(pdf) ===
-      if (info.file.status === "done" && data.get_user.cv) {
-        await axios
-          .delete("http://localhost:5000/pdf/delete/" + data.get_user.cv)
-          .catch((err) => console.log(err));
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
       }
     },
-    // onRemove: async (data) => {
-    //   await axios
-    //     .delete("http://localhost:5000/pdf/delete/" + data.response)
-    //     .catch((err) => console.log(err));
-    //   await setFile("");
-    // },
     maxCount: 1,
   };
 
   const onFinish = async (values) => {
-    // console.log(values);
-    if (values.newpassword !== values.verify) {
-      message.warn("Your new password does not match!");
-    } else if (file) {
-      // === check if user upload new cv(pdf) ===
-      // == post pdf file to public/uplaod/pdf folder in server ==
+    // === remove password from values ===
+    delete values.verify;
+    delete values.password;
+    delete values.newpassword;
+
+    // === check if user upload new cv(pdf) ===
+    if (file) {
       const formdata = new FormData();
       formdata.append("pdf", file);
 
-      await axios
-        .post("http://localhost:5000/upload/pdf", formdata)
-        .then(async (res) => {
-          // === remove verify from values ===
-          delete values.verify;
+      // == post pdf file to public/uplaod/pdf folder in server ==
+      await axios.post(API + "/upload/pdf", formdata).then(async (res) => {
+        // ===  check for old cv and delete  ====
+        if (data.get_user.cv !== "") {
+          await axios
+            .delete(API + "/pdf/delete/" + data.get_user.cv)
+            .catch((err) => console.log(err));
+        }
 
-          editUser({
-            variables: { ...values, cv: res.data },
+        editUser({
+          variables: { ...values, cv: res.data },
+        })
+          .then(async (res) => {
+            await refetch();
+            await message.success(res.data.edit_user.message);
           })
-            .then(async (res) => {
-              await message.success(res.data.edit_user.message);
-            })
-            .catch(async () =>
-              message.warn("Your old password is not correct!")
-            );
-        });
+          .catch(async (err) => console.log(err));
+      });
     } else {
-      // === remove verify from values ===
-      delete values.verify;
-      delete values.password;
-      delete values.newpassword;
-
       editUser({
         variables: { ...values },
       })
         .then(async (res) => {
-          await message.success(res.data.edit_user.message);
-          // window.location.replace("/open-opportunities/profile");
           await refetch();
+          await message.success(res.data.edit_user.message);
         })
-        .catch(
-          async () => await message.warn("Your old password is not correct!")
-        );
+        .catch((err) => console.log(err));
     }
   };
 
@@ -202,11 +186,7 @@ function profile() {
                       ? [
                           {
                             name: data.get_user.cv,
-                            // === response for onRemove when user remove image ===
-                            // response: get_user.cv,
-                            url:
-                              "http://localhost:5000/public/upload/pdf/" +
-                              data.get_user.cv,
+                            url: API + "/public/upload/pdf/" + data.get_user.cv,
                           },
                         ]
                       : ""
