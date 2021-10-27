@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 // === register user ===
 const REGISTER_USER = gql`
-  mutation ($name: String!, $email: String!, $password: String!) {
-    register_user(name: $name, email: $email, password: $password) {
+  mutation ($name: String!, $email: String!, $userId: ID!) {
+    register_user(name: $name, email: $email, userId: $userId) {
       message
     }
   }

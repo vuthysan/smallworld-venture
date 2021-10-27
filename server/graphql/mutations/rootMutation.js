@@ -38,25 +38,20 @@ const RootMutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
+        userId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve: async (_, args) => {
-        const existedEmail = await User.findOne({ email: args.email });
-        if (existedEmail) {
-          throw { message: "User with this email is already existed!" };
-        } else {
-          let newUser = new User({
-            ...args,
-            interest: [],
-            phone: "",
-            gender: "",
-            cv: "",
-          });
-          await newUser.save();
-
-          return {
-            message: "Register Sucessfull!",
-          };
-        }
+        let newUser = new User({
+          ...args,
+          interest: [],
+          phone: "",
+          gender: "",
+          cv: "",
+        });
+        await newUser.save();
+        return {
+          message: "Register Sucessfull!",
+        };
       },
     },
 

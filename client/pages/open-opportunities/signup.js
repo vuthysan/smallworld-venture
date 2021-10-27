@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useMutation } from "@apollo/client";
 import { REGISTER_USER } from "../../graphql/mutation";
 import { Row, Col, Button, Form, Input, message } from "antd";
@@ -8,14 +9,44 @@ import SignFooter from "../../comps//Layout/SignFooter";
 function JobSeekerSignUp() {
   const ACCOUNT_URL = process.env.ACCOUNTS_URL;
   const [form] = Form.useForm();
-
+  console.log(ACCOUNT_URL);
   // === register jobseeker function ===
   const [register] = useMutation(REGISTER_USER);
 
   const onFinish = (values) => {
-    
-    axios.post(ACCOUNT_URL + "/register", { ...values });
-    // message.warn("This function have not implemented yet!");
+    // console.log(values);
+    axios
+      .post(ACCOUNT_URL + "/register", { ...values })
+      .then(async (res) => {
+        delete values.confirmPassword;
+        const { user } = res.data;
+        const newUser = {
+          name: values.fullname,
+          email: values.email,
+          userId: user._id,
+        };
+
+        await register({
+          variables: newUser,
+        })
+          .then(async () => {
+            await message.success("Done!");
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.response) {
+          if (
+            error.response.data.message ===
+            "An account with this email already exist."
+          ) {
+            message.error("User with this email is alrady existed!");
+          }
+        }
+        console.log("error", error);
+      });
+
     // if (values.password !== values.verify) {
     //   message.error("Password does not match");
     // } else {
@@ -130,3 +161,32 @@ function JobSeekerSignUp() {
 }
 
 export default JobSeekerSignUp;
+// await axios
+//       .post(`${baseUrl}/register`, { ...values, googleToken }, config)
+//       .then(async res => {
+//         const { user } = res.data
+//         await axios
+//           .post(`${serverUrl}/register`, { ...user, userId: user._id }, config)
+//           .then(async () => {
+//             await message.success('ការចុះឈ្មោះរបស់អ្នក ទទួលបានជោគជ័យ')
+//             await notification.warning({
+//               message: 'បញ្ជាក់អ៊ីមែល...',
+//               description: `សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីផ្ទៀងផ្ទាត់គណនី!`,
+//               duration: 6,
+//               style: {
+//                 width: 500
+//               }
+//             })
+//             setLoading(false)
+//             router.push('/user/login')
+//           })
+//       })
+//       .catch(error => {
+//         setLoading(false)
+//         if (error.response) {
+//           if (error.response.data.message === 'An account with this email already exist.') {
+//             message.error('អ៊ីមែលនេះមានរួចហើយ។​ សូមសាកល្បងអាសយដ្ឋានអ៊ីមែលផ្សេងទៀត !')
+//           }
+//         }
+//         console.log('error', error)
+//       })

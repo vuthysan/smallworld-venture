@@ -24,7 +24,10 @@ function JobSeekerSignIn() {
         await message.success("Successfull!");
         await window.location.replace("/open-opportunities");
       })
-      .catch((err) => message.error("Email or password is incorrect!"));
+      .catch((err) => {
+        message.error("Email or password is incorrect!");
+        console.log(err);
+      });
 
     // await login({
     //   variables: values,
