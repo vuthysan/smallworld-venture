@@ -25,15 +25,9 @@
     "url": "https://www.seavphovjivet.com/"
   },
   {
-    "name": "hospicare",
-    "logo": "hospicare.png",
-    "url": "https://hospicare.co/"
-  },
-
-  {
-    "name": "fado",
-    "logo": "fado.png",
-    "url": "https://fado168.com/"
+    "name": "jabaram",
+    "logo": "jabaram.png",
+    "url": "https://www.jabaram.com/"
   },
   {
     "name": "bookmebus",
@@ -43,11 +37,11 @@
   {
     "name": "toursanak",
     "logo": "toursanak.png",
-    "url": "https://toursanak.com/"
+    "url": ""
   },
   {
     "name": "codingate",
     "logo": "codingate.png",
-    "url": "https://www.codingate.com/"
+    "url": "https://codingate.com/"
   }
 ]

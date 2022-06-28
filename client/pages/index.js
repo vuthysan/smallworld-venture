@@ -7,6 +7,8 @@ import CardBox from "../comps/CardBox";
 import { Row, Col, Spin, Button } from "antd";
 import axios from "axios";
 import MetaTags from "../comps/MetaTags";
+import Lottie from "lottie-react";
+import startup from "../public/images/home/startup.json";
 
 // ==== json data ===
 import smallworld from "../data/smallworld.json";
@@ -16,6 +18,7 @@ import smallworld from "../data/smallworld.json";
 function Home() {
   const [community, setCommunity] = useState([]);
   const [koompi, setKoompi] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -35,6 +38,21 @@ function Home() {
         setCommunity(res.data.items);
       });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 7000);
+  }, [loading]);
+
+  if (loading) {
+    return (
+      <center>
+        <Lottie animationData={startup} loop={true} className="startup-intro" />
+      </center>
+    );
+  }
+
   return (
     <React.Fragment>
       <MetaTags
@@ -98,7 +116,7 @@ function Home() {
             {smallworld.map((res, i) => {
               const { title, des, img } = res;
               return (
-                <Col key={i} md={12} xl={6}>
+                <Col key={i} md={12} xl={6} data-aos="fade-up-right">
                   <CardBox title={title} des={des} src={img} />
                 </Col>
               );
@@ -157,7 +175,15 @@ function Home() {
                   const { title, description, thumbnail, author, guid } =
                     community;
                   return (
-                    <Col xs={24} sm={24} md={12} lg={8} xl={6} key={guid}>
+                    <Col
+                      xs={24}
+                      sm={24}
+                      md={12}
+                      lg={8}
+                      xl={6}
+                      key={guid}
+                      data-aos="fade-up-right"
+                    >
                       <Card
                         title={title}
                         desc={description}

@@ -4,6 +4,8 @@ import { Row, Col, Spin } from "antd";
 import axios from "axios";
 import MetaTags from "../comps/MetaTags";
 
+axios.defaults.withCredentials = true;
+
 function News() {
   const [community, setCommunity] = useState([]);
   const [koompi, setKoompi] = useState([]);
@@ -21,7 +23,6 @@ function News() {
         "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/smallworldvc"
       )
       .then((res) => {
-        // console.log(res.data);
         setCommunity(res.data.items);
       });
     window.scrollTo(0, 0);
@@ -55,7 +56,15 @@ function News() {
                 const { title, description, thumbnail, author, guid } =
                   community;
                 return (
-                  <Col xs={24} sm={24} md={12} lg={8} xl={6} key={guid}>
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={8}
+                    xl={6}
+                    key={guid}
+                    data-aos="fade-right"
+                  >
                     <Card
                       title={title}
                       desc={description}

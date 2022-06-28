@@ -59,7 +59,7 @@ function Navbar() {
                   </a>
                 </Link>
               </Col>
-              <Col>
+              {/* <Col>
                 <Link href="/spaces">
                   <a
                     className={router.pathname == "/spaces" ? "nav-active" : ""}
@@ -67,7 +67,7 @@ function Navbar() {
                     Spaces
                   </a>
                 </Link>
-              </Col>
+              </Col> */}
               <Col>
                 <Link href="/contact">
                   <a
@@ -79,7 +79,7 @@ function Navbar() {
                   </a>
                 </Link>
               </Col>
-              <Col>
+              {/* <Col>
                 <Link href="/open-opportunities">
                   <a
                     className={
@@ -91,7 +91,7 @@ function Navbar() {
                     Oppen-Opportunities
                   </a>
                 </Link>
-              </Col>
+              </Col> */}
             </Row>
           </Col>
 
@@ -132,15 +132,15 @@ function Navbar() {
               <Menu.Item onClick={onClose}>
                 <Link href="/news">News</Link>
               </Menu.Item>
-              <Menu.Item onClick={onClose}>
+              {/* <Menu.Item onClick={onClose}>
                 <Link href="/spaces">Spaces</Link>
-              </Menu.Item>
+              </Menu.Item> */}
               <Menu.Item onClick={onClose}>
                 <Link href="/contact">Contact</Link>
               </Menu.Item>
-              <Menu.Item onClick={onClose}>
+              {/* <Menu.Item onClick={onClose}>
                 <Link href="/open-opportunities">Open-Opportunities</Link>
-              </Menu.Item>
+              </Menu.Item> */}
             </Menu>
           </Drawer>
         </Row>

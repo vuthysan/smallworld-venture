@@ -44,6 +44,7 @@ function About() {
             md={{ span: 0 }}
             lg={{ span: 12 }}
             span={{ xxl: 14 }}
+            data-aos="fade-left"
           >
             <img src="/images/about/about-banner.png" alt="About" />
           </Col>
@@ -56,7 +57,7 @@ function About() {
             align="middle"
             gutter={20}
           >
-            <Col span={24} md={{ span: 10 }}>
+            <Col span={24} md={{ span: 10 }} data-aos="fade-right">
               <img src="/images/about/portfolios.png" alt="Portfolios" />
             </Col>
             <Col span={24} md={{ span: 11 }}>
@@ -72,7 +73,7 @@ function About() {
               <Row justify="space-between" align="middle" gutter={[20, 20]}>
                 {startups.map((startup, i) => {
                   return (
-                    <Col key={i} span={7}>
+                    <Col key={i} span={7} data-aos="fade-left">
                       <a href={startup.url} target="_blank">
                         <img
                           loading="lazy"
@@ -101,7 +102,7 @@ function About() {
               {data.map((res) => {
                 const { fullName, photo, id, position } = res;
                 return (
-                  <div key={id} className="directors-back">
+                  <div key={id} className="directors-back" data-aos="fade-up">
                     <img src={photo} alt={fullName} />
                     <h3>{fullName}</h3>
                     <p>{position}</p>
@@ -129,7 +130,7 @@ function About() {
                 {partners.map((partner) => {
                   const { photo, name, id, url } = partner;
                   return (
-                    <Col xs={8} sm={8} md={6} key={id}>
+                    <Col xs={8} sm={8} md={6} key={id} data-aos="fade-up">
                       <a href={url} target="_blank">
                         <img
                           src={photo}

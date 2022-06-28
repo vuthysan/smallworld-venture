@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Head from "next/head";
 import { ApolloProvider } from "@apollo/client";
 import { AuthProvider } from "../context/auth";
@@ -6,9 +7,15 @@ import "antd/dist/antd.css";
 import "../styles/globals.css";
 import axios from "axios";
 import client from "../apollo-client";
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 axios.defaults.withCredentials = true;
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    AOS.init({ duration: 1200 });
+  }, []);
+
   return (
     <ApolloProvider client={client}>
       <Head>

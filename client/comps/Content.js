@@ -41,8 +41,7 @@ function Content({ content }) {
           sm={{ span: 24, order: 2 }}
           md={{ span: 10, order: content.imgOrder }}
         >
-          {" "}
-          <div className="content-img-wrapper">
+          <div className="content-img-wrapper" data-aos="fade-left">
             <img loading="lazy" src={content.img} alt={content.title} />
           </div>
         </Col>
