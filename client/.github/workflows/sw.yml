@@ -1,0 +1,22 @@
+name: Production workflow
+
+on: 
+  push: 
+    branches: [main],
+
+jobs:
+  deploy: 
+      runs-on: ubuntu-latest
+      steps: 
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Install Dependecies
+          - run: |
+              echo "Running inatalling dependecies..."
+              npm install
+
+        - name: Run Linting 
+          - run: |
+              echo "Running inatalling dependecies..."
+              npm install
+      

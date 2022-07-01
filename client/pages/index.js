@@ -18,7 +18,7 @@ import smallworld from "../data/smallworld.json";
 function Home() {
   const [community, setCommunity] = useState([]);
   const [koompi, setKoompi] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -39,19 +39,20 @@ function Home() {
       });
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 7000);
-  }, [loading]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setInterval(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
 
-  if (loading) {
-    return (
-      <center>
-        <Lottie animationData={startup} loop={true} className="startup-intro" />
-      </center>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <center>
+  //       <Lottie animationData={startup} loop={true} className="startup-intro" />
+  //     </center>
+  //   );
+  // }
 
   return (
     <React.Fragment>
@@ -116,7 +117,7 @@ function Home() {
             {smallworld.map((res, i) => {
               const { title, des, img } = res;
               return (
-                <Col key={i} md={12} xl={6} data-aos="fade-up-right">
+                <Col key={i} md={12} xl={6} data-aos="fade-up">
                   <CardBox title={title} des={des} src={img} />
                 </Col>
               );
@@ -182,7 +183,7 @@ function Home() {
                       lg={8}
                       xl={6}
                       key={guid}
-                      data-aos="fade-up-right"
+                      data-aos="fade-up"
                     >
                       <Card
                         title={title}

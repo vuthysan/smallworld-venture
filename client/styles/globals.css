@@ -48,6 +48,10 @@ h2 span {
 /* navbar */
 .nav {
   background-color: rgb(1, 94, 152);
+  height: 85px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nav-logo:hover {
   cursor: pointer;
@@ -60,7 +64,7 @@ h2 span {
   font-weight: 700;
   z-index: 2;
 }
-.startup-intro{
+.startup-intro {
   width: 800px;
 }
 .open-menu-btn {
@@ -221,7 +225,6 @@ h2 span {
   position: relative;
   top: 0px;
 }
-
 
 .sw-default-btn:hover {
   box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 24px !important;
@@ -1178,7 +1181,7 @@ input[type="text"]:focus {
   background-color: #f5f5f5;
   width: 45px;
   height: 45px;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-left: 15px;
   padding: 10px;
   color: #32383e;
@@ -1324,13 +1327,12 @@ input[type="text"]:focus {
 .ant-select-selection-placeholder {
   position: absolute;
 }
-@media only screen and (max-width: 1600px) {  
-  .startup-intro{
+@media only screen and (max-width: 1600px) {
+  .startup-intro {
     width: 600px !important;
   }
 }
 @media only screen and (max-width: 1440px) {
-
   .container {
     width: 90% !important;
     margin: 0 auto;
@@ -1621,7 +1623,7 @@ input[type="text"]:focus {
   }
 }
 @media only screen and (max-width: 700px) {
-  .startup-intro{
+  .startup-intro {
     width: 300px !important;
   }
   .contact-page {
