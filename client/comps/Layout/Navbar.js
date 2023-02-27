@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { FiMenu } from "react-icons/fi";
-import { Row, Col, Drawer, Menu } from "antd";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { FiMenu } from 'react-icons/fi';
+import { Row, Col, Drawer, Menu } from 'antd';
 // === comps ===
-import UserNavMenu from "../UserNavMenu";
+import UserNavMenu from '../UserNavMenu';
 
 function Navbar() {
   const router = useRouter();
@@ -37,7 +37,7 @@ function Navbar() {
               <Col>
                 <Link href="/about">
                   <a
-                    className={router.pathname == "/about" ? "nav-active" : ""}
+                    className={router.pathname == '/about' ? 'nav-active' : ''}
                   >
                     About
                   </a>
@@ -46,7 +46,7 @@ function Navbar() {
               <Col>
                 <Link href="/works">
                   <a
-                    className={router.pathname == "/works" ? "nav-active" : ""}
+                    className={router.pathname == '/works' ? 'nav-active' : ''}
                   >
                     Works
                   </a>
@@ -54,25 +54,25 @@ function Navbar() {
               </Col>
               <Col>
                 <Link href="/news">
-                  <a className={router.pathname == "/news" ? "nav-active" : ""}>
+                  <a className={router.pathname == '/news' ? 'nav-active' : ''}>
                     News
                   </a>
                 </Link>
               </Col>
-              {/* <Col>
+              <Col>
                 <Link href="/spaces">
                   <a
-                    className={router.pathname == "/spaces" ? "nav-active" : ""}
+                    className={router.pathname == '/spaces' ? 'nav-active' : ''}
                   >
                     Spaces
                   </a>
                 </Link>
-              </Col> */}
+              </Col>
               <Col>
                 <Link href="/contact">
                   <a
                     className={
-                      router.pathname == "/contact" ? "nav-active" : ""
+                      router.pathname == '/contact' ? 'nav-active' : ''
                     }
                   >
                     Contact

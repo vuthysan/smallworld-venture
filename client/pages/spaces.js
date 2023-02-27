@@ -1,5 +1,5 @@
-import { Image, Row, Col } from "antd";
-import MetaTags from "../comps/MetaTags";
+import { Image, Row, Col } from 'antd';
+import MetaTags from '../comps/MetaTags';
 function Spaces() {
   return (
     <>
@@ -9,7 +9,10 @@ function Spaces() {
         canonical="https://smallworldventure.com/spaces"
         thumbnail="https://smallworldventure.com/images/thumbnail/spaces.png"
       />
-      <div className="container">
+      <center style={{ marginTop: '12px', marginBottom: '12px' }}>
+        <img style={{ maxWidth: '100%' }} src="/images/SWR(1).png" />
+      </center>
+      {/* <div className="container">
         <div className="spaces">
           <Row align="middle">
             <Col xs={24} md={15} lg={10}>
@@ -191,7 +194,7 @@ function Spaces() {
             loading="lazy"
           ></iframe>
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 }
