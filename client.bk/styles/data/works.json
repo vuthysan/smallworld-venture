@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": ["STARTUP COMMUNITY"],
+    "des": "Since 2011, SmallWorld has remained focused on their vision of building a vibrant startup community in Phnom Penh through partnering with other area workspace groups to offer greater value and accessibility to early stage startup teams and entrepreneurs.",
+    "img": "/images/home/startup-com.png",
+    "desOrder": 1,
+    "imgOrder": 2
+  },
+  {
+    "id": 2,
+    "title": ["SEED EQUITY INVESTMENTS"],
+    "des": " Seed Equity Investments are used to form equity investment partnerships that serve as the foundation for building a strong startup community. During our formative years we gained insightful experience by working with dozens of innovative startups and now provide Seed Equity Investments for five new startup teams each year. With a funding range between 5,000 to 25,000 USD per team, our Seed Equity Investments are not loans, but equity-based investments. Local co-investor equity participation is encouraged and generated through seminars and presentations within the greater Phnom Penh business.",
+    "img": "/images/home/investment.png",
+    "imgOrder": 1,
+    "desOrder": 2
+  },
+  {
+    "id": 3,
+    "title": ["VENTURE BUILDING", "RESEARCH AND DEVELOPMENT"],
+    "des": [
+      "Our branded KOOMPI system is one among several exciting ventures in our portfolio.We produced practical, affordable, and effective entry-level notebookS designed for future engineers, inventors, organizers, developers, and freethinkers.The KOOMPI notebook computer is a slim, elegant, high-end, portable, personal-productivity environment designed to perform well at work, school, or small businesses.Powering the KOOMPI notebook is KOOMPI OS, our own version of the popular open-source Linux that has been tailored for the Cambodian marketplace.        ",
+      "The cornerstone of SmallWorld Ventures is to  promote Venture Building with a key focus on Research and Development (R&D).We&aposre engaged in both hardware and software R&D projects related to decentralized peer-to-peer applications, tokenization, robotics, artificial intelligence, and automation.Beyond hardware and software, we are building an all-natural outdoor environment using industrial hemp and bamboo designs as the fundamental basis for production."
+    ],
+    "img": "/images/home/venture-building.png",
+    "imgOrder": 2,
+    "desOrder": 1
+  },
+  {
+    "id": 4,
+    "title": ["ENVIRONMENTAL STEWARDSHIP"],
+    "des": "Environmental stewardship means the responsible use and protection of our natural resources through conservation and sustainable practice.We strive to be knowledgeable of the natural world and to minimize negative impact on it.VitaminAir is our ecovillage project on 100+ hectares of rural land located 100 kilometres east of Phnom Penh beneath Phnom Pich Nil near the base of the Dâmrei Mountains.At our VitaminAir project and the surrounding protect sites, we directly engage in small-scale agriculture and reforestation, along with nature and wildlife preservation programs.In addition, we are creating hands-on learning, working, and living environment while balancing economic opportunity, environmental protection, and sustainable living practices.      ",
+    "img": "/images/home/reforest.png",
+    "imgOrder": 1,
+    "desOrder": 2
+  }
+]

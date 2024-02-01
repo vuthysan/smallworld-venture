@@ -1,0 +1,22 @@
+[
+  {
+    "img": "/images/home/start-up.png",
+    "title": "Startup Comunity",
+    "des": "SmallWorld Ventures is committed to becoming the number one catalyst for funding and assisting startups in Cambodia."
+  },
+  {
+    "img": "/images/home/venture-building.png",
+    "title": "Seed Equity Investments",
+    "des": "Seed Equity Investments are provided to promising startup teams with projects ranging between 5,000 to 25,000 USD."
+  },
+  {
+    "img": "/images/home/investment.png",
+    "title": "Venture Building",
+    "des": "Smallworld Ventures has built an internal team of technicians engaged in research and development projects with an aim to spin off new ventures."
+  },
+  {
+    "img": "/images/home/reforest.png",
+    "title": "Ecovillage Development",
+    "des": "At our rural ecovillage project, we're building a hands-on learning, working, and living environment with a balance among the natural world, education, economics, and sustainable living practices."
+  }
+]
