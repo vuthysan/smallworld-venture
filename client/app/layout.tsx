@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import { AppNavbar } from "@/components/navbar";
+import Footer from "@/components/Footer";
 import { Link } from "@nextui-org/link";
 import { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -57,6 +58,7 @@ export default function RootLayout({
 								<p className="text-primary">NextUI</p>
 							</Link>
 						</footer> */}
+						<Footer />
 					</div>
 				</Providers>
 			</body>
