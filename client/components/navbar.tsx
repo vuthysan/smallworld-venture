@@ -37,27 +37,22 @@ export const AppNavbar = () => {
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="end">
 				<NavbarItem>
-					<Link color="foreground" href="#">
+					<Link color="foreground" href="/about">
 						About
 					</Link>
 				</NavbarItem>
 				<NavbarItem isActive>
-					<Link href="#" aria-current="page">
+					<Link href="/works" aria-current="page">
 						Works
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link color="foreground" href="#">
+					<Link color="foreground" href="/news">
 						News
 					</Link>
 				</NavbarItem>
 				<NavbarItem>
-					<Link color="foreground" href="#">
-						Spaces
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Link color="foreground" href="#">
+					<Link color="foreground" href="/contact">
 						Contact
 					</Link>
 				</NavbarItem>

@@ -5,11 +5,20 @@ export default function AboutPage() {
 	return (
 		<div className="overflow-hidden relative">
 			<section className="text-gray-600 body-font">
-				<div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-					<div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-						<h1 className="title-font sm:text-4xl text-3xl mb-4 font-extrabold text-gray-900">
-							Our Story
-						</h1>
+				<div className="container mx-auto flex justify-center flex-col items-center">
+					<div>
+						<Image
+							radius="lg"
+							className="h-[600px] w-screen object-cover mt-10"
+							alt="hero"
+							src="/images/DSC00527.JPG"
+						/>
+					</div>
+
+					<div className="w-2/3 text-center bg-white/80 backdrop-blur-lg py-12 px-20  rounded-xl relative -mt-28 mb-10 shadow-md  z-10">
+						<h2 className="font-bold text-4xl mb-3">
+							Our <span className="font-black text-primary">Story</span>
+						</h2>
 						<p className="text-xl">
 							SmallWorld started as a collaborative space designed to aid
 							ambitious individuals in transforming ideas into profitable
@@ -27,13 +36,6 @@ export default function AboutPage() {
 							support successful ventures and contribute positively to local,
 							national, and global communities.
 						</p>
-					</div>
-					<div className="lg:max-w-xl lg:w-full md:w-1/2 w-5/6">
-						<img
-							className="object-cover object-center rounded"
-							alt="hero"
-							src="https://dummyimage.com/720x600"
-						/>
 					</div>
 				</div>
 			</section>
@@ -71,15 +73,15 @@ export default function AboutPage() {
 						<div className="font-bold text-2xl">dreamers</div>
 					</div>
 				</div> */}
-				<h2 className="text-center font-bold text-5xl">
+				<h2 className="text-center font-bold text-5xl mb-3">
 					Our <span className="font-black text-primary">Portfolios</span>
 				</h2>
-				<p className="w-[50%] mx-auto text-center text-lg">
+				<p className="w-[50%] mx-auto text-center text-lg mb-12">
 					We began experimenting with equity investment partnerships in 2013,
 					and since then we&apos;ve listed a few startup teams we&apos;re proud
 					to be partnered with from their inception.
 				</p>
-				<div className="grid grid-cols-4 flex-wrap gap-4">
+				<div className="grid lg:grid-cols-4 grid-cols-2 flex-wrap gap-4">
 					<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
 						<Image
 							className="lg:h-48 md:h-36 w-full object-cover object-center"
@@ -162,16 +164,16 @@ export default function AboutPage() {
 				</div>
 			</div>
 
-			<div className="container mx-auto mb-12">
-				<h2 className="text-center font-bold text-5xl">
+			<div className="container mx-auto">
+				<h2 className="text-center font-bold text-5xl mb-3">
 					Board of <span className="font-black text-primary">Directors</span>
 				</h2>
-				<p className="w-[50%] mx-auto text-center text-lg">
+				<p className="lg:w-[50%] w-screen mx-auto text-center text-lg mb-12">
 					We are honored to have courageous and insightful business and
 					community leaders to serve on our Board of Directors.
 				</p>
 
-				<div className="grid grid-cols-5 flex-wrap gap-4">
+				<div className="grid lg:grid-cols-5 grid-cols-2 flex-wrap gap-4 mb-20">
 					<div className="bg-white p-4 rounded-2xl border-b-2 border-b-[#22A699]">
 						<div className="h-full flex flex-col items-center text-center">
 							<Image
@@ -199,7 +201,7 @@ export default function AboutPage() {
 								src="/images/about/mr-lin-willson.jpg"
 							/>
 							<div className="w-full">
-								<h2 className="title-font font-bold text-lg text-[#1abc9c]">
+								<h2 className="title-font font-bold text-lg text-[#1abc9c] ">
 									Mr. Willson LIN
 								</h2>
 								<h3 className="text-gray-500 mb-3">
@@ -260,6 +262,28 @@ export default function AboutPage() {
 								</h3>
 							</div>
 						</div>
+					</div>
+				</div>
+
+				<div className="container mx-auto">
+					<h2 className="text-center font-bold text-5xl mb-3">
+						Strategic <span className="font-black text-primary">Partners</span>
+					</h2>
+					<p className="w-[50%] mx-auto text-center text-lg mb-12">
+						We are especially pleased to have built strategic partnerships with
+						forward-thinking leaders in the business world.
+					</p>
+
+					<div className="flex max-w-4xl gap-x-20 gap-y-3 mx-auto items-center justify-between">
+						<Image
+							src="/images/about/Doer.png"
+							alt="SmallWorld Venture Doers"
+						/>
+						<Image
+							src="/images/about/sabay.png"
+							alt="SmallWorld Venture Doers"
+						/>
+						<Image src="/images/about/ISI.png" alt="SmallWorld Venture Doers" />
 					</div>
 				</div>
 			</div>
