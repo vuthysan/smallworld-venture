@@ -1,4 +1,5 @@
 import { Image } from "@nextui-org/react";
+import Project from "@/components/Project";
 import { title } from "@/components/primitives";
 
 export default function AboutPage() {
@@ -50,29 +51,30 @@ export default function AboutPage() {
 								to venture building and micro-investments, while crafting a new
 								startup narrative.
 							</p>
+
+							<h2 className="md:text-2xl font-bold mb-12 mt-8 ">
+								We seek to recruit and partner with
+							</h2>
+							<div className="grid grid-cols-3 w-[80%] mx-auto gap-4">
+								<div className="text-center bg-default/10 backdrop-blur-lg text-secondary border-2 border-secondary py-8 rounded-xl shadow-sm">
+									<div>Visionary</div>
+									<div className="font-bold text-2xl ">founders</div>
+								</div>
+								<div className="text-center bg-default/10 backdrop-blur-lg text-[#2CD3E1] border-2 border-[#2CD3E1] py-8 rounded-xl shadow-sm">
+									<div>Underdog</div>
+									<div className="font-bold text-2xl">innovators</div>
+								</div>
+								<div className="text-center bg-default/10 backdrop-blur-lg text-[#ED5AB3] border-2 border-[#ED5AB3] py-8 rounded-xl shadow-sm">
+									<div>Unreasonable</div>
+									<div className="font-bold text-2xl">dreamers</div>
+								</div>
+							</div>
 						</div>
 					</section>
 				</div>
 			</div>
 
-			<div className="container mx-auto py-20">
-				{/* <h2 className="md:text-2xl font-bold mb-12 mt-8 ">
-					We seek to recruit and partner with
-				</h2>
-				<div className="grid grid-cols-3 w-[80%] mx-auto gap-4">
-					<div className="text-center bg-default/10 backdrop-blur-lg text-secondary border-2 border-secondary py-8 rounded-xl shadow-sm">
-						<div>Visionary</div>
-						<div className="font-bold text-2xl ">founders</div>
-					</div>
-					<div className="text-center bg-default/10 backdrop-blur-lg text-[#2CD3E1] border-2 border-[#2CD3E1] py-8 rounded-xl shadow-sm">
-						<div>Underdog</div>
-						<div className="font-bold text-2xl">innovators</div>
-					</div>
-					<div className="text-center bg-default/10 backdrop-blur-lg text-[#ED5AB3] border-2 border-[#ED5AB3] py-8 rounded-xl shadow-sm">
-						<div>Unreasonable</div>
-						<div className="font-bold text-2xl">dreamers</div>
-					</div>
-				</div> */}
+			<div className="container mx-auto pt-10">
 				<h2 className="text-center font-bold text-5xl mb-3">
 					Our <span className="font-black text-primary">Portfolios</span>
 				</h2>
@@ -81,86 +83,83 @@ export default function AboutPage() {
 					and since then we&apos;ve listed a few startup teams we&apos;re proud
 					to be partnered with from their inception.
 				</p>
-				<div className="grid lg:grid-cols-4 grid-cols-2 flex-wrap gap-4">
-					<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-						<Image
-							className="lg:h-48 md:h-36 w-full object-cover object-center"
-							src="https://dummyimage.com/720x400"
-							alt="blog"
-						/>
-						<div className="p-6">
-							<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-								CATEGORY
-							</h2>
-							<h1 className="text-lg font-medium text-gray-900 mb-3">
-								The Catalyzer
-							</h1>
-							<p className="leading-relaxed mb-3">
-								Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-								microdosing tousled waistcoat.
-							</p>
-						</div>
-					</div>
+				<div className="grid grid-cols-2 flex-wrap gap-4">
+					<Project
+						title="KOOMPI"
+						image="/images/KOOMPI.png"
+						description="KOOMPI empowers the next generation of creators, innovators and thinkers to build better, through development of essential tools for learning."
+					/>
+					<Project
+						title="Onelab"
+						image="/images/onelb.png"
+						description="Enhancing Educational Progress in Cambodia through Accessible Technology"
+					/>
+					<Project
+						title="Content Server"
+						image="/images/content-server.png"
+						description="An Offline Learning Hub for students in remote areas with little to no internet access."
+					/>
+					<Project
+						title="Weteka"
+						image="/images/weteka.png"
+						description="Weteka is a digital school platform that enables schools to create their own digital schools. Students can access a wide range of high-quality courses through the platform."
+					/>
+					<Project
+						title="Riverbase"
+						image="/images/riverbase-org.png"
+						description="E-commerce platforms for SMEs and developers."
+					/>
 
-					<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-						<Image
-							className="lg:h-48 md:h-36 w-full object-cover object-center"
-							src="https://dummyimage.com/720x400"
-							alt="blog"
-						/>
-						<div className="p-6">
-							<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-								CATEGORY
-							</h2>
-							<h1 className="text-lg font-medium text-gray-900 mb-3">
-								The Catalyzer
-							</h1>
-							<p className="leading-relaxed mb-3">
-								Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-								microdosing tousled waistcoat.
-							</p>
-						</div>
-					</div>
+					<Project
+						title="Baray (InDev)"
+						image="/images/baray.png"
+						description="A  financial platform that streamlines online payment integration and management for developers and SMEs."
+					/>
 
-					<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-						<Image
-							className="lg:h-48 md:h-36 w-full object-cover object-center"
-							src="https://dummyimage.com/720x400"
-							alt="blog"
-						/>
-						<div className="p-6">
-							<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-								CATEGORY
-							</h2>
-							<h1 className="text-lg font-medium text-gray-900 mb-3">
-								The Catalyzer
-							</h1>
-							<p className="leading-relaxed mb-3">
-								Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-								microdosing tousled waistcoat.
-							</p>
-						</div>
-					</div>
+					<Project
+						title="VitaminAir"
+						image="/images/Home-Vitaminair.png"
+						description="VitaminAir flourishes as a community dedicated to driving positive change through social, cultural, ecological, and economic regeneration initiatives."
+					/>
 
-					<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-						<Image
-							className="lg:h-48 md:h-36 w-full object-cover object-center "
-							src="https://dummyimage.com/720x400"
-							alt="blog"
-						/>
-						<div className="p-6">
-							<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-								CATEGORY
-							</h2>
-							<h1 className="text-lg font-medium text-gray-900 mb-3">
-								The Catalyzer
-							</h1>
-							<p className="leading-relaxed mb-3">
-								Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-								microdosing tousled waistcoat.
-							</p>
-						</div>
-					</div>
+					<Project
+						title="SmallWorld Realty"
+						image="/images/smallworld-realty.jpg"
+						description="With SWR's virtual office solution, SMEs and startups can benefit from a physical address without the associated costs and hassles."
+					/>
+				</div>
+			</div>
+
+			<div className="container mx-auto py-10">
+				<h2 className="text-center font-bold text-5xl mb-3">
+					<span className="font-black text-primary">Investments</span>
+				</h2>
+				<p className="w-[50%] mx-auto text-center text-lg mb-12">
+					These team operate independently and have the freedom to pursue their
+					own path. We consider ourselves fortunate to be a part of their
+					journey from the very beginning.
+				</p>
+				<div className="grid grid-cols-2 flex-wrap gap-4">
+					<Project
+						title="Seavphovjivet"
+						image="/images/seavphovjivet.jpg"
+						description="Nurture a reading nation, empowering one author at a time."
+					/>
+					<Project
+						title="Jabaram"
+						image="/images/jabaram.png"
+						description="Shop from Amazon and e-commerce in the world in one place."
+					/>
+					<Project
+						title="GROOD"
+						image="/images/GROOD-GET-GROOD.png"
+						description="Phnom Penh e-bike and upcycling bicycle"
+					/>
+					<Project
+						title="BookMeBus"
+						image="/images/BookMeBus.png"
+						description="Bus, boat and everything tickets booking app"
+					/>
 				</div>
 			</div>
 

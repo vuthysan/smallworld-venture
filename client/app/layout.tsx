@@ -4,12 +4,9 @@ import { AppNavbar } from "@/components/navbar";
 import Footer from "@/components/Footer";
 import { Link } from "@nextui-org/link";
 import { Metadata } from "next";
-import { Nunito } from "next/font/google";
 import { Providers } from "./providers";
 import clsx from "clsx";
 import { siteConfig } from "@/config/site";
-
-const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: {
@@ -37,16 +34,12 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head />
 			<body
-				className={
-					"min-h-screen font-sans antialiased light text-foreground bg-[#f5f5f5]"
-				}
+				className={`min-h-screen font-sans antialiased light text-foreground bg-[#f5f5f5]`}
 			>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
 					<div className="relative flex flex-col h-screen">
 						<AppNavbar />
-						<main className={`${nunito.className} bg-[#f5f5f5f5]`}>
-							{children}
-						</main>
+						<main className={`bg-[#f5f5f5f5]`}>{children}</main>
 						{/* <footer className="w-full flex items-center justify-center py-3">
 							<Link
 								isExternal

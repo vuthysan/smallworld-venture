@@ -75,7 +75,7 @@ export default function Home() {
 			<div className="container mx-auto py-12">
 				<div className="mb-10">
 					<h2 className="text-center font-black opacity-80 text-4xl mb-4">
-						Our Core Values
+						SmallWorld Venture
 					</h2>
 					<p className="w-[55%] opacity-75 mx-auto text-center text-xl mb-12 ">
 						Founded in 2011 as SmallWorld Cambodia, we created a shared

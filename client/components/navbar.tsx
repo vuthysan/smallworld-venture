@@ -19,10 +19,12 @@ import {
 } from "@nextui-org/navbar";
 
 import { Button } from "@nextui-org/button";
+import { Image } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
 import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
 import { Logo } from "@/components/icons";
+import { NavLink } from "./ActiveLink";
 import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import clsx from "clsx";
@@ -31,31 +33,30 @@ import { siteConfig } from "@/config/site";
 
 export const AppNavbar = () => {
 	return (
-		<Navbar maxWidth="2xl">
+		<Navbar maxWidth="2xl" className="bg-primary/80">
 			<NavbarBrand>
-				<p className="font-bold text-inherit">ACME</p>
+				<Image
+					src="https://smallworldventure.com/images/home/sw-white.png"
+					alt="SmallWorldVenture"
+					className="h-[75px]"
+				/>
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="end">
-				<NavbarItem>
-					<Link color="foreground" href="/about">
-						About
-					</Link>
-				</NavbarItem>
-				<NavbarItem isActive>
-					<Link href="/works" aria-current="page">
-						Works
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Link color="foreground" href="/news">
-						News
-					</Link>
-				</NavbarItem>
-				<NavbarItem>
-					<Link color="foreground" href="/contact">
-						Contact
-					</Link>
-				</NavbarItem>
+				<ul className="hidden lg:flex gap-4 justify-start ml-2">
+					{siteConfig.navItems.map((item) => (
+						<NavLink
+							href={item.href}
+							key={item.href}
+							className="text-white font-semibold"
+						>
+							<NavbarItem>
+								<div className="flex flex-col items-center">
+									<div className=" text-lg">{item.label}</div>
+								</div>
+							</NavbarItem>
+						</NavLink>
+					))}
+				</ul>
 			</NavbarContent>
 		</Navbar>
 	);

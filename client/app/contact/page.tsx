@@ -27,17 +27,17 @@ export default function page() {
 										/>
 									</svg>
 								</span>
-								<div className="text-2xl font-extrabold text-dark-grey-900">
+								<div className="text-xl mt-3 font-bold text-grey-900">
 									Email
 								</div>
-								<div className="text-base leading-7 text-dark-grey-600">
+								<div className="text-base text-gray-500 mb-2">
 									Contact us at
 								</div>
 								<a
 									className="text-lg font-bold text-purple-blue-500"
 									href="mailto: hello@loopple.com"
 								>
-									hello@loopple.com
+									smallworldventure@gmail.com
 								</a>
 							</div>
 							<div className="flex flex-col items-center px-8 py-10 bg-white rounded-3xl shadow-sm">
@@ -55,17 +55,15 @@ export default function page() {
 										/>
 									</svg>
 								</span>
-								<div className="text-2xl font-extrabold text-dark-grey-900">
+								<div className="text-xl mt-3 font-bold text-grey-900">
 									Telegram
 								</div>
-								<div className="text-base leading-7 text-dark-grey-600">
-									Get in touch
-								</div>
+								<div className="text-base text-gray-500 mb-2">Get in touch</div>
 								<a
 									className="text-lg font-bold text-purple-blue-500"
 									href="mailto: hello@loopple.com"
 								>
-									hello@loopple.com
+									xxxx
 								</a>
 							</div>
 							<div className="flex flex-col items-center px-8 py-10 bg-white rounded-3xl shadow-sm">
@@ -83,18 +81,13 @@ export default function page() {
 										/>
 									</svg>
 								</span>
-								<div className="text-2xl font-extrabold text-dark-grey-900">
+								<div className="text-xl mt-3 font-bold text-grey-900">
 									Location
 								</div>
-								<div className="text-base leading-7 text-dark-grey-600">
-									Find us
+								<div className="text-base text-gray-500 mb-2">Find us</div>
+								<div className="text-lg font-bold text-purple-blue-500 text-center">
+									#92 E1K, St.19m Doun Penh, Phnom Penh, Cambodia
 								</div>
-								<a
-									className="text-lg font-bold text-purple-blue-500"
-									href="mailto: hello@loopple.com"
-								>
-									hello@loopple.com
-								</a>
 							</div>
 						</div>
 					</div>
