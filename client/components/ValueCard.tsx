@@ -9,7 +9,7 @@ type Props = {
 
 export default function ValueCard(props: Props) {
 	return (
-		<div className="top-0 relative hover:-top-1 cursor-pointer transition-all bg-background col-span-1 shadow-sm p-3 rounded-xl flex justify-center flex-col items-center">
+		<div className="top-0 relative hover:-top-1 cursor-pointer transition-all  bg-background/80 backdrop-blur-lg col-span-1 shadow-sm p-3 rounded-xl flex justify-center flex-col items-center">
 			<Image
 				src={props.image}
 				alt="SmallWorldVenture"

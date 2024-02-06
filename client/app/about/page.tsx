@@ -12,7 +12,7 @@ export default function AboutPage() {
 							radius="lg"
 							className="h-[600px] w-screen object-cover mt-10"
 							alt="hero"
-							src="/images/DSC00527.JPG"
+							src="/images/DSC00527.jpg"
 						/>
 					</div>
 
@@ -85,44 +85,52 @@ export default function AboutPage() {
 				</p>
 				<div className="grid grid-cols-2 flex-wrap gap-4">
 					<Project
+						link="https://koompi.com"
 						title="KOOMPI"
 						image="/images/KOOMPI.png"
 						description="KOOMPI empowers the next generation of creators, innovators and thinkers to build better, through development of essential tools for learning."
 					/>
 					<Project
+						link="https://koompi.com/koompi/onelab"
 						title="Onelab"
 						image="/images/onelb.png"
 						description="Enhancing Educational Progress in Cambodia through Accessible Technology"
 					/>
 					<Project
+						link="#"
 						title="Content Server"
 						image="/images/content-server.png"
 						description="An Offline Learning Hub for students in remote areas with little to no internet access."
 					/>
 					<Project
+						link="https://weteka.org/"
 						title="Weteka"
 						image="/images/weteka.png"
 						description="Weteka is a digital school platform that enables schools to create their own digital schools. Students can access a wide range of high-quality courses through the platform."
 					/>
 					<Project
+						link="https://riverbase.org/"
 						title="Riverbase"
 						image="/images/riverbase-org.png"
 						description="E-commerce platforms for SMEs and developers."
 					/>
 
 					<Project
+						link="#"
 						title="Baray (InDev)"
 						image="/images/baray.png"
 						description="A  financial platform that streamlines online payment integration and management for developers and SMEs."
 					/>
 
 					<Project
+						link="https://vitaminair.org/"
 						title="VitaminAir"
 						image="/images/Home-Vitaminair.png"
 						description="VitaminAir flourishes as a community dedicated to driving positive change through social, cultural, ecological, and economic regeneration initiatives."
 					/>
 
 					<Project
+						link="#"
 						title="SmallWorld Realty"
 						image="/images/smallworld-realty.jpg"
 						description="With SWR's virtual office solution, SMEs and startups can benefit from a physical address without the associated costs and hassles."
@@ -141,21 +149,25 @@ export default function AboutPage() {
 				</p>
 				<div className="grid grid-cols-2 flex-wrap gap-4">
 					<Project
+						link="https://www.seavphovjivet.com/"
 						title="Seavphovjivet"
 						image="/images/seavphovjivet.jpg"
 						description="Nurture a reading nation, empowering one author at a time."
 					/>
 					<Project
+						link="https://www.jabaram.com/"
 						title="Jabaram"
 						image="/images/jabaram.png"
 						description="Shop from Amazon and e-commerce in the world in one place."
 					/>
 					<Project
+						link="https://getgrood.com/"
 						title="GROOD"
 						image="/images/GROOD-GET-GROOD.png"
 						description="Phnom Penh e-bike and upcycling bicycle"
 					/>
 					<Project
+						link="https://bookmebus.com/"
 						title="BookMeBus"
 						image="/images/BookMeBus.png"
 						description="Bus, boat and everything tickets booking app"

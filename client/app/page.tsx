@@ -1,5 +1,6 @@
 import { Button, Image } from "@nextui-org/react";
 
+import Marquee from "react-fast-marquee";
 import ValueCard from "@/components/ValueCard";
 
 const data = [
@@ -30,6 +31,9 @@ const data = [
 ];
 
 export default function Home() {
+	const my_photos = Array.from({ length: 12 }, (_, index) => index);
+	const my_photos_1 = Array.from({ length: 12 }, (_, index) => index);
+
 	return (
 		<section className="relative overflow-hidden">
 			<div className=" bg-[url('/images/home/home-banner.png')] w-screen bg-no-repeat h-screen  bg-bottom">
@@ -42,7 +46,7 @@ export default function Home() {
 					src="/images/home/home-banner.png"
 				/> */}
 				<div className="relative container mx-auto">
-					<div className="grid grid-cols-2 h-[80vh] items-center">
+					<div className="grid grid-cols-2 h-[70vh] items-center">
 						<div>
 							<h2 className="text-5xl font-black mb-6 text-default-50">
 								{"<"}Homegrown Startup Community{"/>"}
@@ -72,7 +76,8 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="container mx-auto py-12">
+
+			<div className="container mx-auto py-12 ">
 				<div className="mb-10">
 					<h2 className="text-center font-black opacity-80 text-4xl mb-4">
 						SmallWorld Venture
@@ -142,6 +147,46 @@ export default function Home() {
 							src="/images/idea-banner.png"
 						/>
 					</div>
+				</div>
+			</section>
+
+			<section className="body-font  bg-gradient-to-r from-cyan-500 to-blue-500 h-screen relative">
+				<div className="bg-default-50/80 backdrop-blur-md h-full w-full py-16">
+					<div className="container mx-auto">
+						<h2 className="text-center font-black opacity-80 text-4xl mb-4">
+							{`<Join, collaborate and connect />`}
+						</h2>
+						<p className="text-center text-2xl w-2/3 mx-auto mt-6 mb-10 opacity-75">
+							Our ventures are working on exciting projects in various
+							industries! Read our community news to stay updated on their
+							initiatives and milestones!
+						</p>
+					</div>
+					<Marquee>
+						<div className="flex">
+							{my_photos.map((_, index) => (
+								<Image
+									key={index} // Make sure to provide a unique key for each item in the loop
+									src={`/images/photos/${index + 1}.jpg`}
+									alt="smallworldventure"
+									className="h-80 w-80 object-cover p-2"
+								/>
+							))}
+						</div>
+					</Marquee>
+
+					<Marquee direction="right" speed={30} className="mt-1">
+						<div className="flex">
+							{my_photos_1.map((_, index) => (
+								<Image
+									key={index} // Make sure to provide a unique key for each item in the loop
+									src={`/images/photos/${index + 13}.jpg`}
+									alt="smallworldventure"
+									className="h-64 w-64 object-cover p-2"
+								/>
+							))}
+						</div>
+					</Marquee>
 				</div>
 			</section>
 

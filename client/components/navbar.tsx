@@ -35,11 +35,13 @@ export const AppNavbar = () => {
 	return (
 		<Navbar maxWidth="2xl" className="bg-primary/80">
 			<NavbarBrand>
-				<Image
-					src="https://smallworldventure.com/images/home/sw-white.png"
-					alt="SmallWorldVenture"
-					className="h-[75px]"
-				/>
+				<Link href="/">
+					<Image
+						src="https://smallworldventure.com/images/home/sw-white.png"
+						alt="SmallWorldVenture"
+						className="h-[75px]"
+					/>
+				</Link>
 			</NavbarBrand>
 			<NavbarContent className="hidden sm:flex gap-4" justify="end">
 				<ul className="hidden lg:flex gap-4 justify-start ml-2">
