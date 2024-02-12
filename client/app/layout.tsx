@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { AppNavbar } from "@/components/navbar";
+import AppNavbar from "@/components/navbar";
 import Footer from "@/components/Footer";
 import { Link } from "@nextui-org/link";
 import { Metadata } from "next";

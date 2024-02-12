@@ -16,7 +16,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
 	...props
 }) => {
 	const pathname = usePathname();
-	const active = "block text-secondary w-full font-black";
+	const active = "block w-full font-bold";
 
 	const isActive = exact
 		? pathname === href.split("?q=")[0]

@@ -23,9 +23,7 @@ export default function Project({
 					radius="none"
 				/>
 				<div className="p-6 ">
-					<h1 className="text-2xl font-extrabold text-gray-900 mb-3">
-						{title}
-					</h1>
+					<h1 className="text-2xl font-extrabold mb-3">{title}</h1>
 					<p className="leading-relaxed mb-3">{description}</p>
 				</div>
 			</div>

@@ -77,7 +77,12 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="container mx-auto py-12 ">
+			<div className="container mx-auto py-12 relative">
+				<img
+					src="/images/bg1.png"
+					className="absolute overflow-hidden h-full w-full blur-3xl opacity-30"
+					alt=""
+				/>
 				<div className="mb-10">
 					<h2 className="text-center font-black opacity-80 text-4xl mb-4">
 						SmallWorld Venture

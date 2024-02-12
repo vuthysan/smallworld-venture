@@ -1,48 +1,72 @@
+/* eslint-disable @next/next/no-img-element */
 import { Image } from "@nextui-org/react";
 import Project from "@/components/Project";
+import SportlightCard from "@/components/SportlightCard";
 import { title } from "@/components/primitives";
 
 export default function AboutPage() {
 	return (
-		<div className="overflow-hidden relative">
-			<section className="text-gray-600 body-font">
-				<div className="container mx-auto flex justify-center flex-col items-center">
-					<div>
-						<Image
-							radius="lg"
-							className="h-[600px] w-screen object-cover mt-10"
-							alt="hero"
-							src="/images/DSC00527.jpg"
+		<div className="overflow-hidden relative text-gray-600">
+			<section className="body-font container mx-auto">
+				<div className="py-20 grid grid-cols-2 overflow-hidden">
+					<Image
+						radius="md"
+						alt="hero"
+						className="w-full"
+						src="/images/about.png"
+					/>
+					<div className="relative h-[100%]">
+						<img
+							src="/images/bg1.png"
+							className="absolute top-0 left-0 w-full h-full object-cover blur-3xl"
+							alt="smallworldventure"
 						/>
-					</div>
+						<div className="h-[100%] border-white border-2 relative bg-white/80 backdrop-blur-lg p-6 rounded-lg">
+							<h2 className="font-black text-4xl mb-3">
+								Start SMALL Dream BIG{" "}
+							</h2>
+							<p className="text-lg">
+								SmallWorld started as a collaborative space designed to aid
+								ambitious individuals in transforming ideas into profitable
+								ventures.
+							</p>
+							<p className="text-lg">
+								Today, our focus has shifted to venture-building and becoming a
+								micro-VC for tech startups. We aim to leverage our expertise to
+								support successful ventures and contribute positively to local,
+								national, and global communities.
+							</p>
+							<p className="text-lg">
+								Today, our focus has shifted to venture-building and becoming a
+								micro-VC for tech startups. We aim to leverage our expertise to
+								support successful ventures and contribute positively to local,
+								national, and global communities.
+							</p>
 
-					<div className="w-2/3 text-center bg-white/80 backdrop-blur-lg py-12 px-20  rounded-xl relative -mt-28 mb-10 shadow-md  z-10">
-						<h2 className="font-bold text-4xl mb-3">
-							Our <span className="font-black text-primary">Story</span>
-						</h2>
-						<p className="text-xl">
-							SmallWorld started as a collaborative space designed to aid
-							ambitious individuals in transforming ideas into profitable
-							ventures.
-						</p>
-						<p className="text-xl">
-							Today, our focus has shifted to venture-building and becoming a
-							micro-VC for tech startups. We aim to leverage our expertise to
-							support successful ventures and contribute positively to local,
-							national, and global communities.
-						</p>
-						<p className="text-xl">
-							Today, our focus has shifted to venture-building and becoming a
-							micro-VC for tech startups. We aim to leverage our expertise to
-							support successful ventures and contribute positively to local,
-							national, and global communities.
-						</p>
+							<h2 className="text-lg font-bold mb-3">
+								We seek to recruit and partner with
+							</h2>
+							<div className="flex gap-12 text-2xl">
+								<div className="text-center">
+									<div className="text-base">Visionary</div>
+									<div className="font-black  text-secondary">Founders</div>
+								</div>
+								<div className="text-center">
+									<div className="text-base">Underdog</div>
+									<div className="font-black  text-[#2CD3E1]">Innovators</div>
+								</div>
+								<div className="text-center">
+									<div className="text-base">Unreasonable</div>
+									<div className="font-black  text-[#ED5AB3] ">Dreamers</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			<div className="bg-[url('/images/mission-back.jpg')] h-screen w-screen ">
-				<div className="bg-slate-950/60 backdrop-blur-lg text-white">
+				<div className="bg-slate-950/80 backdrop-blur-xl text-white">
 					<section className="container mx-auto">
 						<div className="h-screen flex justify-center items-center flex-col">
 							<h2 className="md:text-2xl font-bold">Mission</h2>
@@ -51,24 +75,6 @@ export default function AboutPage() {
 								to venture building and micro-investments, while crafting a new
 								startup narrative.
 							</p>
-
-							<h2 className="md:text-2xl font-bold mb-12 mt-8 ">
-								We seek to recruit and partner with
-							</h2>
-							<div className="grid grid-cols-3 w-[80%] mx-auto gap-4">
-								<div className="text-center bg-default/10 backdrop-blur-lg text-secondary border-2 border-secondary py-8 rounded-xl shadow-sm">
-									<div>Visionary</div>
-									<div className="font-bold text-2xl ">founders</div>
-								</div>
-								<div className="text-center bg-default/10 backdrop-blur-lg text-[#2CD3E1] border-2 border-[#2CD3E1] py-8 rounded-xl shadow-sm">
-									<div>Underdog</div>
-									<div className="font-bold text-2xl">innovators</div>
-								</div>
-								<div className="text-center bg-default/10 backdrop-blur-lg text-[#ED5AB3] border-2 border-[#ED5AB3] py-8 rounded-xl shadow-sm">
-									<div>Unreasonable</div>
-									<div className="font-bold text-2xl">dreamers</div>
-								</div>
-							</div>
 						</div>
 					</section>
 				</div>
