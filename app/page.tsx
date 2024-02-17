@@ -1,5 +1,8 @@
+import BlogCard, { BlogProps } from "@/components/BlogCard";
 import { Button, Image } from "@nextui-org/react";
+import { getFirstParagraph, getThumbnail } from "@/utils/editor-parse";
 
+import Blogs from "@/components/BlogCard";
 import Marquee from "react-fast-marquee";
 import ValueCard from "@/components/ValueCard";
 
@@ -30,9 +33,40 @@ const data = [
 	},
 ];
 
-export default function Home() {
+export default async function Home() {
 	const my_photos = Array.from({ length: 12 }, (_, index) => index);
 	const my_photos_1 = Array.from({ length: 12 }, (_, index) => index);
+
+	let blogsData = JSON.stringify({
+		query: `{
+              getBlogsByOrg(orgId: "65cb897ea99b50af22007c00"){
+                id
+                  slug
+                  title
+                  views
+                  status
+                  isPublic
+                  createdAt
+                  updatedAt
+                  content
+              }
+            }`,
+	});
+
+	const revalidatedData: BlogProps = await fetch(
+		"https://api.weteka.org/api/private",
+		{
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: blogsData,
+		}
+	)
+		.then((response) => response.json())
+		.then(({ data }) => {
+			return data.getBlogsByOrg;
+		});
 
 	return (
 		<section className="overflow-hidden relative">
@@ -203,85 +237,21 @@ export default function Home() {
 						</p>
 					</div>
 					<div className="grid md:grid-cols-4 grid-cols-1 flex-wrap gap-4">
-						<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-							<Image
-								className="lg:h-48 md:h-36 w-full object-cover object-center"
-								src="https://dummyimage.com/720x400"
-								alt="blog"
-							/>
-							<div className="p-6">
-								<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-									CATEGORY
-								</h2>
-								<h1 className="text-lg font-medium text-gray-900 mb-3">
-									The Catalyzer
-								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings
-									jianbing microdosing tousled waistcoat.
-								</p>
-							</div>
-						</div>
+						{revalidatedData.map((res: BlogProps) => {
+							const thumbnail = getThumbnail(JSON.parse(res.content));
 
-						<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-							<Image
-								className="lg:h-48 md:h-36 w-full object-cover object-center"
-								src="https://dummyimage.com/720x400"
-								alt="blog"
-							/>
-							<div className="p-6">
-								<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-									CATEGORY
-								</h2>
-								<h1 className="text-lg font-medium text-gray-900 mb-3">
-									The Catalyzer
-								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings
-									jianbing microdosing tousled waistcoat.
-								</p>
-							</div>
-						</div>
-
-						<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-							<Image
-								className="lg:h-48 md:h-36 w-full object-cover object-center"
-								src="https://dummyimage.com/720x400"
-								alt="blog"
-							/>
-							<div className="p-6">
-								<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-									CATEGORY
-								</h2>
-								<h1 className="text-lg font-medium text-gray-900 mb-3">
-									The Catalyzer
-								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings
-									jianbing microdosing tousled waistcoat.
-								</p>
-							</div>
-						</div>
-
-						<div className="h-full shadow-sm border-gray-200 bg-default-50 border-opacity-60 rounded-lg overflow-hidden">
-							<Image
-								className="lg:h-48 md:h-36 w-full object-cover object-center "
-								src="https://dummyimage.com/720x400"
-								alt="blog"
-							/>
-							<div className="p-6">
-								<h2 className="tracking-widest text-xs font-medium text-gray-400 mb-1">
-									CATEGORY
-								</h2>
-								<h1 className="text-lg font-medium text-gray-900 mb-3">
-									The Catalyzer
-								</h1>
-								<p className="leading-relaxed mb-3">
-									Photo booth fam kinfolk cold-pressed sriracha leggings
-									jianbing microdosing tousled waistcoat.
-								</p>
-							</div>
-						</div>
+							return (
+								<>
+									<BlogCard
+										image={thumbnail ?? "/images/blog-1.jpg"}
+										title={res.title}
+										desc={getFirstParagraph(JSON.parse(res.content))}
+										content={""}
+									/>
+								</>
+							);
+						})}
+						{/* <Blogs /> */}
 					</div>
 				</div>
 			</section>
