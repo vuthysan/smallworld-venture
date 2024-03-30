@@ -74,7 +74,7 @@ export default async function Home() {
 				<div className="absolute top-0 left-0 bg-[url('/images/home/home-banner.png')] w-screen bg-no-repeat md:h-screen h-[95vh]  bg-bottom"></div>
 
 				<div className="px-2 py-8 relative container mx-auto">
-					<div className="grid md:grid-cols-2 grid-cols-1 h-[100vh] items-center">
+					<div className="grid md:grid-cols-2 grid-cols-1 h-[80vh] items-center">
 						<div>
 							<h2 className="md:text-5xl text-3xl font-black mb-6 text-default-50">
 								Homegrown Startup Community
